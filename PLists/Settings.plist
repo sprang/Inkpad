@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Items</key>
+		<array>
+			<dict>
+				<key>Key</key>
+				<string>WDSnapToPoints</string>
+				<key>Selector</key>
+				<string>takeSnapToPointsFrom:</string>
+				<key>Title</key>
+				<string>Snap to Points</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+			<dict>
+				<key>Key</key>
+				<string>WDSnapToEdges</string>
+				<key>Selector</key>
+				<string>takeSnapToEdgesFrom:</string>
+				<key>Title</key>
+				<string>Snap to Edges</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+			<dict>
+				<key>Key</key>
+				<string>WDSnapToGrid</string>
+				<key>Selector</key>
+				<string>takeSnapToGridFrom:</string>
+				<key>Title</key>
+				<string>Snap to Grid</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+		</array>
+		<key>Title</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>Items</key>
+		<array>
+			<dict>
+				<key>Accessor</key>
+				<string>showGrid</string>
+				<key>Key</key>
+				<string>WDShowGrid</string>
+				<key>Selector</key>
+				<string>takeShowGridFrom:</string>
+				<key>Title</key>
+				<string>Grid</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+			<dict>
+				<key>Accessor</key>
+				<string>gridSpacing</string>
+				<key>Key</key>
+				<string>WDGridSpacing</string>
+				<key>Maximum</key>
+				<integer>100</integer>
+				<key>Minimum</key>
+				<integer>1</integer>
+				<key>Selector</key>
+				<string>takeGridSpacingFrom:</string>
+				<key>Title</key>
+				<string>Grid Spacing</string>
+				<key>Type</key>
+				<string>TextField</string>
+			</dict>
+		</array>
+		<key>Title</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>Items</key>
+		<array>
+			<dict>
+				<key>Key</key>
+				<string>WDIsolateActiveLayer</string>
+				<key>Selector</key>
+				<string>takeIsolateLayerFrom:</string>
+				<key>Title</key>
+				<string>Isolate Active Layer</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+			<dict>
+				<key>Key</key>
+				<string>WDOutlineMode</string>
+				<key>Selector</key>
+				<string>takeOutlineModeFrom:</string>
+				<key>Title</key>
+				<string>Outline Mode</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+		</array>
+		<key>Title</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>Items</key>
+		<array>
+			<dict>
+				<key>Key</key>
+				<string>WDRulersVisible</string>
+				<key>Selector</key>
+				<string>takeShowRulersFrom:</string>
+				<key>Title</key>
+				<string>Rulers</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+			<dict>
+				<key>Selector</key>
+				<string>showDimensionsPanel:</string>
+				<key>Title</key>
+				<string>Size and Units</string>
+				<key>Type</key>
+				<string>Dimensions</string>
+			</dict>
+		</array>
+		<key>Title</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

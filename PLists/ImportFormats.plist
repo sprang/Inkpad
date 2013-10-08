@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>bmp</string>
+	<string>BMPf</string>
+	<string>cur</string>
+	<string>gif</string>
+	<string>icon</string>
+	<string>jpeg</string>
+	<string>jpg</string>
+	<string>png</string>
+	<string>tif</string>
+	<string>tiff</string>
+	<string>xbm</string>
+	<string>svg</string>
+	<string>svgz</string>
+</array>
+</plist>
