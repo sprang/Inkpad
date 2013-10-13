@@ -84,6 +84,7 @@
                 
                 [canvas.drawingController selectNone:nil];
                 canvas.drawingController.activePath = path;
+                activePath = path;
                 
                 updatingOldNode_ = YES;
                 oldNodeMode_ = [path lastNode].reflectionMode;
@@ -94,6 +95,9 @@
             }
         }
     }
+
+    // we should only reset the active path's fill transform if it is the default fill transform for the shape
+    shouldResetFillTransform_ = activePath.fillTransform && [activePath.fillTransform isDefaultInRect:activePath.bounds];
 }
 
 - (void) moveWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
@@ -170,7 +174,7 @@
             [activePath addNode:self.replacementNode];
         }
         
-        if (activePath.fillTransform) {
+        if (shouldResetFillTransform_) {
             activePath.fillTransform = [WDFillTransform fillTransformWithRect:activePath.bounds];
         }
         

@@ -69,6 +69,15 @@ NSString *WDFillTransformTransformKey = @"WDFillTransformTransformKey";
     return self; 
 }
 
+- (BOOL) isDefaultInRect:(CGRect)rect
+{
+    CGPoint start = CGPointMake(CGRectGetMinX(rect), CGRectGetMidY(rect));
+    CGPoint end = CGPointMake(CGRectGetMaxX(rect), CGRectGetMidY(rect));
+        
+    return (CGPointEqualToPoint(start_, start) && CGPointEqualToPoint(end_, end) &&
+            CGAffineTransformIsIdentity(self.transform));
+}
+
 - (BOOL) isEqual:(WDFillTransform *)fillTransform
 {
     if (fillTransform == self) {
