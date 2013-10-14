@@ -1,0 +1,9 @@
+1.5.1 [upcoming release]
+- Fixed broken Github link in the help file
+- Fixed a bug that caused gradient transforms to be reset when reactivating an existing path
+- Vertically centered the titles in the Stroke and Fill panels
+
+1.5.0
+- Updated to support iOS 7 (which is now the minimum supported OS)
+- Fixed a bunch of old bugs
+- Initial public release of source code
