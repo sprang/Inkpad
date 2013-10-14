@@ -32,15 +32,16 @@
     }
 
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
-    title.text = @"Stroke";
+    title.text = NSLocalizedString(@"Stroke", @"Stroke");
     title.font = [UIFont boldSystemFontOfSize:17.0f];
     title.textColor = [UIColor blackColor];
     title.backgroundColor = nil;
     title.opaque = NO;
-    title.textAlignment = NSTextAlignmentRight;
     [title sizeToFit];
+    
+    // make sure the title is centered vertically
     CGRect frame = title.frame;
-    frame.size.width += 5;
+    frame.size.height = 44;
     title.frame = frame;
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:title];
