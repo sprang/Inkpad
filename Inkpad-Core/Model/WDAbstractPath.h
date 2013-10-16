@@ -44,5 +44,8 @@ typedef enum {
 
 - (WDAbstractPath *) pathByFlatteningPath;
 
+// so subclasses can override
+- (void) renderStrokeInContext:(CGContextRef)ctx;
+
 @end
 

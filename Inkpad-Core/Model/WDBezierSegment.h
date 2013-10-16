@@ -52,3 +52,6 @@ CGPoint WDBezierSegmentGetClosestPoint(WDBezierSegment seg, CGPoint test, float 
 BOOL WDBezierSegmentsFormCorner(WDBezierSegment a, WDBezierSegment b);
 
 BOOL WDBezierSegmentGetIntersection(WDBezierSegment seg, CGPoint a, CGPoint b, float *tIntersect);
+
+float WDBezierSegmentOutAngle(WDBezierSegment seg);
+

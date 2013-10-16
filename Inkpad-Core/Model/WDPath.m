@@ -10,6 +10,7 @@
 //
 
 #import "UIColor+Additions.h"
+#import "WDArrowhead.h"
 #import "WDBezierNode.h"
 #import "WDBezierSegment.h"
 #import "WDColor.h"
@@ -593,6 +594,30 @@ NSString *WDClosedKey = @"WDClosedKey";
             
             prev = curr;
             curr = next;
+        }
+    }
+    
+    // add in arrowheads, if any
+    if ([self.strokeStyle hasArrow]) {
+        float               angle, scale = self.strokeStyle.width;
+        CGPoint             attachment;
+        CGRect              arrowBounds;
+        WDArrowhead         *arrow;
+        
+        // start arrow
+        if (self.strokeStyle.startArrow) {
+            arrow = [WDArrowhead arrowheads][self.strokeStyle.startArrow];
+            [self startArrowAttachmentPoint:&attachment angle:&angle];
+            arrowBounds = [arrow boundingBoxAtPosition:attachment scale:scale angle:angle];
+            styleBounds = CGRectUnion(styleBounds, arrowBounds);
+        }
+        
+        // end arrow
+        if (self.strokeStyle.endArrow) {
+            arrow = [WDArrowhead arrowheads][self.strokeStyle.endArrow];
+            [self endArrowAttachmentPoint:&attachment angle:&angle];
+            arrowBounds = [arrow boundingBoxAtPosition:attachment scale:scale angle:angle];
+            styleBounds = CGRectUnion(styleBounds, arrowBounds);
         }
     }
     
@@ -1773,6 +1798,62 @@ NSString *WDClosedKey = @"WDClosedKey";
     path->boundsDirty_ = YES;
 
     return path;
+}
+
+- (void) endArrowAttachmentPoint:(CGPoint *)pt angle:(float *)angle
+{
+    if (pt) {
+        *pt = self.lastNode.anchorPoint;
+    }
+    
+    if (angle) {
+        WDBezierSegment segment = WDBezierSegmentMake(self.firstNode, self.lastNode);
+        *angle = WDBezierSegmentOutAngle(segment);
+    }
+}
+
+- (void) startArrowAttachmentPoint:(CGPoint *)pt angle:(float *)angle
+{
+    if (pt) {
+        *pt = self.firstNode.anchorPoint;
+    }
+    
+    if (angle) {
+        WDBezierSegment segment = WDBezierSegmentMake([self.lastNode flippedNode], [self.firstNode flippedNode]);
+        *angle = WDBezierSegmentOutAngle(segment);
+    }
+}
+
+- (void) renderStrokeInContext:(CGContextRef)ctx
+{
+    if (!self.strokeStyle.hasArrow) {
+        [super renderStrokeInContext:ctx];
+        return;
+    }
+    
+    CGContextAddPath(ctx, self.pathRef);
+    [self.strokeStyle applyInContext:ctx];
+    
+    CGContextReplacePathWithStrokedPath(ctx);
+    CGContextSetFillColorWithColor(ctx, self.strokeStyle.color.CGColor);
+ 
+    float       angle, scale = self.strokeStyle.width;
+    CGPoint     attachment;
+    WDArrowhead *arrow;
+    
+    if (self.strokeStyle.startArrow) {
+        arrow = [WDArrowhead arrowheads][self.strokeStyle.startArrow];
+        [self startArrowAttachmentPoint:&attachment angle:&angle];
+        [arrow addArrowInContext:ctx position:attachment scale:scale angle:angle];
+    }
+    
+    if (self.strokeStyle.endArrow) {
+        arrow = [WDArrowhead arrowheads][self.strokeStyle.endArrow];
+        [self endArrowAttachmentPoint:&attachment angle:&angle];
+        [arrow addArrowInContext:ctx position:attachment scale:scale angle:angle];
+    }
+
+    CGContextFillPath(ctx);
 }
 
 @end

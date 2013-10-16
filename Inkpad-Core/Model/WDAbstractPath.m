@@ -55,6 +55,13 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     return CGPathContainsPoint(self.pathRef, NULL, pt, false);
 }
 
+- (void) renderStrokeInContext:(CGContextRef)ctx
+{
+    CGContextAddPath(ctx, self.pathRef);
+    [self.strokeStyle applyInContext:ctx];
+    CGContextStrokePath(ctx);
+}
+
 - (void) renderInContext:(CGContextRef)ctx metaData:(WDRenderingMetaData)metaData
 {
     if (metaData.flags & WDRenderOutlineOnly) {
@@ -82,9 +89,7 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
         }
         
         if (self.strokeStyle && [self.strokeStyle willRender]) {
-            CGContextAddPath(ctx, self.pathRef);
-            [self.strokeStyle applyInContext:ctx];
-            CGContextStrokePath(ctx);
+            [self renderStrokeInContext:ctx];
         }
         
         [self endTransparencyLayer:ctx metaData:metaData];

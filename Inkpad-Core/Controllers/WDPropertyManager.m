@@ -288,7 +288,9 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
                                            cap:(int)[[self defaultValueForProperty:WDStrokeCapProperty] integerValue]
                                           join:(int)[[self defaultValueForProperty:WDStrokeJoinProperty] integerValue]
                                          color:[self defaultValueForProperty:WDStrokeColorProperty]
-                                   dashPattern:[self defaultValueForProperty:WDStrokeDashPatternProperty]];
+                                   dashPattern:[self defaultValueForProperty:WDStrokeDashPatternProperty]
+                                    startArrow:nil
+                                      endArrow:nil];
 }
 
 - (WDShadow *) activeShadow

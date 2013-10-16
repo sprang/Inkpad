@@ -627,3 +627,19 @@ BOOL WDBezierSegmentsFormCorner(WDBezierSegment a, WDBezierSegment b)
     
     return !WDCollinear(p, q, r);    
 }
+
+float WDBezierSegmentOutAngle(WDBezierSegment seg)
+{
+    CGPoint a;
+    
+    if (!CGPointEqualToPoint(seg.b_, seg.in_)) {
+        a = seg.in_;
+    } else {
+        a = seg.out_;
+    }
+    
+    CGPoint delta = WDSubtractPoints(seg.b_, a);
+    
+    return atan2f(delta.y, delta.x);
+}
+

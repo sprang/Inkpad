@@ -119,6 +119,7 @@
 		6B74B7E5150E829E000A08D4 /* linear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B74B7E0150E829E000A08D4 /* linear@2x.png */; };
 		6B74B7E6150E829E000A08D4 /* radial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B74B7E1150E829E000A08D4 /* radial@2x.png */; };
 		6B74B7E9150E82F0000A08D4 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B74B7E7150E82F0000A08D4 /* checkmark@2x.png */; };
+		6B7A881A180CF73000FA241B /* WDArrowhead.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A8819180CF73000FA241B /* WDArrowhead.m */; };
 		6B7D2C3515085403001311B0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7D2C3415085403001311B0 /* Twitter.framework */; };
 		6B7D2CF0150898BE001311B0 /* font@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7D2CEF150898BE001311B0 /* font@2x.png */; };
 		6B7D2CF415089966001311B0 /* redo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7D2CF215089965001311B0 /* redo@2x.png */; };
@@ -451,6 +452,8 @@
 		6B74B7E0150E829E000A08D4 /* linear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "linear@2x.png"; path = "Images/linear@2x.png"; sourceTree = "<group>"; };
 		6B74B7E1150E829E000A08D4 /* radial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radial@2x.png"; path = "Images/radial@2x.png"; sourceTree = "<group>"; };
 		6B74B7E7150E82F0000A08D4 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Images/checkmark@2x.png"; sourceTree = "<group>"; };
+		6B7A8818180CF73000FA241B /* WDArrowhead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowhead.h; sourceTree = "<group>"; };
+		6B7A8819180CF73000FA241B /* WDArrowhead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowhead.m; sourceTree = "<group>"; };
 		6B7D2C3415085403001311B0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		6B7D2CEF150898BE001311B0 /* font@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "font@2x.png"; path = "Images/font@2x.png"; sourceTree = "<group>"; };
 		6B7D2CF215089965001311B0 /* redo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "redo@2x.png"; path = "Images/redo@2x.png"; sourceTree = "<group>"; };
@@ -1165,6 +1168,8 @@
 			children = (
 				6BABD8E7141ED30100F7E0A9 /* WDAbstractPath.h */,
 				6BABD8E8141ED30100F7E0A9 /* WDAbstractPath.m */,
+				6B7A8818180CF73000FA241B /* WDArrowhead.h */,
+				6B7A8819180CF73000FA241B /* WDArrowhead.m */,
 				6BABD8E9141ED30100F7E0A9 /* WDBezierNode.h */,
 				6BABD8EA141ED30100F7E0A9 /* WDBezierNode.m */,
 				6BABD8EB141ED30100F7E0A9 /* WDBezierSegment.h */,
@@ -1835,6 +1840,7 @@
 				6BABD9A7141ED30100F7E0A9 /* Path.cpp in Sources */,
 				6BABD9A8141ED30100F7E0A9 /* PathConversion.cpp in Sources */,
 				6BABD9A9141ED30100F7E0A9 /* Shape.cpp in Sources */,
+				6B7A881A180CF73000FA241B /* WDArrowhead.m in Sources */,
 				6BABD9AA141ED30100F7E0A9 /* ShapeMisc.cpp in Sources */,
 				6BABD9AB141ED30100F7E0A9 /* ShapeSweep.cpp in Sources */,
 				6BABD9AC141ED30100F7E0A9 /* ShapeSweepUtils.cpp in Sources */,

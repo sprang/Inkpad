@@ -18,6 +18,8 @@ NSString *WDWeightKey = @"WDWeightKey";
 NSString *WDCapKey = @"WDCapKey";
 NSString *WDJoinKey = @"WDJoinKey";
 NSString *WDDashPatternKey = @"WDDashPatternKey";
+NSString *WDStartArrowKey = @"WDStartArrowKey";
+NSString *WDEndArrowKey = @"WDEndArrowKey";
 
 @implementation WDStrokeStyle
 
@@ -26,6 +28,8 @@ NSString *WDDashPatternKey = @"WDDashPatternKey";
 @synthesize join = join_;
 @synthesize color = color_;
 @synthesize dashPattern = dashPattern_;
+@synthesize startArrow = startArrow_;
+@synthesize endArrow = endArrow_;
 
 NSString * WDSVGStringForCGLineJoin(CGLineJoin join)
 {
@@ -38,10 +42,30 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     NSString *caps[] = {@"butt", @"round", @"square"};
     return caps[cap];
 }
-    
-+ (WDStrokeStyle *) strokeStyleWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color dashPattern:(NSArray *)dashPattern
+
++ (WDStrokeStyle *) strokeStyleWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color
+                             dashPattern:(NSArray *)dashPattern
 {
-    WDStrokeStyle *style = [[WDStrokeStyle alloc] initWithWidth:width cap:cap join:join color:color dashPattern:dashPattern];
+    WDStrokeStyle *style = [[WDStrokeStyle alloc] initWithWidth:width
+                                                            cap:cap
+                                                           join:join
+                                                          color:color
+                                                    dashPattern:dashPattern
+                                                     startArrow:nil
+                                                       endArrow:nil];
+    return style;
+}
+
++ (WDStrokeStyle *) strokeStyleWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color
+                             dashPattern:(NSArray *)dashPattern startArrow:(NSString *)startArrow endArrow:(NSString *)endArrow
+{
+    WDStrokeStyle *style = [[WDStrokeStyle alloc] initWithWidth:width
+                                                            cap:cap
+                                                           join:join
+                                                          color:color
+                                                    dashPattern:dashPattern
+                                                     startArrow:startArrow
+                                                       endArrow:endArrow];
     return style;
 }
 
@@ -61,7 +85,8 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     return self;
 }
 
-- (id) initWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color dashPattern:(NSArray *)dashPattern
+- (id) initWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color
+         dashPattern:(NSArray *)dashPattern startArrow:(NSString *)startArrow endArrow:(NSString *)endArrow
 {
     self = [super init];
     
@@ -73,6 +98,8 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     cap_ = cap;
     join_ = join;
     color_ = color;
+    startArrow_ = startArrow;
+    endArrow_ = endArrow;
     
     if (dashPattern && dashPattern.count) {
         dashPattern_ = dashPattern;
@@ -91,6 +118,14 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     if ([self hasPattern]) {
         [coder encodeObject:dashPattern_ forKey:WDDashPatternKey];
     }
+    
+    if (self.startArrow) {
+        [coder encodeObject:self.startArrow forKey:WDStartArrowKey];
+    }
+    
+    if (self.endArrow) {
+        [coder encodeObject:self.endArrow forKey:WDEndArrowKey];
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)coder
@@ -102,14 +137,16 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     join_ = [coder decodeInt32ForKey:WDJoinKey]; 
     color_ = [coder decodeObjectForKey:WDColorKey];
     dashPattern_ = [coder decodeObjectForKey:WDDashPatternKey];
+    startArrow_ = [coder decodeObjectForKey:WDStartArrowKey];
+    endArrow_ = [coder decodeObjectForKey:WDEndArrowKey];
     
     return self; 
 }
  
 - (NSString *) description
 {
-    return [NSString stringWithFormat:@"%@: width: %f, cap: %d, join:%d, color: %@, dashPattern: %@",
-            [super description], width_, cap_, join_, [color_ description], dashPattern_];
+    return [NSString stringWithFormat:@"%@: width: %f, cap: %d, join:%d, color: %@, dashPattern: %@, start arrow: %@, end arrow: %@",
+            [super description], width_, cap_, join_, [color_ description], dashPattern_, startArrow_, endArrow_];
 }
 
 - (WDStrokeStyle *) adjustColor:(WDColor * (^)(WDColor *color))adjustment
@@ -118,7 +155,9 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
                                            cap:self.cap
                                           join:self.join
                                          color:[self.color adjustColor:adjustment]
-                                   dashPattern:self.dashPattern];
+                                   dashPattern:self.dashPattern
+                                    startArrow:self.startArrow
+                                      endArrow:self.endArrow];
 }
 
 - (void) addSVGAttributes:(WDXMLElement *)element
@@ -173,7 +212,9 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
             cap_ == stroke.cap &&
             join_ == stroke.join &&
             [color_ isEqual:stroke.color] &&
-            [dashPattern_ isEqual:stroke.dashPattern]);
+            [dashPattern_ isEqual:stroke.dashPattern] &&
+            [startArrow_ isEqualToString:stroke.startArrow] &&
+            [endArrow_ isEqualToString:stroke.endArrow]);
 }
 
 - (void) randomize
@@ -214,6 +255,11 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     }
     
     return (sum > 0) ? YES : NO;
+}
+
+- (BOOL) hasArrow
+{
+    return (startArrow_ || endArrow_) ? YES : NO;
 }
 
 - (void) applyPatternInContext:(CGContextRef)ctx
