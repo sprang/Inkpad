@@ -9,6 +9,7 @@
 //  Copyright (c) 2010-2013 Steve Sprang
 //
 
+#import "WDArrowhead.h"
 #import "WDColor.h"
 #import "WDColorController.h"
 #import "WDColorWell.h"
@@ -120,6 +121,11 @@
     float       width = round(slider.value) / 2;
     
     [drawingController_ setValue:@(width) forProperty:WDStrokeWidthProperty];
+}
+
+- (IBAction)showArrowheads:(id)sender
+{
+    
 }
 
 - (void) takeCapFrom:(id)sender
@@ -267,6 +273,10 @@
             [self setDashSlidersFromArray:value];
         }
     }
+    
+    if ([properties intersectsSet:[NSSet setWithObjects:WDStartArrowProperty, WDEndArrowProperty, nil]]) {
+        [self updateArrowPreview];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -282,11 +292,91 @@
     capPicker_.cap = strokeStyle.cap;
     joinPicker_.join = strokeStyle.join;
     
+    [self updateArrowPreview];
     [self setDashSlidersFromArray:strokeStyle.dashPattern];
     
     [modeSegment_ removeTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
     modeSegment_.selectedSegmentIndex = [[drawingController_.propertyManager defaultValueForProperty:WDStrokeVisibleProperty] boolValue] ? 1 : 0;
     [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void) updateArrowPreview
+{
+    [arrowButton_ setImage:[self arrowPreview] forState:UIControlStateNormal];
+}
+
+- (UIImage *) arrowPreview
+{
+    WDStrokeStyle   *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
+    WDArrowhead     *arrow;
+    UIColor         *color = [UIColor colorWithRed:0.0f green:(118.0f / 255) blue:1.0f alpha:1.0f];
+    CGContextRef    ctx;
+    CGSize          size = arrowButton_.frame.size;
+    float           scale = 5.0f;
+    float           y = size.height / 2;
+    float           arrowBoxDim = scale * 5;
+    float           arrowStemLength = 15;
+    float           stemStart;
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    ctx = UIGraphicsGetCurrentContext();
+    
+    [color set];
+    CGContextSetLineWidth(ctx, scale);
+    
+    // start arrow
+    arrow = [WDArrowhead arrowheads][strokeStyle.startArrow];
+    if (arrow) {
+        [arrow addArrowInContext:ctx position:CGPointMake(arrowBoxDim, y) scale:scale angle:M_PI];
+        CGContextFillPath(ctx);
+        stemStart = arrowBoxDim;
+    } else {
+        stemStart = 10;
+    }
+    
+    CGContextMoveToPoint(ctx, stemStart, y);
+    CGContextAddLineToPoint(ctx, arrowBoxDim + arrowStemLength, y);
+    CGContextStrokePath(ctx);
+    
+    // end arrow
+    arrow = [WDArrowhead arrowheads][strokeStyle.endArrow];
+    if (arrow) {
+        [arrow addArrowInContext:ctx position:CGPointMake(size.width - arrowBoxDim, y) scale:scale angle:0];
+        CGContextFillPath(ctx);
+        stemStart = arrowBoxDim;
+    } else {
+        stemStart = 10;
+    }
+    
+    CGContextMoveToPoint(ctx, size.width - stemStart, y);
+    CGContextAddLineToPoint(ctx, size.width - (arrowBoxDim + arrowStemLength), y);
+    CGContextStrokePath(ctx);
+    
+    // draw interior line
+    [[color colorWithAlphaComponent:0.5f] set];
+    CGContextMoveToPoint(ctx, arrowBoxDim + arrowStemLength + 5, y);
+    CGContextAddLineToPoint(ctx, size.width - (arrowBoxDim + arrowStemLength + 5), y);
+    CGContextSetLineWidth(ctx, scale - 2);
+    CGContextStrokePath(ctx);
+    
+    // draw a label
+    NSString *label = NSLocalizedString(@"arrowheads", @"arrowheads");
+    NSDictionary *attrs = @{NSFontAttributeName: [UIFont systemFontOfSize:15.0f],
+                            NSForegroundColorAttributeName:color};
+    CGRect bounds = CGRectZero;
+    bounds.size = [label sizeWithAttributes:attrs];
+    bounds.origin.x = (size.width - CGRectGetWidth(bounds)) / 2;
+    bounds.origin.y = (size.height - CGRectGetHeight(bounds)) / 2 - 1;
+    CGContextSetBlendMode(ctx, kCGBlendModeClear);
+    CGContextFillRect(ctx, CGRectInset(bounds, -10, -10));
+    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+    [label drawInRect:bounds withAttributes:attrs];
+    
+    // pull out the image
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
 }
 
 @end

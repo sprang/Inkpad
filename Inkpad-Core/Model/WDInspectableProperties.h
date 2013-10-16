@@ -35,3 +35,5 @@ extern NSString *WDStrokeJoinProperty;
 extern NSString *WDStrokeWidthProperty;
 extern NSString *WDStrokeVisibleProperty;
 extern NSString *WDStrokeDashPatternProperty;
+extern NSString *WDStartArrowProperty;
+extern NSString *WDEndArrowProperty;
