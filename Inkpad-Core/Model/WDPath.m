@@ -598,7 +598,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     }
     
     // add in arrowheads, if any
-    if ([self.strokeStyle hasArrow]) {
+    if ([self.strokeStyle hasArrow] && self.nodes && self.nodes.count) {
         float               angle, scale = self.strokeStyle.width;
         CGPoint             attachment;
         CGRect              arrowBounds;
