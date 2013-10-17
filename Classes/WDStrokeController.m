@@ -317,7 +317,7 @@
     CGContextRef    ctx;
     CGSize          size = arrowButton_.frame.size;
     float           scale = 5.0f;
-    float           y = size.height / 2;
+    float           y = floor(size.height / 2) + 0.5f;
     float           arrowInset;
     float           stemStart;
     float           stemEnd = 40;

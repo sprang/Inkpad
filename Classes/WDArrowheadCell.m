@@ -23,16 +23,17 @@
 
 - (void) drawRect:(CGRect)rect
 {
-    CGRect frame = self.frame;
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGFloat lengths[] = {2};
+    CGRect          frame = self.frame;
+    CGContextRef    ctx = UIGraphicsGetCurrentContext();
+    CGFloat         lengths[] = {2};
+    float           y = floor(CGRectGetMidY(frame)) + 0.5f;
     
     [[[WDArrowheadCell tintColor] colorWithAlphaComponent:0.5f] set];
     
     CGContextSetLineWidth(ctx, 1.0);
     CGContextSetLineDash(ctx, 0, lengths, 1);
-    CGContextMoveToPoint(ctx, 0, CGRectGetMidY(frame));
-    CGContextAddLineToPoint(ctx, CGRectGetWidth(frame), CGRectGetMidY(frame));
+    CGContextMoveToPoint(ctx, 0, y);
+    CGContextAddLineToPoint(ctx, CGRectGetWidth(frame), y);
     CGContextStrokePath(ctx);
 }
 
@@ -156,7 +157,7 @@
     WDArrowhead     *arrow = [WDArrowhead arrowheads][arrowID];
     CGContextRef    ctx;
     float           scale = 5.0f;
-    float           midY = kArrowHeight / 2;
+    float           midY = floor(kArrowHeight / 2) + 0.5f;
     float           startX = kArrowInset + arrow.insetLength * scale;
     
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(kArrowWidth,kArrowHeight), NO, 0);
