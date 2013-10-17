@@ -10,6 +10,7 @@
 //
 
 #import "WDArrowhead.h"
+#import "WDUtilities.h"
 
 @interface WDArrowhead (Private)
 + (NSDictionary *) buildArrows;
@@ -46,7 +47,20 @@
         return nil;
     }
     
-    path_ = pathRef;
+    // we want this path to butt up against the origin
+    CGRect boundsTest = CGPathGetBoundingBox(pathRef);
+    if (!CGPointEqualToPoint(boundsTest.origin, CGPointZero)) {
+        CGAffineTransform tX = CGAffineTransformMakeTranslation(-boundsTest.origin.x, -boundsTest.origin.y);
+        CGPathRef transformedPath = WDCreateTransformedCGPathRef(pathRef, tX);
+        CGPathRelease(pathRef);
+        path_ = transformedPath;
+        
+        // need to shift the attachment point too
+        attach = WDAddPoints(attach, WDMultiplyPointScalar(boundsTest.origin, -1));
+    } else {
+        path_ = pathRef;
+    }
+    
     attachment_ = attach;
     
     bounds_ = CGPathGetBoundingBox(path_);
@@ -119,6 +133,18 @@ const float kDefaultArrowDimension = 4.0f;
     
     [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(1.5, baseArrowDimension / 2)]
                forKey:@"arrow2"];
+    
+    pathRef = CGPathCreateMutable();
+    baseArrowDimension = 4.0f;
+    CGPathMoveToPoint(pathRef, NULL,  baseArrowDimension / 3, baseArrowDimension);
+    CGPathAddLineToPoint(pathRef, NULL, baseArrowDimension, baseArrowDimension / 2);
+    CGPathAddLineToPoint(pathRef, NULL, baseArrowDimension / 3, 0);
+    
+    CGPathRef outline = CGPathCreateCopyByStrokingPath(pathRef, NULL, 1.0f, kCGLineCapButt, kCGLineJoinMiter, 4);
+    CGPathRelease(pathRef);
+    
+    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(baseArrowDimension - 0.5, baseArrowDimension / 2)]
+               forKey:@"arrow3"];
 
     /*
      * Circles
@@ -153,7 +179,35 @@ const float kDefaultArrowDimension = 4.0f;
     [arrows setObject:[WDArrowhead arrowheadWithPath:CGPathCreateWithRect(defaultRect, &transform)
                                           attachment:CGPointMake(0.25, kDefaultArrowDimension/2)]
                forKey:@"closed square"];
+    
+    /*
+     * Diamonds
+     */
+    
+    pathRef = CGPathCreateMutable();
+    CGPathMoveToPoint(pathRef, NULL, kDefaultArrowDimension / 2, kDefaultArrowDimension);
+    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension, kDefaultArrowDimension / 2);
+    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension / 2, 0);
+    CGPathAddLineToPoint(pathRef, NULL,  0, kDefaultArrowDimension / 2);
+    CGPathCloseSubpath(pathRef);
+    
+    outline = CGPathCreateCopyByStrokingPath(pathRef, NULL, 1.0f, kCGLineCapButt, kCGLineJoinMiter, 4);
+    CGPathRelease(pathRef);
 
+    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(0.25, kDefaultArrowDimension/2)]
+               forKey:@"open diamond"];
+    
+    pathRef = CGPathCreateMutable();
+    CGPathMoveToPoint(pathRef, NULL, kDefaultArrowDimension / 2, kDefaultArrowDimension);
+    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension, kDefaultArrowDimension / 2);
+    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension / 2, 0);
+    CGPathAddLineToPoint(pathRef, NULL,  0, kDefaultArrowDimension / 2);
+    CGPathCloseSubpath(pathRef);
+    
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef
+                                          attachment:CGPointMake(kDefaultArrowDimension/2, kDefaultArrowDimension/2)]
+               forKey:@"closed diamond"];
+    
     return arrows;
 }
 

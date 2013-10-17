@@ -153,6 +153,8 @@
 		6B98C140124D63B1008FB8E1 /* WDTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B98C13F124D63B1008FB8E1 /* WDTextController.m */; };
 		6B98C154124D642A008FB8E1 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98C153124D642A008FB8E1 /* font.png */; };
 		6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */; };
+		6BA45791180F2B9200B51D7A /* WDArrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45790180F2B9200B51D7A /* WDArrowController.m */; };
+		6BA45794180F778F00B51D7A /* WDArrowheadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45793180F778F00B51D7A /* WDArrowheadCell.m */; };
 		6BAACC7B1332A048000C6E74 /* WDSparkSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BAACC7A1332A047000C6E74 /* WDSparkSlider.m */; };
 		6BABD96D141ED30100F7E0A9 /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BABD886141ED30100F7E0A9 /* NSArray+Additions.m */; };
 		6BABD96F141ED30100F7E0A9 /* NSData+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BABD88A141ED30100F7E0A9 /* NSData+Additions.m */; };
@@ -496,6 +498,10 @@
 		6B98C13F124D63B1008FB8E1 /* WDTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WDTextController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6B98C153124D642A008FB8E1 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Images/font.png; sourceTree = "<group>"; };
 		6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark_knob_highlighted.png; path = Images/spark_knob_highlighted.png; sourceTree = "<group>"; };
+		6BA4578F180F2B9200B51D7A /* WDArrowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowController.h; sourceTree = "<group>"; };
+		6BA45790180F2B9200B51D7A /* WDArrowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowController.m; sourceTree = "<group>"; };
+		6BA45792180F778F00B51D7A /* WDArrowheadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowheadCell.h; sourceTree = "<group>"; };
+		6BA45793180F778F00B51D7A /* WDArrowheadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowheadCell.m; sourceTree = "<group>"; };
 		6BAACC791332A047000C6E74 /* WDSparkSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDSparkSlider.h; sourceTree = "<group>"; };
 		6BAACC7A1332A047000C6E74 /* WDSparkSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDSparkSlider.m; sourceTree = "<group>"; };
 		6BABD885141ED30100F7E0A9 /* NSArray+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Additions.h"; sourceTree = "<group>"; };
@@ -1367,6 +1373,8 @@
 			children = (
 				6B00DA5B140604CE00E45409 /* WDActivityController.h */,
 				6B00DA5C140604CE00E45409 /* WDActivityController.m */,
+				6BA4578F180F2B9200B51D7A /* WDArrowController.h */,
+				6BA45790180F2B9200B51D7A /* WDArrowController.m */,
 				5D62B27313CE866500E4D41B /* WDBlendModeController.h */,
 				5D62B27413CE866500E4D41B /* WDBlendModeController.m */,
 				6BCD52D812400017002FCB27 /* WDBrowserController.h */,
@@ -1422,6 +1430,8 @@
 			children = (
 				6B356057136026AA007D8DBB /* WDAnglePicker.h */,
 				6B356058136026AA007D8DBB /* WDAnglePicker.m */,
+				6BA45792180F778F00B51D7A /* WDArrowheadCell.h */,
+				6BA45793180F778F00B51D7A /* WDArrowheadCell.m */,
 				6B6DC1A012403DA000A98FCE /* WDBlockingView.h */,
 				6B6DC1A112403DA000A98FCE /* WDBlockingView.m */,
 				6B51BCEE126522B6000F6BF3 /* WDButton.h */,
@@ -1865,6 +1875,7 @@
 				6BABD9BE141ED30100F7E0A9 /* WDPathfinder.mm in Sources */,
 				6BABD9BF141ED30100F7E0A9 /* WDPickResult.m in Sources */,
 				6BABD9C0141ED30100F7E0A9 /* WDRulerUnit.m in Sources */,
+				6BA45791180F2B9200B51D7A /* WDArrowController.m in Sources */,
 				6BABD9C1141ED30100F7E0A9 /* WDShadow.m in Sources */,
 				6BABD9C2141ED30100F7E0A9 /* WDStrokeStyle.m in Sources */,
 				6BABD9C3141ED30100F7E0A9 /* WDStylable.m in Sources */,
@@ -1876,6 +1887,7 @@
 				6BABD9D3141ED30100F7E0A9 /* WDEyedropperTool.m in Sources */,
 				6BABD9D4141ED30100F7E0A9 /* WDFreehandTool.m in Sources */,
 				6BABD9D5141ED30100F7E0A9 /* WDHandTool.m in Sources */,
+				6BA45794180F778F00B51D7A /* WDArrowheadCell.m in Sources */,
 				6BABD9D6141ED30100F7E0A9 /* WDPenTool.m in Sources */,
 				6BABD9D7141ED30100F7E0A9 /* WDRotateTool.m in Sources */,
 				6BABD9D8141ED30100F7E0A9 /* WDScaleTool.m in Sources */,

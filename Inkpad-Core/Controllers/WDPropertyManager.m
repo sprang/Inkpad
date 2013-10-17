@@ -207,7 +207,8 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
     
     if (!strokeProperties) {
         strokeProperties = [NSSet setWithObjects:WDStrokeColorProperty, WDStrokeCapProperty, WDStrokeJoinProperty,
-                            WDStrokeWidthProperty, WDStrokeVisibleProperty, WDStrokeDashPatternProperty, nil];
+                            WDStrokeWidthProperty, WDStrokeVisibleProperty, WDStrokeDashPatternProperty,
+                            WDStartArrowProperty, WDEndArrowProperty, nil];
     }
     
     return [strokeProperties containsObject:property];
@@ -289,8 +290,8 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
                                           join:(int)[[self defaultValueForProperty:WDStrokeJoinProperty] integerValue]
                                          color:[self defaultValueForProperty:WDStrokeColorProperty]
                                    dashPattern:[self defaultValueForProperty:WDStrokeDashPatternProperty]
-                                    startArrow:nil
-                                      endArrow:nil];
+                                    startArrow:[self defaultValueForProperty:WDStartArrowProperty]
+                                      endArrow:[self defaultValueForProperty:WDEndArrowProperty]];
 }
 
 - (WDShadow *) activeShadow

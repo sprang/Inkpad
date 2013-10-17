@@ -9,6 +9,7 @@
 //  Copyright (c) 2010-2013 Steve Sprang
 //
 
+#import "WDArrowController.h"
 #import "WDArrowhead.h"
 #import "WDColor.h"
 #import "WDColorController.h"
@@ -125,7 +126,10 @@
 
 - (IBAction)showArrowheads:(id)sender
 {
-    
+    WDArrowController *arrowController = [[WDArrowController alloc] initWithNibName:nil bundle:nil];
+    arrowController.preferredContentSize = self.view.frame.size;
+    arrowController.drawingController = self.drawingController;
+	[self.navigationController pushViewController:arrowController animated:YES];
 }
 
 - (void) takeCapFrom:(id)sender
@@ -308,15 +312,15 @@
 - (UIImage *) arrowPreview
 {
     WDStrokeStyle   *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
-    WDArrowhead     *arrow;
     UIColor         *color = [UIColor colorWithRed:0.0f green:(118.0f / 255) blue:1.0f alpha:1.0f];
+    WDArrowhead     *arrow;
     CGContextRef    ctx;
     CGSize          size = arrowButton_.frame.size;
     float           scale = 5.0f;
     float           y = size.height / 2;
-    float           arrowBoxDim = scale * 5;
-    float           arrowStemLength = 15;
+    float           arrowInset;
     float           stemStart;
+    float           stemEnd = 40;
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     ctx = UIGraphicsGetCurrentContext();
@@ -326,36 +330,38 @@
     
     // start arrow
     arrow = [WDArrowhead arrowheads][strokeStyle.startArrow];
+    arrowInset = arrow.insetLength;
     if (arrow) {
-        [arrow addArrowInContext:ctx position:CGPointMake(arrowBoxDim, y) scale:scale angle:M_PI];
+        [arrow addArrowInContext:ctx position:CGPointMake(arrowInset * scale, y) scale:scale angle:M_PI];
         CGContextFillPath(ctx);
-        stemStart = arrowBoxDim;
+        stemStart = arrowInset * scale;
     } else {
         stemStart = 10;
     }
     
     CGContextMoveToPoint(ctx, stemStart, y);
-    CGContextAddLineToPoint(ctx, arrowBoxDim + arrowStemLength, y);
+    CGContextAddLineToPoint(ctx, stemEnd, y);
     CGContextStrokePath(ctx);
     
     // end arrow
     arrow = [WDArrowhead arrowheads][strokeStyle.endArrow];
+    arrowInset = arrow.insetLength;
     if (arrow) {
-        [arrow addArrowInContext:ctx position:CGPointMake(size.width - arrowBoxDim, y) scale:scale angle:0];
+        [arrow addArrowInContext:ctx position:CGPointMake(size.width - (arrowInset * scale), y) scale:scale angle:0];
         CGContextFillPath(ctx);
-        stemStart = arrowBoxDim;
+        stemStart = arrowInset * scale;
     } else {
         stemStart = 10;
     }
     
     CGContextMoveToPoint(ctx, size.width - stemStart, y);
-    CGContextAddLineToPoint(ctx, size.width - (arrowBoxDim + arrowStemLength), y);
+    CGContextAddLineToPoint(ctx, size.width - stemEnd, y);
     CGContextStrokePath(ctx);
     
     // draw interior line
     [[color colorWithAlphaComponent:0.5f] set];
-    CGContextMoveToPoint(ctx, arrowBoxDim + arrowStemLength + 5, y);
-    CGContextAddLineToPoint(ctx, size.width - (arrowBoxDim + arrowStemLength + 5), y);
+    CGContextMoveToPoint(ctx, stemEnd + 10, y);
+    CGContextAddLineToPoint(ctx, size.width - (stemEnd + 10), y);
     CGContextSetLineWidth(ctx, scale - 2);
     CGContextStrokePath(ctx);
     
@@ -372,7 +378,7 @@
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
     [label drawInRect:bounds withAttributes:attrs];
     
-    // pull out the image
+    // grab the image
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
