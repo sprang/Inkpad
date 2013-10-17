@@ -119,11 +119,11 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
         [coder encodeObject:dashPattern_ forKey:WDDashPatternKey];
     }
     
-    if (self.startArrow) {
+    if (self.startArrow && ![self.startArrow isEqualToString:@"none"]) {
         [coder encodeObject:self.startArrow forKey:WDStartArrowKey];
     }
     
-    if (self.endArrow) {
+    if (self.endArrow && ![self.endArrow isEqualToString:@"none"]) {
         [coder encodeObject:self.endArrow forKey:WDEndArrowKey];
     }
 }
