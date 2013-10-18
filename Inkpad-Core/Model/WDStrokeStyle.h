@@ -65,6 +65,7 @@ typedef enum {
 
 - (WDStrokeStyle *) strokeStyleWithSwappedArrows;
 - (WDStrokeStyle *) adjustColor:(WDColor * (^)(WDColor *color))adjustment;
+- (WDStrokeStyle *) strokeStyleSansArrows;
 
 - (void) addSVGAttributes:(WDXMLElement *)element;
 

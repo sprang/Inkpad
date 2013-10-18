@@ -192,6 +192,21 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
                                       endArrow:self.endArrow];
 }
 
+- (WDStrokeStyle *) strokeStyleSansArrows
+{
+    if (![self hasArrow]) {
+        return self;
+    }
+    
+    return [WDStrokeStyle strokeStyleWithWidth:self.width
+                                           cap:self.cap
+                                          join:self.join
+                                         color:self.color
+                                   dashPattern:self.dashPattern
+                                    startArrow:WDStrokeArrowNone
+                                      endArrow:WDStrokeArrowNone];
+}
+
 - (void) addSVGAttributes:(WDXMLElement *)element
 {
     [element setAttribute:@"stroke" value:[color_ hexValue]];
