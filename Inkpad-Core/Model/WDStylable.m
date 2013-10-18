@@ -387,9 +387,9 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
         } else if ([property isEqualToString:WDStrokeDashPatternProperty]) {
             return self.strokeStyle.dashPattern ?: @[];
         } else if ([property isEqualToString:WDStartArrowProperty]) {
-            return self.strokeStyle.startArrow ?: @"none";
+            return self.strokeStyle.startArrow ?: WDStrokeArrowNone;
         } else if ([property isEqualToString:WDEndArrowProperty]) {
-            return self.strokeStyle.endArrow ?: @"none";
+            return self.strokeStyle.endArrow ?: WDStrokeArrowNone;
         }
     }
     

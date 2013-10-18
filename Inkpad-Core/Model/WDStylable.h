@@ -34,7 +34,7 @@
 
 @property (nonatomic, readonly) BOOL isMasking;
 
-
+- (NSSet *) changedStrokePropertiesFrom:(WDStrokeStyle *)from to:(WDStrokeStyle *)to;
 - (void) strokeStyleChanged;
 
 - (void) takeStylePropertiesFrom:(WDStylable *)obj;

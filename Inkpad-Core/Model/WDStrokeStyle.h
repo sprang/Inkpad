@@ -63,9 +63,11 @@ typedef enum {
 
 - (void) randomize;
 
+- (WDStrokeStyle *) strokeStyleWithSwappedArrows;
 - (WDStrokeStyle *) adjustColor:(WDColor * (^)(WDColor *color))adjustment;
 
 - (void) addSVGAttributes:(WDXMLElement *)element;
 
 @end
 
+extern NSString *WDStrokeArrowNone;

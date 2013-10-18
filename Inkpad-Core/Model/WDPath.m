@@ -423,6 +423,17 @@ NSString *WDClosedKey = @"WDClosedKey";
     
     [[self.undoManager prepareWithInvocationTarget:self] reversePathDirection];
     
+    if (self.strokeStyle && [self.strokeStyle hasArrow]) {
+        WDStrokeStyle *flippedArrows = [self.strokeStyle strokeStyleWithSwappedArrows];
+        NSSet *changedProperties = [self changedStrokePropertiesFrom:self.strokeStyle to:flippedArrows];
+        
+        if (changedProperties.count) {
+            [self setStrokeStyleQuiet:flippedArrows];
+            [self strokeStyleChanged];
+            [self propertiesChanged:changedProperties];
+        }
+    }
+    
     reversed_ = !reversed_;
     [self invalidatePath];
 

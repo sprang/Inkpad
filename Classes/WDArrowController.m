@@ -46,7 +46,7 @@
 
 - (NSArray *) arrows
 {
-    return @[@"none", @"arrow1", @"arrow2", @"arrow3",
+    return @[WDStrokeArrowNone, @"arrow1", @"arrow2", @"arrow3",
              @"closed circle", @"closed square", @"closed diamond",
              @"open circle", @"open square", @"open diamond"];
 }
