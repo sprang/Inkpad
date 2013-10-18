@@ -1867,4 +1867,28 @@ NSString *WDClosedKey = @"WDClosedKey";
     CGContextFillPath(ctx);
 }
 
+- (void) addElementsToOutlinedStroke:(CGMutablePathRef)outline
+{
+    if (![self.strokeStyle hasArrow]) {
+        // no arrows...
+        return;
+    }
+    
+    WDArrowhead     *arrow;
+    float           angle, scale = self.strokeStyle.width;
+    CGPoint         attachment;
+    
+    arrow = [WDArrowhead arrowheads][self.strokeStyle.startArrow];
+    if (arrow) {
+        [self startArrowAttachmentPoint:&attachment angle:&angle];
+        [arrow addToMutablePath:outline position:attachment scale:scale angle:angle];
+    }
+    
+    arrow = [WDArrowhead arrowheads][self.strokeStyle.endArrow];
+    if (arrow) {
+        [self endArrowAttachmentPoint:&attachment angle:&angle];
+        [arrow addToMutablePath:outline position:attachment scale:scale angle:angle];
+    }
+}
+
 @end

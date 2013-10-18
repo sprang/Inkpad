@@ -69,7 +69,7 @@
     return self;
 }
 
-- (CGRect) boundingBoxAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle
+- (CGAffineTransform) transformAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle
 {
     CGAffineTransform transform = CGAffineTransformIdentity;
     transform = CGAffineTransformTranslate(transform, pt.x, pt.y);
@@ -77,6 +77,12 @@
     transform = CGAffineTransformRotate(transform, angle);
     transform = CGAffineTransformTranslate(transform, -self.attachment.x, -self.attachment.y);
     
+    return transform;
+}
+
+- (CGRect) boundingBoxAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle
+{
+    CGAffineTransform transform = [self transformAtPosition:pt scale:scale angle:angle];
     CGPathRef rectPath = CGPathCreateWithRect(self.bounds, &transform);
     CGRect arrowBounds = CGPathGetBoundingBox(rectPath);
     CGPathRelease(rectPath);
@@ -84,16 +90,17 @@
     return arrowBounds;
 }
 
+- (void) addToMutablePath:(CGMutablePathRef)pathRef position:(CGPoint)pt scale:(float)scale angle:(float)angle
+{
+    CGAffineTransform transform = [self transformAtPosition:pt scale:scale angle:angle];
+    CGPathAddPath(pathRef, &transform, self.path);
+}
+
 - (void) addArrowInContext:(CGContextRef)ctx position:(CGPoint)pt scale:(float)scale angle:(float)angle
 {
     CGContextSaveGState(ctx);
-    
-    CGContextTranslateCTM(ctx, pt.x, pt.y);
-    CGContextScaleCTM(ctx, scale, scale);
-    CGContextRotateCTM(ctx, angle);
-    CGContextTranslateCTM(ctx, -self.attachment.x, -self.attachment.y);
+    CGContextConcatCTM(ctx, [self transformAtPosition:pt scale:scale angle:angle]);
     CGContextAddPath(ctx, self.path);
-    
     CGContextRestoreGState(ctx);
 }
 

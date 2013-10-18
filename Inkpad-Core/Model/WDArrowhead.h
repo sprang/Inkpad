@@ -25,6 +25,7 @@
 - (id) initWithPath:(CGPathRef)pathRef attachment:(CGPoint)attach;
 
 - (CGRect) boundingBoxAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle;
+- (void) addToMutablePath:(CGMutablePathRef)pathRef position:(CGPoint)pt scale:(float)scale angle:(float)angle;
 - (void) addArrowInContext:(CGContextRef)ctx position:(CGPoint)pt scale:(float)scale angle:(float)angle;
 
 @end

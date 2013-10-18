@@ -37,6 +37,9 @@ typedef enum {
 - (BOOL) canOutlineStroke;
 - (WDAbstractPath *) outlineStroke;
 
+// subclasses can override this to enhance the default outline
+- (void) addElementsToOutlinedStroke:(CGMutablePathRef)pathRef;
+
 - (NSArray *) erase:(WDAbstractPath *)erasePath;
 
 - (void) simplify;
