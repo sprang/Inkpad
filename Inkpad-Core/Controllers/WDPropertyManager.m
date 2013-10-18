@@ -244,6 +244,10 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
     } else if ([self propertyAffectsActiveStroke:property]) {
         if (![property isEqual:WDStrokeVisibleProperty]) {
             defaults_[WDStrokeVisibleProperty] = @YES;
+        } else if (![value boolValue]) {
+            // turning off the stroke, so reset the arrows
+            defaults_[WDStartArrowProperty] = WDStrokeArrowNone;
+            defaults_[WDEndArrowProperty] = WDStrokeArrowNone;
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:WDActiveStrokeChangedNotification object:self userInfo:nil];
