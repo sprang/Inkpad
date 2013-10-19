@@ -69,6 +69,11 @@
     return self;
 }
 
+- (void) dealloc
+{
+    CGPathRelease(path_);
+}
+
 - (CGAffineTransform) transformAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle
 {
     CGAffineTransform transform = CGAffineTransformIdentity;
@@ -106,70 +111,68 @@
 
 @end
 
-const float kDefaultArrowDimension = 4.0f;
+const float kArrowheadDimension = 8.0f;
+const float kHalfArrowheadDimension = kArrowheadDimension / 2;
 
 @implementation WDArrowhead (Private)
 
 + (NSDictionary *) buildArrows
 {
     NSMutableDictionary *arrows = [NSMutableDictionary dictionary];
-    CGAffineTransform   transform;
+    CGAffineTransform   flipTransform = CGAffineTransformIdentity;
+    CGAffineTransform   diamondTransform = CGAffineTransformIdentity;
     CGMutablePathRef    pathRef;
-    CGRect              defaultRect = CGRectMake(0, 0, kDefaultArrowDimension, kDefaultArrowDimension);
+    CGRect              defaultRect = CGRectMake(0, 0, kArrowheadDimension, kArrowheadDimension);
 
     /*
      * Arrows
      */
 
     pathRef = CGPathCreateMutable();
-    float baseArrowDimension = 5.0f;
-    CGPathMoveToPoint(pathRef, NULL,  1.5f, baseArrowDimension / 2);
-    CGPathAddLineToPoint(pathRef, NULL,  0, baseArrowDimension);
-    CGPathAddLineToPoint(pathRef, NULL, baseArrowDimension, baseArrowDimension / 2);
+    CGPathMoveToPoint(pathRef, NULL, (3.0f / 8) * kArrowheadDimension, kHalfArrowheadDimension);
+    CGPathAddLineToPoint(pathRef, NULL,  0, kArrowheadDimension);
+    CGPathAddLineToPoint(pathRef, NULL, kArrowheadDimension, kHalfArrowheadDimension);
     CGPathAddLineToPoint(pathRef, NULL, 0, 0);
     CGPathCloseSubpath(pathRef);
 
-    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(1.5, baseArrowDimension / 2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake((3.0f / 8) * kArrowheadDimension, kHalfArrowheadDimension)]
                forKey:@"arrow1"];
     
     pathRef = CGPathCreateMutable();
-    CGPathMoveToPoint(pathRef, NULL,  0, baseArrowDimension);
-    CGPathAddLineToPoint(pathRef, NULL, baseArrowDimension-1, baseArrowDimension / 2);
+    CGPathMoveToPoint(pathRef, NULL,  0, kArrowheadDimension);
+    CGPathAddLineToPoint(pathRef, NULL, kArrowheadDimension - 1, kHalfArrowheadDimension);
     CGPathAddLineToPoint(pathRef, NULL, 0, 0);
     CGPathCloseSubpath(pathRef);
     
-    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(1.5, baseArrowDimension / 2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(1.5, kHalfArrowheadDimension)]
                forKey:@"arrow2"];
     
     pathRef = CGPathCreateMutable();
-    baseArrowDimension = 4.0f;
-    CGPathMoveToPoint(pathRef, NULL,  baseArrowDimension / 3, baseArrowDimension);
-    CGPathAddLineToPoint(pathRef, NULL, baseArrowDimension, baseArrowDimension / 2);
-    CGPathAddLineToPoint(pathRef, NULL, baseArrowDimension / 3, 0);
-    
-    CGPathRef outline = CGPathCreateCopyByStrokingPath(pathRef, NULL, 1.0f, kCGLineCapButt, kCGLineJoinMiter, 4);
+    CGPathMoveToPoint(pathRef, NULL,  kArrowheadDimension / 3 + 0.5f, kArrowheadDimension - 0.5f);
+    CGPathAddLineToPoint(pathRef, NULL, kArrowheadDimension - 0.5f, kHalfArrowheadDimension);
+    CGPathAddLineToPoint(pathRef, NULL, kArrowheadDimension / 3 + 0.5f, 0.5f);
+    CGPathRef outline = CGPathCreateCopyByStrokingPath(pathRef, NULL, 1.0f, kCGLineCapRound, kCGLineJoinMiter, 4);
     CGPathRelease(pathRef);
     
-    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(baseArrowDimension - 0.5, baseArrowDimension / 2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(kArrowheadDimension - 1, kHalfArrowheadDimension)]
                forKey:@"arrow3"];
 
     /*
      * Circles
      */
     
-    transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformTranslate(transform, 0, kDefaultArrowDimension);
-    transform = CGAffineTransformScale(transform, 1, -1);
+    flipTransform = CGAffineTransformTranslate(flipTransform, 0, kArrowheadDimension);
+    flipTransform = CGAffineTransformScale(flipTransform, 1, -1);
 
     pathRef = CGPathCreateMutable();
-    CGPathAddEllipseInRect(pathRef, &transform, defaultRect);
+    CGPathAddEllipseInRect(pathRef, &flipTransform, defaultRect);
     CGPathAddEllipseInRect(pathRef, NULL, CGRectInset(defaultRect, 1, 1));
 
-    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(0.25, kDefaultArrowDimension / 2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(0.25f, kHalfArrowheadDimension)]
                forKey:@"open circle"];
     
-    [arrows setObject:[WDArrowhead arrowheadWithPath:CGPathCreateWithEllipseInRect(defaultRect, &transform)
-                                          attachment:CGPointMake(0.25, kDefaultArrowDimension / 2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:CGPathCreateWithEllipseInRect(defaultRect, &flipTransform)
+                                          attachment:CGPointMake(0.25f, kHalfArrowheadDimension)]
                forKey:@"closed circle"];
 
     /*
@@ -177,42 +180,34 @@ const float kDefaultArrowDimension = 4.0f;
      */
     
     pathRef = CGPathCreateMutable();
-    CGPathAddRect(pathRef, &transform, defaultRect);
-    CGPathAddRect(pathRef, NULL, CGRectInset(defaultRect, 1, 1));
+    CGPathAddRect(pathRef, &flipTransform, CGRectInset(defaultRect, 0.5f, 0.5f));
+    CGPathAddRect(pathRef, NULL, CGRectInset(defaultRect, 1.5f, 1.5f));
 
-    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(0.25, kDefaultArrowDimension/2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(0.75, kHalfArrowheadDimension)]
                forKey:@"open square"];
 
-    [arrows setObject:[WDArrowhead arrowheadWithPath:CGPathCreateWithRect(defaultRect, &transform)
-                                          attachment:CGPointMake(0.25, kDefaultArrowDimension/2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:CGPathCreateWithRect(CGRectInset(defaultRect, 0.5f, 0.5f), &flipTransform)
+                                          attachment:CGPointMake(0.75f, kHalfArrowheadDimension)]
                forKey:@"closed square"];
     
     /*
      * Diamonds
      */
     
-    pathRef = CGPathCreateMutable();
-    CGPathMoveToPoint(pathRef, NULL, kDefaultArrowDimension / 2, kDefaultArrowDimension);
-    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension, kDefaultArrowDimension / 2);
-    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension / 2, 0);
-    CGPathAddLineToPoint(pathRef, NULL,  0, kDefaultArrowDimension / 2);
-    CGPathCloseSubpath(pathRef);
+    diamondTransform = CGAffineTransformTranslate(diamondTransform, kHalfArrowheadDimension, kHalfArrowheadDimension);
+    diamondTransform = CGAffineTransformRotate(diamondTransform, M_PI_4);
+    diamondTransform = CGAffineTransformScale(diamondTransform, 1, -1);
+    diamondTransform = CGAffineTransformTranslate(diamondTransform, -kHalfArrowheadDimension, -kHalfArrowheadDimension);
     
-    outline = CGPathCreateCopyByStrokingPath(pathRef, NULL, 1.0f, kCGLineCapButt, kCGLineJoinMiter, 4);
-    CGPathRelease(pathRef);
+    CGPathRef diamond = CGPathCreateWithRect(CGRectInset(defaultRect, 1.5f, 1.5f), &diamondTransform);
+    outline = CGPathCreateCopyByStrokingPath(diamond, NULL, 1.0f, kCGLineCapButt, kCGLineJoinMiter, 4);
+    CGPathRelease(diamond);
 
-    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(0.25, kDefaultArrowDimension/2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(0.5f, kHalfArrowheadDimension)]
                forKey:@"open diamond"];
     
-    pathRef = CGPathCreateMutable();
-    CGPathMoveToPoint(pathRef, NULL, kDefaultArrowDimension / 2, kDefaultArrowDimension);
-    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension, kDefaultArrowDimension / 2);
-    CGPathAddLineToPoint(pathRef, NULL, kDefaultArrowDimension / 2, 0);
-    CGPathAddLineToPoint(pathRef, NULL,  0, kDefaultArrowDimension / 2);
-    CGPathCloseSubpath(pathRef);
-    
-    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef
-                                          attachment:CGPointMake(kDefaultArrowDimension/2, kDefaultArrowDimension/2)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:CGPathCreateWithRect(CGRectInset(defaultRect, 1, 1), &diamondTransform)
+                                          attachment:CGPointMake(0.5f, kHalfArrowheadDimension)]
                forKey:@"closed diamond"];
     
     return arrows;

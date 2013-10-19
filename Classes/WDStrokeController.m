@@ -316,7 +316,7 @@
     WDArrowhead     *arrow;
     CGContextRef    ctx;
     CGSize          size = arrowButton_.frame.size;
-    float           scale = 5.0f;
+    float           scale = 3.0;
     float           y = floor(size.height / 2) + 0.5f;
     float           arrowInset;
     float           stemStart;

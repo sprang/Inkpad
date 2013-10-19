@@ -13,7 +13,7 @@
 #import "WDPropertyManager.h"
 
 #define kArrowInset     15
-#define kArrowWidth     66
+#define kArrowWidth     72
 #define kArrowHeight    46
 
 @interface WDArrowSeparatorView : UIView
@@ -156,7 +156,7 @@
 {
     WDArrowhead     *arrow = [WDArrowhead arrowheads][arrowID];
     CGContextRef    ctx;
-    float           scale = 5.0f;
+    float           scale = 3.0f;
     float           midY = floor(kArrowHeight / 2) + 0.5f;
     float           startX = kArrowInset + arrow.insetLength * scale;
     
