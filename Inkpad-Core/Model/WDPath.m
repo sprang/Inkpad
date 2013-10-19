@@ -609,23 +609,23 @@ NSString *WDClosedKey = @"WDClosedKey";
     }
     
     // add in arrowheads, if any
-    if ([self.strokeStyle hasArrow] && self.nodes && self.nodes.count) {
-        float               angle, scale = self.strokeStyle.width;
+    if ([strokeStyle hasArrow] && self.nodes && self.nodes.count) {
+        float               angle, scale = strokeStyle.width;
         CGPoint             attachment;
         CGRect              arrowBounds;
         WDArrowhead         *arrow;
         
         // start arrow
-        if (self.strokeStyle.startArrow) {
-            arrow = [WDArrowhead arrowheads][self.strokeStyle.startArrow];
+        if (strokeStyle.startArrow) {
+            arrow = [WDArrowhead arrowheads][strokeStyle.startArrow];
             [self startArrowAttachmentPoint:&attachment angle:&angle];
             arrowBounds = [arrow boundingBoxAtPosition:attachment scale:scale angle:angle];
             styleBounds = CGRectUnion(styleBounds, arrowBounds);
         }
         
         // end arrow
-        if (self.strokeStyle.endArrow) {
-            arrow = [WDArrowhead arrowheads][self.strokeStyle.endArrow];
+        if (strokeStyle.endArrow) {
+            arrow = [WDArrowhead arrowheads][strokeStyle.endArrow];
             [self endArrowAttachmentPoint:&attachment angle:&angle];
             arrowBounds = [arrow boundingBoxAtPosition:attachment scale:scale angle:angle];
             styleBounds = CGRectUnion(styleBounds, arrowBounds);
@@ -1837,29 +1837,31 @@ NSString *WDClosedKey = @"WDClosedKey";
 
 - (void) renderStrokeInContext:(CGContextRef)ctx
 {
-    if (!self.strokeStyle.hasArrow) {
+    WDStrokeStyle *stroke = self.superpath ? self.superpath.strokeStyle : self.strokeStyle;
+    
+    if (!stroke.hasArrow) {
         [super renderStrokeInContext:ctx];
         return;
     }
     
     CGContextAddPath(ctx, self.pathRef);
-    [self.strokeStyle applyInContext:ctx];
+    [stroke applyInContext:ctx];
     
     CGContextReplacePathWithStrokedPath(ctx);
-    CGContextSetFillColorWithColor(ctx, self.strokeStyle.color.CGColor);
+    CGContextSetFillColorWithColor(ctx, stroke.color.CGColor);
  
-    float       angle, scale = self.strokeStyle.width;
+    float       angle, scale = stroke.width;
     CGPoint     attachment;
     WDArrowhead *arrow;
     
-    if (self.strokeStyle.startArrow) {
-        arrow = [WDArrowhead arrowheads][self.strokeStyle.startArrow];
+    if (stroke.startArrow) {
+        arrow = [WDArrowhead arrowheads][stroke.startArrow];
         [self startArrowAttachmentPoint:&attachment angle:&angle];
         [arrow addArrowInContext:ctx position:attachment scale:scale angle:angle];
     }
     
-    if (self.strokeStyle.endArrow) {
-        arrow = [WDArrowhead arrowheads][self.strokeStyle.endArrow];
+    if (stroke.endArrow) {
+        arrow = [WDArrowhead arrowheads][stroke.endArrow];
         [self endArrowAttachmentPoint:&attachment angle:&angle];
         [arrow addArrowInContext:ctx position:attachment scale:scale angle:angle];
     }
@@ -1869,22 +1871,24 @@ NSString *WDClosedKey = @"WDClosedKey";
 
 - (void) addElementsToOutlinedStroke:(CGMutablePathRef)outline
 {
-    if (![self.strokeStyle hasArrow]) {
+    WDStrokeStyle *stroke = self.superpath ? self.superpath.strokeStyle : self.strokeStyle;
+    
+    if (![stroke hasArrow]) {
         // no arrows...
         return;
     }
     
     WDArrowhead     *arrow;
-    float           angle, scale = self.strokeStyle.width;
+    float           angle, scale = stroke.width;
     CGPoint         attachment;
     
-    arrow = [WDArrowhead arrowheads][self.strokeStyle.startArrow];
+    arrow = [WDArrowhead arrowheads][stroke.startArrow];
     if (arrow) {
         [self startArrowAttachmentPoint:&attachment angle:&angle];
         [arrow addToMutablePath:outline position:attachment scale:scale angle:angle];
     }
     
-    arrow = [WDArrowhead arrowheads][self.strokeStyle.endArrow];
+    arrow = [WDArrowhead arrowheads][stroke.endArrow];
     if (arrow) {
         [self endArrowAttachmentPoint:&attachment angle:&angle];
         [arrow addToMutablePath:outline position:attachment scale:scale angle:angle];

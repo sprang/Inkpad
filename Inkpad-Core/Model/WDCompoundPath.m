@@ -140,6 +140,13 @@ NSString *WDSubpathsKey = @"WDSubpathsKey";
     return nil;
 }
 
+- (void) addElementsToOutlinedStroke:(CGMutablePathRef)outline
+{
+    for (WDPath *path in subpaths_) {
+        [path addElementsToOutlinedStroke:outline];
+    }
+}
+
 - (CGRect) styleBounds
 {
     CGRect bounds = CGRectNull;
@@ -372,6 +379,18 @@ NSString *WDSubpathsKey = @"WDSubpathsKey";
     [cp->subpaths_ makeObjectsPerformSelector:@selector(setSuperpath:) withObject:cp];
     
     return cp;
+}
+
+- (void) renderStrokeInContext:(CGContextRef)ctx
+{
+    if (![self.strokeStyle hasArrow]) {
+        [super renderStrokeInContext:ctx];
+        return;
+    }
+    
+    for (WDPath *path in subpaths_) {
+        [path renderStrokeInContext:ctx];
+    }
 }
 
 @end
