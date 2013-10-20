@@ -111,7 +111,7 @@
 
 @end
 
-const float kArrowheadDimension = 8.0f;
+const float kArrowheadDimension = 7.0f;
 const float kHalfArrowheadDimension = kArrowheadDimension / 2;
 
 @implementation WDArrowhead (Private)
