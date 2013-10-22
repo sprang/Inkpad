@@ -187,7 +187,8 @@
 
 - (void) moveWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
-    CGPoint initialPt = self.initialEvent.snappedLocation;
+    CGPoint initialPt = self.initialEvent.location;
+    CGPoint initialSnapped = self.initialEvent.snappedLocation;
     CGPoint currentPt = event.location;
     CGPoint snapped = event.snappedLocation;
     CGPoint delta;
@@ -206,7 +207,7 @@
         [canvas.drawingController selectObjectsInRect:selectionRect];
     }  else if (transformingNodes_) {
         canvas.transforming = canvas.transformingNode = YES;
-        delta = WDSubtractPoints(snapped, initialPt);
+        delta = WDSubtractPoints(snapped, initialSnapped);
     
         if (self.flags & WDToolShiftKey || self.flags & WDToolSecondaryTouch) {
             delta = WDConstrainPoint(delta);
@@ -264,7 +265,7 @@
         canvas.transforming = YES;
         canvas.transformingNode = [canvas.drawingController selectedNodes].count;
         
-        delta = WDSubtractPoints(currentPt, initialPt);
+        delta = WDSubtractPoints(currentPt, initialSnapped);
         
         if (self.flags & WDToolShiftKey || self.flags & WDToolSecondaryTouch) {
             delta = WDConstrainPoint(delta);
