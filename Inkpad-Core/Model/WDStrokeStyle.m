@@ -312,6 +312,16 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     return (noStart && noEnd) ? NO : YES;
 }
 
+- (BOOL) hasStartArrow
+{
+    return ![startArrow_ isEqualToString:WDStrokeArrowNone];
+}
+
+- (BOOL) hasEndArrow
+{
+    return ![endArrow_ isEqualToString:WDStrokeArrowNone];
+}
+
 - (void) applyPatternInContext:(CGContextRef)ctx
 {
     NSMutableArray *dashes = [dashPattern_ mutableCopy];

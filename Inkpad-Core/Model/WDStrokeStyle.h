@@ -58,6 +58,8 @@ typedef enum {
 - (BOOL) hasPattern;
 - (BOOL) willRender;
 - (BOOL) hasArrow;
+- (BOOL) hasStartArrow;
+- (BOOL) hasEndArrow;
 
 - (void) applyInContext:(CGContextRef)ctx;
 

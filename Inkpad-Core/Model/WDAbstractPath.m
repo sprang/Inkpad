@@ -50,6 +50,12 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     return NULL;
 }
 
+- (CGPathRef) strokePathRef
+{
+    // implemented by subclasses
+    return NULL;
+}
+
 - (BOOL) containsPoint:(CGPoint)pt
 {
     return CGPathContainsPoint(self.pathRef, NULL, pt, false);
@@ -57,7 +63,7 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
 
 - (void) renderStrokeInContext:(CGContextRef)ctx
 {
-    CGContextAddPath(ctx, self.pathRef);
+    CGContextAddPath(ctx, self.strokePathRef);
     [self.strokeStyle applyInContext:ctx];
     CGContextStrokePath(ctx);
 }
@@ -221,7 +227,7 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     CGPDFContextBeginPage(ctx, NULL);
     
     [self.strokeStyle applyInContext:ctx];
-    CGContextAddPath(ctx, self.pathRef);
+    CGContextAddPath(ctx, self.strokePathRef);
     CGContextReplacePathWithStrokedPath(ctx);
     CGPathRef outline = CGContextCopyPath(ctx);
     

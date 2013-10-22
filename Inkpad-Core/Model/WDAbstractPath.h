@@ -28,6 +28,7 @@ typedef enum {
 
 @property (nonatomic, assign) WDFillRule fillRule;
 @property (nonatomic, readonly) CGPathRef pathRef;
+@property (nonatomic, readonly) CGPathRef strokePathRef;
 
 + (WDAbstractPath *) pathWithCGPathRef:(CGPathRef)pathRef;
 

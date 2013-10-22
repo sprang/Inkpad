@@ -54,4 +54,5 @@ BOOL WDBezierSegmentsFormCorner(WDBezierSegment a, WDBezierSegment b);
 BOOL WDBezierSegmentGetIntersection(WDBezierSegment seg, CGPoint a, CGPoint b, float *tIntersect);
 
 float WDBezierSegmentOutAngle(WDBezierSegment seg);
-
+CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t);
+BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment segment, float distance, CGPoint pt, CGPoint *result, float *t);

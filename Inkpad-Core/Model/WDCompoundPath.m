@@ -254,10 +254,30 @@ NSString *WDSubpathsKey = @"WDSubpathsKey";
     return pathRef_;
 }
 
+- (CGPathRef) strokePathRef
+{
+    if (!strokePathRef_) {
+        strokePathRef_ = CGPathCreateMutable();
+        
+        for (WDPath *subpath in subpaths_) {
+            CGPathAddPath(strokePathRef_, NULL, subpath.strokePathRef);
+        }
+    }
+    
+    return strokePathRef_;
+}
+
 - (void) invalidatePath
 {
-    CGPathRelease(pathRef_);
-    pathRef_ = NULL;
+    if (pathRef_) {
+        CGPathRelease(pathRef_);
+        pathRef_ = NULL;
+    }
+    
+    if (strokePathRef_) {
+        CGPathRelease(strokePathRef_);
+        strokePathRef_ = NULL;
+    }
 }
 
 // OpenGL-based selection rendering
@@ -379,6 +399,11 @@ NSString *WDSubpathsKey = @"WDSubpathsKey";
     [cp->subpaths_ makeObjectsPerformSelector:@selector(setSuperpath:) withObject:cp];
     
     return cp;
+}
+
+- (void) strokeStyleChanged
+{
+    [subpaths_ makeObjectsPerformSelector:@selector(strokeStyleChanged)];
 }
 
 - (void) renderStrokeInContext:(CGContextRef)ctx
