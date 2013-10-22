@@ -627,3 +627,74 @@ BOOL WDBezierSegmentsFormCorner(WDBezierSegment a, WDBezierSegment b)
     
     return !WDCollinear(p, q, r);    
 }
+
+float WDBezierSegmentOutAngle(WDBezierSegment seg)
+{
+    CGPoint a;
+    
+    if (!CGPointEqualToPoint(seg.b_, seg.in_)) {
+        a = seg.in_;
+    } else {
+        a = seg.out_;
+    }
+    
+    CGPoint delta = WDSubtractPoints(seg.b_, a);
+    
+    return atan2f(delta.y, delta.x);
+}
+
+inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
+{
+    float   t2 ,t3, td2, td3;
+    CGPoint result;
+    
+    t2 = t * t;
+    t3 = t2 * t;
+    
+    td2 = (1-t) * (1-t);
+    td3 = td2 * (1-t);
+    
+    result.x = td3 * seg.a_.x +
+    3 * t * td2 * seg.out_.x +
+    3 * t2 * (1-t) * seg.in_.x +
+    t3 * seg.b_.x;
+    
+    result.y = td3 * seg.a_.y +
+    3 * t * td2 * seg.out_.y +
+    3 * t2 * (1-t) * seg.in_.y +
+    t3 * seg.b_.y;
+    
+    return result;
+}
+
+BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment seg, float distance, CGPoint pt, CGPoint *result, float *tResult)
+{
+    CGPoint     current, last = seg.a_;
+    float       start = 0.0f, end = 1.0f, step = 0.1f;
+    
+    for (float t = start; t <= end; t += step) {
+        current = WDBezierSegmentCalculatePointAtT(seg, t);
+        
+        if (WDDistance(current, pt) >= distance) {
+            start = (t - step); // back up one iteration
+            end = t;
+
+            // it's between the last and current point, let's get more precise
+            step = 0.0001f;
+            
+            for (float t = start; t <= end; t += step) {
+                current = WDBezierSegmentCalculatePointAtT(seg, t);
+                
+                if (WDDistance(current, pt) >= distance) {
+                    *tResult = t - (step / 2);
+                    *result = WDBezierSegmentCalculatePointAtT(seg, t);
+                    return YES;
+                }
+            }
+        }
+        
+        last = current;
+    }
+    
+    return NO;
+}

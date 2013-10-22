@@ -9,6 +9,8 @@
 //  Copyright (c) 2010-2013 Steve Sprang
 //
 
+#import "WDArrowController.h"
+#import "WDArrowhead.h"
 #import "WDColor.h"
 #import "WDColorController.h"
 #import "WDColorWell.h"
@@ -120,6 +122,14 @@
     float       width = round(slider.value) / 2;
     
     [drawingController_ setValue:@(width) forProperty:WDStrokeWidthProperty];
+}
+
+- (IBAction)showArrowheads:(id)sender
+{
+    WDArrowController *arrowController = [[WDArrowController alloc] initWithNibName:nil bundle:nil];
+    arrowController.preferredContentSize = self.view.frame.size;
+    arrowController.drawingController = self.drawingController;
+	[self.navigationController pushViewController:arrowController animated:YES];
 }
 
 - (void) takeCapFrom:(id)sender
@@ -267,6 +277,10 @@
             [self setDashSlidersFromArray:value];
         }
     }
+    
+    if ([properties intersectsSet:[NSSet setWithObjects:WDStartArrowProperty, WDEndArrowProperty, nil]]) {
+        [self updateArrowPreview];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -282,11 +296,93 @@
     capPicker_.cap = strokeStyle.cap;
     joinPicker_.join = strokeStyle.join;
     
+    [self updateArrowPreview];
     [self setDashSlidersFromArray:strokeStyle.dashPattern];
     
     [modeSegment_ removeTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
     modeSegment_.selectedSegmentIndex = [[drawingController_.propertyManager defaultValueForProperty:WDStrokeVisibleProperty] boolValue] ? 1 : 0;
     [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void) updateArrowPreview
+{
+    [arrowButton_ setImage:[self arrowPreview] forState:UIControlStateNormal];
+}
+
+- (UIImage *) arrowPreview
+{
+    WDStrokeStyle   *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
+    UIColor         *color = [UIColor colorWithRed:0.0f green:(118.0f / 255) blue:1.0f alpha:1.0f];
+    WDArrowhead     *arrow;
+    CGContextRef    ctx;
+    CGSize          size = arrowButton_.frame.size;
+    float           scale = 3.0;
+    float           y = floor(size.height / 2) + 0.5f;
+    float           arrowInset;
+    float           stemStart;
+    float           stemEnd = 40;
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    ctx = UIGraphicsGetCurrentContext();
+    
+    [color set];
+    CGContextSetLineWidth(ctx, scale);
+    
+    // start arrow
+    arrow = [WDArrowhead arrowheads][strokeStyle.startArrow];
+    arrowInset = arrow.insetLength;
+    if (arrow) {
+        [arrow addArrowInContext:ctx position:CGPointMake(arrowInset * scale, y) scale:scale angle:M_PI];
+        CGContextFillPath(ctx);
+        stemStart = arrowInset * scale;
+    } else {
+        stemStart = 10;
+    }
+    
+    CGContextMoveToPoint(ctx, stemStart, y);
+    CGContextAddLineToPoint(ctx, stemEnd, y);
+    CGContextStrokePath(ctx);
+    
+    // end arrow
+    arrow = [WDArrowhead arrowheads][strokeStyle.endArrow];
+    arrowInset = arrow.insetLength;
+    if (arrow) {
+        [arrow addArrowInContext:ctx position:CGPointMake(size.width - (arrowInset * scale), y) scale:scale angle:0];
+        CGContextFillPath(ctx);
+        stemStart = arrowInset * scale;
+    } else {
+        stemStart = 10;
+    }
+    
+    CGContextMoveToPoint(ctx, size.width - stemStart, y);
+    CGContextAddLineToPoint(ctx, size.width - stemEnd, y);
+    CGContextStrokePath(ctx);
+    
+    // draw interior line
+    [[color colorWithAlphaComponent:0.5f] set];
+    CGContextMoveToPoint(ctx, stemEnd + 10, y);
+    CGContextAddLineToPoint(ctx, size.width - (stemEnd + 10), y);
+    CGContextSetLineWidth(ctx, scale - 2);
+    CGContextStrokePath(ctx);
+    
+    // draw a label
+    NSString *label = NSLocalizedString(@"arrowheads", @"arrowheads");
+    NSDictionary *attrs = @{NSFontAttributeName: [UIFont systemFontOfSize:15.0f],
+                            NSForegroundColorAttributeName:color};
+    CGRect bounds = CGRectZero;
+    bounds.size = [label sizeWithAttributes:attrs];
+    bounds.origin.x = (size.width - CGRectGetWidth(bounds)) / 2;
+    bounds.origin.y = (size.height - CGRectGetHeight(bounds)) / 2 - 1;
+    CGContextSetBlendMode(ctx, kCGBlendModeClear);
+    CGContextFillRect(ctx, CGRectInset(bounds, -10, -10));
+    CGContextSetBlendMode(ctx, kCGBlendModeNormal);
+    [label drawInRect:bounds withAttributes:attrs];
+    
+    // grab the image
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
 }
 
 @end

@@ -50,9 +50,22 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     return NULL;
 }
 
+- (CGPathRef) strokePathRef
+{
+    // implemented by subclasses
+    return NULL;
+}
+
 - (BOOL) containsPoint:(CGPoint)pt
 {
     return CGPathContainsPoint(self.pathRef, NULL, pt, false);
+}
+
+- (void) renderStrokeInContext:(CGContextRef)ctx
+{
+    CGContextAddPath(ctx, self.strokePathRef);
+    [self.strokeStyle applyInContext:ctx];
+    CGContextStrokePath(ctx);
 }
 
 - (void) renderInContext:(CGContextRef)ctx metaData:(WDRenderingMetaData)metaData
@@ -82,9 +95,7 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
         }
         
         if (self.strokeStyle && [self.strokeStyle willRender]) {
-            CGContextAddPath(ctx, self.pathRef);
-            [self.strokeStyle applyInContext:ctx];
-            CGContextStrokePath(ctx);
+            [self renderStrokeInContext:ctx];
         }
         
         [self endTransparencyLayer:ctx metaData:metaData];
@@ -195,6 +206,11 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     }
 }
 
+- (void) addElementsToOutlinedStroke:(CGMutablePathRef)pathRef
+{
+    // subclasses can add more to the outline
+}
+
 - (WDAbstractPath *) outlineStroke
 {
     if (!self.strokeStyle || ![self.strokeStyle willRender]) {
@@ -204,15 +220,17 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     CGRect              mediaBox = self.styleBounds;
     CFMutableDataRef	data = CFDataCreateMutable(NULL, 0);
     CGDataConsumerRef	consumer = CGDataConsumerCreateWithCFData(data);
-    CGContextRef        ctx = CGPDFContextCreate(consumer, &mediaBox, NULL);	
+    CGContextRef        ctx = CGPDFContextCreate(consumer, &mediaBox, NULL);
+    CGMutablePathRef    mutableOutline;
     
     CGDataConsumerRelease(consumer);
     CGPDFContextBeginPage(ctx, NULL);
     
     [self.strokeStyle applyInContext:ctx];
-    CGContextAddPath(ctx, self.pathRef);
+    CGContextAddPath(ctx, self.strokePathRef);
     CGContextReplacePathWithStrokedPath(ctx);
     CGPathRef outline = CGContextCopyPath(ctx);
+    
     CGPDFContextEndPage(ctx);
     CGContextRelease(ctx);
     CFRelease(data);
@@ -220,17 +238,21 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     if (CGPathIsEmpty(outline)) {
         CGPathRelease(outline);
         return nil;
+    } else {
+        mutableOutline = CGPathCreateMutableCopy(outline);
+        CGPathRelease(outline);
     }
-    
-    WDAbstractPath *result = [WDAbstractPath pathWithCGPathRef:outline];
+
+    [self addElementsToOutlinedStroke:mutableOutline];
+    WDAbstractPath *result = [WDAbstractPath pathWithCGPathRef:mutableOutline];
     [result simplify];
+    CGPathRelease(mutableOutline);
     
     // remove self intersections
     if (result) {
         result = [WDPathfinder combinePaths:@[result, [WDPath pathWithRect:result.styleBounds]] operation:WDPathfinderIntersect];
     }
     
-    CGPathRelease(outline);
     return result;
 }
 

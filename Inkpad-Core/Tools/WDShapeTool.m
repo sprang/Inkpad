@@ -234,7 +234,9 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
         if (!CGPointEqualToPoint(self.initialEvent.snappedLocation, theEvent.snappedLocation)) {
             WDPath  *path = [self pathWithPoint:theEvent.snappedLocation constrain:[self constrain]];
             
-            path.strokeStyle = [canvas.drawingController.propertyManager activeStrokeStyle];
+            WDStrokeStyle *stroke = [canvas.drawingController.propertyManager activeStrokeStyle];
+            path.strokeStyle = (shapeMode_ == WDShapeLine) ? stroke : [stroke strokeStyleSansArrows];
+            
             if (shapeMode_ != WDShapeLine) {
                 path.fill = [canvas.drawingController.propertyManager activeFillStyle];
             }

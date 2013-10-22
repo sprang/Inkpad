@@ -66,6 +66,10 @@
 	<true/>
 	<key>WDStrokeWidthProperty</key>
 	<integer>1</integer>
+	<key>WDStartArrowProperty</key>
+	<string>none</string>
+	<key>WDEndArrowProperty</key>
+	<string>none</string>
 	<key>WDSwatchPanelModeKey</key>
 	<integer>2</integer>
 	<key>WDTextAlignmentProperty</key>

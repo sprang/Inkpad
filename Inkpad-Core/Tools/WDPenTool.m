@@ -149,7 +149,7 @@
         WDPath *path = [[WDPath alloc] initWithNode:self.replacementNode];
         
         path.fill = [canvas.drawingController.propertyManager activeFillStyle];
-        path.strokeStyle = [canvas.drawingController.propertyManager activeStrokeStyle];
+        path.strokeStyle = [[canvas.drawingController.propertyManager activeStrokeStyle] strokeStyleSansArrows];
         path.opacity = [[canvas.drawingController.propertyManager defaultValueForProperty:WDOpacityProperty] floatValue];
         path.shadow = [canvas.drawingController.propertyManager activeShadow];
         

@@ -190,7 +190,8 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
     if (!inspectableProperties) {
         inspectableProperties = [NSMutableSet setWithObjects:WDFillProperty, WDStrokeColorProperty,
                                  WDStrokeCapProperty, WDStrokeJoinProperty, WDStrokeWidthProperty,
-                                 WDStrokeVisibleProperty, WDStrokeDashPatternProperty, nil];
+                                 WDStrokeVisibleProperty, WDStrokeDashPatternProperty,
+                                 WDStartArrowProperty, WDEndArrowProperty, nil];
         [inspectableProperties unionSet:[super inspectableProperties]];
     }
     
@@ -219,6 +220,12 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
     }
     if (![from.dashPattern isEqualToArray:to.dashPattern]) {
         [changedProperties addObject:WDStrokeDashPatternProperty];
+    }
+    if (![from.startArrow isEqualToString:to.startArrow]) {
+        [changedProperties addObject:WDStartArrowProperty];
+    }
+    if (![from.endArrow isEqualToString:to.endArrow]) {
+        [changedProperties addObject:WDEndArrowProperty];
     }
     
     return changedProperties;
@@ -313,7 +320,7 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
     static NSSet *strokeProperties = nil;
     if (!strokeProperties) {
         strokeProperties = [[NSSet alloc] initWithObjects:WDStrokeColorProperty, WDStrokeCapProperty, WDStrokeJoinProperty,
-                            WDStrokeWidthProperty, WDStrokeDashPatternProperty, nil];
+                            WDStrokeWidthProperty, WDStrokeDashPatternProperty, WDStartArrowProperty, WDEndArrowProperty, nil];
     }
     
     if ([property isEqualToString:WDFillProperty]) {
@@ -334,17 +341,16 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
             strokeStyle = [propertyManager defaultStrokeStyle];
         }
         
-        if ([property isEqualToString:WDStrokeColorProperty]) {
-            self.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:strokeStyle.width cap:strokeStyle.cap join:strokeStyle.join color:value dashPattern:strokeStyle.dashPattern];
-        } else if ([property isEqualToString:WDStrokeCapProperty]) {
-            self.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:strokeStyle.width cap:[value intValue] join:strokeStyle.join color:strokeStyle.color dashPattern:strokeStyle.dashPattern];
-        } else if ([property isEqualToString:WDStrokeJoinProperty]) {
-            self.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:strokeStyle.width cap:strokeStyle.cap join:[value intValue] color:strokeStyle.color dashPattern:strokeStyle.dashPattern];
-        } else if ([property isEqualToString:WDStrokeWidthProperty]) {
-            self.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:[value floatValue] cap:strokeStyle.cap join:strokeStyle.join color:strokeStyle.color dashPattern:strokeStyle.dashPattern];
-        } else if ([property isEqualToString:WDStrokeDashPatternProperty]) {
-            self.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:strokeStyle.width cap:strokeStyle.cap join:strokeStyle.join color:strokeStyle.color dashPattern:value];
-        }
+        float width = [property isEqualToString:WDStrokeWidthProperty] ? [value floatValue] : strokeStyle.width;
+        CGLineCap cap = [property isEqualToString:WDStrokeCapProperty]? [value intValue] : strokeStyle.cap;
+        CGLineJoin join = [property isEqualToString:WDStrokeJoinProperty] ? [value intValue] : strokeStyle.join;
+        WDColor *color = [property isEqualToString:WDStrokeColorProperty] ? value : strokeStyle.color;
+        NSArray *dashPattern = [property isEqualToString:WDStrokeDashPatternProperty] ? value : strokeStyle.dashPattern;
+        NSString *startArrow = [property isEqualToString:WDStartArrowProperty] ? value : strokeStyle.startArrow;
+        NSString *endArrow = [property isEqualToString:WDEndArrowProperty] ? value : strokeStyle.endArrow;
+        
+        self.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:width cap:cap join:join color:color
+                                                   dashPattern:dashPattern startArrow:startArrow endArrow:endArrow];
     } else {
         [super setValue:value forProperty:property propertyManager:propertyManager];
     }
@@ -379,11 +385,11 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
         } else if ([property isEqualToString:WDStrokeWidthProperty]) {
             return @(self.strokeStyle.width);
         } else if ([property isEqualToString:WDStrokeDashPatternProperty]) {
-            if (!self.strokeStyle.dashPattern) {
-                return @[];
-            } else {
-                return self.strokeStyle.dashPattern;
-            }
+            return self.strokeStyle.dashPattern ?: @[];
+        } else if ([property isEqualToString:WDStartArrowProperty]) {
+            return self.strokeStyle.startArrow ?: WDStrokeArrowNone;
+        } else if ([property isEqualToString:WDEndArrowProperty]) {
+            return self.strokeStyle.endArrow ?: WDStrokeArrowNone;
         }
     }
     

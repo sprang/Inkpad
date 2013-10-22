@@ -37,3 +37,5 @@ NSString *WDStrokeJoinProperty = @"WDStrokeJoinProperty";
 NSString *WDStrokeWidthProperty = @"WDStrokeWidthProperty";
 NSString *WDStrokeVisibleProperty = @"WDStrokeVisibleProperty";
 NSString *WDStrokeDashPatternProperty = @"WDStrokeDashPatternProperty";
+NSString *WDStartArrowProperty = @"WDStartArrowProperty";
+NSString *WDEndArrowProperty = @"WDEndArrowProperty";
