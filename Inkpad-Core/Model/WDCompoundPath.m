@@ -25,7 +25,13 @@ NSString *WDSubpathsKey = @"WDSubpathsKey";
 
 - (void) dealloc
 {
-    CGPathRelease(pathRef_);
+    if (pathRef_) {
+        CGPathRelease(pathRef_);
+    }
+    
+    if (strokePathRef_) {
+        CGPathRelease(strokePathRef_);
+    }
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
