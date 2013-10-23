@@ -672,7 +672,7 @@ BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment seg, float distance, C
     CGPoint     current, last = seg.a_;
     float       start = 0.0f, end = 1.0f, step = 0.1f;
     
-    for (float t = start; t <= end; t += step) {
+    for (float t = start; t < (end + step); t += step) {
         current = WDBezierSegmentCalculatePointAtT(seg, t);
         
         if (WDDistance(current, pt) >= distance) {
@@ -682,7 +682,7 @@ BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment seg, float distance, C
             // it's between the last and current point, let's get more precise
             step = 0.0001f;
             
-            for (float t = start; t <= end; t += step) {
+            for (float t = start; t < (end + step); t += step) {
                 current = WDBezierSegmentCalculatePointAtT(seg, t);
                 
                 if (WDDistance(current, pt) >= distance) {
