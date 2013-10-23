@@ -20,6 +20,7 @@
 #import "WDSparkSlider.h"
 #import "WDStrokeController.h"
 #import "WDPropertyManager.h"
+#import "WDUtilities.h"
 
 @implementation WDStrokeController
 
@@ -65,6 +66,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void) setDrawingController:(WDDrawingController *)drawingController
 {
     drawingController_ = drawingController;
@@ -75,6 +81,122 @@
                                                  name:WDInvalidPropertiesNotification
                                                object:drawingController.propertyManager];
 }
+
+- (void) invalidProperties:(NSNotification *)aNotification
+{
+    NSSet *properties = [aNotification userInfo][WDInvalidPropertiesKey];
+    
+    for (NSString *property in properties) {
+        id value = [drawingController_.propertyManager defaultValueForProperty:property];
+        
+        if ([property isEqualToString:WDStrokeWidthProperty]) {
+            widthSlider_.value = [self strokeWidthToSliderValue:[value floatValue]];
+            widthLabel_.text = [NSString stringWithFormat:@"%.1f pt", [value floatValue]];
+            
+            decrement.enabled = widthSlider_.value != widthSlider_.minimumValue;
+            increment.enabled = widthSlider_.value != widthSlider_.maximumValue;
+        } else if ([property isEqualToString:WDStrokeCapProperty]) {
+            capPicker_.cap = [value integerValue];
+        } else if ([property isEqualToString:WDStrokeJoinProperty]) {
+            joinPicker_.join = [value integerValue];
+        } else if ([property isEqualToString:WDStrokeColorProperty]) {
+            colorController_.color = value;
+        } else if ([property isEqualToString:WDStrokeVisibleProperty]) {
+            [modeSegment_ removeTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
+            modeSegment_.selectedSegmentIndex = [value boolValue] ? 1 : 0;
+            [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
+        } else if ([property isEqualToString:WDStrokeDashPatternProperty]) {
+            [self setDashSlidersFromArray:value];
+        }
+    }
+    
+    if ([properties intersectsSet:[NSSet setWithObjects:WDStartArrowProperty, WDEndArrowProperty, nil]]) {
+        [self updateArrowPreview];
+    }
+}
+
+#pragma mark - Width Slider
+
+#define kX 40.0f
+#define kXLog log(kX + 1)
+
+- (float) widthSliderDelta
+{
+    return (widthSlider_.maximumValue - widthSlider_.minimumValue);
+}
+
+- (float) strokeWidthToSliderValue:(float)strokeWidth
+{
+    float delta = [self widthSliderDelta];
+    float v = (strokeWidth - widthSlider_.minimumValue) * (kX / delta) + 1.0f;
+    v = log(v);
+    v /= kXLog;
+    
+    return (v * 100);
+}
+
+- (float) sliderValueToStrokeWidth
+{
+    float percentage = WDClamp(0.0f, 1.0f, (widthSlider_.value) / 100.0f);
+    float delta = [self widthSliderDelta];
+    float v = delta * (exp(kXLog * percentage) - 1.0f) / kX + widthSlider_.minimumValue;
+    
+    return v;
+}
+
+- (IBAction) takeStrokeWidthFrom:(id)sender
+{
+    widthLabel_.text = [NSString stringWithFormat:@"%.1f pt", [self sliderValueToStrokeWidth]];
+    
+    UISlider *slider = (UISlider *)sender;
+    decrement.enabled = slider.value != slider.minimumValue;
+    increment.enabled = slider.value != slider.maximumValue;
+}
+
+- (IBAction) takeFinalStrokeWidthFrom:(id)sender
+{
+    [drawingController_ setValue:@([self sliderValueToStrokeWidth])
+                     forProperty:WDStrokeWidthProperty];
+}
+
+- (float) roundingFactor:(float)strokeWidth
+{
+    if (strokeWidth <= 5.0) {
+        return 10.0f;
+    } else if (strokeWidth <= 10) {
+        return 5.0f;
+    } else if (strokeWidth <= 20) {
+        return 2.0f;
+    }
+    
+    return 1.0f;
+}
+
+- (void) changeSliderBy:(float)change
+{
+    float strokeWidth = [self sliderValueToStrokeWidth];
+    float roundingFactor = [self roundingFactor:strokeWidth];
+    
+    strokeWidth *= roundingFactor;
+    strokeWidth += change;
+    strokeWidth = roundf(strokeWidth);
+    strokeWidth /= roundingFactor;
+    
+    widthSlider_.value = [self strokeWidthToSliderValue:strokeWidth];
+    [widthSlider_ sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
+- (IBAction) increment:(id)sender
+{
+    [self changeSliderBy:1];
+}
+
+- (IBAction) decrement:(id)sender
+{
+    [self changeSliderBy:(-1)];
+}
+
+#pragma mark - Actions
 
 - (void) modeChanged:(id)sender
 {
@@ -88,40 +210,11 @@
 }
 
 - (void) takeColorFrom:(id)sender
-{ 
+{
     WDColorController   *colorController = (WDColorController *)sender;
     WDColor             *color = colorController.color;
     
     [drawingController_ setValue:color forProperty:WDStrokeColorProperty];
-}
-
-- (IBAction) increment:(id)sender
-{
-    widthSlider_.value = widthSlider_.value + 1;
-    [widthSlider_ sendActionsForControlEvents:UIControlEventTouchUpInside];
-}
-
-- (IBAction) decrement:(id)sender
-{
-    widthSlider_.value = widthSlider_.value - 1;
-    [widthSlider_ sendActionsForControlEvents:UIControlEventTouchUpInside];
-}
-
-- (IBAction) takeStrokeWidthFrom:(id)sender
-{
-    UISlider *slider = (UISlider *)sender;
-    widthLabel_.text = [NSString stringWithFormat:@"%.1f pt", round(slider.value) / 2];
-    
-    decrement.enabled = slider.value != slider.minimumValue;
-    increment.enabled = slider.value != slider.maximumValue;
-}
-
-- (IBAction) takeFinalStrokeWidthFrom:(id)sender
-{
-    UISlider    *slider = (UISlider *)sender;
-    float       width = round(slider.value) / 2;
-    
-    [drawingController_ setValue:@(width) forProperty:WDStrokeWidthProperty];
 }
 
 - (IBAction)showArrowheads:(id)sender
@@ -174,55 +267,6 @@
     [drawingController_ setValue:pattern forProperty:WDStrokeDashPatternProperty];
 }
 
-- (void) viewDidLoad
-{
-    [super viewDidLoad];
-    
-    colorController_ = [[WDColorController alloc] initWithNibName:@"Color" bundle:nil];
-    
-    [self.view addSubview:colorController_.view];
-    CGRect frame = colorController_.view.frame;
-    frame.origin = CGPointMake(5, 5);
-    colorController_.view.frame = frame;
-    colorController_.colorWell.strokeMode = YES;
-    
-    colorController_.target = self;
-    colorController_.action = @selector(takeColorFrom:);
-    
-    widthSlider_.minimumValue = 1;
-    widthSlider_.maximumValue = 200;
-    [widthSlider_ addTarget:self action:@selector(takeStrokeWidthFrom:)
-          forControlEvents:(UIControlEventTouchDown | UIControlEventTouchDragInside | UIControlEventValueChanged)];
-    [widthSlider_ addTarget:self action:@selector(takeFinalStrokeWidthFrom:)
-          forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
-    
-    capPicker_.mode = kStrokeCapAttribute;
-    [capPicker_ addTarget:self action:@selector(takeCapFrom:) forControlEvents:UIControlEventValueChanged];
-    
-    joinPicker_.mode = kStrokeJoinAttribute;
-    [joinPicker_ addTarget:self action:@selector(takeJoinFrom:) forControlEvents:UIControlEventValueChanged];
-    
-    // need to add/remove this target when programmatically changing the segment controller's value
-    [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
-    
-    dash0_.title.text = NSLocalizedString(@"dash", @"dash");
-    dash1_.title.text = NSLocalizedString(@"dash", @"dash");
-    gap0_.title.text = NSLocalizedString(@"gap", @"gap");
-    gap1_.title.text = NSLocalizedString(@"gap", @"gap");
-    
-    [dash0_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
-    [dash1_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
-    [gap0_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
-    [gap1_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
-    
-    self.preferredContentSize = self.view.frame.size;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void) setDashSlidersFromArray:(NSArray *)pattern
 {
     WDSparkSlider   *sliders[4] = {dash0_, gap0_, dash1_, gap1_};
@@ -250,37 +294,50 @@
     }
 }
 
-- (void) invalidProperties:(NSNotification *)aNotification
+#pragma mark - View Life Cycle
+
+- (void) viewDidLoad
 {
-    NSSet *properties = [aNotification userInfo][WDInvalidPropertiesKey];
+    [super viewDidLoad];
     
-    for (NSString *property in properties) {
-        id value = [drawingController_.propertyManager defaultValueForProperty:property];
-        
-        if ([property isEqualToString:WDStrokeWidthProperty]) {
-            widthSlider_.value = [value floatValue] * 2;
-            widthLabel_.text = [NSString stringWithFormat:@"%.1f pt", [value floatValue]];
-            
-            decrement.enabled = widthSlider_.value != widthSlider_.minimumValue;
-            increment.enabled = widthSlider_.value != widthSlider_.maximumValue;
-        } else if ([property isEqualToString:WDStrokeCapProperty]) {
-            capPicker_.cap = [value integerValue];
-        } else if ([property isEqualToString:WDStrokeJoinProperty]) {
-            joinPicker_.join = [value integerValue];
-        } else if ([property isEqualToString:WDStrokeColorProperty]) {
-            colorController_.color = value;
-        } else if ([property isEqualToString:WDStrokeVisibleProperty]) {
-            [modeSegment_ removeTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
-            modeSegment_.selectedSegmentIndex = [value boolValue] ? 1 : 0;
-            [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
-        } else if ([property isEqualToString:WDStrokeDashPatternProperty]) {
-            [self setDashSlidersFromArray:value];
-        }
-    }
+    colorController_ = [[WDColorController alloc] initWithNibName:@"Color" bundle:nil];
     
-    if ([properties intersectsSet:[NSSet setWithObjects:WDStartArrowProperty, WDEndArrowProperty, nil]]) {
-        [self updateArrowPreview];
-    }
+    [self.view addSubview:colorController_.view];
+    CGRect frame = colorController_.view.frame;
+    frame.origin = CGPointMake(5, 5);
+    colorController_.view.frame = frame;
+    colorController_.colorWell.strokeMode = YES;
+    
+    colorController_.target = self;
+    colorController_.action = @selector(takeColorFrom:);
+    
+    widthSlider_.minimumValue = 0.1f;
+    widthSlider_.maximumValue = 100.0f;
+    [widthSlider_ addTarget:self action:@selector(takeStrokeWidthFrom:)
+          forControlEvents:(UIControlEventTouchDown | UIControlEventTouchDragInside | UIControlEventValueChanged)];
+    [widthSlider_ addTarget:self action:@selector(takeFinalStrokeWidthFrom:)
+          forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
+    
+    capPicker_.mode = kStrokeCapAttribute;
+    [capPicker_ addTarget:self action:@selector(takeCapFrom:) forControlEvents:UIControlEventValueChanged];
+    
+    joinPicker_.mode = kStrokeJoinAttribute;
+    [joinPicker_ addTarget:self action:@selector(takeJoinFrom:) forControlEvents:UIControlEventValueChanged];
+    
+    // need to add/remove this target when programmatically changing the segment controller's value
+    [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    dash0_.title.text = NSLocalizedString(@"dash", @"dash");
+    dash1_.title.text = NSLocalizedString(@"dash", @"dash");
+    gap0_.title.text = NSLocalizedString(@"gap", @"gap");
+    gap1_.title.text = NSLocalizedString(@"gap", @"gap");
+    
+    [dash0_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
+    [dash1_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
+    [gap0_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
+    [gap1_ addTarget:self action:@selector(dashChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    self.preferredContentSize = self.view.frame.size;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -291,7 +348,7 @@
     WDStrokeStyle *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
     
     colorController_.color = strokeStyle.color;
-    widthSlider_.value = strokeStyle.width * 2;
+    widthSlider_.value = [self strokeWidthToSliderValue:strokeStyle.width];
     widthLabel_.text = [NSString stringWithFormat:@"%.1f pt", strokeStyle.width];
     capPicker_.cap = strokeStyle.cap;
     joinPicker_.join = strokeStyle.join;
@@ -303,6 +360,8 @@
     modeSegment_.selectedSegmentIndex = [[drawingController_.propertyManager defaultValueForProperty:WDStrokeVisibleProperty] boolValue] ? 1 : 0;
     [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
 }
+
+#pragma mark - Arrow Previews
 
 - (void) updateArrowPreview
 {
