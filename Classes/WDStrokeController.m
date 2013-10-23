@@ -200,7 +200,7 @@
 
 - (void) modeChanged:(id)sender
 {
-    mode_ = [modeSegment_ selectedSegmentIndex];
+    mode_ = (int) [modeSegment_ selectedSegmentIndex];
     
     if (mode_ == kStrokeNone) {
         [drawingController_ setValue:@NO forProperty:WDStrokeVisibleProperty];

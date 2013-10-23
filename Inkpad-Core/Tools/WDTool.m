@@ -165,7 +165,7 @@
     
     if (!self.primaryTouchEnded) {
         // reflect the modifier touch immediately
-        int         remainingTouchCount = [event allTouches].count - touches.count;
+        NSInteger   remainingTouchCount = [event allTouches].count - touches.count;
         WDToolFlags newFlags = (remainingTouchCount > 1 ? WDToolSecondaryTouch : WDToolDefault);
         
         [self setFlags:newFlags inCanvas:canvas];

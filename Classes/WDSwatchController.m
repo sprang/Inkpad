@@ -156,9 +156,9 @@ NSString *WDSwatchPanelModeKey = @"WDSwatchPanelModeKey";
 
 - (CGSize) preferredContentSize
 {
-    float   width = kSwatchesPerRow * (kSwatchDimension + kSwatchSpacing) + kSwatchSpacing;
-    int     numRows = (self.swatches.count / kSwatchesPerRow) + 2;
-    float   height = numRows * (kSwatchDimension + kSwatchSpacing) + kSwatchSpacing;
+    float       width = kSwatchesPerRow * (kSwatchDimension + kSwatchSpacing) + kSwatchSpacing;
+    NSUInteger  numRows = (self.swatches.count / kSwatchesPerRow) + 2;
+    float       height = numRows * (kSwatchDimension + kSwatchSpacing) + kSwatchSpacing;
     
     return CGSizeMake(width, height);
 }

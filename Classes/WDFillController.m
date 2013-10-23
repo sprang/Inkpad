@@ -76,7 +76,7 @@
 
 - (void) modeChanged:(id)sender
 {
-    fillMode_ = [modeSegment_ selectedSegmentIndex];
+    fillMode_ = (int) [modeSegment_ selectedSegmentIndex];
     
     if (fillMode_ == kFillNone) {
         [drawingController_ setValue:[NSNull null] forProperty:WDFillProperty];

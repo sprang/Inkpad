@@ -169,7 +169,7 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     
     if (indexPath.section == kSizeSection) {
         // find old cell
-        int oldRow = [self indexOfPageSizeInConfiguration:[defaults objectForKey:WDPageSize]];
+        NSUInteger oldRow = [self indexOfPageSizeInConfiguration:[defaults objectForKey:WDPageSize]];
         oldIndexPath = [NSIndexPath indexPathForRow:oldRow inSection:indexPath.section];
         oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
         
