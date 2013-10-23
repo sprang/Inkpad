@@ -2,6 +2,10 @@
 - Fixed broken Github link in the help file
 - Fixed a bug that caused gradient transforms to be reset when reactivating an existing path
 - Vertically centered the titles in the Stroke and Fill panels
+- Added support for arrowheads on strokes
+- Made the stroke width slider non-linear for better precision at small widths
+- Enabled support for arm64
+- Updated to latest Dropbox SDK
 
 1.5.0
 - Updated to support iOS 7 (which is now the minimum supported OS)
