@@ -161,21 +161,18 @@ NSString *WDClosedKey = @"WDClosedKey";
 
 - (NSArray *) insetForArrowhead:(WDArrowhead *)arrowhead nodes:(NSArray *)nodes attachment:(CGPoint *)attachment angle:(float *)angle
 {
-    CGPoint         arrowTip = ((WDBezierNode *) nodes[0]).anchorPoint;
-    CGPoint         result = arrowTip;
-    NSInteger       numNodes = nodes.count;
-    WDBezierSegment L, R, segment;
     NSMutableArray  *newNodes = [NSMutableArray array];
+    NSInteger       numNodes = nodes.count;
+    WDBezierNode    *firstNode = nodes[0];
+    CGPoint         arrowTip = firstNode.anchorPoint;
+    CGPoint         result;
     float           t, scale = [self effectiveStrokeStyle].width;
     
     for (int i = 0; i < numNodes-1; i++) {
-        WDBezierNode *a = nodes[i];
-        WDBezierNode *b = nodes[i+1];
-        
-        segment.a_ = a.anchorPoint;
-        segment.out_ = a.outPoint;
-        segment.in_ = b.inPoint;
-        segment.b_ = b.anchorPoint;
+        WDBezierNode    *a = nodes[i];
+        WDBezierNode    *b = nodes[i+1];
+        WDBezierSegment segment = WDBezierSegmentMake(a, b);
+        WDBezierSegment L, R;
         
         if (WDBezierSegmentPointDistantFromPoint(segment, arrowhead.insetLength * scale, arrowTip, &result, &t)) {
             WDBezierSegmentSplitAtT(segment, &L, &R, t);
@@ -183,7 +180,7 @@ NSString *WDClosedKey = @"WDClosedKey";
             [newNodes addObject:[WDBezierNode bezierNodeWithInPoint:R.in_ anchorPoint:b.anchorPoint outPoint:b.outPoint]];
             
             for (int n = i+2; n < numNodes; n++) {
-                [newNodes addObject:nodes[n % nodes.count]];
+                [newNodes addObject:nodes[n % numNodes]];
             }
             
             *attachment = result;
@@ -199,13 +196,14 @@ NSString *WDClosedKey = @"WDClosedKey";
 
 - (void) computeStrokePathRef
 {
+    WDStrokeStyle *stroke = [self effectiveStrokeStyle];
+    
     if (strokePathRef_) {
         CGPathRelease(strokePathRef_);
     }
     
-    WDStrokeStyle *stroke = [self effectiveStrokeStyle];
-    
     if (![stroke hasArrow]) {
+        // since we don't have arrowheads, the stroke path is the same as the fill path
         strokePathRef_ = (CGMutablePathRef) CGPathRetain(self.pathRef);
         return;
     }
@@ -217,24 +215,27 @@ NSString *WDClosedKey = @"WDClosedKey";
         nodes = [nodes arrayByAddingObject:nodes[0]];
     }
     
-    canFitStartArrow_ = canFitEndArrow_ = NO;
+    // by default, we can fit an arrow
+    canFitStartArrow_ = canFitEndArrow_ = YES;
     
     // start arrow?
-    WDArrowhead *arrowhead = [WDArrowhead arrowheads][stroke.startArrow];
-    if (arrowhead) {
-        nodes = [self insetForArrowhead:arrowhead nodes:nodes attachment:&arrowStartAttachment_ angle:&arrowStartAngle_];
+    WDArrowhead *startArrowhead = [WDArrowhead arrowheads][stroke.startArrow];
+    if (startArrowhead) {
+        nodes = [self insetForArrowhead:startArrowhead nodes:nodes attachment:&arrowStartAttachment_ angle:&arrowStartAngle_];
+        // if we ate up the path, we can't fit
         canFitStartArrow_ = nodes.count;
     }
     
     // end arrow?
-    arrowhead = [WDArrowhead arrowheads][stroke.endArrow];
-    if (arrowhead && nodes.count) {
-        NSMutableArray  *reversed = [NSMutableArray array];
+    WDArrowhead *endArrowhead = [WDArrowhead arrowheads][stroke.endArrow];
+    if (endArrowhead && nodes.count) {
+        NSMutableArray *reversed = [NSMutableArray array];
         for (WDBezierNode *node in [nodes reverseObjectEnumerator]) {
             [reversed addObject:[node flippedNode]];
         }
         
-        NSArray *result = [self insetForArrowhead:arrowhead nodes:reversed attachment:&arrowEndAttachment_ angle:&arrowEndAngle_];
+        NSArray *result = [self insetForArrowhead:endArrowhead nodes:reversed attachment:&arrowEndAttachment_ angle:&arrowEndAngle_];
+        // if we ate up the path, we can't fit
         canFitEndArrow_ = result.count;
         
         if (canFitEndArrow_) {
@@ -242,17 +243,20 @@ NSString *WDClosedKey = @"WDClosedKey";
         }
     }
     
-    if (!canFitStartArrow_ && !canFitEndArrow_) {
+    if (!canFitStartArrow_ || !canFitEndArrow_) {
+        if (startArrowhead && endArrowhead) {
+            // we either fit both arrows or no arrows
+            canFitStartArrow_ = canFitEndArrow_ = NO;
+        }
         strokePathRef_ = (CGMutablePathRef) CGPathRetain(pathRef_);
         return;
     }
 
-    // construct the path ref from the node list
-    WDBezierNode                *prevNode = nil;
-    BOOL                        firstTime = YES;
+    // construct the path ref from the remaining node list
+    WDBezierNode    *prevNode = nil;
+    BOOL            firstTime = YES;
 
     strokePathRef_ = CGPathCreateMutable();
-
     for (WDBezierNode *node in nodes) {
         if (firstTime) {
             CGPathMoveToPoint(strokePathRef_, NULL, node.anchorPoint.x, node.anchorPoint.y);
