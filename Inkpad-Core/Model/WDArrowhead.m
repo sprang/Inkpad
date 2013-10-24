@@ -135,7 +135,7 @@ const float kHalfArrowheadDimension = kArrowheadDimension / 2;
     CGPathAddLineToPoint(pathRef, NULL, 0, 0);
     CGPathCloseSubpath(pathRef);
 
-    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake((3.0f / 8) * kArrowheadDimension, kHalfArrowheadDimension)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(kHalfArrowheadDimension, kHalfArrowheadDimension)]
                forKey:@"arrow1"];
     
     pathRef = CGPathCreateMutable();
@@ -144,7 +144,7 @@ const float kHalfArrowheadDimension = kArrowheadDimension / 2;
     CGPathAddLineToPoint(pathRef, NULL, 0, 0);
     CGPathCloseSubpath(pathRef);
     
-    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(1.5, kHalfArrowheadDimension)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef attachment:CGPointMake(1.5f, kHalfArrowheadDimension)]
                forKey:@"arrow2"];
     
     pathRef = CGPathCreateMutable();
@@ -203,11 +203,11 @@ const float kHalfArrowheadDimension = kArrowheadDimension / 2;
     outline = CGPathCreateCopyByStrokingPath(diamond, NULL, 1.0f, kCGLineCapButt, kCGLineJoinMiter, 4);
     CGPathRelease(diamond);
 
-    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(0.5f, kHalfArrowheadDimension)]
+    [arrows setObject:[WDArrowhead arrowheadWithPath:outline attachment:CGPointMake(0.75f, kHalfArrowheadDimension)]
                forKey:@"open diamond"];
     
     [arrows setObject:[WDArrowhead arrowheadWithPath:CGPathCreateWithRect(CGRectInset(defaultRect, 1, 1), &diamondTransform)
-                                          attachment:CGPointMake(0.5f, kHalfArrowheadDimension)]
+                                          attachment:CGPointMake(0.75f, kHalfArrowheadDimension)]
                forKey:@"closed diamond"];
     
     return arrows;
