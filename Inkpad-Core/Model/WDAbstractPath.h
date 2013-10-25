@@ -34,6 +34,7 @@ typedef enum {
 
 - (NSUInteger) subpathCount;
 - (NSString *) nodeSVGRepresentation;
+- (void) addSVGArrowheadsToGroup:(WDXMLElement *)group;
 
 - (BOOL) canOutlineStroke;
 - (WDAbstractPath *) outlineStroke;

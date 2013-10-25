@@ -1964,6 +1964,38 @@ NSString *WDClosedKey = @"WDClosedKey";
     return self.superpath ? self.superpath.strokeStyle : self.strokeStyle;
 }
 
+- (void) addSVGArrowheadPath:(CGPathRef)pathRef toGroup:(WDXMLElement *)group
+{
+    WDAbstractPath  *inkpadPath = [WDAbstractPath pathWithCGPathRef:pathRef];
+    WDStrokeStyle   *stroke = [self effectiveStrokeStyle];
+    
+    WDXMLElement *arrowPath = [WDXMLElement elementWithName:@"path"];
+    [arrowPath setAttribute:@"d" value:[inkpadPath nodeSVGRepresentation]];
+    [arrowPath setAttribute:@"fill" value:[stroke.color hexValue]];
+    [group addChild:arrowPath];
+}
+
+- (void) addSVGArrowheadsToGroup:(WDXMLElement *)group
+{
+    WDStrokeStyle *stroke = [self effectiveStrokeStyle];
+    
+    WDArrowhead *arrow = [WDArrowhead arrowheads][stroke.startArrow];
+    if (arrow) {
+        CGMutablePathRef pathRef = CGPathCreateMutable();
+        [arrow addToMutablePath:pathRef position:arrowStartAttachment_ scale:stroke.width angle:arrowStartAngle_];
+        [self addSVGArrowheadPath:pathRef toGroup:group];
+        CGPathRelease(pathRef);
+    }
+    
+    arrow = [WDArrowhead arrowheads][stroke.endArrow];
+    if (arrow) {
+        CGMutablePathRef pathRef = CGPathCreateMutable();
+        [arrow addToMutablePath:pathRef position:arrowEndAttachment_ scale:stroke.width angle:arrowEndAngle_];
+        [self addSVGArrowheadPath:pathRef toGroup:group];
+        CGPathRelease(pathRef);
+    }
+}
+
 //#define DEBUG_ATTACHMENTS YES
 
 - (void) renderStrokeInContext:(CGContextRef)ctx

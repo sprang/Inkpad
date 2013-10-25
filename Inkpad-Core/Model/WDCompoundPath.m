@@ -333,6 +333,13 @@ NSString *WDSubpathsKey = @"WDSubpathsKey";
     return svg;
 }
 
+- (void) addSVGArrowheadsToGroup:(WDXMLElement *)group
+{
+    for (WDPath *path in self.subpaths) {
+        [path addSVGArrowheadsToGroup:group];
+    }
+}
+
 - (NSArray *) erase:(WDAbstractPath *)erasePath
 {
     if (self.fill) {

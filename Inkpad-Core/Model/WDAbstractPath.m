@@ -14,6 +14,7 @@
 #endif
 
 #import "WDAbstractPath.h"
+#import "WDArrowhead.h"
 #import "WDColor.h"
 #import "WDCompoundPath.h"
 #import "WDLayer.h"
@@ -106,20 +107,34 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     return nil;
 }
 
+- (void) addSVGArrowheadsToGroup:(WDXMLElement *)group
+{
+}
+
 - (WDXMLElement *) SVGElement
 {
-    WDXMLElement *path = [WDXMLElement elementWithName:@"path"];
-    
-    [self addSVGOpacityAndShadowAttributes:path];
-    [self addSVGFillAndStrokeAttributes:path];
-    
+    BOOL isMask = (self.maskedElements && [self.maskedElements count] > 0);
+    BOOL hasArrow = self.strokeStyle && [self.strokeStyle hasArrow] && !CGPathEqualToPath(self.pathRef, self.strokePathRef);
+
+    WDXMLElement *basePath = [WDXMLElement elementWithName:@"path"];
+    [basePath setAttribute:@"d" value:[self nodeSVGRepresentation]];
     if (self.fill && self.fillRule == kWDEvenOddFillRule) {
-        [path setAttribute:@"fill-rule" value:@"evenodd"];
+        [basePath setAttribute:@"fill-rule" value:@"evenodd"];
     }
     
-    [path setAttribute:@"d" value:[self nodeSVGRepresentation]];
+    if (!isMask && !hasArrow) {
+        // this just a normal shape
+        [self addSVGOpacityAndShadowAttributes:basePath];
+        [self addSVGFillAndStrokeAttributes:basePath];
+
+        return basePath;
+    }
     
-    if (self.maskedElements && [self.maskedElements count] > 0) {
+    // we're either a mask or we have arrowheads (or both)... either way, we need a group
+    WDXMLElement *group = [WDXMLElement elementWithName:@"g"];
+    [self addSVGOpacityAndShadowAttributes:group];
+    
+    if (isMask) {
         // Produces an element such as:
         // <defs>
         //   <path id="MaskN" d="..."/>
@@ -134,22 +149,20 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
         //   </g>
         //   <use xlink:href="#MaskN" stroke="..."/>
         // </g>
-        NSString        *uniqueMask = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:@"Mask"];
-        NSString        *uniqueClip = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:@"ClipPath"];
+        NSString    *uniqueMask = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:@"Mask"];
+        NSString    *uniqueClip = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:@"ClipPath"];
         
-        [path setAttribute:@"id" value:uniqueMask];
-        [[WDSVGHelper sharedSVGHelper] addDefinition:path];
+        [basePath setAttribute:@"id" value:uniqueMask];
+        [[WDSVGHelper sharedSVGHelper] addDefinition:basePath];
         
-        WDXMLElement *group = [WDXMLElement elementWithName:@"g"];
         [group setAttribute:@"inkpad:mask" value:[NSString stringWithFormat:@"#%@", uniqueMask]];
-        [self addSVGOpacityAndShadowAttributes:group];
         
         if (self.fill) {
             // add a path for the fill
             WDXMLElement *use = [WDXMLElement elementWithName:@"use"];
             [use setAttribute:@"xlink:href" value:[NSString stringWithFormat:@"#%@", uniqueMask]];
             [use setAttribute:@"stroke" value:@"none"];
-            //            [self addSVGFillAttributes:use];
+            [self addSVGFillAttributes:use];
             [group addChild:use];
         }
         
@@ -159,30 +172,54 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
         WDXMLElement *use = [WDXMLElement elementWithName:@"use"];
         [use setAttribute:@"xlink:href" value:[NSString stringWithFormat:@"#%@", uniqueMask]];
         [use setAttribute:@"overflow" value:@"visible"];
+        [use setAttribute:@"fill" value:@"none"];
         [clipPath addChild:use];
         [group addChild:clipPath];
         
         WDXMLElement *elements = [WDXMLElement elementWithName:@"g"];
         [elements setAttribute:@"clip-path" value:[NSString stringWithFormat:@"url(#%@)", uniqueClip]];
-        
         for (WDElement *element in self.maskedElements) {
             [elements addChild:[element SVGElement]];
         }
         [group addChild:elements];
         
-        if (self.strokeStyle) {
+        if (self.strokeStyle && !hasArrow) {
             // add a path for the stroke
             WDXMLElement *use = [WDXMLElement elementWithName:@"use"];
             [use setAttribute:@"xlink:href" value:[NSString stringWithFormat:@"#%@", uniqueMask]];
             [use setAttribute:@"fill" value:@"none"];
-            //            [self.strokeStyle addSVGAttributes:use];
+            [self.strokeStyle addSVGAttributes:use];
             [group addChild:use];
         }
-        
-        return group;
-    } else {
-        return path;
     }
+    
+    if (hasArrow) {
+        if (!isMask && self.fill) {
+            // add the fill path
+            [self addSVGFillAttributes:basePath];
+            [group addChild:basePath];
+        }
+        
+        WDXMLElement *strokeGroup = [WDXMLElement elementWithName:@"g"];
+        
+        WDXMLElement *strokePath = [WDXMLElement elementWithName:@"path"];
+        [strokePath setAttribute:@"fill" value:@"none"];
+        [self.strokeStyle addSVGAttributes:strokePath];
+        
+        if (self.strokeStyle.color.alpha != 1.0) {
+            [strokePath.attributes removeObjectForKey:@"stroke-opacity"];
+            [strokeGroup setAttribute:@"opacity" floatValue:self.strokeStyle.color.alpha];
+        }
+        
+        WDAbstractPath *inkpadPath = [WDAbstractPath pathWithCGPathRef:self.strokePathRef];
+        [strokePath setAttribute:@"d" value:[inkpadPath nodeSVGRepresentation]];
+        [strokeGroup addChild:strokePath];
+        
+        [self addSVGArrowheadsToGroup:strokeGroup];
+        [group addChild:strokeGroup];
+    }
+    
+    return group;
 }
 
 - (NSUInteger) subpathCount
