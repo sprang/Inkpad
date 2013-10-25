@@ -6,6 +6,7 @@
 - Made the stroke width slider non-linear for better precision at small widths
 - Enabled support for arm64
 - Updated to latest Dropbox SDK
+- Fixed WDDocument import leak
 
 1.5.0
 - Updated to support iOS 7 (which is now the minimum supported OS)
