@@ -1029,7 +1029,6 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) restClient:(DBRestClient*)client loadedFile:(NSString*)downloadPath
 {
-	WDDocument  *newDrawing = nil;
     NSString    *extension = [[downloadPath pathExtension] lowercaseString];
     NSString    *filename = [downloadPath lastPathComponent];
     
@@ -1057,8 +1056,8 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         
         [[NSFileManager defaultManager] removeItemAtPath:downloadPath error:NULL];
 	} else if ([WDImportController canImportType:extension]) {
-		newDrawing = [[WDDrawingManager sharedInstance] createNewDrawingWithImageAtURL:[NSURL fileURLWithPath:downloadPath]];
-        if (!newDrawing) {
+        BOOL success = [[WDDrawingManager sharedInstance] createNewDrawingWithImageAtURL:[NSURL fileURLWithPath:downloadPath]];
+        if (!success) {
             [self showImportErrorMessage:filename];
         }
         

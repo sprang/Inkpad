@@ -25,8 +25,8 @@
 + (BOOL) drawingExists:(NSString *)drawing;
 
 - (WDDocument *) createNewDrawingWithSize:(CGSize)size andUnits:(NSString *)units;
-- (WDDocument *) createNewDrawingWithImageAtURL:(NSURL *)imageURL;
-- (WDDocument *) createNewDrawingWithImage:(UIImage *)image;
+- (BOOL) createNewDrawingWithImageAtURL:(NSURL *)imageURL;
+- (BOOL) createNewDrawingWithImage:(UIImage *)image;
 
 // these import methods are asynchronous
 - (void) importDrawingAtURL:(NSURL *)url errorBlock:(void (^)(void))errorBlock withCompletionHandler:(void (^)(WDDocument *))completionBlock;
