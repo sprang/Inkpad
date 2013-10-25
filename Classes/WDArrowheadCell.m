@@ -165,17 +165,18 @@
     
     [[UIColor whiteColor] set];
     CGContextSetLineWidth(ctx, scale);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
     
     if (!arrow) {
         CGContextMoveToPoint(ctx, kArrowInset, midY);
         CGContextAddLineToPoint(ctx, kArrowWidth - kArrowInset, midY);
     } else if (isStart) {
-        [arrow addArrowInContext:ctx position:CGPointMake(startX, midY) scale:scale angle:M_PI];
+        [arrow addArrowInContext:ctx position:CGPointMake(startX, midY) scale:scale angle:M_PI useAdjustment:NO];
         CGContextFillPath(ctx);
         CGContextMoveToPoint(ctx, startX, midY);
         CGContextAddLineToPoint(ctx, kArrowWidth - kArrowInset, midY);
     } else {
-        [arrow addArrowInContext:ctx position:CGPointMake(kArrowWidth - startX, midY) scale:scale angle:0];
+        [arrow addArrowInContext:ctx position:CGPointMake(kArrowWidth - startX, midY) scale:scale angle:0 useAdjustment:NO];
         CGContextFillPath(ctx);
         CGContextMoveToPoint(ctx, kArrowWidth - startX, midY);
         CGContextAddLineToPoint(ctx, kArrowInset, midY);

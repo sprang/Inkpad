@@ -166,7 +166,9 @@ NSString *WDClosedKey = @"WDClosedKey";
     WDBezierNode    *firstNode = nodes[0];
     CGPoint         arrowTip = firstNode.anchorPoint;
     CGPoint         result;
-    float           t, scale = [self effectiveStrokeStyle].width;
+    WDStrokeStyle   *stroke = [self effectiveStrokeStyle];
+    float           t, scale = stroke.width;
+    BOOL            butt = (stroke.cap == kCGLineCapButt) ? YES : NO;
     
     for (int i = 0; i < numNodes-1; i++) {
         WDBezierNode    *a = nodes[i];
@@ -174,7 +176,7 @@ NSString *WDClosedKey = @"WDClosedKey";
         WDBezierSegment segment = WDBezierSegmentMake(a, b);
         WDBezierSegment L, R;
         
-        if (WDBezierSegmentPointDistantFromPoint(segment, arrowhead.insetLength * scale, arrowTip, &result, &t)) {
+        if (WDBezierSegmentPointDistantFromPoint(segment, [arrowhead insetLength:butt] * scale, arrowTip, &result, &t)) {
             WDBezierSegmentSplitAtT(segment, &L, &R, t);
             [newNodes addObject:[WDBezierNode bezierNodeWithInPoint:result anchorPoint:result outPoint:R.out_]];
             [newNodes addObject:[WDBezierNode bezierNodeWithInPoint:R.in_ anchorPoint:b.anchorPoint outPoint:b.outPoint]];
@@ -768,14 +770,16 @@ NSString *WDClosedKey = @"WDClosedKey";
         // start arrow
         if ([strokeStyle hasStartArrow]) {
             arrow = [WDArrowhead arrowheads][strokeStyle.startArrow];
-            arrowBounds = [arrow boundingBoxAtPosition:arrowStartAttachment_ scale:scale angle:arrowStartAngle_];
+            arrowBounds = [arrow boundingBoxAtPosition:arrowStartAttachment_ scale:scale angle:arrowStartAngle_
+                                     useAdjustment:(strokeStyle.cap == kCGLineCapButt)];
             styleBounds = CGRectUnion(styleBounds, arrowBounds);
         }
         
         // end arrow
         if ([strokeStyle hasEndArrow]) {
             arrow = [WDArrowhead arrowheads][strokeStyle.endArrow];
-            arrowBounds = [arrow boundingBoxAtPosition:arrowEndAttachment_ scale:scale angle:arrowEndAngle_];
+            arrowBounds = [arrow boundingBoxAtPosition:arrowEndAttachment_ scale:scale angle:arrowEndAngle_
+                                     useAdjustment:(strokeStyle.cap == kCGLineCapButt)];
             styleBounds = CGRectUnion(styleBounds, arrowBounds);
         }
     }
@@ -1982,7 +1986,8 @@ NSString *WDClosedKey = @"WDClosedKey";
     WDArrowhead *arrow = [WDArrowhead arrowheads][stroke.startArrow];
     if (arrow) {
         CGMutablePathRef pathRef = CGPathCreateMutable();
-        [arrow addToMutablePath:pathRef position:arrowStartAttachment_ scale:stroke.width angle:arrowStartAngle_];
+        [arrow addToMutablePath:pathRef position:arrowStartAttachment_ scale:stroke.width angle:arrowStartAngle_
+              useAdjustment:(stroke.cap == kCGLineCapButt)];
         [self addSVGArrowheadPath:pathRef toGroup:group];
         CGPathRelease(pathRef);
     }
@@ -1990,7 +1995,8 @@ NSString *WDClosedKey = @"WDClosedKey";
     arrow = [WDArrowhead arrowheads][stroke.endArrow];
     if (arrow) {
         CGMutablePathRef pathRef = CGPathCreateMutable();
-        [arrow addToMutablePath:pathRef position:arrowEndAttachment_ scale:stroke.width angle:arrowEndAngle_];
+        [arrow addToMutablePath:pathRef position:arrowEndAttachment_ scale:stroke.width angle:arrowEndAngle_
+              useAdjustment:(stroke.cap == kCGLineCapButt)];
         [self addSVGArrowheadPath:pathRef toGroup:group];
         CGPathRelease(pathRef);
     }
@@ -2021,12 +2027,14 @@ NSString *WDClosedKey = @"WDClosedKey";
     
     WDArrowhead *arrow = [WDArrowhead arrowheads][stroke.startArrow];
     if (canFitStartArrow_ && arrow) {
-        [arrow addArrowInContext:ctx position:arrowStartAttachment_ scale:stroke.width angle:arrowStartAngle_];
+        [arrow addArrowInContext:ctx position:arrowStartAttachment_ scale:stroke.width angle:arrowStartAngle_
+               useAdjustment:(stroke.cap == kCGLineCapButt)];
     }
     
     arrow = [WDArrowhead arrowheads][stroke.endArrow];
     if (canFitEndArrow_ && arrow) {
-        [arrow addArrowInContext:ctx position:arrowEndAttachment_ scale:stroke.width angle:arrowEndAngle_];
+        [arrow addArrowInContext:ctx position:arrowEndAttachment_ scale:stroke.width angle:arrowEndAngle_
+               useAdjustment:(stroke.cap == kCGLineCapButt)];
     }
 
     CGContextFillPath(ctx);
@@ -2044,12 +2052,14 @@ NSString *WDClosedKey = @"WDClosedKey";
     
     if ([stroke hasStartArrow]) {
         arrow = [WDArrowhead arrowheads][stroke.startArrow];
-        [arrow addToMutablePath:outline position:arrowStartAttachment_ scale:stroke.width angle:arrowStartAngle_];
+        [arrow addToMutablePath:outline position:arrowStartAttachment_ scale:stroke.width angle:arrowStartAngle_
+              useAdjustment:(stroke.cap == kCGLineCapButt)];
     }
     
     if ([stroke hasEndArrow]) {
         arrow = [WDArrowhead arrowheads][stroke.endArrow];
-        [arrow addToMutablePath:outline position:arrowEndAttachment_ scale:stroke.width angle:arrowEndAngle_];
+        [arrow addToMutablePath:outline position:arrowEndAttachment_ scale:stroke.width angle:arrowEndAngle_
+              useAdjustment:(stroke.cap == kCGLineCapButt)];
     }
 }
 

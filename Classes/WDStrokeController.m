@@ -386,12 +386,14 @@
     
     [color set];
     CGContextSetLineWidth(ctx, scale);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
     
     // start arrow
     arrow = [WDArrowhead arrowheads][strokeStyle.startArrow];
     arrowInset = arrow.insetLength;
     if (arrow) {
-        [arrow addArrowInContext:ctx position:CGPointMake(arrowInset * scale, y) scale:scale angle:M_PI];
+        [arrow addArrowInContext:ctx position:CGPointMake(arrowInset * scale, y)
+                           scale:scale angle:M_PI useAdjustment:NO];
         CGContextFillPath(ctx);
         stemStart = arrowInset * scale;
     } else {
@@ -406,7 +408,8 @@
     arrow = [WDArrowhead arrowheads][strokeStyle.endArrow];
     arrowInset = arrow.insetLength;
     if (arrow) {
-        [arrow addArrowInContext:ctx position:CGPointMake(size.width - (arrowInset * scale), y) scale:scale angle:0];
+        [arrow addArrowInContext:ctx position:CGPointMake(size.width - (arrowInset * scale), y)
+                           scale:scale angle:0 useAdjustment:NO];
         CGContextFillPath(ctx);
         stemStart = arrowInset * scale;
     } else {
