@@ -131,7 +131,7 @@
         return;
     }
     
-    [self setJoin:button.tag];
+    [self setJoin:(CGLineJoin)button.tag];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
@@ -143,7 +143,7 @@
         return;
     }
     
-    [self setCap:button.tag];
+    [self setCap:(CGLineCap)button.tag];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 

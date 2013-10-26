@@ -207,7 +207,8 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
     
     if (!strokeProperties) {
         strokeProperties = [NSSet setWithObjects:WDStrokeColorProperty, WDStrokeCapProperty, WDStrokeJoinProperty,
-                            WDStrokeWidthProperty, WDStrokeVisibleProperty, WDStrokeDashPatternProperty, nil];
+                            WDStrokeWidthProperty, WDStrokeVisibleProperty, WDStrokeDashPatternProperty,
+                            WDStartArrowProperty, WDEndArrowProperty, nil];
     }
     
     return [strokeProperties containsObject:property];
@@ -243,6 +244,10 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
     } else if ([self propertyAffectsActiveStroke:property]) {
         if (![property isEqual:WDStrokeVisibleProperty]) {
             defaults_[WDStrokeVisibleProperty] = @YES;
+        } else if (![value boolValue]) {
+            // turning off the stroke, so reset the arrows
+            defaults_[WDStartArrowProperty] = WDStrokeArrowNone;
+            defaults_[WDEndArrowProperty] = WDStrokeArrowNone;
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:WDActiveStrokeChangedNotification object:self userInfo:nil];
@@ -288,7 +293,9 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
                                            cap:(int)[[self defaultValueForProperty:WDStrokeCapProperty] integerValue]
                                           join:(int)[[self defaultValueForProperty:WDStrokeJoinProperty] integerValue]
                                          color:[self defaultValueForProperty:WDStrokeColorProperty]
-                                   dashPattern:[self defaultValueForProperty:WDStrokeDashPatternProperty]];
+                                   dashPattern:[self defaultValueForProperty:WDStrokeDashPatternProperty]
+                                    startArrow:[self defaultValueForProperty:WDStartArrowProperty]
+                                      endArrow:[self defaultValueForProperty:WDEndArrowProperty]];
 }
 
 - (WDShadow *) activeShadow

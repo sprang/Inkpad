@@ -29,21 +29,48 @@ typedef enum {
 @property (nonatomic, readonly) CGLineJoin join;
 @property (nonatomic, readonly) WDColor *color;
 @property (nonatomic, readonly) NSArray *dashPattern;
+@property (nonatomic, readonly) NSString *startArrow;
+@property (nonatomic, readonly) NSString *endArrow;
 
-+ (WDStrokeStyle *) strokeStyleWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color dashPattern:(NSArray *)dashPattern;
-- (id) initWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color dashPattern:(NSArray *)dashPattern;
++ (WDStrokeStyle *) strokeStyleWithWidth:(float)width
+                                     cap:(CGLineCap)cap
+                                    join:(CGLineJoin)join
+                                   color:(WDColor *)color
+                             dashPattern:(NSArray *)dashPattern;
+
++ (WDStrokeStyle *) strokeStyleWithWidth:(float)width
+                                     cap:(CGLineCap)cap
+                                    join:(CGLineJoin)join
+                                   color:(WDColor *)color
+                             dashPattern:(NSArray *)dashPattern
+                              startArrow:(NSString *)startArrow
+                                endArrow:(NSString *)endArrow;
+
+- (id) initWithWidth:(float)width
+                 cap:(CGLineCap)cap
+                join:(CGLineJoin)join
+               color:(WDColor *)color
+         dashPattern:(NSArray *)dashPattern
+          startArrow:(NSString *)startArrow
+            endArrow:(NSString *)endArrow;
 
 - (BOOL) isNullStroke;
 - (BOOL) hasPattern;
 - (BOOL) willRender;
+- (BOOL) hasArrow;
+- (BOOL) hasStartArrow;
+- (BOOL) hasEndArrow;
 
 - (void) applyInContext:(CGContextRef)ctx;
 
 - (void) randomize;
 
+- (WDStrokeStyle *) strokeStyleWithSwappedArrows;
 - (WDStrokeStyle *) adjustColor:(WDColor * (^)(WDColor *color))adjustment;
+- (WDStrokeStyle *) strokeStyleSansArrows;
 
 - (void) addSVGAttributes:(WDXMLElement *)element;
 
 @end
 
+extern NSString *WDStrokeArrowNone;

@@ -300,7 +300,7 @@ void WDGLDrawLineStrip(GLfloat *vertices, NSUInteger count)
 {
 #if TARGET_OS_IPHONE
     glVertexPointer(2, GL_FLOAT, 0, vertices);
-    glDrawArrays(GL_LINE_STRIP, 0, count / 2);
+    glDrawArrays(GL_LINE_STRIP, 0, (int) count / 2);
 #else 
     glBegin(GL_LINE_STRIP);
     for (int i = 0; i < count; i+=2) {

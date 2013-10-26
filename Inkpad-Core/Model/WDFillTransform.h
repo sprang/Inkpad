@@ -22,6 +22,8 @@
 + (WDFillTransform *) fillTransformWithRect:(CGRect)rect;
 - (id) initWithTransform:(CGAffineTransform)transform start:(CGPoint)start end:(CGPoint)end;
 
+- (BOOL) isDefaultInRect:(CGRect)rect;
+
 - (WDFillTransform *) transform:(CGAffineTransform)transform;
 - (WDFillTransform *) transformWithTransformedStart:(CGPoint)pt;
 - (WDFillTransform *) transformWithTransformedEnd:(CGPoint)pt;

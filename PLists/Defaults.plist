@@ -66,10 +66,14 @@
 	<true/>
 	<key>WDStrokeWidthProperty</key>
 	<integer>1</integer>
+	<key>WDStartArrowProperty</key>
+	<string></string>
+	<key>WDEndArrowProperty</key>
+	<string></string>
 	<key>WDSwatchPanelModeKey</key>
 	<integer>2</integer>
 	<key>WDTextAlignmentProperty</key>
-	<real>0</real>
+	<integer>0</integer>
 	<key>WDUnits</key>
 	<string>Inches</string>
 </dict>

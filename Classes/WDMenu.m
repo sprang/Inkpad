@@ -98,7 +98,7 @@
         for (NSValue *rect in rects_) {
             if (CGRectContainsPoint([rect CGRectValue], pt)) {
                 WDMenuItem *item = items_[ix];
-                selectedIndex_ = (item.separator || !item.enabled) ? -1 : [rects_ indexOfObject:rect];
+                selectedIndex_ = (item.separator || !item.enabled) ? -1 : (int) [rects_ indexOfObject:rect];
                 break;
             }
             ix++;

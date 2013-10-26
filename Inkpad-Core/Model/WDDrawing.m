@@ -224,7 +224,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
     undoManager_ = [[NSUndoManager alloc] init];
     
 #ifdef WD_DEBUG
-NSLog(@"Elements in drawing: %u", [self allElements].count);
+NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
 #endif
     
     return self; 

@@ -123,12 +123,12 @@ NSString *WDDropboxFormatDefault = @"WDDropboxFormatDefault";
     NSString        *defaultsKey = (mode_ == kWDExportViaEmailMode) ? WDEmailFormatDefault : WDDropboxFormatDefault;
 
     NSString *oldValue = [defaults objectForKey:defaultsKey];
-    int oldRow = [self indexForFormatName:oldValue];
+    NSUInteger oldRow = [self indexForFormatName:oldValue];
     
     oldIndexPath = [NSIndexPath indexPathForRow:oldRow inSection:indexPath.section];
     oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
     
-    [defaults setObject:[self stringForExportFormat:indexPath.row] forKey:defaultsKey];
+    [defaults setObject:[self stringForExportFormat:(WDExportFormat)indexPath.row] forKey:defaultsKey];
     
     // deselect old cell
     if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
@@ -153,7 +153,7 @@ NSString *WDDropboxFormatDefault = @"WDDropboxFormatDefault";
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         
-        NSString *name = [self stringForExportFormat:indexPath.row];
+        NSString *name = [self stringForExportFormat:(WDExportFormat)indexPath.row];
         cell.textLabel.text = name;
 
         if (mode_ == kWDExportViaEmailMode && [name isEqualToString:[defaults objectForKey:WDEmailFormatDefault]]) {

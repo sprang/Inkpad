@@ -236,7 +236,7 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
     return unique;
 }
 
-- (WDDocument *) installDrawing:(WDDrawing *)drawing withName:(NSString *)drawingName
+- (WDDocument *) installDrawing:(WDDrawing *)drawing withName:(NSString *)drawingName closeAfterSaving:(BOOL)shouldClose
 {
     [drawingNames_ addObject:drawingName];
     [self saveDrawingOrder_];
@@ -248,6 +248,9 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
     document.drawing = drawing;
     [document saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
         [[NSNotificationCenter defaultCenter] postNotificationName:WDDrawingAdded object:drawingName];
+        if (shouldClose) {
+            [document closeWithCompletionHandler:nil];
+        }
     }];
 
     return document;
@@ -256,10 +259,10 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
 - (WDDocument *) createNewDrawingWithSize:(CGSize)size andUnits:(NSString *)units
 {   
     WDDrawing *drawing = [[WDDrawing alloc] initWithSize:size andUnits:units];
-    return [self installDrawing:drawing withName:[self uniqueFilename]];
+    return [self installDrawing:drawing withName:[self uniqueFilename] closeAfterSaving:NO];
 }
 
-- (WDDocument *) createNewDrawingWithImage:(UIImage *)image imageName:(NSString *)imageName drawingName:(NSString *)drawingName
+- (BOOL) createNewDrawingWithImage:(UIImage *)image imageName:(NSString *)imageName drawingName:(NSString *)drawingName
 {
     if (!image) {
         return nil;
@@ -268,10 +271,10 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
     image = [image downsampleWithMaxDimension:1024];
     
     WDDrawing *drawing = [[WDDrawing alloc] initWithImage:image imageName:imageName];
-    return [self installDrawing:drawing withName:drawingName];
+    return [self installDrawing:drawing withName:drawingName closeAfterSaving:YES] ? YES : NO;
 }
 
-- (WDDocument *) createNewDrawingWithImage:(UIImage *)image
+- (BOOL) createNewDrawingWithImage:(UIImage *)image
 {
     NSString *imageName = NSLocalizedString(@"Photo", @"Photo");
     NSString *drawingName = [self uniqueFilenameWithPrefix:imageName extension:WDDefaultDrawingExtension];
@@ -279,7 +282,7 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
     return [self createNewDrawingWithImage:image imageName:imageName drawingName:drawingName];
 }
 
-- (WDDocument *) createNewDrawingWithImageAtURL:(NSURL *)imageURL
+- (BOOL) createNewDrawingWithImageAtURL:(NSURL *)imageURL
 {
     UIImage *image = [UIImage imageWithContentsOfFile:imageURL.path];
     NSString *imageName = [[imageURL lastPathComponent] stringByDeletingPathExtension];
@@ -299,36 +302,6 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
     
     return importQueue;
 }
-
-- (void) importSVGAtURL:(NSURL *)svgURL errorBlock:(void (^)(void))errorBlock memoryWarningBlock:(void (^)(void))memoryWarningBlock completionBlock:(void (^)(WDDocument *document))completionBlock
-{
-    dispatch_async([self importQueue], ^{
-        WDDocument *doc = [[WDDocument alloc] initWithFileURL:svgURL];
-        [doc openWithCompletionHandler:^(BOOL success) {
-            if (success) {
-                doc.fileTypeOverride = @"com.taptrix.inkpad";
-                NSString *svgName = [[svgURL lastPathComponent] stringByDeletingPathExtension];
-                NSString *drawingName = [self uniqueFilenameWithPrefix:svgName extension:WDDefaultDrawingExtension];
-                NSString *path = [[WDDrawingManager drawingPath] stringByAppendingPathComponent:drawingName]; 
-                NSURL *url = [NSURL fileURLWithPath:path];
-                [doc saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                        [drawingNames_ addObject:drawingName];
-                        [self saveDrawingOrder_];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:WDDrawingAdded object:drawingName];
-                        completionBlock(doc);
-                    });
-                }];
-            } else {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    errorBlock();
-                    completionBlock(nil);
-                });
-            }
-        }];
-    });
-}
-
 
 - (NSString *) fileAtIndex:(NSUInteger)ix
 {
@@ -372,7 +345,7 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
     
     // the original drawing will save when it's freed
     
-    return [self installDrawing:document.drawing withName:unique];
+    return [self installDrawing:document.drawing withName:unique closeAfterSaving:NO];
 }
 
 - (void) importDrawingAtURL:(NSURL *)url errorBlock:(void (^)(void))errorBlock withCompletionHandler:(void (^)(WDDocument *document))completionBlock
@@ -392,6 +365,7 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
                         [self saveDrawingOrder_];
                         [[NSNotificationCenter defaultCenter] postNotificationName:WDDrawingAdded object:drawingName];
                         completionBlock(doc);
+                        [doc closeWithCompletionHandler:nil];
                     });
                 }];
             } else {

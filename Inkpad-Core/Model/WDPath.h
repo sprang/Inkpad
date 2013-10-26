@@ -24,8 +24,17 @@
     BOOL                reversed_;
     
     CGMutablePathRef    pathRef_;
+    CGMutablePathRef    strokePathRef_;
     CGRect              bounds_;
     BOOL                boundsDirty_;
+    
+    // arrowheads
+    CGPoint             arrowStartAttachment_;
+    float               arrowStartAngle_;
+    BOOL                canFitStartArrow_;
+    CGPoint             arrowEndAttachment_;
+    float               arrowEndAngle_;
+    BOOL                canFitEndArrow_;
     
     // to simplify rendering
     NSMutableArray      *displayNodes_;
@@ -88,6 +97,8 @@
 - (NSString *) nodeSVGRepresentation;
 
 - (void) setClosedQuiet:(BOOL)closed;
+
+- (WDStrokeStyle *) effectiveStrokeStyle;
 
 @end
 

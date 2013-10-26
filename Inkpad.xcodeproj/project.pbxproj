@@ -119,6 +119,7 @@
 		6B74B7E5150E829E000A08D4 /* linear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B74B7E0150E829E000A08D4 /* linear@2x.png */; };
 		6B74B7E6150E829E000A08D4 /* radial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B74B7E1150E829E000A08D4 /* radial@2x.png */; };
 		6B74B7E9150E82F0000A08D4 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B74B7E7150E82F0000A08D4 /* checkmark@2x.png */; };
+		6B7A881A180CF73000FA241B /* WDArrowhead.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A8819180CF73000FA241B /* WDArrowhead.m */; };
 		6B7D2C3515085403001311B0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7D2C3415085403001311B0 /* Twitter.framework */; };
 		6B7D2CF0150898BE001311B0 /* font@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7D2CEF150898BE001311B0 /* font@2x.png */; };
 		6B7D2CF415089966001311B0 /* redo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7D2CF215089965001311B0 /* redo@2x.png */; };
@@ -152,6 +153,8 @@
 		6B98C140124D63B1008FB8E1 /* WDTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B98C13F124D63B1008FB8E1 /* WDTextController.m */; };
 		6B98C154124D642A008FB8E1 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98C153124D642A008FB8E1 /* font.png */; };
 		6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */; };
+		6BA45791180F2B9200B51D7A /* WDArrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45790180F2B9200B51D7A /* WDArrowController.m */; };
+		6BA45794180F778F00B51D7A /* WDArrowheadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45793180F778F00B51D7A /* WDArrowheadCell.m */; };
 		6BAACC7B1332A048000C6E74 /* WDSparkSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BAACC7A1332A047000C6E74 /* WDSparkSlider.m */; };
 		6BABD96D141ED30100F7E0A9 /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BABD886141ED30100F7E0A9 /* NSArray+Additions.m */; };
 		6BABD96F141ED30100F7E0A9 /* NSData+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BABD88A141ED30100F7E0A9 /* NSData+Additions.m */; };
@@ -451,6 +454,8 @@
 		6B74B7E0150E829E000A08D4 /* linear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "linear@2x.png"; path = "Images/linear@2x.png"; sourceTree = "<group>"; };
 		6B74B7E1150E829E000A08D4 /* radial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "radial@2x.png"; path = "Images/radial@2x.png"; sourceTree = "<group>"; };
 		6B74B7E7150E82F0000A08D4 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Images/checkmark@2x.png"; sourceTree = "<group>"; };
+		6B7A8818180CF73000FA241B /* WDArrowhead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowhead.h; sourceTree = "<group>"; };
+		6B7A8819180CF73000FA241B /* WDArrowhead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowhead.m; sourceTree = "<group>"; };
 		6B7D2C3415085403001311B0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		6B7D2CEF150898BE001311B0 /* font@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "font@2x.png"; path = "Images/font@2x.png"; sourceTree = "<group>"; };
 		6B7D2CF215089965001311B0 /* redo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "redo@2x.png"; path = "Images/redo@2x.png"; sourceTree = "<group>"; };
@@ -493,6 +498,10 @@
 		6B98C13F124D63B1008FB8E1 /* WDTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WDTextController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6B98C153124D642A008FB8E1 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Images/font.png; sourceTree = "<group>"; };
 		6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark_knob_highlighted.png; path = Images/spark_knob_highlighted.png; sourceTree = "<group>"; };
+		6BA4578F180F2B9200B51D7A /* WDArrowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowController.h; sourceTree = "<group>"; };
+		6BA45790180F2B9200B51D7A /* WDArrowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowController.m; sourceTree = "<group>"; };
+		6BA45792180F778F00B51D7A /* WDArrowheadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowheadCell.h; sourceTree = "<group>"; };
+		6BA45793180F778F00B51D7A /* WDArrowheadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowheadCell.m; sourceTree = "<group>"; };
 		6BAACC791332A047000C6E74 /* WDSparkSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDSparkSlider.h; sourceTree = "<group>"; };
 		6BAACC7A1332A047000C6E74 /* WDSparkSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDSparkSlider.m; sourceTree = "<group>"; };
 		6BABD885141ED30100F7E0A9 /* NSArray+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Additions.h"; sourceTree = "<group>"; };
@@ -1165,6 +1174,8 @@
 			children = (
 				6BABD8E7141ED30100F7E0A9 /* WDAbstractPath.h */,
 				6BABD8E8141ED30100F7E0A9 /* WDAbstractPath.m */,
+				6B7A8818180CF73000FA241B /* WDArrowhead.h */,
+				6B7A8819180CF73000FA241B /* WDArrowhead.m */,
 				6BABD8E9141ED30100F7E0A9 /* WDBezierNode.h */,
 				6BABD8EA141ED30100F7E0A9 /* WDBezierNode.m */,
 				6BABD8EB141ED30100F7E0A9 /* WDBezierSegment.h */,
@@ -1362,6 +1373,8 @@
 			children = (
 				6B00DA5B140604CE00E45409 /* WDActivityController.h */,
 				6B00DA5C140604CE00E45409 /* WDActivityController.m */,
+				6BA4578F180F2B9200B51D7A /* WDArrowController.h */,
+				6BA45790180F2B9200B51D7A /* WDArrowController.m */,
 				5D62B27313CE866500E4D41B /* WDBlendModeController.h */,
 				5D62B27413CE866500E4D41B /* WDBlendModeController.m */,
 				6BCD52D812400017002FCB27 /* WDBrowserController.h */,
@@ -1417,6 +1430,8 @@
 			children = (
 				6B356057136026AA007D8DBB /* WDAnglePicker.h */,
 				6B356058136026AA007D8DBB /* WDAnglePicker.m */,
+				6BA45792180F778F00B51D7A /* WDArrowheadCell.h */,
+				6BA45793180F778F00B51D7A /* WDArrowheadCell.m */,
 				6B6DC1A012403DA000A98FCE /* WDBlockingView.h */,
 				6B6DC1A112403DA000A98FCE /* WDBlockingView.m */,
 				6B51BCEE126522B6000F6BF3 /* WDButton.h */,
@@ -1835,6 +1850,7 @@
 				6BABD9A7141ED30100F7E0A9 /* Path.cpp in Sources */,
 				6BABD9A8141ED30100F7E0A9 /* PathConversion.cpp in Sources */,
 				6BABD9A9141ED30100F7E0A9 /* Shape.cpp in Sources */,
+				6B7A881A180CF73000FA241B /* WDArrowhead.m in Sources */,
 				6BABD9AA141ED30100F7E0A9 /* ShapeMisc.cpp in Sources */,
 				6BABD9AB141ED30100F7E0A9 /* ShapeSweep.cpp in Sources */,
 				6BABD9AC141ED30100F7E0A9 /* ShapeSweepUtils.cpp in Sources */,
@@ -1859,6 +1875,7 @@
 				6BABD9BE141ED30100F7E0A9 /* WDPathfinder.mm in Sources */,
 				6BABD9BF141ED30100F7E0A9 /* WDPickResult.m in Sources */,
 				6BABD9C0141ED30100F7E0A9 /* WDRulerUnit.m in Sources */,
+				6BA45791180F2B9200B51D7A /* WDArrowController.m in Sources */,
 				6BABD9C1141ED30100F7E0A9 /* WDShadow.m in Sources */,
 				6BABD9C2141ED30100F7E0A9 /* WDStrokeStyle.m in Sources */,
 				6BABD9C3141ED30100F7E0A9 /* WDStylable.m in Sources */,
@@ -1870,6 +1887,7 @@
 				6BABD9D3141ED30100F7E0A9 /* WDEyedropperTool.m in Sources */,
 				6BABD9D4141ED30100F7E0A9 /* WDFreehandTool.m in Sources */,
 				6BABD9D5141ED30100F7E0A9 /* WDHandTool.m in Sources */,
+				6BA45794180F778F00B51D7A /* WDArrowheadCell.m in Sources */,
 				6BABD9D6141ED30100F7E0A9 /* WDPenTool.m in Sources */,
 				6BABD9D7141ED30100F7E0A9 /* WDRotateTool.m in Sources */,
 				6BABD9D8141ED30100F7E0A9 /* WDScaleTool.m in Sources */,
@@ -2091,7 +2109,7 @@
 		6B87CE4A1313D6ED0027A482 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Steve Sprang";
@@ -2143,7 +2161,7 @@
 		6BF7476D1311C351000D9344 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
@@ -2195,7 +2213,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2219,7 +2237,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

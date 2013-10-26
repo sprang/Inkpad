@@ -45,7 +45,7 @@
         return nil;
     }
     
-    self.title = @"Layers";
+    self.title = NSLocalizedString(@"Layers", @"Layers");
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteLayer:)];
     

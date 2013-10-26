@@ -1038,7 +1038,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     
     if (result) {
         result.fill = [propertyManager_ activeFillStyle];
-        result.strokeStyle = [propertyManager_ activeStrokeStyle];
+        result.strokeStyle = [[propertyManager_ activeStrokeStyle] strokeStyleSansArrows];
         result.opacity = [[propertyManager_ defaultValueForProperty:WDOpacityProperty] floatValue];
         result.shadow = [propertyManager_ activeShadow];
         
@@ -1072,7 +1072,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     
     if (result) {
         result.fill = bottommost.fill;
-        result.strokeStyle = bottommost.strokeStyle;
+        result.strokeStyle = [bottommost.strokeStyle strokeStyleSansArrows];
         result.fillTransform = bottommost.fillTransform;
         result.opacity = bottommost.opacity;
         result.shadow = bottommost.shadow;
@@ -1153,13 +1153,13 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     
     if (exclusion) {
         exclusion.fill = [propertyManager_ activeFillStyle];
-        exclusion.strokeStyle = [propertyManager_ activeStrokeStyle];
+        exclusion.strokeStyle = [[propertyManager_ activeStrokeStyle] strokeStyleSansArrows];
         [topObject.layer insertObject:exclusion above:topObject];
     }
     
     if (intersection) {
         intersection.fill = [propertyManager_ activeFillStyle];
-        intersection.strokeStyle = [propertyManager_ activeStrokeStyle];
+        intersection.strokeStyle = [[propertyManager_ activeStrokeStyle] strokeStyleSansArrows];
         [topObject.layer insertObject:intersection above:topObject];
     }
     

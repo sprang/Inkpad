@@ -37,6 +37,8 @@ typedef enum {
     IBOutlet WDSparkSlider          *gap0_;
     IBOutlet WDSparkSlider          *gap1_;
     
+    IBOutlet UIButton               *arrowButton_;
+    
     WDColorController               *colorController_;
     UISegmentedControl              *modeSegment_;
     
@@ -51,5 +53,6 @@ typedef enum {
 - (IBAction) decrement:(id)sender;
 - (IBAction) takeStrokeWidthFrom:(id)sender;
 - (IBAction) takeFinalStrokeWidthFrom:(id)sender;
+- (IBAction) showArrowheads:(id)sender;
 
 @end

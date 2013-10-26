@@ -98,7 +98,8 @@
 
 - (void) scrollToSelectedFont
 {
-    int fontIndex = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:[drawingController_.propertyManager defaultValueForProperty:WDFontNameProperty]];
+    NSString *defaultFontName = [drawingController_.propertyManager defaultValueForProperty:WDFontNameProperty];
+    NSUInteger fontIndex = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:defaultFontName];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:fontIndex inSection:0];
     [table_ scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
@@ -183,7 +184,7 @@
     NSIndexPath     *oldIndexPath = nil; 
     
     // find old cell
-    int oldRow = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:self.selectedFontName];
+    NSUInteger oldRow = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:self.selectedFontName];
     oldIndexPath = [NSIndexPath indexPathForRow:oldRow inSection:indexPath.section];
     oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
     self.selectedFontName = nil;

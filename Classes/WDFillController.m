@@ -32,15 +32,16 @@
     }
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
-    title.text = @"Fill";
+    title.text = NSLocalizedString(@"Fill", @"Fill");
     title.font = [UIFont boldSystemFontOfSize:17.0f];
     title.textColor = [UIColor blackColor];
     title.backgroundColor = nil;
     title.opaque = NO;
-    title.textAlignment = NSTextAlignmentRight;
     [title sizeToFit];
+    
+    // make sure the title is centered vertically
     CGRect frame = title.frame;
-    frame.size.width += 5;
+    frame.size.height = 44;
     title.frame = frame;
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:title];
@@ -51,7 +52,7 @@
                                                               NSLocalizedString(@"Gradient", @"Gradient")]];
     
     frame = modeSegment_.frame;
-    frame.size.width += 60; //CGRectGetWidth(self.view.frame);
+    frame.size.width += 60;
     modeSegment_.frame = frame;
     
     [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
@@ -75,7 +76,7 @@
 
 - (void) modeChanged:(id)sender
 {
-    fillMode_ = [modeSegment_ selectedSegmentIndex];
+    fillMode_ = (int) [modeSegment_ selectedSegmentIndex];
     
     if (fillMode_ == kFillNone) {
         [drawingController_ setValue:[NSNull null] forProperty:WDFillProperty];

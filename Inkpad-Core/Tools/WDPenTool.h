@@ -17,6 +17,7 @@
     BOOL                        updatingOldNode_;
     WDBezierNodeReflectionMode  oldNodeMode_;
     BOOL                        closingPath_;
+    BOOL                        shouldResetFillTransform_;
 }
 
 @property (nonatomic, strong) WDBezierNode *replacementNode;

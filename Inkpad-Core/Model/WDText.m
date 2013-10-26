@@ -466,7 +466,7 @@ NSString *WDAlignmentKey = @"WDAlignmentKey";
 {
     [self cacheDirtyBounds];
     
-    [[self.undoManager prepareWithInvocationTarget:self] setFontSize:fontSize_];
+    [(WDText *)[self.undoManager prepareWithInvocationTarget:self] setFontSize:fontSize_];
 
     [self setFontSizeQuiet:size];
     

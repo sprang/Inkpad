@@ -33,6 +33,7 @@ BOOL WDBezierSegmentIsDegenerate(WDBezierSegment seg);
 BOOL WDBezierSegmentIntersectsRect(WDBezierSegment seg, CGRect rect);
 BOOL WDLineInRect(CGPoint a, CGPoint b, CGRect test);
 
+BOOL WDBezierSegmentIsStraight(WDBezierSegment segment);
 BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, float tolerance);
 void WDBezierSegmentFlatten(WDBezierSegment seg, CGPoint **vertices, NSUInteger *size, NSUInteger *index);
 CGPoint WDBezierSegmentSplit(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R);
@@ -52,3 +53,7 @@ CGPoint WDBezierSegmentGetClosestPoint(WDBezierSegment seg, CGPoint test, float 
 BOOL WDBezierSegmentsFormCorner(WDBezierSegment a, WDBezierSegment b);
 
 BOOL WDBezierSegmentGetIntersection(WDBezierSegment seg, CGPoint a, CGPoint b, float *tIntersect);
+
+float WDBezierSegmentOutAngle(WDBezierSegment seg);
+CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t);
+BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment segment, float distance, CGPoint pt, CGPoint *result, float *t);

@@ -40,7 +40,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
 #define kMaxOutwardKernAdjustment   (-0.25f)
 
 @interface WDTextPath (WDPrivate)
-- (int) segmentCount;
+- (NSInteger) segmentCount;
 - (void) layout;
 - (void) getStartKnobBase:(CGPoint *)base andTop:(CGPoint *)top;
 @end
@@ -276,7 +276,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
 {
     [self cacheDirtyBounds];
     
-    [[self.undoManager prepareWithInvocationTarget:self] setFontSize:fontSize_];
+    [(WDTextPath *)[self.undoManager prepareWithInvocationTarget:self] setFontSize:fontSize_];
     
     fontSize_ = size;
     
@@ -388,7 +388,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
 
 - (float) length:(BOOL)naturalSpace
 {
-    int                 numSegments = [self segmentCount];
+    NSInteger           numSegments = [self segmentCount];
     WDBezierSegment     segments[numSegments];
     float               lengths[numSegments];
     
@@ -396,7 +396,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
     return [self getSegments:segments andLengths:lengths naturalSpace:naturalSpace];
 }
 
-- (BOOL) cornerAtEndOfSegment:(int)ix segments:(WDBezierSegment *)segments count:(int)numSegments
+- (BOOL) cornerAtEndOfSegment:(int)ix segments:(WDBezierSegment *)segments count:(NSInteger)numSegments
 {
     if (!closed_ && (ix < 0 || ix >= numSegments)) {
         return NO;
@@ -440,7 +440,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
         return;
     }
     
-    int                 numSegments = [self segmentCount];
+    NSInteger           numSegments = [self segmentCount];
     WDBezierSegment     segments[numSegments];
     float               lengths[numSegments];
     float               totalLength = 0;
@@ -912,7 +912,7 @@ done:
 
 - (void) moveStartKnobToNearestPoint:(CGPoint)pt
 {
-    int                 numSegments = [self segmentCount];
+    NSInteger           numSegments = [self segmentCount];
     WDBezierSegment     segments[numSegments];
     float               lengths[numSegments];
     float               lowestError = MAXFLOAT;

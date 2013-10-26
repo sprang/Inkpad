@@ -101,7 +101,7 @@ NSString *WDColorSpaceDefault = @"WDColorSpaceDefault";
     self.view.backgroundColor = nil;
     self.view.opaque = NO;
     
-    [self setColorSpace:[[NSUserDefaults standardUserDefaults] integerForKey:WDColorSpaceDefault]];
+    [self setColorSpace:(WDColorSpace)[[NSUserDefaults standardUserDefaults] integerForKey:WDColorSpaceDefault]];
     alphaSlider_.mode = WDColorSliderModeAlpha;
     
     // set up connections

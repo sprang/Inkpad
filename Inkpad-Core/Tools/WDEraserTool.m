@@ -103,7 +103,7 @@ NSString *WDEraserToolSize = @"WDEraserToolSize";
 
 - (void) updateOptionsSettings
 {
-    optionsValue_.text = [NSString stringWithFormat:@"%d", eraserSize_];
+    optionsValue_.text = [NSString stringWithFormat:@"%lu", (unsigned long)eraserSize_];
     optionsSlider_.value = eraserSize_;
 }
 

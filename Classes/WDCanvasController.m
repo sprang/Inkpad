@@ -1411,14 +1411,8 @@
 - (void) printDrawing:(id)sender
 {
     UIPrintInteractionController *printController = [UIPrintInteractionController sharedPrintController];
- 
     printController.printingItem = [self.drawing PDFRepresentation];
-    
-    // We need a completion handler block for printing.
-    UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
-    };
-    
-    [printController presentFromBarButtonItem:actionItem_ animated:NO completionHandler:completionHandler];
+    [printController presentFromBarButtonItem:actionItem_ animated:NO completionHandler:nil];
 }
 
 - (void) postOnFacebook:(id)sender

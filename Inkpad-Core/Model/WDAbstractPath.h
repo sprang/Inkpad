@@ -28,14 +28,19 @@ typedef enum {
 
 @property (nonatomic, assign) WDFillRule fillRule;
 @property (nonatomic, readonly) CGPathRef pathRef;
+@property (nonatomic, readonly) CGPathRef strokePathRef;
 
 + (WDAbstractPath *) pathWithCGPathRef:(CGPathRef)pathRef;
 
 - (NSUInteger) subpathCount;
 - (NSString *) nodeSVGRepresentation;
+- (void) addSVGArrowheadsToGroup:(WDXMLElement *)group;
 
 - (BOOL) canOutlineStroke;
 - (WDAbstractPath *) outlineStroke;
+
+// subclasses can override this to enhance the default outline
+- (void) addElementsToOutlinedStroke:(CGMutablePathRef)pathRef;
 
 - (NSArray *) erase:(WDAbstractPath *)erasePath;
 
@@ -43,6 +48,9 @@ typedef enum {
 - (void) flatten;
 
 - (WDAbstractPath *) pathByFlatteningPath;
+
+// so subclasses can override
+- (void) renderStrokeInContext:(CGContextRef)ctx;
 
 @end
 
