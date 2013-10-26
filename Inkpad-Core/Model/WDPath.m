@@ -246,10 +246,8 @@ NSString *WDClosedKey = @"WDClosedKey";
     }
     
     if (!canFitStartArrow_ || !canFitEndArrow_) {
-        if (startArrowhead && endArrowhead) {
-            // we either fit both arrows or no arrows
-            canFitStartArrow_ = canFitEndArrow_ = NO;
-        }
+        // we either fit both arrows or no arrows
+        canFitStartArrow_ = canFitEndArrow_ = NO;
         strokePathRef_ = (CGMutablePathRef) CGPathRetain(pathRef_);
         return;
     }
