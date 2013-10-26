@@ -112,8 +112,35 @@ inline CGPoint WDBezierSegmentTangetAtT(WDBezierSegment seg, float t)
     return CGPointMake(x,y);
 }
 
+inline BOOL WDBezierSegmentIsStraight(WDBezierSegment segment)
+{
+    // true if the control points coincide with their anchors...
+    return CGPointEqualToPoint(segment.a_, segment.out_) && CGPointEqualToPoint(segment.in_, segment.b_);
+}
+
 inline CGPoint WDBezierSegmentSplitAtT(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R, float t)
 {
+    if (WDBezierSegmentIsStraight(seg)) {
+        CGPoint point = WDMultiplyPointScalar(WDSubtractPoints(seg.b_, seg.a_), t);
+        point = WDAddPoints(seg.a_, point);
+        
+        if (L) {
+            L->a_ = seg.a_;
+            L->out_ = seg.a_;
+            L->in_ = point;
+            L->b_ = point;
+        }
+        
+        if (R) {
+            R->a_ = point;
+            R->out_ = point;
+            R->in_ = seg.b_;
+            R->b_ = seg.b_;
+        }
+        
+        return point;
+    }
+    
     CGPoint A, B, C, D, E, F;
     
     //A = WDAddPoints(seg.a_, WDMultiplyPointScalar(WDSubtractPoints(seg.out_, seg.a_), t));
@@ -155,16 +182,6 @@ inline CGPoint WDBezierSegmentSplitAtT(WDBezierSegment seg, WDBezierSegment *L, 
         R->out_ = E;
         R->in_ = C;
         R->b_ = seg.b_;
-    }
-    
-    if ((L || R) && CGPointEqualToPoint(seg.a_, seg.out_) && CGPointEqualToPoint(seg.in_, seg.b_)) {
-        // no curves
-        if (L) {
-            L->in_ = L->b_;
-        }
-        if (R) {
-            R->out_ = R->a_;
-        }
     }
     
     return F;
@@ -282,16 +299,41 @@ BOOL WDBezierSegmentFindPointOnSegment_R(WDBezierSegment seg, CGPoint testPoint,
     
     if (!CGRectContainsPoint(bbox, testPoint)) {
         return NO;
+    } else if (WDBezierSegmentIsStraight(seg)) {
+        CGPoint s = WDSubtractPoints(seg.b_, seg.a_);
+        CGPoint v = WDSubtractPoints(testPoint, seg.a_);
+        float   n = v.x * s.x + v.y * s.y;
+        float   d = s.x * s.x + s.y * s.y;
+        float   t = n/d;
+        BOOL    onSegment = NO;
+        
+        if (0.0f <= t && t <= 1.0f) {
+            CGPoint delta = WDSubtractPoints(seg.b_, seg.a_);
+            CGPoint p = WDAddPoints(seg.a_, WDMultiplyPointScalar(delta, t));
+            
+            if (WDDistance(p, testPoint) < tolerance) {
+                if (nearestPoint) {
+                    *nearestPoint = p;
+                }
+                if (split) {
+                    *split += (t * depth);
+                }
+                onSegment = YES;
+            }
+        }
+        
+        return onSegment;
     } else if((CGRectGetWidth(bbox) < tolerance * 1.1) || (CGRectGetHeight(bbox) < tolerance * 1.1)) {
         // Close enough! This should be more or less a straight line now...
-        CGPoint ab = WDSubtractPoints(seg.b_, seg.a_);
-        CGPoint ap = WDSubtractPoints(testPoint, seg.a_);
-        float t = ap.x * ab.x + ap.y * ab.y;
-        float abSquared = ab.x * ab.x + ab.y * ab.y;
-        t = WDClamp(0.0f, 1.0f, t / abSquared);
+        CGPoint s = WDSubtractPoints(seg.b_, seg.a_);
+        CGPoint v = WDSubtractPoints(testPoint, seg.a_);
+        float n = v.x * s.x + v.y * s.y;
+        float d = s.x * s.x + s.y * s.y;
+        float t = WDClamp(0.0f, 1.0f, n/d);
 
         if (nearestPoint) {
-            *nearestPoint = WDBezierSegmentSplitAtT(seg, NULL, NULL, t);
+            CGPoint delta = WDSubtractPoints(seg.b_, seg.a_);
+            *nearestPoint = WDAddPoints(seg.a_, WDMultiplyPointScalar(delta, t));
         }
         if (split) {
             *split += (t * depth);

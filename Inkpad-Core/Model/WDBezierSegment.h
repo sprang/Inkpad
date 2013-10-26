@@ -33,6 +33,7 @@ BOOL WDBezierSegmentIsDegenerate(WDBezierSegment seg);
 BOOL WDBezierSegmentIntersectsRect(WDBezierSegment seg, CGRect rect);
 BOOL WDLineInRect(CGPoint a, CGPoint b, CGRect test);
 
+BOOL WDBezierSegmentIsStraight(WDBezierSegment segment);
 BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, float tolerance);
 void WDBezierSegmentFlatten(WDBezierSegment seg, CGPoint **vertices, NSUInteger *size, NSUInteger *index);
 CGPoint WDBezierSegmentSplit(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R);
