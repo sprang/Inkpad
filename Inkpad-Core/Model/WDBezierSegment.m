@@ -332,8 +332,8 @@ BOOL WDBezierSegmentFindPointOnSegment_R(WDBezierSegment seg, CGPoint testPoint,
         float t = WDClamp(0.0f, 1.0f, n/d);
 
         if (nearestPoint) {
-            CGPoint delta = WDSubtractPoints(seg.b_, seg.a_);
-            *nearestPoint = WDAddPoints(seg.a_, WDMultiplyPointScalar(delta, t));
+            // make sure the found point is on the path and not just near it
+            *nearestPoint = WDBezierSegmentSplitAtT(seg, NULL, NULL, t);
         }
         if (split) {
             *split += (t * depth);
