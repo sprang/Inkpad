@@ -20,11 +20,15 @@
     IBOutlet UILabel                *sizeLabel_;
     IBOutlet UISlider               *sizeSlider_;
     IBOutlet UISegmentedControl     *alignment_;
+    IBOutlet UIBarButtonItem        *familiesButton_;
     NSString                        *selectedFontName_;
+    NSString                        *selectedFamilyName_;
+    BOOL                            viewByFamily_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;
 @property (nonatomic, strong) NSString *selectedFontName;
+@property (nonatomic, strong) NSString *selectedFamilyName;
 
 - (IBAction) takeFontSizeFrom:(id)sender;
 - (IBAction) takeAlignmentFrom:(id)sender;
