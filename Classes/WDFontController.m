@@ -201,6 +201,9 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    WDCoreTextLabel *previewLabel = (WDCoreTextLabel *) [cell viewWithTag:kCoreTextLabelTag];
+    previewLabel.frame = CGRectInset(cell.contentView.bounds, 10, 0);
+    
     if (tableView == faceTable_)
     {
         NSString *fontNameForRow = [[WDFontManager sharedInstance] fontsInFamily:self.selectedFamilyName][indexPath.row];
@@ -211,8 +214,6 @@
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
-    } else {
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
 
