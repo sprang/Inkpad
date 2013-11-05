@@ -221,6 +221,18 @@ const float kHalfArrowheadDimension = kArrowheadDimension / 2;
                forKey:@"closed square"];
     
     /*
+     * T Shaped
+     */
+    
+    pathRef = CGPathCreateMutable();
+    CGPathAddRect(pathRef, &flipTransform, CGRectMake(0.0f, 0.5f, 1.0f, kArrowheadDimension - 1.0f));
+    
+    [arrows setObject:[WDArrowhead arrowheadWithPath:pathRef
+                                          attachment:CGPointMake(0.25f, kHalfArrowheadDimension)
+                                       capAdjustment:CGPointMake(0.25f, 0.0f)]
+               forKey:@"T shape"];
+    
+    /*
      * Diamonds
      */
     

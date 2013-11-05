@@ -47,8 +47,8 @@
 - (NSArray *) arrows
 {
     return @[WDStrokeArrowNone, @"arrow1", @"arrow2", @"arrow3",
-             @"closed circle", @"closed square", @"closed diamond",
-             @"open circle", @"open square", @"open diamond"];
+             @"T shape", @"closed circle", @"closed square",
+             @"closed diamond", @"open circle", @"open square", @"open diamond"];
 }
 
 - (void) swapArrowheads:(id)sender
