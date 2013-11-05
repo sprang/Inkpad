@@ -1,4 +1,8 @@
-1.5.1 [upcoming release]
+Next Update
+- Added T-end arrowhead
+- Fixed incorrect shadow/parallax on eraser options view
+
+1.5.1 [currently on the App Store]
 - Fixed broken Github link in the help file
 - Fixed a bug that caused gradient transforms to be reset when reactivating an existing path
 - Vertically centered the titles in the Stroke and Fill panels
