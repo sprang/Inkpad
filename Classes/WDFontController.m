@@ -173,6 +173,7 @@
     }
     
     NSString *fontName = nil;
+    CGFloat fontSize = 20.0f;
     WDCoreTextLabel *previewLabel = (WDCoreTextLabel *) [cell viewWithTag:kCoreTextLabelTag];
     
     if (tableView == familyTable_)
@@ -182,15 +183,16 @@
         [previewLabel setText:familyName];
         
         fontName = [[WDFontManager sharedInstance] defaultFontForFamily:familyName];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        fontSize = 15.f;
     } else {
         // Set the text to the font display name
         fontName = [[WDFontManager sharedInstance] fontsInFamily:self.selectedFamilyName][indexPath.row];
+        fontSize = 18.f;
         [previewLabel setText:[[WDFontManager sharedInstance] displayNameForFont:fontName]];
     }
     
     // Set both cells to use a font for the preview label
-    CTFontRef fontRef = [[WDFontManager sharedInstance] newFontRefForFont:fontName withSize:20];
+    CTFontRef fontRef = [[WDFontManager sharedInstance] newFontRefForFont:fontName withSize:fontSize];
     [previewLabel setFontRef:fontRef];
     CFRelease(fontRef);
     
@@ -209,6 +211,8 @@
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
+    } else {
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
 
