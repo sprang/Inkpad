@@ -175,6 +175,32 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     return systemFamilyMap[fullName] ?: ((WDUserFont *)userFamilyMap[fullName]).familyName;
 }
 
+- (NSString *) defaultFontForFamily:(NSString *)familyName
+{
+    [self waitForInitialLoad];
+    
+    NSArray *fonts = [self fontsInFamily:familyName];
+    for (NSString *fontName in fonts) {
+        CTFontRef fontRef = [self newFontRefForFont:fontName withSize:10];
+        CTFontSymbolicTraits traits = CTFontGetSymbolicTraits(fontRef);
+        
+        BOOL isBold = (traits & kCTFontBoldTrait);
+        if (isBold) {
+            continue;
+        }
+        
+        BOOL isItalic = (traits & kCTFontItalicTrait);
+        if (isItalic) {
+            continue;
+        }
+        
+        return fontName;
+    }
+    
+    // Fallback, just return the first font in this family
+    return [fonts firstObject];
+}
+
 - (NSArray *) fontsInFamily:(NSString *)familyName
 {
     [self waitForInitialLoad];
