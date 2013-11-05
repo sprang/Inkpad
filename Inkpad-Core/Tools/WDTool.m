@@ -14,6 +14,9 @@
 #import "WDDrawingController.h"
 #import "WDPickResult.h"
 #import "WDTool.h"
+#import "UIView+Additions.h"
+
+#define kOptionsViewCornerRadius    9
 
 @implementation WDEvent
 @synthesize location;
@@ -62,6 +65,22 @@
 - (UIView *) optionsView
 {
     return nil;
+}
+
+- (void) configureOptionsView:(UIView *)options
+{
+    CALayer *layer = options.layer;
+    
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRoundedRect:options.bounds
+                                                          cornerRadius:kOptionsViewCornerRadius];
+    
+    layer.shadowPath = shadowPath.CGPath;
+    layer.cornerRadius = kOptionsViewCornerRadius;
+    layer.shadowOpacity = 0.4f;
+    layer.shadowRadius = 2;
+    layer.shadowOffset = CGSizeZero;
+
+    [options addParallaxEffect];
 }
 
 - (void) activated
