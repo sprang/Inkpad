@@ -112,7 +112,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     }
     
     // Create a help button to display in the top left corner.
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Help"
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", @"Help")
                                                                  style:UIBarButtonItemStyleBordered
                                                                 target:self
                                                                 action:@selector(showHelp:)];

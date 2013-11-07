@@ -971,17 +971,17 @@
         return editingItems_;
     } 
 
-    UIBarButtonItem *objectItem = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+    UIBarButtonItem *objectItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit")
                                                  style:UIBarButtonItemStyleBordered
                                                 target:self
                                                 action:@selector(showObjectMenu:)];
     
-    UIBarButtonItem *arrangeItem = [[UIBarButtonItem alloc] initWithTitle:@"Arrange"
+    UIBarButtonItem *arrangeItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Arrange", @"Arrange")
                                                                  style:UIBarButtonItemStyleBordered
                                                                 target:self
                                                                 action:@selector(showArrangeMenu:)];
     
-    UIBarButtonItem *pathItem = [[UIBarButtonItem alloc] initWithTitle:@"Path"
+    UIBarButtonItem *pathItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Path", @"Path")
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:self
                                                                   action:@selector(showPathMenu:)];
@@ -1024,14 +1024,14 @@
     UIBarButtonItem *swatchItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];
     imageButton.barButtonItem = swatchItem;
     
-    layerItem_ = [[UIBarButtonItem alloc] initWithTitle:@"Layers"
+    layerItem_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Layers", @"Layers")
                                                   style:UIBarButtonItemStyleBordered
                                                  target:self
                                                  action:@selector(showLayers:)];
     
     UIBarButtonItem *flexibleItem = [UIBarButtonItem flexibleItem];
-    UIBarButtonItem *fixedItem = [UIBarButtonItem fixedItemWithWidth:18];
-    UIBarButtonItem *smallFixedItem = [UIBarButtonItem fixedItemWithWidth:10];
+    UIBarButtonItem *fixedItem = [UIBarButtonItem fixedItemWithWidth:16];
+    UIBarButtonItem *smallFixedItem = [UIBarButtonItem fixedItemWithWidth:8];
     
     shadowWell_ = [[WDShadowWell alloc] initWithFrame:CGRectMake(0, 0, 28, 44)];
     UIBarButtonItem *shadowItem = [[UIBarButtonItem alloc] initWithCustomView:shadowWell_];
