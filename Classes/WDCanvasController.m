@@ -1454,13 +1454,13 @@
 
     // Generates export file in requested format
     if ([format isEqualToString:@"PDF"]) {
-        filename = [NSHomeDirectory() stringByAppendingPathComponent:[@"Documents/" stringByAppendingString:[baseFilename stringByAppendingPathExtension:@"pdf"]]];
+        filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[baseFilename stringByAppendingPathExtension:@"pdf"]];
         [[self.drawing PDFRepresentation] writeToFile:filename atomically:YES];
     } else if ([format isEqualToString:@"PNG"]) {
-        filename = [NSHomeDirectory() stringByAppendingPathComponent:[@"Documents/" stringByAppendingString:[baseFilename stringByAppendingPathExtension:@"png"]]];
+        filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[baseFilename stringByAppendingPathExtension:@"png"]];
         [UIImagePNGRepresentation([canvas_.drawing image]) writeToFile:filename atomically:YES];
     } else if ([format isEqualToString:@"SVG"]) {
-        filename = [NSHomeDirectory() stringByAppendingPathComponent:[@"Documents/" stringByAppendingString:[baseFilename stringByAppendingPathExtension:@"svg"]]];
+        filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[baseFilename stringByAppendingPathExtension:@"svg"]];
         [[self.drawing SVGRepresentation] writeToFile:filename atomically:YES];
     }
 
