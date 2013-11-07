@@ -1003,7 +1003,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     [self addSubview:activityView_];
     
     CALayer *layer = activityView_.layer;
-    layer.cornerRadius = 7;
+    layer.cornerRadius = CGRectGetWidth(activityView_.frame) / 2;
 }
 
 - (void) stopActivity
