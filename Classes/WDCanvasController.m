@@ -252,6 +252,20 @@
         item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Email as SVG", @"Email as SVG")
                                   action:@selector(emailSVG:) target:self];
         [menus addObject:item];
+
+        [menus addObject:[WDMenuItem separatorItem]];
+
+        item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Export as PNG", @"Export as PNG")
+                                  action:@selector(exportAsPNG:) target:self];
+        [menus addObject:item];
+
+        item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Export as PDF", @"Export as PDF")
+                                  action:@selector(exportAsPDF:) target:self];
+        [menus addObject:item];
+
+        item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Export as SVG", @"Export as SVG")
+                                  action:@selector(exportAsSVG:) target:self];
+        [menus addObject:item];
         
         actionMenu_ = [[WDMenu alloc] initWithItems:menus];
         actionMenu_.delegate = self;
@@ -1505,6 +1519,62 @@
 - (void) emailSVG:(id)sender
 {
     [self emailDrawing:sender format:@"SVG"];
+}
+
+- (void) export:(id)sender format:(NSString *)format
+{
+    NSString *baseFilename = [self.document.filename stringByDeletingPathExtension];
+    NSString *filename = nil;
+
+    // Generates export file in requested format
+    if ([format isEqualToString:@"PDF"]) {
+        filename = [NSHomeDirectory() stringByAppendingPathComponent:[@"Documents/" stringByAppendingString:[baseFilename stringByAppendingPathExtension:@"pdf"]]];
+        [[self.drawing PDFRepresentation] writeToFile:filename atomically:YES];
+    } else if ([format isEqualToString:@"PNG"]) {
+        filename = [NSHomeDirectory() stringByAppendingPathComponent:[@"Documents/" stringByAppendingString:[baseFilename stringByAppendingPathExtension:@"png"]]];
+        [UIImagePNGRepresentation([canvas_.drawing image]) writeToFile:filename atomically:YES];
+    } else if ([format isEqualToString:@"SVG"]) {
+        filename = [NSHomeDirectory() stringByAppendingPathComponent:[@"Documents/" stringByAppendingString:[baseFilename stringByAppendingPathExtension:@"svg"]]];
+        [[self.drawing SVGRepresentation] writeToFile:filename atomically:YES];
+    }
+
+    // Passes exported file to UIDocumentInteractionController
+    exportFileUrl = [NSURL fileURLWithPath:filename];
+    if(exportFileUrl) {
+        self.documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:exportFileUrl];
+        [self.documentInteractionController setDelegate:self];
+        [self.documentInteractionController presentPreviewAnimated:YES];
+    }
+}
+
+- (void) exportAsPNG:(id)sender
+{
+    [self export:sender format:@"PNG"];
+}
+
+- (void) exportAsPDF:(id)sender
+{
+    [self export:sender format:@"PDF"];
+}
+
+- (void) exportAsSVG:(id)sender
+{
+    [self export:sender format:@"SVG"];
+}
+
+#pragma mark - UIDocumentInteractionController
+
+- (UIViewController *) documentInteractionControllerViewControllerForPreview: (UIDocumentInteractionController *) controller {
+    return self;
+}
+
+- (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller
+{
+    // Clean up by removing generated file
+    NSError *error;
+    if(exportFileUrl) {
+        [[NSFileManager defaultManager] removeItemAtURL:exportFileUrl error:&error];
+    }
 }
 
 @end

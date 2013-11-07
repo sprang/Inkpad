@@ -40,7 +40,8 @@ enum {
 };
 
 @interface WDCanvasController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-                                                    MFMailComposeViewControllerDelegate, UIPopoverControllerDelegate>
+                                                    MFMailComposeViewControllerDelegate, UIPopoverControllerDelegate,
+                                                    UIDocumentInteractionControllerDelegate>
 {
     WDDocument          *document_;
     WDCanvas            *canvas_;
@@ -77,12 +78,15 @@ enum {
     
     WDHueSaturationController   *hueController_;
     WDColorBalanceController   *balanceController_;
+
+    NSURL *exportFileUrl;
 }
 
 @property (nonatomic, strong) WDDocument *document;
 @property (weak, nonatomic, readonly) WDDrawing *drawing;
 @property (nonatomic, readonly) WDCanvas *canvas;
 @property (nonatomic, readonly, strong) WDDrawingController *drawingController;
+@property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
 
 - (void) updateTitle;
 - (void) hidePopovers;
