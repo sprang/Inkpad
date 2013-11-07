@@ -241,20 +241,6 @@
         
         [menus addObject:[WDMenuItem separatorItem]];
         
-        item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Email as PNG", @"Email as PNG")
-                                  action:@selector(emailPNG:) target:self];
-        [menus addObject:item];
-        
-        item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Email as PDF", @"Email as PDF")
-                                  action:@selector(emailPDF:) target:self];
-        [menus addObject:item];
-        
-        item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Email as SVG", @"Email as SVG")
-                                  action:@selector(emailSVG:) target:self];
-        [menus addObject:item];
-
-        [menus addObject:[WDMenuItem separatorItem]];
-
         item = [WDMenuItem itemWithTitle:NSLocalizedString(@"Export as PNG", @"Export as PNG")
                                   action:@selector(exportAsPNG:) target:self];
         [menus addObject:item];
@@ -713,12 +699,7 @@
     }
     
     // ACTION
-    else if (item.action == @selector(emailPNG:) ||
-             item.action == @selector(emailPDF:) ||
-             item.action == @selector(emailSVG:))
-    {
-        item.enabled = [MFMailComposeViewController canSendMail];
-    } else if (item.action == @selector(printDrawing:)) {
+    else if (item.action == @selector(printDrawing:)) {
         item.enabled = [UIPrintInteractionController isPrintingAvailable];
     }
     
@@ -1451,46 +1432,6 @@
     [self presentViewController:tweetSheet animated:YES completion:nil];
 }
 
-// Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
-{	
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void) emailDrawing:(id)sender format:(NSString *)format
-{
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    picker.mailComposeDelegate = self;
-    
-    NSString *baseFilename = [self.document.filename stringByDeletingPathExtension];
-    NSString *subject = NSLocalizedString(@"Inkpad Drawing: ", @"Inkpad Drawing: ");
-    subject = [subject stringByAppendingString:baseFilename];
-    [picker setSubject:subject];    
-    
-    NSData *data = nil;
-    NSString *mimetype = nil;
-    NSString *filename = nil;
-    
-    // Attach an image to the email
-    if ([format isEqualToString:@"PNG"]) {
-        data = UIImagePNGRepresentation([canvas_.drawing image]);
-        mimetype = @"image/png";
-        filename = [baseFilename stringByAppendingPathExtension:@"png"];
-    } else if ([format isEqualToString:@"PDF"]) {
-        data = [self.drawing PDFRepresentation];
-        mimetype = @"image/pdf";
-        filename = [baseFilename stringByAppendingPathExtension:@"pdf"];
-    } else if ([format isEqualToString:@"SVG"]) {
-        data = [self.drawing SVGRepresentation];
-        mimetype = @"image/svg+xml";
-        filename = [baseFilename stringByAppendingPathExtension:@"svg"];
-    } 
-    
-    [picker addAttachmentData:data mimeType:mimetype fileName:filename];
-    
-    [self.navigationController presentViewController:picker animated:YES completion:nil];
-}
-
 - (void) copyDrawing:(id)sender
 {
     [UIPasteboard generalPasteboard].image = [canvas_.drawing image];
@@ -1504,21 +1445,6 @@
     [UIView setAnimationDuration:1.0f];
     [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:canvas_ cache:YES];
     [UIView commitAnimations];
-}
-
-- (void) emailPNG:(id)sender
-{
-    [self emailDrawing:sender format:@"PNG"];
-}
-
-- (void) emailPDF:(id)sender
-{
-    [self emailDrawing:sender format:@"PDF"];
-}
-
-- (void) emailSVG:(id)sender
-{
-    [self emailDrawing:sender format:@"SVG"];
 }
 
 - (void) export:(id)sender format:(NSString *)format

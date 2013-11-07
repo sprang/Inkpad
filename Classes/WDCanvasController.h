@@ -10,7 +10,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MessageUI/MFMailComposeViewController.h>
 #import "WDElement.h"
 #import "WDStrokeStyle.h"
 
@@ -40,7 +39,7 @@ enum {
 };
 
 @interface WDCanvasController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-                                                    MFMailComposeViewControllerDelegate, UIPopoverControllerDelegate,
+                                                    UIPopoverControllerDelegate,
                                                     UIDocumentInteractionControllerDelegate>
 {
     WDDocument          *document_;
