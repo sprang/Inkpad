@@ -19,10 +19,13 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
 @implementation WDFontManager
 
 @synthesize systemFontMap;
+@synthesize systemFamilyMap;
 @synthesize systemFonts;
 @synthesize userFontMap;
+@synthesize userFamilyMap;
 @synthesize userFonts;
 @synthesize supportedFonts;
+@synthesize supportedFamilies;
 
 + (WDFontManager *) sharedInstance
 {
@@ -71,16 +74,20 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
         dispatch_async([self fontQueue], ^{
             // load system fonts
             systemFontMap = [[NSMutableDictionary alloc] init];
+            systemFamilyMap = [[NSMutableDictionary alloc] init];
             
             NSArray *families = [UIFont familyNames];
             for (NSString *family in families) {
                 for (NSString *fontName in [UIFont fontNamesForFamilyName:family]) {
                     CTFontRef myFont = CTFontCreateWithName((CFStringRef)fontName, 12, NULL);
                     CFStringRef displayName = CTFontCopyDisplayName(myFont);
+                    CFStringRef familyName = CTFontCopyFamilyName(myFont);
 
                     systemFontMap[fontName] = (__bridge NSString *)displayName;
+                    systemFamilyMap[fontName] = (__bridge NSString *)familyName;
                     
                     CFRelease(displayName);
+                    CFRelease(familyName);
                     CFRelease(myFont);
                 }
             }
@@ -88,12 +95,13 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
             systemFonts = [[systemFontMap allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
             
             // load user fonts
-            userFontMap = [[NSMutableDictionary alloc] init];
-            
+            userFontMap = [NSMutableDictionary dictionary];
+            userFamilyMap = [NSMutableDictionary dictionary];
             for (NSString *fontPath in [self userLibraryFontPaths]) {
                 WDUserFont *userFont = [WDUserFont userFontWithFilename:fontPath];
                 if (userFont) {
                     userFontMap[userFont.fullName] = userFont;
+                    userFamilyMap[userFont.fullName] = userFont.familyName;
                 }
             }
         });
@@ -113,6 +121,20 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
 {
     [self waitForInitialLoad];
     return systemFonts;
+}
+
+- (NSArray *) supportedFamilies
+{
+    [self waitForInitialLoad];
+    
+    if (!supportedFamilies) {
+        NSMutableSet *families = [NSMutableSet setWithArray:[self.systemFamilyMap allValues]];
+        [families addObjectsFromArray:[self.userFamilyMap allValues]];
+        
+        supportedFamilies = [[families allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    }
+    
+    return supportedFamilies;
 }
 
 - (NSArray *) supportedFonts
@@ -145,6 +167,44 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
 {
     [self waitForInitialLoad];
     return systemFontMap[fullName] ?: ((WDUserFont *)userFontMap[fullName]).displayName;
+}
+
+- (NSString *) familyNameForFont:(NSString *)fullName
+{
+    [self waitForInitialLoad];
+    return systemFamilyMap[fullName] ?: ((WDUserFont *)userFamilyMap[fullName]).familyName;
+}
+
+- (NSString *) defaultFontForFamily:(NSString *)familyName
+{
+    [self waitForInitialLoad];
+    
+    NSArray *fonts = [self fontsInFamily:familyName];
+    for (NSString *fontName in fonts) {
+        CTFontRef fontRef = [self newFontRefForFont:fontName withSize:10];
+        CTFontSymbolicTraits traits = CTFontGetSymbolicTraits(fontRef);
+        
+        BOOL isBold = (traits & kCTFontBoldTrait);
+        if (isBold) {
+            continue;
+        }
+        
+        BOOL isItalic = (traits & kCTFontItalicTrait);
+        if (isItalic) {
+            continue;
+        }
+        
+        return fontName;
+    }
+    
+    // Fallback, just return the first font in this family
+    return [fonts firstObject];
+}
+
+- (NSArray *) fontsInFamily:(NSString *)familyName
+{
+    [self waitForInitialLoad];
+    return [systemFamilyMap allKeysForObject:familyName];
 }
 
 - (NSString *) pathForUserLibrary

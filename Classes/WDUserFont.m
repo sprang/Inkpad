@@ -19,6 +19,7 @@
 @synthesize fontRef;
 @synthesize filepath;
 @synthesize fullName;
+@synthesize familyName;
 @synthesize displayName;
 @synthesize digest;
 
@@ -64,6 +65,10 @@
     CFStringRef fullNameRef = CTFontCopyFullName(self.fontRef);
     self.fullName = (__bridge NSString *)fullNameRef;
     CFRelease(fullNameRef);
+    
+    CFStringRef familyNameRef = CTFontCopyFamilyName(self.fontRef);
+    self.familyName = (__bridge NSString *)familyNameRef;
+    CFRelease(familyNameRef);
     
     return self;
 }
