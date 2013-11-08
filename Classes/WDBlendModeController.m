@@ -152,7 +152,7 @@
 {
     for (NSDictionary *dict in blendModeNames_) {
         if ([dict[@"value"] intValue] == blendMode) {
-            return dict[@"name"];
+            return [self localizedTitleForKey:dict[@"name"]];
         }
     }
     
