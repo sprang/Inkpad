@@ -235,6 +235,27 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     }
 }
 
+- (NSString *) localizedTitleForKey:(NSString *)key
+{
+    // we could duplicate the PageSizes.plist for every localization, but this seems less error prone
+    static NSMutableDictionary *map_ = nil;
+    if (!map_) {
+        map_ = [NSMutableDictionary dictionary];
+        map_[@"Letter"]         = NSLocalizedString(@"Letter", @"Letter");
+        map_[@"Legal"]          = NSLocalizedString(@"Legal", @"Legal");
+        map_[@"Tabloid"]        = NSLocalizedString(@"Tabloid", @"Tabloid");
+        map_[@"A4"]             = NSLocalizedString(@"A4", @"A4");
+        map_[@"A3"]             = NSLocalizedString(@"A3", @"A3");
+        map_[@"B5"]             = NSLocalizedString(@"B5", @"B5");
+        map_[@"B4"]             = NSLocalizedString(@"B4", @"B4");
+        map_[@"Custom Size"]    = NSLocalizedString(@"Custom Size", @"Custom Size");
+        map_[@"Portrait"]       = NSLocalizedString(@"Portrait", @"Portrait");
+        map_[@"Landscape"]      = NSLocalizedString(@"Landscape", @"Landscape");
+    }
+    
+    return map_[key];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -250,7 +271,7 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     if (indexPath.section == kSizeSection) {
         NSString *name = configuration_[indexPath.row][@"Name"];
 
-        cell.textLabel.text = name;
+        cell.textLabel.text = [self localizedTitleForKey:name];
         cell.detailTextLabel.text = [self dimensionsString:configuration_[indexPath.row]];
         
         if ([name isEqualToString:[defaults objectForKey:WDPageSize]]) {

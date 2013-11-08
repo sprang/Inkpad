@@ -141,6 +141,26 @@
     return configuration_[section][@"Title"];
 }
 
+- (NSString *) localizedTitleForKey:(NSString *)key
+{
+    // we could duplicate the Settings.plist for every localization, but this seems less error prone
+    static NSMutableDictionary *map_ = nil;
+    if (!map_) {
+        map_ = [NSMutableDictionary dictionary];
+        map_[@"Snap to Points"]         = NSLocalizedString(@"Snap to Points", @"Snap to Points");
+        map_[@"Snap to Edges"]          = NSLocalizedString(@"Snap to Edges", @"Snap to Edges");
+        map_[@"Snap to Grid"]           = NSLocalizedString(@"Snap to Grid", @"Snap to Grid");
+        map_[@"Grid"]                   = NSLocalizedString(@"Grid", @"Grid");
+        map_[@"Grid Spacing"]           = NSLocalizedString(@"Grid Spacing", @"Grid Spacing");
+        map_[@"Isolate Active Layer"]   = NSLocalizedString(@"Isolate Active Layer", @"Isolate Active Layer");
+        map_[@"Outline Mode"]           = NSLocalizedString(@"Outline Mode", @"Outline Mode");
+        map_[@"Rulers"]                 = NSLocalizedString(@"Rulers", @"Rulers");
+        map_[@"Size and Units"]         = NSLocalizedString(@"Size and Units", @"Size and Units");
+    }
+    
+    return map_[key];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellIdentifier = @"cellID";
@@ -153,7 +173,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = cellDescription[@"Title"];
+    cell.textLabel.text = [self localizedTitleForKey:cellDescription[@"Title"]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if ([cellDescription[@"Type"] isEqualToString:@"Switch"]) {
