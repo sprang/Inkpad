@@ -1,12 +1,12 @@
 
 /* Class = "IBUILabel"; text = "Blue"; ObjectID = "15"; */
-"15.text" = "Blue";
+"15.text" = "Blu";
 
 /* Class = "IBUILabel"; text = "Yellow"; ObjectID = "16"; */
-"16.text" = "Yellow";
+"16.text" = "Giallo";
 
 /* Class = "IBUILabel"; text = "Green"; ObjectID = "18"; */
-"18.text" = "Green";
+"18.text" = "Verde";
 
 /* Class = "IBUILabel"; text = "Magenta"; ObjectID = "19"; */
 "19.text" = "Magenta";
@@ -18,7 +18,7 @@
 "22.text" = "Cyan";
 
 /* Class = "IBUILabel"; text = "Red"; ObjectID = "23"; */
-"23.text" = "Red";
+"23.text" = "Rossa";
 
 /* Class = "IBUILabel"; text = "0"; ObjectID = "24"; */
 "24.text" = "0";
@@ -27,7 +27,7 @@
 "25.text" = "0";
 
 /* Class = "IBUINavigationItem"; title = "Color Balance"; ObjectID = "34"; */
-"34.title" = "Color Balance";
+"34.title" = "Bilanciamento Colore";
 
 /* Class = "IBUIBarButtonItem"; title = "Accept"; ObjectID = "36"; */
-"36.title" = "Accept";
+"36.title" = "Conferma";
