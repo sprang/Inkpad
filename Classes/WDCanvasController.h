@@ -39,8 +39,7 @@ enum {
 };
 
 @interface WDCanvasController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-                                                    UIPopoverControllerDelegate,
-                                                    UIDocumentInteractionControllerDelegate>
+                                                    UIPopoverControllerDelegate, UIDocumentInteractionControllerDelegate>
 {
     WDDocument          *document_;
     WDCanvas            *canvas_;
