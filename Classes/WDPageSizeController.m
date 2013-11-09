@@ -218,7 +218,8 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     NSString *width = [formatter stringFromNumber:@(size.width / unit.conversionFactor)];
     NSString *height = [formatter stringFromNumber:@(size.height / unit.conversionFactor)];
     
-    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, unit.abbreviation, height, unit.abbreviation];
+    NSString *abbreviation = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
+    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, abbreviation, height, abbreviation];
 }
 
 - (void) customSizeChanged:(NSNotification *)aNotification

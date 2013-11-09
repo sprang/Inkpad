@@ -93,6 +93,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
     NSUserDefaults  *defaults = [NSUserDefaults standardUserDefaults];
     WDRulerUnit     *unit = [self units];
     CGSize          size;
+    NSString        *abbreviation = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
     
     if (drawing_) {
         size = drawing_.dimensions;
@@ -104,13 +105,13 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
     if (!width_.isEditing) {
         width_.text = nil;
     }
-    width_.placeholder = [NSString stringWithFormat:@"%@ %@", width, unit.abbreviation];
+    width_.placeholder = [NSString stringWithFormat:@"%@ %@", width, abbreviation];
     
     NSString *height = [[self formatter] stringFromNumber:@(size.height / unit.conversionFactor)];
     if (!height_.isEditing) {
         height_.text = nil;
     }
-    height_.placeholder = [NSString stringWithFormat:@"%@ %@", height, unit.abbreviation];
+    height_.placeholder = [NSString stringWithFormat:@"%@ %@", height, abbreviation];
 }
 
 - (void) drawingDimensionsChanged:(NSNotification *)aNotification

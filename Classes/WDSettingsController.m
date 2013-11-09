@@ -96,7 +96,8 @@
         gridSpacing_.text = nil;
     }
     
-    gridSpacing_.placeholder = [NSString stringWithFormat:@"%@ %@", spacing, drawing_.rulerUnit.abbreviation];
+    NSString *abbreviation = [WDRulerUnit localizedUnitAbbreviation:drawing_.rulerUnit.abbreviation];
+    gridSpacing_.placeholder = [NSString stringWithFormat:@"%@ %@", spacing, abbreviation];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -225,8 +226,8 @@
     NSString *width = [formatter stringFromNumber:@(size.width / unit.conversionFactor)];
     NSString *height = [formatter stringFromNumber:@(size.height / unit.conversionFactor)];
     
-
-    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, unit.abbreviation, height, unit.abbreviation];
+    NSString *abbreviation = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
+    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, abbreviation, height, abbreviation];
 }
 
 - (void) unitsChanged:(NSNotification *)aNotification
