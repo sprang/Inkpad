@@ -18,7 +18,7 @@
 "22.text" = "Cyan";
 
 /* Class = "IBUILabel"; text = "Red"; ObjectID = "23"; */
-"23.text" = "Rossa";
+"23.text" = "Rosso";
 
 /* Class = "IBUILabel"; text = "0"; ObjectID = "24"; */
 "24.text" = "0";
@@ -27,7 +27,7 @@
 "25.text" = "0";
 
 /* Class = "IBUINavigationItem"; title = "Color Balance"; ObjectID = "34"; */
-"34.title" = "Bilanciamento Colore";
+"34.title" = "Bilanciamento colore";
 
 /* Class = "IBUIBarButtonItem"; title = "Accept"; ObjectID = "36"; */
 "36.title" = "Conferma";
