@@ -766,6 +766,22 @@
 		6BFA802B1249CEDB00D1749C /* WDLayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDLayerCell.m; sourceTree = "<group>"; };
 		6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoom_to_fit.png; path = Images/zoom_to_fit.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Inkpad-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Inkpad-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		F1ABE1D2182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Fill.strings; sourceTree = "<group>"; };
+		F1ABE1D3182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Font.strings; sourceTree = "<group>"; };
+		F1ABE1D4182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Gradient.strings; sourceTree = "<group>"; };
+		F1ABE1D5182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/HueSaturation.strings; sourceTree = "<group>"; };
+		F1ABE1D6182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Import.strings; sourceTree = "<group>"; };
+		F1ABE1D7182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LayerCell.strings; sourceTree = "<group>"; };
+		F1ABE1D8182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		F1ABE1D9182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Samples.strings; sourceTree = "<group>"; };
+		F1ABE1DA182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Shadow.strings; sourceTree = "<group>"; };
+		F1ABE1DB182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ShapeOptions.strings; sourceTree = "<group>"; };
+		F1ABE1DC182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Stroke.strings; sourceTree = "<group>"; };
+		F1ABE1DD182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Text.strings; sourceTree = "<group>"; };
+		F1ABE1DE182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Activity.strings; sourceTree = "<group>"; };
+		F1ABE1DF182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Color.strings; sourceTree = "<group>"; };
+		F1ABE1E0182DE0230063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ColorBalance.strings; sourceTree = "<group>"; };
+		F1ABE1E1182DE0240063E049 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1585,6 +1601,7 @@
 				en,
 				fr,
 				Base,
+				es,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1922,6 +1939,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53354B18035AC400D46D5B /* Base */,
+				F1ABE1DF182DE0230063E049 /* es */,
 			);
 			name = Color.xib;
 			sourceTree = "<group>";
@@ -1930,6 +1948,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53354C18035AC400D46D5B /* Base */,
+				F1ABE1E0182DE0230063E049 /* es */,
 			);
 			name = ColorBalance.xib;
 			sourceTree = "<group>";
@@ -1938,6 +1957,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53354D18035AC400D46D5B /* Base */,
+				F1ABE1D2182DE0230063E049 /* es */,
 			);
 			name = Fill.xib;
 			sourceTree = "<group>";
@@ -1946,6 +1966,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53354E18035AC400D46D5B /* Base */,
+				F1ABE1D3182DE0230063E049 /* es */,
 			);
 			name = Font.xib;
 			sourceTree = "<group>";
@@ -1954,6 +1975,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53354F18035AC400D46D5B /* Base */,
+				F1ABE1D4182DE0230063E049 /* es */,
 			);
 			name = Gradient.xib;
 			sourceTree = "<group>";
@@ -1962,6 +1984,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355018035AC400D46D5B /* Base */,
+				F1ABE1D5182DE0230063E049 /* es */,
 			);
 			name = HueSaturation.xib;
 			sourceTree = "<group>";
@@ -1970,6 +1993,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355118035AC400D46D5B /* Base */,
+				F1ABE1D6182DE0230063E049 /* es */,
 			);
 			name = Import.xib;
 			sourceTree = "<group>";
@@ -1978,6 +2002,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355218035AC400D46D5B /* Base */,
+				F1ABE1D7182DE0230063E049 /* es */,
 			);
 			name = LayerCell.xib;
 			sourceTree = "<group>";
@@ -1986,6 +2011,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355318035AC500D46D5B /* Base */,
+				F1ABE1D8182DE0230063E049 /* es */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -1994,6 +2020,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355418035AC500D46D5B /* Base */,
+				F1ABE1D9182DE0230063E049 /* es */,
 			);
 			name = Samples.xib;
 			sourceTree = "<group>";
@@ -2002,6 +2029,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355518035AC500D46D5B /* Base */,
+				F1ABE1DA182DE0230063E049 /* es */,
 			);
 			name = Shadow.xib;
 			sourceTree = "<group>";
@@ -2010,6 +2038,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355618035AC500D46D5B /* Base */,
+				F1ABE1DB182DE0230063E049 /* es */,
 			);
 			name = ShapeOptions.xib;
 			sourceTree = "<group>";
@@ -2018,6 +2047,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355718035AC500D46D5B /* Base */,
+				F1ABE1DC182DE0230063E049 /* es */,
 			);
 			name = Stroke.xib;
 			sourceTree = "<group>";
@@ -2026,6 +2056,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355818035AC500D46D5B /* Base */,
+				F1ABE1DD182DE0230063E049 /* es */,
 			);
 			name = Text.xib;
 			sourceTree = "<group>";
@@ -2034,6 +2065,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B53355A18035B3F00D46D5B /* Base */,
+				F1ABE1DE182DE0230063E049 /* es */,
 			);
 			name = Activity.xib;
 			sourceTree = "<group>";
@@ -2042,6 +2074,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B8F091717FCE1DB00BB6F7E /* en */,
+				F1ABE1E1182DE0240063E049 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

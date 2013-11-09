@@ -1,0 +1,27 @@
+
+/* Class = "IBUILabel"; text = "H"; ObjectID = "75"; */
+"75.text" = "H";
+
+/* Class = "IBUILabel"; text = "S"; ObjectID = "76"; */
+"76.text" = "S";
+
+/* Class = "IBUILabel"; text = "B"; ObjectID = "77"; */
+"77.text" = "B";
+
+/* Class = "IBUILabel"; text = "A"; ObjectID = "78"; */
+"78.text" = "A";
+
+/* Class = "IBUIButton"; normalTitle = "RGB"; ObjectID = "96"; */
+"96.normalTitle" = "RGB";
+
+/* Class = "IBUILabel"; text = "360°"; ObjectID = "97"; */
+"97.text" = "360°";
+
+/* Class = "IBUILabel"; text = "100%"; ObjectID = "98"; */
+"98.text" = "100%";
+
+/* Class = "IBUILabel"; text = "100%"; ObjectID = "99"; */
+"99.text" = "100%";
+
+/* Class = "IBUILabel"; text = "100%"; ObjectID = "100"; */
+"100.text" = "100%";
