@@ -231,7 +231,7 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     if (section == 0) { // dimensions
         return NSLocalizedString(@"Drawing Size", @"Drawing Size");
     } else {
-        return NSLocalizedString(@"Orientation", @"Orientation");
+        return NSLocalizedString(@"Orientation", @"Page orientation (landscape/portrait)");
     }
 }
 
@@ -241,9 +241,9 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     static NSMutableDictionary *map_ = nil;
     if (!map_) {
         map_ = [NSMutableDictionary dictionary];
-        map_[@"Letter"]         = NSLocalizedString(@"Letter", @"Letter");
-        map_[@"Legal"]          = NSLocalizedString(@"Legal", @"Legal");
-        map_[@"Tabloid"]        = NSLocalizedString(@"Tabloid", @"Tabloid");
+        map_[@"Letter"]         = NSLocalizedString(@"Letter", @"U.S. Letter Paper Size");
+        map_[@"Legal"]          = NSLocalizedString(@"Legal", @"U.S. Legal Paper Size");
+        map_[@"Tabloid"]        = NSLocalizedString(@"Tabloid", @"U.S. Tabloid Paper Size");
         map_[@"A4"]             = NSLocalizedString(@"A4", @"A4");
         map_[@"A3"]             = NSLocalizedString(@"A3", @"A3");
         map_[@"B5"]             = NSLocalizedString(@"B5", @"B5");
@@ -286,7 +286,9 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
         }
                                     
     } else {
-        cell.textLabel.text = orientations_[indexPath.row];
+        // find the localized orientation string
+        cell.textLabel.text = [self localizedTitleForKey:orientations_[indexPath.row]];
+        
         if ([orientations_[indexPath.row] isEqualToString:[defaults objectForKey:WDPageOrientation]]) {
             cell.imageView.image = [UIImage imageNamed:@"table_checkmark.png"];
         } else {

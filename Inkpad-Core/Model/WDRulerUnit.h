@@ -27,4 +27,7 @@
     
 + (NSDictionary *) rulerUnits;
 
++ (NSString *) localizedUnitName:(NSString *)name;
++ (NSString *) localizedUnitAbbreviation:(NSString *)abbreviation;
+
 @end

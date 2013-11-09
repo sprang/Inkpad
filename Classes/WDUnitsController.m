@@ -29,13 +29,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
         return nil;
     }
     
-    units_ = @[NSLocalizedString(@"Points", @"Points"),
-              NSLocalizedString(@"Picas", @"Picas"),
-              NSLocalizedString(@"Inches", @"Inches"),
-              NSLocalizedString(@"Millimeters", @"Millimeters"),
-              NSLocalizedString(@"Centimeters", @"Centimeters"),
-              NSLocalizedString(@"Pixels", @"Pixels")];
-    
+    units_ = @[@"Points", @"Picas", @"Inches", @"Millimeters", @"Centimeters", @"Pixels"];
     self.navigationItem.title = NSLocalizedString(@"Custom Size", @"Custom Size");
     
     return self;
@@ -248,6 +242,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         WDRulerUnit *unit = [self units];
+        NSString *abbrev = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
         
         if (indexPath.row == 0) { // width
             width_ = textField;
@@ -255,17 +250,17 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
             
             float dimension = (drawing_ ? drawing_.width : [[NSUserDefaults standardUserDefaults] floatForKey:WDCustomSizeWidth]);
             NSString *width = [[self formatter] stringFromNumber:@(dimension / unit.conversionFactor)];
-            width_.placeholder = [NSString stringWithFormat:@"%@ %@", width, unit.abbreviation];
+            width_.placeholder = [NSString stringWithFormat:@"%@ %@", width, abbrev];
         } else { // height
             height_ = textField;
             [textField addTarget:self action:@selector(heightFieldEdited:) forControlEvents:(UIControlEventEditingDidEnd | UIControlEventEditingDidEndOnExit)];
             
             float dimension = (drawing_ ? drawing_.height : [[NSUserDefaults standardUserDefaults] floatForKey:WDCustomSizeHeight]);
             NSString *height = [[self formatter] stringFromNumber:@(dimension / unit.conversionFactor)];
-            height_.placeholder = [NSString stringWithFormat:@"%@ %@", height, unit.abbreviation];
+            height_.placeholder = [NSString stringWithFormat:@"%@ %@", height, abbrev];
         }
     } else {
-        cell.textLabel.text = units_[indexPath.row];
+        cell.textLabel.text = [WDRulerUnit localizedUnitName:units_[indexPath.row]];
         
         if ([[self units].name isEqualToString:units_[indexPath.row]]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
