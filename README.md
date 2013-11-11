@@ -57,6 +57,7 @@ Contributors
 Localizations:
 
 * [Carlo Gandolfi](https://github.com/cgand) / Italian
+* [Miguel Dussán](https://github.com/migdus) / Spanish
 
 App Icon:
 

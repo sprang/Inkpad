@@ -1,6 +1,9 @@
 Next Update
 - Added T-end arrowhead
 - Fixed incorrect shadow/parallax on eraser options view
+- Integrated UIDocumentInteractionController for exporting
+- Added Italian localization
+- Added Spanish localization
 
 1.5.1 [currently on the App Store]
 - Fixed broken Github link in the help file
