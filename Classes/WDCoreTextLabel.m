@@ -41,10 +41,14 @@
 
 - (void) setFontRef:(CTFontRef)font
 {
-    CFRetain(font);
+    if (font) {
+        CFRetain(font);
+    }
+    
     if (fontRef) {
         CFRelease(fontRef);
     }
+    
     fontRef = font;
     
     [self setNeedsDisplay];

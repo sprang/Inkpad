@@ -32,6 +32,7 @@
 - (BOOL) isUserFont:(NSString *)fullName;
 - (BOOL) validFont:(NSString *)fullName;
 - (NSString *) displayNameForFont:(NSString *)fullName;
+- (NSString *) typefaceNameForFont:(NSString *)fullName;
 
 - (NSString *) defaultFontForFamily:(NSString *)familyName;
 - (NSString *) familyNameForFont:(NSString *)fullName;

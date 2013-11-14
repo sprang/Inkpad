@@ -163,6 +163,26 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     return userFontMap[fullName] ? YES : NO;
 }
 
+- (NSString *) typefaceNameForFont:(NSString *)fullName
+{
+    [self waitForInitialLoad];
+    
+    NSString *longName = systemFontMap[fullName] ?: ((WDUserFont *)userFontMap[fullName]).displayName;
+    NSString *familyName = [self familyNameForFont:fullName];
+    
+    NSString *typeface = [longName copy];
+    if ([typeface hasPrefix:familyName]) {
+        typeface = [longName substringFromIndex:[familyName length]];
+        typeface = [typeface stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    }
+    
+    if ([typeface length] == 0) {
+        typeface = @"Regular";
+    }
+    
+    return typeface;
+}
+
 - (NSString *) displayNameForFont:(NSString *)fullName
 {
     [self waitForInitialLoad];
@@ -172,7 +192,7 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
 - (NSString *) familyNameForFont:(NSString *)fullName
 {
     [self waitForInitialLoad];
-    return systemFamilyMap[fullName] ?: ((WDUserFont *)userFamilyMap[fullName]).familyName;
+    return systemFamilyMap[fullName] ?: ((WDUserFont *)userFamilyMap[fullName]);
 }
 
 - (NSString *) defaultFontForFamily:(NSString *)familyName
@@ -204,7 +224,14 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
 - (NSArray *) fontsInFamily:(NSString *)familyName
 {
     [self waitForInitialLoad];
-    return [systemFamilyMap allKeysForObject:familyName];
+    
+    NSArray *result = [systemFamilyMap allKeysForObject:familyName];
+    
+    if (!result || result.count == 0) {
+        result = [userFamilyMap allKeysForObject:familyName];
+    }
+    
+    return (result ?: @[]);
 }
 
 - (NSString *) pathForUserLibrary
