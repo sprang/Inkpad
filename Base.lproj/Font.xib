@@ -7,8 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WDFontController">
             <connections>
-                <outlet property="alignment_" destination="JaA-6P-6Aa" id="b2s-eX-dRv"/>
-                <outlet property="controls_" destination="I8z-AV-pJs" id="cNE-fM-QfJ"/>
                 <outlet property="faceTable_" destination="29" id="JIV-BN-jkt"/>
                 <outlet property="familyTable_" destination="H2l-6g-tzg" id="vqo-Ge-VgG"/>
                 <outlet property="sizeLabel_" destination="4IA-pP-U4y" id="Tdt-2g-b43"/>
@@ -18,7 +16,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="460" height="520"/>
+            <rect key="frame" x="0.0" y="0.0" width="460" height="478"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="40" sectionHeaderHeight="22" sectionFooterHeight="22" id="29">
@@ -39,75 +37,57 @@
                         <outlet property="delegate" destination="-1" id="vXB-B9-i2P"/>
                     </connections>
                 </tableView>
-                <view autoresizesSubviews="NO" contentMode="scaleToFill" id="I8z-AV-pJs">
-                    <rect key="frame" x="10" y="427" width="440" height="93"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="JaA-6P-6Aa">
-                            <rect key="frame" x="100" y="15" width="240" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <segments>
-                                <segment title="" image="textLeft.png"/>
-                                <segment title="" image="textCenter.png"/>
-                                <segment title="" image="textRight.png"/>
-                            </segments>
-                        </segmentedControl>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="kqW-ss-Zqf">
-                            <rect key="frame" x="58" y="51" width="324" height="34"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <color key="minimumTrackTintColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="takeFinalFontSizeFrom:" destination="-1" eventType="touchUpInside" id="Rwd-kH-JIO"/>
-                                <action selector="takeFinalFontSizeFrom:" destination="-1" eventType="touchUpOutside" id="WDs-rq-A6S"/>
-                                <action selector="takeFontSizeFrom:" destination="-1" eventType="valueChanged" id="vfD-b6-z3w"/>
-                            </connections>
-                        </slider>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jrw-wX-GlA">
-                            <rect key="frame" x="20" y="52" width="32" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="decrement.png">
-                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="decrement:" destination="-1" eventType="touchUpInside" id="anY-kE-zji"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YrI-kS-63T">
-                            <rect key="frame" x="388" y="52" width="32" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" image="increment.png">
-                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="increment:" destination="-1" eventType="touchUpInside" id="qph-1j-pWd"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="100 pt" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="4IA-pP-U4y">
-                            <rect key="frame" x="362" y="19" width="58" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                </view>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="kqW-ss-Zqf">
+                    <rect key="frame" x="18" y="434" width="300" height="34"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="minimumTrackTintColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="takeFinalFontSizeFrom:" destination="-1" eventType="touchUpInside" id="Rwd-kH-JIO"/>
+                        <action selector="takeFinalFontSizeFrom:" destination="-1" eventType="touchUpOutside" id="WDs-rq-A6S"/>
+                        <action selector="takeFontSizeFrom:" destination="-1" eventType="valueChanged" id="vfD-b6-z3w"/>
+                    </connections>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jrw-wX-GlA">
+                    <rect key="frame" x="324" y="435" width="32" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" image="decrement.png">
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="decrement:" destination="-1" eventType="touchUpInside" id="anY-kE-zji"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YrI-kS-63T">
+                    <rect key="frame" x="408" y="435" width="32" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" image="increment.png">
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="increment:" destination="-1" eventType="touchUpInside" id="qph-1j-pWd"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="100 pt" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="4IA-pP-U4y">
+                    <rect key="frame" x="354" y="440" width="58" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
         </view>
     </objects>
     <resources>
         <image name="decrement.png" width="25" height="25"/>
         <image name="increment.png" width="25" height="25"/>
-        <image name="textCenter.png" width="32" height="24"/>
-        <image name="textLeft.png" width="32" height="24"/>
-        <image name="textRight.png" width="32" height="24"/>
     </resources>
 </document>

@@ -15,7 +15,6 @@
 @class WDText;
 
 @interface WDFontController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet UIView                 *controls_;
     IBOutlet UITableView            *faceTable_;
     IBOutlet UITableView            *familyTable_;
     IBOutlet UILabel                *sizeLabel_;

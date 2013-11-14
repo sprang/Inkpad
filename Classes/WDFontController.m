@@ -26,6 +26,47 @@
 
 @synthesize drawingController = drawingController_;
 
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (!self) {
+        return nil;
+    }
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
+    title.text = NSLocalizedString(@"Fonts", @"Fonts");
+    title.font = [UIFont boldSystemFontOfSize:17.0f];
+    title.textColor = [UIColor blackColor];
+    title.backgroundColor = nil;
+    title.opaque = NO;
+    [title sizeToFit];
+    
+    // make sure the title is centered vertically
+    CGRect frame = title.frame;
+    frame.size.height = 44;
+    title.frame = frame;
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:title];
+    self.navigationItem.leftBarButtonItem = item;
+    
+    alignment_ = [[UISegmentedControl alloc] initWithItems:@[[UIImage imageNamed:@"textLeft.png"],
+                                                             [UIImage imageNamed:@"textCenter.png"],
+                                                             [UIImage imageNamed:@"textRight.png"]]];
+    [alignment_ sizeToFit];
+    frame = alignment_.frame;
+    frame.size.width += 30;
+    alignment_.frame = frame;
+    
+    [alignment_ addTarget:self action:@selector(takeAlignmentFrom:) forControlEvents:UIControlEventValueChanged];
+    
+    item = [[UIBarButtonItem alloc] initWithCustomView:alignment_];
+    self.navigationItem.rightBarButtonItem = item;
+    
+    return self;
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -75,13 +116,10 @@
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Fonts", @"Fonts");
-    
     sizeSlider_.minimumValue = kMinFontSize;
     sizeSlider_.maximumValue = kMaxFontSize;
     
     alignment_.selectedSegmentIndex = [[drawingController_.propertyManager defaultValueForProperty:WDTextAlignmentProperty] intValue];
-    [alignment_ addTarget:self action:@selector(takeAlignmentFrom:) forControlEvents:UIControlEventValueChanged];
     
     int size = [[drawingController_.propertyManager defaultValueForProperty:WDFontSizeProperty] intValue];
     sizeSlider_.value = size;
