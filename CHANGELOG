@@ -4,6 +4,8 @@ Next Update
 - Integrated UIDocumentInteractionController for exporting
 - Added Italian localization
 - Added Spanish localization
+- Started advertising our ability to edit SVG
+- Added an "Import from Photo Album" button in the Gallery
 
 1.5.1 [currently on the App Store]
 - Fixed broken Github link in the help file
