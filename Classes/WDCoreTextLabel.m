@@ -34,7 +34,9 @@
 
 - (void) dealloc
 {
-    CFRelease(fontRef);
+    if (fontRef) {
+        CFRelease(fontRef);
+    }
 }
 
 - (void) setFontRef:(CTFontRef)font
@@ -66,7 +68,7 @@
 
 - (void) drawRect:(CGRect)rect
 {
-    if (!text) {
+    if (!text || [text isEqualToString:@""]) {
         return;
     }
     

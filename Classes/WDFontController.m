@@ -81,6 +81,8 @@
 {
     [super viewDidLoad];
     
+    self.title = NSLocalizedString(@"Fonts", @"Fonts");
+    
     sizeSlider_.minimumValue = kMinFontSize;
     sizeSlider_.maximumValue = kMaxFontSize;
     
@@ -91,25 +93,34 @@
     sizeSlider_.value = size;
     sizeLabel_.text = [NSString stringWithFormat:@"%d pt", size];
     
-    self.title = NSLocalizedString(@"Font", @"Font");
-
     self.preferredContentSize = self.view.frame.size;
 }
 
 - (void) scrollToSelectedFont
 {
     NSString *defaultFontName = [drawingController_.propertyManager defaultValueForProperty:WDFontNameProperty];
-    NSUInteger fontIndex = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:defaultFontName];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:fontIndex inSection:0];
-    [table_ scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+    
+    NSUInteger familyIndex;
+    if (self.selectedFamilyName) {
+        familyIndex = [[[WDFontManager sharedInstance] supportedFamilies] indexOfObject:self.selectedFamilyName];
+    } else {
+        familyIndex = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:defaultFontName];
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:familyIndex inSection:0];
+    [familyTable_ scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+    
+    NSUInteger faceIndex = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:defaultFontName];
+    indexPath = [NSIndexPath indexPathForRow:faceIndex inSection:0];
+    [faceTable_ scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
-    [table_ reloadData];
-    [self scrollToSelectedFont];
+    [faceTable_ reloadData];
+//    [self scrollToSelectedFont];
 }
 
 - (void) invalidProperties:(NSNotification *)aNotification
@@ -121,7 +132,7 @@
         
         if ([property isEqualToString:WDFontNameProperty]) {
             if (![value isEqualToString:self.selectedFontName]) {
-                [table_ reloadData];
+                [faceTable_ reloadData];
                 [self scrollToSelectedFont];
             }
         } else if ([property isEqualToString:WDFontSizeProperty]) {
@@ -139,7 +150,12 @@
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
-    return [[[WDFontManager sharedInstance] supportedFonts] count];
+    if (table == familyTable_)
+    {
+        return [[[WDFontManager sharedInstance] supportedFamilies] count];
+    }
+    
+    return [[[WDFontManager sharedInstance] fontsInFamily:self.selectedFamilyName] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,61 +163,74 @@
     NSString        *cellIdentifier = @"fontIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
         WDCoreTextLabel *label = [[WDCoreTextLabel alloc] initWithFrame:CGRectInset(cell.contentView.bounds, 10, 0)];
         label.tag = kCoreTextLabelTag;
         [cell.contentView addSubview:label];
     }
-
-    NSString *fontName = [[WDFontManager sharedInstance] supportedFonts][indexPath.row];
     
-    if ([fontName isEqualToString:[drawingController_.propertyManager defaultValueForProperty:WDFontNameProperty]]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        self.selectedFontName = fontName;
+    NSString *fontName = nil;
+    CGFloat fontSize = 20.0f;
+    WDCoreTextLabel *previewLabel = (WDCoreTextLabel *) [cell viewWithTag:kCoreTextLabelTag];
+    
+    if (tableView == familyTable_)
+    {
+        // Set the text to the font family name
+        NSString *familyName = [[WDFontManager sharedInstance] supportedFamilies][indexPath.row];
+        [previewLabel setText:familyName];
+        
+        fontName = [[WDFontManager sharedInstance] defaultFontForFamily:familyName];
+        fontSize = 15.f;
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        // Set the text to the font display name
+        fontName = [[WDFontManager sharedInstance] fontsInFamily:self.selectedFamilyName][indexPath.row];
+        fontSize = 18.f;
+        [previewLabel setText:[[WDFontManager sharedInstance] displayNameForFont:fontName]];
     }
     
-    WDCoreTextLabel *label = (WDCoreTextLabel *) [cell viewWithTag:kCoreTextLabelTag];
-    
-    CTFontRef fontRef = [[WDFontManager sharedInstance] newFontRefForFont:fontName withSize:20];
-    [label setFontRef:fontRef];
+    // Set both cells to use a font for the preview label
+    CTFontRef fontRef = [[WDFontManager sharedInstance] newFontRefForFont:fontName withSize:fontSize];
+    [previewLabel setFontRef:fontRef];
     CFRelease(fontRef);
-    
-    [label setText:[[WDFontManager sharedInstance] displayNameForFont:fontName]];
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WDCoreTextLabel *previewLabel = (WDCoreTextLabel *) [cell viewWithTag:kCoreTextLabelTag];
+    previewLabel.frame = CGRectInset(cell.contentView.bounds, 10, 0);
+    
+    if (tableView == faceTable_)
+    {
+        NSString *fontNameForRow = [[WDFontManager sharedInstance] fontsInFamily:self.selectedFamilyName][indexPath.row];
+        BOOL isDefaultFont = [fontNameForRow isEqualToString:[drawingController_.propertyManager defaultValueForProperty:WDFontNameProperty]];
+        if (isDefaultFont || [fontNameForRow isEqualToString:self.selectedFontName])
+        {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
-    UITableViewCell *oldCell = nil;
-    NSIndexPath     *oldIndexPath = nil; 
-    
-    // find old cell
-    NSUInteger oldRow = [[[WDFontManager sharedInstance] supportedFonts] indexOfObject:self.selectedFontName];
-    oldIndexPath = [NSIndexPath indexPathForRow:oldRow inSection:indexPath.section];
-    oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
-    self.selectedFontName = nil;
-    
-    // deselect old cell
-    if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        oldCell.accessoryType = UITableViewCellAccessoryNone;
+    if (tableView == familyTable_)
+    {
+        self.selectedFamilyName = [[WDFontManager sharedInstance] supportedFamilies][indexPath.row];
+        [faceTable_ reloadData];
+    } else {
+        self.selectedFontName = [[WDFontManager sharedInstance] fontsInFamily:self.selectedFamilyName][indexPath.row];
+        NSString *font = [[WDFontManager sharedInstance] fontsInFamily:self.selectedFamilyName][indexPath.row];
+        [drawingController_ setValue:font forProperty:WDFontNameProperty];
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        [tableView reloadData];
     }
-    
-    // select new value
-    if (newCell.accessoryType == UITableViewCellAccessoryNone) {
-        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
-        self.selectedFontName = [[WDFontManager sharedInstance] supportedFonts][indexPath.row];
-    }
-    
-    NSString *font = [[WDFontManager sharedInstance] supportedFonts][indexPath.row];
-    [drawingController_ setValue:font forProperty:WDFontNameProperty];
 }
 
 @end
