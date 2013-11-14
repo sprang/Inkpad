@@ -34,15 +34,21 @@
 
 - (void) dealloc
 {
-    CFRelease(fontRef);
+    if (fontRef) {
+        CFRelease(fontRef);
+    }
 }
 
 - (void) setFontRef:(CTFontRef)font
 {
-    CFRetain(font);
+    if (font) {
+        CFRetain(font);
+    }
+    
     if (fontRef) {
         CFRelease(fontRef);
     }
+    
     fontRef = font;
     
     [self setNeedsDisplay];
@@ -66,7 +72,7 @@
 
 - (void) drawRect:(CGRect)rect
 {
-    if (!text) {
+    if (!text || [text isEqualToString:@""]) {
         return;
     }
     
