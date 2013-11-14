@@ -264,6 +264,8 @@
 		6BC96752183149E300F46191 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BC9674A183149E300F46191 /* Localizable.strings */; };
 		6BC96753183149E300F46191 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BC9674C183149E300F46191 /* Shadow.strings */; };
 		6BC96754183149E300F46191 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BC9674E183149E300F46191 /* Stroke.strings */; };
+		6BC9675B1834852400F46191 /* album_centered.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC967591834852400F46191 /* album_centered.png */; };
+		6BC9675C1834852400F46191 /* album_centered@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC9675A1834852400F46191 /* album_centered@2x.png */; };
 		6BCD52A0123FFFED002FCB27 /* album.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCD5282123FFFED002FCB27 /* album.png */; };
 		6BCD52A6123FFFED002FCB27 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCD5288123FFFED002FCB27 /* gear.png */; };
 		6BCD52B0123FFFED002FCB27 /* pivot.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BCD5292123FFFED002FCB27 /* pivot.png */; };
@@ -713,6 +715,8 @@
 		6BC9674B183149E300F46191 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		6BC9674D183149E300F46191 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Shadow.strings; sourceTree = "<group>"; };
 		6BC9674F183149E300F46191 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Stroke.strings; sourceTree = "<group>"; };
+		6BC967591834852400F46191 /* album_centered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = album_centered.png; path = Images/album_centered.png; sourceTree = "<group>"; };
+		6BC9675A1834852400F46191 /* album_centered@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "album_centered@2x.png"; path = "Images/album_centered@2x.png"; sourceTree = "<group>"; };
 		6BCD5282123FFFED002FCB27 /* album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = album.png; path = Images/album.png; sourceTree = "<group>"; };
 		6BCD5288123FFFED002FCB27 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = Images/gear.png; sourceTree = "<group>"; };
 		6BCD5292123FFFED002FCB27 /* pivot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pivot.png; path = Images/pivot.png; sourceTree = "<group>"; };
@@ -907,6 +911,8 @@
 		6B87CDEC1313C5A00027A482 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
+				6BC967591834852400F46191 /* album_centered.png */,
+				6BC9675A1834852400F46191 /* album_centered@2x.png */,
 				6B219CCA1511893500761F18 /* duplicate.png */,
 				6B2AC3FA17EAD420008D6391 /* duplicate@2x.png */,
 				6BCD5282123FFFED002FCB27 /* album.png */,
@@ -1655,6 +1661,8 @@
 				6B197DAC12434CED006C5C3A /* align_bottom.png in Resources */,
 				6B6749D817F9446300E9A627 /* Icon-Settings.png in Resources */,
 				6B197DAD12434CED006C5C3A /* align_center.png in Resources */,
+				6BC9675B1834852400F46191 /* album_centered.png in Resources */,
+				6BC9675C1834852400F46191 /* album_centered@2x.png in Resources */,
 				6B197DAE12434CED006C5C3A /* align_left.png in Resources */,
 				6B197DAF12434CED006C5C3A /* align_middle.png in Resources */,
 				6B197DB012434CED006C5C3A /* align_right.png in Resources */,
