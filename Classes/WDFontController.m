@@ -228,7 +228,7 @@
     
     if (tableView == familyTable_) {
         familyName = [[WDFontManager sharedInstance] supportedFamilies][indexPath.row];
-        font = [[WDFontManager sharedInstance] fontsInFamily:familyName][0];
+        font = [[WDFontManager sharedInstance] defaultFontForFamily:familyName];
     } else {
         familyName = [self defaultFontFamilyName];
         font = [[WDFontManager sharedInstance] fontsInFamily:familyName][indexPath.row];

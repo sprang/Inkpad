@@ -200,7 +200,14 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     [self waitForInitialLoad];
     
     NSArray *fonts = [self fontsInFamily:familyName];
-    for (NSString *fontName in fonts) {
+    NSArray *sorted = [fonts sortedArrayUsingComparator:^NSComparisonResult(NSString *aString, NSString *bString) {
+        NSNumber *a = @(aString.length);
+        NSNumber *b = @(bString.length);
+        
+        return [a compare:b];
+    }];
+    
+    for (NSString *fontName in sorted) {
         CTFontRef fontRef = [self newFontRefForFont:fontName withSize:10];
         CTFontSymbolicTraits traits = CTFontGetSymbolicTraits(fontRef);
         
@@ -218,7 +225,7 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     }
     
     // Fallback, just return the first font in this family
-    return [fonts firstObject];
+    return [sorted firstObject];
 }
 
 - (NSArray *) fontsInFamily:(NSString *)familyName
