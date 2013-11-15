@@ -218,7 +218,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-        WDCoreTextLabel *label = [[WDCoreTextLabel alloc] initWithFrame:CGRectInset(cell.contentView.bounds, 10, 0)];
+        WDCoreTextLabel *label = [[WDCoreTextLabel alloc] initWithFrame:cell.contentView.bounds];
         label.tag = kCoreTextLabelTag;
         [cell.contentView addSubview:label];
         

@@ -27,7 +27,7 @@
     self.backgroundColor = nil;
     self.opaque = NO;
     self.contentMode = UIViewContentModeRedraw;
-    self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     return self;
 }
@@ -86,10 +86,7 @@
     CTLineRef tokenLineRef = CTLineCreateWithAttributedString(tokenString);
     CTLineRef truncatedLineRef = CTLineCreateTruncatedLine(lineRef, self.bounds.size.width, kCTLineTruncationEnd, tokenLineRef);
     
-    CGFloat ascent, descent;
-    CTLineGetTypographicBounds(truncatedLineRef, &ascent, &descent, NULL);
-    float offset = (CGRectGetHeight(self.bounds) - (ascent - descent)) / 2;
-    
+    float offset = roundf((CGRectGetHeight(self.bounds) - CTFontGetSize(self.fontRef)) / 2) + 2;
     CGContextSetTextPosition(ctx, 0, roundf(CGRectGetMaxY(self.bounds) - offset));
     CTLineDraw(truncatedLineRef, ctx);
     
