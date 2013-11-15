@@ -210,6 +210,7 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     for (NSString *fontName in sorted) {
         CTFontRef fontRef = [self newFontRefForFont:fontName withSize:10];
         CTFontSymbolicTraits traits = CTFontGetSymbolicTraits(fontRef);
+        CFRelease(fontRef);
         
         BOOL isBold = (traits & kCTFontBoldTrait);
         if (isBold) {
