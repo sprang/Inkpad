@@ -314,6 +314,11 @@
 		6BF747931311C399000D9344 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BF747921311C399000D9344 /* Entitlements.plist */; };
 		6BFA802C1249CEDB00D1749C /* WDLayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFA802B1249CEDB00D1749C /* WDLayerCell.m */; };
 		6BFBC4EB1335F4A000D5877F /* zoom_to_fit.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */; };
+		F43A1D74183557770032933E /* ColorBalance.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43A1D6A183557770032933E /* ColorBalance.strings */; };
+		F43A1D75183557770032933E /* HueSaturation.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43A1D6C183557770032933E /* HueSaturation.strings */; };
+		F43A1D76183557770032933E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43A1D6E183557770032933E /* Localizable.strings */; };
+		F43A1D77183557770032933E /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43A1D70183557770032933E /* Shadow.strings */; };
+		F43A1D78183557770032933E /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43A1D72183557770032933E /* Stroke.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -790,6 +795,11 @@
 		6BFA802B1249CEDB00D1749C /* WDLayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDLayerCell.m; sourceTree = "<group>"; };
 		6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoom_to_fit.png; path = Images/zoom_to_fit.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Inkpad-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Inkpad-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		F43A1D6B183557770032933E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ColorBalance.strings; sourceTree = "<group>"; };
+		F43A1D6D183557770032933E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = HueSaturation.strings; sourceTree = "<group>"; };
+		F43A1D6F183557770032933E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
+		F43A1D71183557770032933E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Shadow.strings; sourceTree = "<group>"; };
+		F43A1D73183557770032933E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Stroke.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -864,6 +874,7 @@
 			children = (
 				6B8F091517FCE1DB00BB6F7E /* en.lproj */,
 				6BC96745183149E300F46191 /* es.lproj */,
+				F43A1D69183557770032933E /* fr.lproj */,
 				6B8C5379182AEA5000C102F7 /* it.lproj */,
 				6B616773137B429200BEC0BA /* Samples */,
 				6B87CA5C1312610D0027A482 /* Help */,
@@ -1585,6 +1596,18 @@
 			name = "Text Alignment";
 			sourceTree = "<group>";
 		};
+		F43A1D69183557770032933E /* fr.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				F43A1D6A183557770032933E /* ColorBalance.strings */,
+				F43A1D6C183557770032933E /* HueSaturation.strings */,
+				F43A1D6E183557770032933E /* Localizable.strings */,
+				F43A1D70183557770032933E /* Shadow.strings */,
+				F43A1D72183557770032933E /* Stroke.strings */,
+			);
+			path = fr.lproj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1683,6 +1706,7 @@
 				6BC96753183149E300F46191 /* Shadow.strings in Resources */,
 				6B6A1C9B125DC10800253800 /* Default-Landscape.png in Resources */,
 				6B95E165125EFA5F00E54B56 /* slider_border.png in Resources */,
+				F43A1D77183557770032933E /* Shadow.strings in Resources */,
 				6B53353E1803538D00D46D5B /* ColorBalance.xib in Resources */,
 				6BF0C5681262598A009BB05C /* radial.png in Resources */,
 				6BF0C57D12625C4D009BB05C /* linear.png in Resources */,
@@ -1735,11 +1759,13 @@
 				6BABD9A1141ED30100F7E0A9 /* text.png in Resources */,
 				6B5335421803538D00D46D5B /* HueSaturation.xib in Resources */,
 				6B53351E1803530E00D46D5B /* ImportFormats.plist in Resources */,
+				F43A1D76183557770032933E /* Localizable.strings in Resources */,
 				6BABD9A3141ED30100F7E0A9 /* zoom.png in Resources */,
 				6BABD9E7141F15AC00F7E0A9 /* SVGColors.plist in Resources */,
 				6B7D2CF0150898BE001311B0 /* font@2x.png in Resources */,
 				6B53354A1803538D00D46D5B /* Text.xib in Resources */,
 				6B7D2CF415089966001311B0 /* redo@2x.png in Resources */,
+				F43A1D75183557770032933E /* HueSaturation.strings in Resources */,
 				6B7D2CF515089966001311B0 /* undo@2x.png in Resources */,
 				6B2AC3FB17EAD420008D6391 /* duplicate@2x.png in Resources */,
 				6B7D2D011508A0B2001311B0 /* album@2x.png in Resources */,
@@ -1751,6 +1777,7 @@
 				6B7D2D15150976EC001311B0 /* isolate@2x.png in Resources */,
 				6B7D2D1E15097D8B001311B0 /* decrement.png in Resources */,
 				6B7D2D1F15097D8B001311B0 /* decrement@2x.png in Resources */,
+				F43A1D74183557770032933E /* ColorBalance.strings in Resources */,
 				6B6749DD17F9446300E9A627 /* Icon@2x.png in Resources */,
 				6BC96754183149E300F46191 /* Stroke.strings in Resources */,
 				6B7D2D2015097D8B001311B0 /* increment.png in Resources */,
@@ -1796,6 +1823,7 @@
 				6B5335201803530E00D46D5B /* Settings.plist in Resources */,
 				6B219CA1150EFAE700761F18 /* groupSelect@2x.png in Resources */,
 				6B219CA3150EFAE700761F18 /* select@2x.png in Resources */,
+				F43A1D78183557770032933E /* Stroke.strings in Resources */,
 				6B219CCB1511893500761F18 /* duplicate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2156,6 +2184,46 @@
 			isa = PBXVariantGroup;
 			children = (
 				6BC9674F183149E300F46191 /* es */,
+			);
+			name = Stroke.strings;
+			sourceTree = "<group>";
+		};
+		F43A1D6A183557770032933E /* ColorBalance.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43A1D6B183557770032933E /* fr */,
+			);
+			name = ColorBalance.strings;
+			sourceTree = "<group>";
+		};
+		F43A1D6C183557770032933E /* HueSaturation.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43A1D6D183557770032933E /* fr */,
+			);
+			name = HueSaturation.strings;
+			sourceTree = "<group>";
+		};
+		F43A1D6E183557770032933E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43A1D6F183557770032933E /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F43A1D70183557770032933E /* Shadow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43A1D71183557770032933E /* fr */,
+			);
+			name = Shadow.strings;
+			sourceTree = "<group>";
+		};
+		F43A1D72183557770032933E /* Stroke.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43A1D73183557770032933E /* fr */,
 			);
 			name = Stroke.strings;
 			sourceTree = "<group>";

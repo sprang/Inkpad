@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <title>Inkpad Help</title>
+            <meta name="author" content="Steve Sprang">
+            <link rel="stylesheet" type="text/css" href="styles.css">
+            <script src="jquery-1.7.1.min.js"></script>
+            <script src="retina.js"></script>
+    </head>
+    <body>
+        
+        <div class="content">
+            
+            <h1>What is Inkpad?</h1>
+            
+            <img class="logo" src="Icon.png" width="130" height="130" alt="Logo"/>
+            Inkpad is a vector illustration app designed from scratch for the iPad. It supports paths, compound paths, text, text on a path, images, groups, masks, gradient fills, and an unlimited number of layers.
+            <p>
+            Inkpad is Free Software. It is distributed under the Mozilla Public License v2.0 which can be found at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0</a>. The source code can be found at <a href="https://github.com/sprang/Inkpad">http://github.com/sprang/Inkpad</a>.
+            <p>
+            <div style="clear: both;"></div>
+            
+            <h1>Gallery</h1>
+            The Gallery displays a thumbnail for each of your drawings. Tap a thumbnail to open it for viewing or editing. Tap the title below the thumbnail to enter a new title.
+            <p>
+            Tap the <b>+</b> button in the upper right corner of the screen to create a new drawing.
+            <p>
+            Tap the <b>Camera</b> button to take a photo and use it as the background for a new drawing.
+            <p>
+    
+    
+            <h3>Importing</h3>
+            Inkpad can import images, fonts (TrueType and OpenType), SVG, SVGZ, and Inkpad files via Dropbox. Tap <b>Import</b> to access your Dropbox.
+            <p>
+            
+            Imported fonts appear in the Gallery’s <b>Fonts</b> panel where they can be removed if you no longer wish to use them. When editing a drawing, the <b>Font</b> panel displays imported fonts intermixed with built-in fonts.
+            <p>
+                Tap the <b>Samples</b> button to reinstall the sample artwork included with Inkpad.
+                <p>
+            
+            <h3>Exporting</h3>
+            Tap <b>Select</b> to enter selection mode.
+            <p>
+            In selection mode, tap on thumbnails to select them (or deselect them). When one or more drawings are selected, tap <b>Email</b> to email them, or tap <b>Dropbox</b> to upload them directly to your Dropbox.
+            <p>
+            Tap the <b>Trash</b> button to delete the selected drawings.
+            <p>
+            Tap <b>Done</b> to exit selection mode.
+            
+            <h1>Drawing</h1>
+            
+            Use the <b>Edit</b> menu to cut, copy, paste, delete, and alter the selection.
+            <p>
+            Use the <b>Arrange</b> menu to move objects backwards and forwards in the stack, group and ungroup objects, distribute objects, and align objects.
+            <p>
+            Use the <b>Path</b> menu to add anchors, remove anchors, outline strokes, join paths, combine paths, make masks, and place text on a path.
+            <p>
+            
+            <img class="color_inline" src="color_wheel.png" width="27" height="27" alt="Color Adjustment"/></h3>
+            Use the <b>Color Adjustment</b> menu to blend fill colors across selected shapes, adjust the hue, saturation, brightness and color balance of the selected objects, and desaturate and invert the colors of the selection.
+            <p>
+            
+            When blending colors, the shapes at each extreme of the selection must have color fills (not gradients). For example, when blending horizontally, the leftmost and rightmost shapes must have color fills. Additionally, at least 3 shapes must be selected to enable the blending options.
+            <p>
+            
+            <img class="undo_inline" src="undo.png" width="24" height="24" alt="Undo"/></h3>
+            Tap the <b>Undo</b> button to undo a change.
+            <p>
+            
+            <img class="undo_inline" src="redo.png" width="24" height="24" alt="Redo"/></h3>
+            Tap the <b>Redo</b> button to redo a change.
+            <p>
+            
+            At the top right of the screen are more options for working with your drawing:
+            <p>
+            
+            <div class="example" style="top-margin:-1em;">
+                <img src="drawing_navbar.png" width="185" height="29" alt="Drawing Nav Bar"/>
+            </div>
+            <p>
+            Respectively, they are: <b>Scale To Fit</b>, <b>Place Photo</b>, <b>Settings</b>, and <b>Share/Export</b>.
+            <p>
+            
+            <h3>Settings</h3>
+            Use the <b>Settings</b> panel to turn the grid on and off, control the grid spacing, and indicate whether you want drawn objects to snap to the grid, snap to points in existing paths, or snap to the edges of existing paths. You can also turn rulers on and off, change the units of your drawing, and modify the dimensions of your drawing.
+            <p>
+            
+            When <b>Isolate Active Layer</b> is enabled, you can only edit the active layer. The other layers in your drawing will be partially hidden. This makes it easy to edit the content of one layer without accidentally touching something in another layer.
+            <p>
+            
+            When <b>Outline Mode</b> is enabled, you can only see the outlines of the objects in your drawing. This makes it easier to select objects that are obscured by other objects. It also significantly reduces rendering time for complex drawings.
+            <p>
+	
+            
+            <h3>Zooming</h3>
+            Use the standard iOS pinch gesture to zoom in and out. Once you’ve started a pinch gesture, you can lift one finger to move the canvas around without zooming.
+<p>
+		If your drawing units are set to pixels, Inkpad displays the drawing at actual pixel size when the zoom level is 100% (as indicated in the navigation bar).
+		<p>
+		If you’re using units that map to a physical measurement (inches, centimeters, etc.), Inkpad displays the drawing at print size when the zoom level is 100%.
+            
+            <h1>Tools</h1>
+            
+            <img class="tool_palette" src="tools.png" width="50" height="196" alt="Tool Palette"/>
+            Inkpad provides a number of tools for creating and modifying your drawing.
+			<p>
+			The tool palette floats above the canvas. Drag it to move it around the screen. Flick it out of your way if necessary.<p>
+	
+			You can modify the behavior of many tools by holding down a second finger on the canvas <b>after</b> you start dragging. If you apply the second touch before you start dragging, you will zoom the canvas.
+			<p>
+			The behavior of each tool is described in the sections below.
+				
+			<div style="clear:both;padding-bottom:0.25em;"></div>
+            
+            <h3>Selection and Multi-Selection Tools</h3>
+            
+            <img class="tool_inline" src="select.png" width="30" height="30" alt="Selection Tool"/>
+			The Selection tool always selects exactly one object when you tap on the drawing. Any previously selected objects are deselected.
+            <p>
+            
+            <img class="tool_inline" src="groupSelect.png" width="30" height="30" alt="Multi Selection Tool"/>
+			The Multi-Selection tool does not discard the previous selection, but instead adds new objects to the selection as you tap them. Tapping a selected object with the Multi-Selection tool deselects it.
+            <p>
+            
+            Select a group of objects by tapping an empty part of the drawing and dragging to enclose them. A box (called a marquee) appears to indicate the selection region.
+            <p>
+            
+            Drag selected objects to move them around your drawing. Constrain movement horizontally, diagonally, and vertically by holding down a second finger on the canvas after you start dragging.
+            <p>
+            
+             When exactly one path is selected, you can edit path anchors and control handles. Like the Pen tool described below, holding down a second finger when dragging a control handle causes the opposite control handle to remain fixed.
+            <p>
+            Double tap the anchors of a path to convert them between corners and curves. Double tapping a control handle removes it.
+			<p>
+            Double tap and drag an anchor to make the control handles mirror each other.
+            <p>
+            
+            <h3>Pen Tool <img class="tool_header" src="pen.png" width="30" height="30" alt="Pen Tool"/></h3>
+       
+			The Pen tool is the most powerful way to create paths in Inkpad. You can use it to define any possible shape. To start, select the Pen from the tool palette.
+            <p>
+            
+            Tap once on the drawing to add a single corner point (an anchor) to your shape. A series of single taps will produce a polygon with sharp corners.
+            
+            <div class="example">
+                <img src="polygon_path.png" width="195" height="84" alt="Polygon"/>
+            </div>
+            
+            To make a curved edge, tap and drag. You’ll see a set of control handles appear that determine the shape of the curve. The farther away the control handles are from the anchor point, the more extreme the curve.
+            
+            <div class="example">
+                <img src="curve.png" width="217" height="167" alt="Curve"/>
+            </div>
+            
+            You can also move control handles independently. Once you start dragging, touch the canvas with a second finger to hold the opposite control handle stationary. This allows you to create two curved segments that form a corner.
+            <p>
+            <div class="example">
+                <img src="corner.png" width="200" height="200" alt="Corner"/>
+            </div>
+            
+            Tap the first anchor in the path to close a path.
+            <p>
+            
+            Double tap the last anchor in the path to end the shape without closing it.
+            <p>
+	
+            To continue editing an existing unclosed path, first select it with the Selection tool. Then choose the Pen tool and tap one of the end points of the path. You can now extend the path or tap on the opposite end point to close it.
+            
+            <h3>Freehand Tool <img class="tool_header" src="brush.png" width="30" height="30" alt="Freehand Tool"/></h3>
+
+            The Freehand tool draws freeform paths on the canvas. This is a great way to doodle and paint.
+            <p>
+            
+            <h3>Eraser Tool <img class="tool_header" src="eraser.png" width="30" height="30" alt="Eraser Tool"/></h3>
+            
+            The Eraser tool erases portions of shapes in your drawing. It works on any ungrouped path or compound path.<p>
+            
+            If there is a selection, the Eraser tool only operates on the selected shapes. <p>
+            
+            You can adjust the width of the eraser via a small settings panel that appears at the bottom of the canvas when the Eraser tool is selected.
+            <p>
+            
+            <h3>Add Anchor Tool <img class="tool_header" src="add_anchor.png" width="30" height="30" alt="Add Anchor Tool"/></h3>
+
+            The Add Anchor tool adds anchor points to existing shapes in your drawing.
+            <p>
+            
+            Tap the edge of a shape to add a new anchor.
+            <p>
+            The Add Anchor tool selects the shape if necessary, but it is easier to add anchors if you select the path first so that you can see the existing anchor points.
+            <p>
+            
+            <h3>Scissor Tool (Path Splitting Tool) <img class="tool_header" src="scissor.png" width="30" height="30" alt="Scissor Tool"/></h3>
+
+            The Scissor tool cuts existing paths.
+            <p>
+            
+            To split a path, tap an edge that you would like to cut. To split at an anchor, tap it.
+            <p>
+            If the path was previously closed, the path will open and both end points will be located at the tap location. If the path was not closed, it will split into two paths at the tap location.
+            <p>
+            
+            <h3>Shape Tools	        <img class="tool_header" src="rect.png" width="30" height="30" alt="Rectangle Tool"/>
+			            <img class="tool_header" src="oval.png" width="30" height="30" alt="Oval Tool"/>
+			            <img class="tool_header" src="star.png" width="30" height="30" alt="Star Tool"/>
+                <img class="tool_header" src="polygon.png" width="30" height="30" alt="Polygon Tool"/>
+                <img class="tool_header" src="spiral.png" width="30" height="30" alt="Spiral Tool"/>
+			            <img class="tool_header" src="line.png" width="30" height="30" alt="Line Tool"/></h3>
+            
+    
+Shape tools create rectangles, ovals, stars, polygons, spirals and lines.
+            <p>
+            Tap and hold the active shape tool in the tool palette to access them. A sub-palette appears that allows you to choose a different shape.
+<p>
+	By default, rectangles and ovals are not constrained to a particular aspect ratio. If you want a perfect square or circle, touch the screen with a second finger after you start dragging out the shape.
+	<p>
+		You can adjust the corner radius of rectangles, the number of points in stars, the decay rate of spirals, and the number of sides in polygons via a small settings panel that appears at the bottom of the canvas when you select the matching tool.
+		<p>
+			If you touch the screen with a second finger while dragging out a star, the inner radius of the star is held constant, allowing you to make the star more or less pointy.
+			<p>
+				If you touch the screen with a second finger while dragging out a line, the line is constrained horizontally, diagonally and vertically.
+            <p>
+            
+            <h3>Eyedropper Tool <img class="tool_header" src="eyedropper.png" width="30" height="30" alt="Eyedropper Tool"/></h3>
+            
+            The Eyedropper tool picks up the style attributes of existing objects in your drawing. It picks up and applies any property that can be edited in the style panels described in the next section.
+            <p>
+            To use the eyedropper, drag your finger over the objects in your drawing until you’ve picked up the style that you want to apply.
+            <p>
+            If nothing is selected when you drag the eyedropper, the styles will be applied to the next object you create. If something is selected, the styles will be applied to the selected objects.
+            <p>
+            
+            <h3>Text Tool <img class="tool_header" src="text.png"  width="30" height="30" alt="Text Tool"/></h3>
+            The Text tool creates text objects.
+            <p>
+            Tap and drag to create a text box on the canvas. When you finish dragging, the onscreen keyboard appears, allowing you to edit the text. To stop editing, tap anywhere on the canvas.
+            <p>
+            To edit the text again in the future, select the Text tool, then tap the text, or choose one of the Selection tools and double tap the text object.
+            <p>
+            
+            <h3>Scale and Rotate Tools</h3>
+            
+            The Scale and Rotate tools transform selected objects.
+            <p>
+            A single tap using either of these tools moves the pivot point for the transform (initially it appears at the center of the selection). The objects scale away from the pivot or rotate around it when you drag.
+            <p>
+            <img class="tool_inline" src="scale.png"  width="30" height="30" alt="Scale Tool"/>
+            The Scale tool maintains the aspect ratio of the selected objects, but holding down a second finger while dragging performs a non-uniform scale.
+            <p>
+            <img class="tool_inline" src="rotate.png"  width="30" height="30" alt="Rotate Tool"/>
+            The Rotate tool rotates freely, unless you hold down a second finger while dragging, in which case the tool constrains the rotation to 45&deg; angles.
+            
+            <h1>Styling Objects</h1>
+            
+            Tap the style buttons in the toolbar to modify the appearance of selected objects:
+            <p>
+            
+            <div class="example" style="margin-bottom:-0.5em;">
+                <img src="style_bar.png" width="252" height="30" alt="Styles Toolbar"/>
+            </div>
+            <p>
+            They are, respectively: <b>Font</b>, <b>Shadow and Opacity</b>, <b>Stroke</b>, <b>Fill</b>, and <b>Swatches</b>.<p>
+            
+            The <b>Shadow and Opacity</b> button indicates the current shadow color and direction, as well as the object opacity. The colors indicated in the <b>Stroke</b> and <b>Fill</b> buttons are the values used when creating new shapes.
+            <p>
+            
+            <h3>Swatches</h3>
+            
+            The <b>Swatches</b> panel saves colors and gradients for later reuse.
+            <p>
+            
+            The <b>Shadow/Stroke/Fill</b> control at the bottom of the panel determines which style is saved when you press the <b>+</b> button in the upper right corner of the panel. It also determines which style is set when you tap one of the swatches in the panel.
+            <p>
+            Since gradients only function as fills, tapping a gradient swatch applies it to the fill style regardless of the setting.
+            <p>
+            
+            <h1>Gradients</h1>
+            
+            A gradient is a fill that transitions between two or more colors. A gradient is defined by a set of color stops. Each stop specifies a color and a position within the gradient.
+            <p>
+            
+            To apply a gradient, open the <b>Fill</b> panel and tap the <b>Gradient</b> button in the title bar.
+            <p>
+            Tap a color stop to select it. Use the color sliders at the top of the panel to alter the stop’s color. Drag the color stop to change its position within the gradient.
+            <p>
+            To reverse the gradient direction, swipe left or right in the gradient bar (the area above the color stops).
+            <p>
+            To evenly distribute the stops in a gradient, double tap the gradient bar.
+            <p>
+            To remove a color stop from the gradient, drag it up or down.
+            <p>
+            To insert a new color stop, tap the blank space between color stops (below the gradient bar).
+            <p>
+            When a shape has a gradient fill (and it is the only selected object), special control handles appear that allow you to change the gradient’s start and end points:
+            <p>
+            <div class="example" style="margin-bottom:-1.5em;">
+                <img src="gradient_canvas.png" width="215" height="150" alt="Gradient on Canvas"/>
+            </div>
+            
+            <h1>Layers</h1>
+            
+            Inkpad supports an unlimited number of layers. Layers are useful for organizing complex drawings. Each component of the drawing can be on its own layer, making it much easier to edit.
+            <p>
+            You can delete, duplicate, rearrange, rename, lock, and hide layers. You can also control the transparency of each layer.
+            <p>
+            
+            Tap the <b>Layers</b> button in the toolbar to view the layers in your drawing.
+            <p>
+            
+            <h1>Joining Paths</h1>
+            
+            To join two unclosed paths, select them both and choose <b>Join Paths</b> from the <b>Path</b> menu.
+            <p>
+            The paths are joined by attaching their closest endpoints, so you might want to line them up the way you intend them to connect before choosing <b>Join Paths</b>.
+            <p>
+            If the opposite ends of the new path coincide after joining, the new path is also closed.
+            
+            <h1>Compound Paths</h1>
+            
+            A compound path is a path composed of multiple subpaths. They are useful for creating shapes that contain holes.
+            <p>
+            
+            To create a compound path, select two or more paths and/or compound paths and choose <b>Combine Paths</b> from the <b>Path</b> menu.
+            <p>
+            
+            To break a compound path back into simple paths, choose <b>Separate Paths</b> from the <b>Path</b> menu.
+            <p>
+            
+            The relative direction of each subpath in a compound path determines which subpaths are filled. If all the paths run in the same direction, they are all filled.
+            <p>
+            If you’ve combined two paths hoping to make a hole, but the hole is filled, select one of the paths in the compound path and choose <b>Reverse Path Direction</b> from the <b>Path</b> menu.
+            <p>
+            
+            <h1>Placing Text on a Path</h1>
+            
+            To place text on a path, select a single non-compound path (or a path and an existing text object) and choose <b>Place Text on Path</b> from the <b>Path</b> menu.
+            <p>
+            A text editor appears, allowing you to edit the text on the path. Reactivate this editor later by double tapping the path with one of the Selection tools (or tapping the path with the Text tool).
+            <p>
+            The path is editable just like any normal path, but style settings apply only to the text.
+            <p>
+            Drag the start bar that appears at the beginning of the text to adjust the starting position of the text on the path.
+            <p>
+            To make the text appear on the other side of the path, choose <b>Reverse Path Direction</b> from the <b>Path</b> menu.
+            <p>
+            
+            <h1>Masks</h1>
+            
+            A mask is a path, compound path, or text object that clips the contents of other drawing elements.
+            <p>
+            To create a mask, select the objects that you want to mask and the path or text object that you want to use as the mask (the masking object must be the topmost selected object). Choose <b>Mask</b> from the <b>Path</b> menu.
+            <p>
+            
+            To unmask objects, select the masked object and choose <b>Unmask</b> from the <b>Path</b> menu.
+            <p>
+            
+            A masking path can have a fill and stroke just like any normal path.
+            <p>
+            
+        </div>
+        
+    </body>
+    
+    <script type="text/javascript">
+        highdpi_init();
+    </script>
+</html>
