@@ -15,11 +15,13 @@
 @class WDText;
 
 @interface WDFontController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet UITableView            *faceTable_;
-    IBOutlet UITableView            *familyTable_;
-    IBOutlet UILabel                *sizeLabel_;
-    IBOutlet UISlider               *sizeSlider_;
-    IBOutlet UISegmentedControl     *alignment_;
+    IBOutlet UITableView    *faceTable_;
+    IBOutlet UITableView    *familyTable_;
+    IBOutlet UILabel        *sizeLabel_;
+    IBOutlet UISlider       *sizeSlider_;
+    
+    UISegmentedControl      *alignment_;
+    NSString                *lastLoadedFamily_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;

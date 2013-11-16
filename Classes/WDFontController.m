@@ -154,6 +154,7 @@
     NSUInteger  familyIndex;
     BOOL        scroll;
     
+    // update the family table
     familyIndex = [[[WDFontManager sharedInstance] supportedFamilies] indexOfObject:familyName];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:familyIndex inSection:0];
     
@@ -161,7 +162,11 @@
     UITableViewScrollPosition position = scroll ? UITableViewScrollPositionMiddle : UITableViewScrollPositionNone;
     [familyTable_ selectRowAtIndexPath:indexPath animated:YES scrollPosition:position];
     
-    [faceTable_ reloadData];
+    // update the typeface table
+    if (![familyName isEqualToString:lastLoadedFamily_]) {
+        [faceTable_ reloadData];
+        lastLoadedFamily_ = familyName;
+    }
     NSArray *faces = [[WDFontManager sharedInstance] fontsInFamily:familyName];
     NSUInteger faceIndex = [faces indexOfObject:defaultFontName];
     
