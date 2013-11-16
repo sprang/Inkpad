@@ -203,7 +203,6 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     NSArray *sorted = [fonts sortedArrayUsingComparator:^NSComparisonResult(NSString *aString, NSString *bString) {
         NSNumber *a = @(aString.length);
         NSNumber *b = @(bString.length);
-        
         return [a compare:b];
     }];
     
@@ -365,6 +364,8 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     
     // the font is now copied to ~/Library/Fonts/ so update the user font map and name array
     userFontMap[userFont.fullName] = userFont;
+    userFamilyMap[userFont.fullName] = userFont.familyName;
+    
     [self userFontsChanged];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:WDFontAddedNotification
@@ -390,6 +391,7 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     
     // update caches
     [userFontMap removeObjectForKey:userFont.fullName];
+    [userFamilyMap removeObjectForKey:userFont.fullName];
     
     NSInteger index = [self.userFonts indexOfObject:userFont.fullName];
     [self userFontsChanged];
