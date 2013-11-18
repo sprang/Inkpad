@@ -1,4 +1,14 @@
-1.5.1 [upcoming release]
+Next Update
+- Added T-end arrowhead
+- Fixed incorrect shadow/parallax on eraser options view
+- Integrated UIDocumentInteractionController for exporting
+- Added Italian localization
+- Added Spanish localization
+- Started advertising our ability to edit SVG
+- Added an "Import from Photo Album" button in the Gallery
+- Redesigned Font panel (now shows Family/Typeface)
+
+1.5.1 [currently on the App Store]
 - Fixed broken Github link in the help file
 - Fixed a bug that caused gradient transforms to be reset when reactivating an existing path
 - Vertically centered the titles in the Stroke and Fill panels

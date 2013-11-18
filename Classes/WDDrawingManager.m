@@ -180,7 +180,8 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
 
 - (NSString *) uniqueFilename
 {
-    return [self uniqueFilenameWithPrefix:@"Drawing" extension:WDDefaultDrawingExtension];
+    return [self uniqueFilenameWithPrefix:NSLocalizedString(@"Drawing", @"Default drawing name prefix")
+                                extension:WDDefaultDrawingExtension];
 }
 
 - (NSString *) cleanPrefix:(NSString *)prefix

@@ -50,6 +50,9 @@ typedef enum {
 - (void) deactivated;
 - (BOOL) isDefaultForKind;
 
+// apply common options view settings (shadow, etc.)
+- (void) configureOptionsView:(UIView *)options;
+
 #if TARGET_OS_IPHONE
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;

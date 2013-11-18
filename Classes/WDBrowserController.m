@@ -96,28 +96,36 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     
     self.navigationItem.title = NSLocalizedString(@"Gallery", @"Gallery");
     
-    // Create an add button to display in the top right corner.
+    NSMutableArray *rightBarButtonItems = [NSMutableArray array];
+
+    // Create an "add new drawing" button
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                              target:self
                                                                              action:@selector(addDrawing:)];
+    [rightBarButtonItems addObject:addItem];
     
+    // create an album import button
+    UIBarButtonItem *albumItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"album_centered.png"]
+                                                                  style:UIBarButtonItemStylePlain
+                                                                 target:self
+                                                                 action:@selector(importFromAlbum:)];
+    [rightBarButtonItems addObject:albumItem];
+    
+    // add a camera import item if we have a camera (I think this will always be true from now on)
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
                                                                                     target:self
                                                                                     action:@selector(importFromCamera:)];
-        
-        self.navigationItem.rightBarButtonItems = @[addItem, cameraItem];
-    } else {
-        self.navigationItem.rightBarButtonItem = addItem;
+        [rightBarButtonItems addObject:cameraItem];
     }
-    
+
     // Create a help button to display in the top left corner.
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Help"
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", @"Help")
                                                                  style:UIBarButtonItemStyleBordered
                                                                 target:self
                                                                 action:@selector(showHelp:)];
     self.navigationItem.leftBarButtonItem = leftItem;
-    
+    self.navigationItem.rightBarButtonItems = rightBarButtonItems;
     self.toolbarItems = [self defaultToolbarItems];
     
     return self;
@@ -169,9 +177,9 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 #pragma mark - Camera
 
-- (void) importFromCamera:(id)sender
+- (void) importFromImagePicker:(id)sender sourceType:(UIImagePickerControllerSourceType)sourceType
 {
-    if (pickerController_) {
+    if (pickerController_ && (pickerController_.sourceType == sourceType)) {
         [self dismissPopover];
         return;
     }
@@ -179,13 +187,23 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     [self dismissPopover];
     
     pickerController_ = [[UIImagePickerController alloc] init];
-    pickerController_.sourceType = UIImagePickerControllerSourceTypeCamera;
+    pickerController_.sourceType = sourceType;
     pickerController_.delegate = self;
     
     popoverController_ = [[UIPopoverController alloc] initWithContentViewController:pickerController_];
     
     popoverController_.delegate = self;
     [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+}
+
+- (void) importFromAlbum:(id)sender
+{
+    [self importFromImagePicker:sender sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (void) importFromCamera:(id)sender
+{
+    [self importFromImagePicker:sender sourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

@@ -1,0 +1,801 @@
+Incident Identifier: 9B3E1775-B6DA-4AC4-9525-581E8C000A16
+Hardware Model:      iPad3,3
+Process:             Inkpad [234]
+Path:                /var/mobile/Applications/2AB10283-498E-48AB-B2D8-BAD9A4449214/Inkpad.app/Inkpad
+Identifier:          com.taptrix.inkpad
+Version:             1.5.1 (1.5.1)
+Code Type:           ARM (Native)
+Parent Process:      launchd [1]
+
+Date/Time:           2013-11-10 17:15:00.173 +0700
+OS Version:          iOS 7.0.3 (11B511)
+Report Version:      104
+
+Exception Type:  EXC_BAD_ACCESS (SIGSEGV)
+Exception Subtype: KERN_PROTECTION_FAILURE at 0x27c38fec
+Triggered by Thread:  0
+
+Thread 0 Crashed:
+0   Inkpad                        	0x0013952c WDBezierSegmentIsFlat (WDBezierSegment.m:38)
+1   Inkpad                        	0x00174a14 WDGLFlattenBezierSegment (WDGLUtilities.m:155)
+2   Inkpad                        	0x00174a86 WDGLFlattenBezierSegment (WDGLUtilities.m:169)
+3   Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+4   Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+5   Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+6   Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+7   Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+8   Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+9   Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+10  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+11  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+12  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+13  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+14  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+15  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+16  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+17  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+18  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+19  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+20  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+21  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+22  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+23  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+24  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+25  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+26  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+27  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+28  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+29  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+30  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+31  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+32  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+33  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+34  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+35  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+36  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+37  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+38  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+39  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+40  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+41  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+42  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+43  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+44  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+45  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+46  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+47  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+48  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+49  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+50  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+51  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+52  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+53  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+54  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+55  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+56  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+57  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+58  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+59  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+60  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+61  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+62  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+63  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+64  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+65  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+66  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+67  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+68  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+69  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+70  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+71  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+72  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+73  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+74  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+75  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+76  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+77  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+78  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+79  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+80  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+81  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+82  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+83  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+84  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+85  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+86  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+87  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+88  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+89  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+90  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+91  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+92  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+93  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+94  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+95  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+96  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+97  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+98  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+99  Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+100 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+101 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+102 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+103 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+104 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+105 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+106 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+107 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+108 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+109 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+110 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+111 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+112 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+113 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+114 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+115 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+116 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+117 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+118 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+119 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+120 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+121 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+122 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+123 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+124 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+125 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+126 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+127 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+128 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+129 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+130 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+131 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+132 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+133 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+134 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+135 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+136 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+137 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+138 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+139 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+140 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+141 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+142 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+143 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+144 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+145 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+146 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+147 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+148 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+149 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+150 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+151 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+152 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+153 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+154 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+155 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+156 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+157 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+158 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+159 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+160 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+161 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+162 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+163 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+164 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+165 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+166 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+167 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+168 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+169 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+170 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+171 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+172 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+173 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+174 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+175 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+176 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+177 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+178 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+179 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+180 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+181 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+182 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+183 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+184 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+185 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+186 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+187 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+188 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+189 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+190 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+191 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+192 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+193 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+194 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+195 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+196 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+197 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+198 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+199 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+200 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+201 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+202 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+203 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+204 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+205 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+206 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+207 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+208 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+209 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+210 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+211 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+212 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+213 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+214 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+215 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+216 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+217 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+218 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+219 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+220 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+221 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+222 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+223 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+224 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+225 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+226 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+227 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+228 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+229 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+230 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+231 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+232 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+233 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+234 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+235 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+236 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+237 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+238 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+239 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+240 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+241 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+242 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+243 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+244 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+245 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+246 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+247 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+248 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+249 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+250 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+251 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+252 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+253 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+254 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+255 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+256 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+257 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+258 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+259 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+260 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+261 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+262 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+263 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+264 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+265 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+266 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+267 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+268 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+269 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+270 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+271 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+272 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+273 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+274 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+275 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+276 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+277 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+278 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+279 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+280 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+281 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+282 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+283 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+284 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+285 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+286 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+287 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+288 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+289 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+290 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+291 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+292 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+293 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+294 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+295 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+296 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+297 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+298 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+299 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+300 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+301 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+302 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+303 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+304 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+305 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+306 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+307 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+308 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+309 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+310 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+311 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+312 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+313 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+314 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+315 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+316 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+317 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+318 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+319 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+320 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+321 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+322 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+323 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+324 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+325 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+326 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+327 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+328 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+329 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+330 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+331 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+332 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+333 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+334 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+335 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+336 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+337 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+338 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+339 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+340 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+341 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+342 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+343 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+344 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+345 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+346 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+347 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+348 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+349 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+350 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+351 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+352 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+353 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+354 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+355 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+356 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+357 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+358 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+359 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+360 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+361 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+362 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+363 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+364 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+365 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+366 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+367 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+368 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+369 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+370 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+371 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+372 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+373 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+374 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+375 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+376 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+377 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+378 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+379 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+380 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+381 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+382 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+383 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+384 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+385 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+386 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+387 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+388 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+389 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+390 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+391 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+392 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+393 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+394 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+395 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+396 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+397 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+398 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+399 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+400 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+401 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+402 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+403 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+404 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+405 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+406 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+407 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+408 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+409 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+410 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+411 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+412 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+413 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+414 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+415 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+416 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+417 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+418 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+419 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+420 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+421 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+422 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+423 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+424 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+425 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+426 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+427 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+428 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+429 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+430 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+431 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+432 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+433 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+434 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+435 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+436 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+437 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+438 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+439 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+440 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+441 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+442 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+443 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+444 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+445 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+446 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+447 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+448 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+449 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+450 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+451 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+452 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+453 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+454 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+455 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+456 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+457 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+458 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+459 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+460 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+461 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+462 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+463 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+464 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+465 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+466 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+467 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+468 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+469 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+470 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+471 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+472 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+473 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+474 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+475 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+476 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+477 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+478 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+479 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+480 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+481 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+482 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+483 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+484 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+485 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+486 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+487 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+488 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+489 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+490 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+491 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+492 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+493 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+494 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+495 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+496 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+497 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+498 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+499 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+500 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+501 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+502 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+503 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+504 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+505 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+506 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+507 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+508 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+509 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+510 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+511 Inkpad                        	0x00174aa8 WDGLFlattenBezierSegment (WDGLUtilities.m:170)
+
+Thread 1:
+0   libsystem_kernel.dylib        	0x3aaf883c kevent64 + 24
+1   libdispatch.dylib             	0x3aa39210 _dispatch_mgr_invoke + 228
+2   libdispatch.dylib             	0x3aa38f96 _dispatch_mgr_thread$VARIANT$mp + 34
+
+Thread 2 name:  com.apple.coremedia.player.async
+Thread 2:
+0   libsystem_kernel.dylib        	0x3aaf8adc semaphore_wait_trap + 8
+1   libdispatch.dylib             	0x3aa37428 _dispatch_semaphore_wait_slow + 172
+2   MediaToolbox                  	0x310f583c fpa_AsyncMovieControlThread + 1752
+3   CoreMedia                     	0x30234234 figThreadMain + 192
+4   libsystem_pthread.dylib       	0x3ab73c1a _pthread_body + 138
+5   libsystem_pthread.dylib       	0x3ab73b8a _pthread_start + 98
+6   libsystem_pthread.dylib       	0x3ab71c8c thread_start + 4
+
+Thread 3:
+0   libsystem_kernel.dylib        	0x3ab0bc7c __workq_kernreturn + 8
+1   libsystem_pthread.dylib       	0x3ab71dc6 _pthread_wqthread + 306
+2   libsystem_pthread.dylib       	0x3ab71c80 start_wqthread + 4
+
+Thread 4:
+0   libsystem_kernel.dylib        	0x3aaf8a8c mach_msg_trap + 20
+1   libsystem_kernel.dylib        	0x3aaf8888 mach_msg + 44
+2   CoreFoundation                	0x2fca07be __CFRunLoopServiceMachPort + 150
+3   CoreFoundation                	0x2fc9eee4 __CFRunLoopRun + 780
+4   CoreFoundation                	0x2fc09c22 CFRunLoopRunSpecific + 518
+5   CoreFoundation                	0x2fc4d736 CFRunLoopRun + 94
+6   CoreMotion                    	0x302c0230 ___lldb_unnamed_function1404$$CoreMotion + 724
+7   libsystem_pthread.dylib       	0x3ab73c1a _pthread_body + 138
+8   libsystem_pthread.dylib       	0x3ab73b8a _pthread_start + 98
+9   libsystem_pthread.dylib       	0x3ab71c8c thread_start + 4
+
+Thread 5:
+0   libsystem_kernel.dylib        	0x3ab0bc7c __workq_kernreturn + 8
+1   libsystem_pthread.dylib       	0x3ab71dc6 _pthread_wqthread + 306
+2   libsystem_pthread.dylib       	0x3ab71c80 start_wqthread + 4
+
+Thread 0 crashed with ARM Thread State (32-bit):
+
+Binary Images:
+0xcc000 - 0x1b7fff Inkpad armv7  <52c246b85f243ef59e5f1f787db58ab5> /var/mobile/Applications/2AB10283-498E-48AB-B2D8-BAD9A4449214/Inkpad.app/Inkpad
+0x2be8f000 - 0x2beaffff dyld armv7  <66466931af5f3a57ab89493b2e488df9> /usr/lib/dyld
+0x2e8fb000 - 0x2e916fff libJapaneseConverter.dylib armv7  <e9cac8b8a1723a5bad9fed4e517171cf> /System/Library/CoreServices/Encodings/libJapaneseConverter.dylib
+0x2e917000 - 0x2e937fff libKoreanConverter.dylib armv7  <32aaf294803d339fbe6011ecf4e4aca4> /System/Library/CoreServices/Encodings/libKoreanConverter.dylib
+0x2ea66000 - 0x2eb6ffff IMGSGX543GLDriver armv7  <6ad7917135fb3e749a48eb1b727961bc> /System/Library/Extensions/IMGSGX543GLDriver.bundle/IMGSGX543GLDriver
+0x2eb79000 - 0x2ec7afff AVFoundation armv7  <bdebaff677b53712bf81e005c4c0c156> /System/Library/Frameworks/AVFoundation.framework/AVFoundation
+0x2ec7b000 - 0x2eca3fff libAVFAudio.dylib armv7  <bc76e47ade1d3e0a84e7d3c301acc65f> /System/Library/Frameworks/AVFoundation.framework/libAVFAudio.dylib
+0x2eca4000 - 0x2eca4fff Accelerate armv7  <8e17835efc9234da89e3080c47fad906> /System/Library/Frameworks/Accelerate.framework/Accelerate
+0x2ecae000 - 0x2ee7afff vImage armv7  <a0e38e04253d345684ae9b6020775c4a> /System/Library/Frameworks/Accelerate.framework/Frameworks/vImage.framework/vImage
+0x2ee7b000 - 0x2ef54fff libBLAS.dylib armv7  <98fa9344fcaf36cea0171bd98b2d4aa1> /System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/libBLAS.dylib
+0x2ef55000 - 0x2f20dfff libLAPACK.dylib armv7  <b3eb717cd5263db1887946fd376f5c61> /System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/libLAPACK.dylib
+0x2f20e000 - 0x2f27cfff libvDSP.dylib armv7  <37739741965d36df9f8274ecaa63da77> /System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/libvDSP.dylib
+0x2f27d000 - 0x2f28efff libvMisc.dylib armv7  <f24c84c7c0d43396a3c36a8dc10631b2> /System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/libvMisc.dylib
+0x2f28f000 - 0x2f28ffff vecLib armv7  <75820262401c3e648868525cca914352> /System/Library/Frameworks/Accelerate.framework/Frameworks/vecLib.framework/vecLib
+0x2f290000 - 0x2f2affff Accounts armv7  <b8a0886aa66f3d67bac95e766546c1f0> /System/Library/Frameworks/Accounts.framework/Accounts
+0x2f2b1000 - 0x2f316fff AddressBook armv7  <9128ef26f70f3eb6b3cbba93054b9b7b> /System/Library/Frameworks/AddressBook.framework/AddressBook
+0x2f317000 - 0x2f429fff AddressBookUI armv7  <a1f0ff5f8e6d3e3498c3549663254dad> /System/Library/Frameworks/AddressBookUI.framework/AddressBookUI
+0x2f42a000 - 0x2f43bfff AssetsLibrary armv7  <08323602afe8306cbf48240439d0ddba> /System/Library/Frameworks/AssetsLibrary.framework/AssetsLibrary
+0x2f57e000 - 0x2f897fff AudioToolbox armv7  <9a7099fbc6a731e3a5a28326a82f195b> /System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+0x2f898000 - 0x2f99dfff CFNetwork armv7  <65ca2400f013332ebdf316de7f77a5d1> /System/Library/Frameworks/CFNetwork.framework/CFNetwork
+0x2f99e000 - 0x2f9f8fff CoreAudio armv7  <0e21e762e7ba306fa0298e809b713853> /System/Library/Frameworks/CoreAudio.framework/CoreAudio
+0x2f9f9000 - 0x2fa0ffff CoreBluetooth armv7  <a0b9022fb60f3fdfb5074e73b1bc2c02> /System/Library/Frameworks/CoreBluetooth.framework/CoreBluetooth
+0x2fa10000 - 0x2fc01fff CoreData armv7  <236e9b1668c835a69c7db4d61081a42e> /System/Library/Frameworks/CoreData.framework/CoreData
+0x2fc02000 - 0x2fd44ff0 CoreFoundation armv7  <401717ac95d238a396e41b0637d0bc1c> /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+0x2fd45000 - 0x2fe68fff CoreGraphics armv7  <cfd2c47267003ad0b0423c48a04fcd60> /System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+0x2fe6a000 - 0x2fea5fff libCGFreetype.A.dylib armv7  <bc90599da698338cb7b95199b2147509> /System/Library/Frameworks/CoreGraphics.framework/Resources/libCGFreetype.A.dylib
+0x2fea7000 - 0x2feb1fff libCMSBuiltin.A.dylib armv7  <e7d1996b5d3836019b6613fa406a15f7> /System/Library/Frameworks/CoreGraphics.framework/Resources/libCMSBuiltin.A.dylib
+0x3007b000 - 0x30095fff libPDFRIP.A.dylib armv7  <f04482f12e1a3cdba69dc7758aa96d98> /System/Library/Frameworks/CoreGraphics.framework/Resources/libPDFRIP.A.dylib
+0x30096000 - 0x300b0fff libRIP.A.dylib armv7  <8a769a8b161932e89e3c82b11bd94d77> /System/Library/Frameworks/CoreGraphics.framework/Resources/libRIP.A.dylib
+0x300b1000 - 0x30189fff CoreImage armv7  <1cb68b326ee73162a7036fda163c6527> /System/Library/Frameworks/CoreImage.framework/CoreImage
+0x3018a000 - 0x301d7fff CoreLocation armv7  <82a8b8f426f53cc69a3bc2af8f57e6bc> /System/Library/Frameworks/CoreLocation.framework/CoreLocation
+0x3020f000 - 0x30286fff CoreMedia armv7  <68ca1c192750311fb18eee3527cd46f1> /System/Library/Frameworks/CoreMedia.framework/CoreMedia
+0x30287000 - 0x3032ffff CoreMotion armv7  <247abf16847039b39d88f1877d67eccd> /System/Library/Frameworks/CoreMotion.framework/CoreMotion
+0x30330000 - 0x30388fff CoreTelephony armv7  <f19c1bf765b73adea253d47a480e3ab5> /System/Library/Frameworks/CoreTelephony.framework/CoreTelephony
+0x30389000 - 0x30418fff CoreText armv7  <192d424022103d64a916dbb90e809ff5> /System/Library/Frameworks/CoreText.framework/CoreText
+0x30419000 - 0x30428fff CoreVideo armv7  <4abf76ef603f37679a3d3c53dffb71c6> /System/Library/Frameworks/CoreVideo.framework/CoreVideo
+0x30429000 - 0x304e7fff EventKit armv7  <b3802b720df8397d984690c9120da16b> /System/Library/Frameworks/EventKit.framework/EventKit
+0x305eb000 - 0x307d6fff Foundation armv7  <60ab855beee933178552f1d9fa1144f0> /System/Library/Frameworks/Foundation.framework/Foundation
+0x307d7000 - 0x30801fff GLKit armv7  <c780aa02ad853321a35bbac8c1949245> /System/Library/Frameworks/GLKit.framework/GLKit
+0x309b4000 - 0x30a0afff IOKit armv7  <0ab20ffa074e3f71a5b2fa467ff5968c> /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x30a0b000 - 0x30c1cfff ImageIO armv7  <cf859b567f35305aa262175766cbad35> /System/Library/Frameworks/ImageIO.framework/ImageIO
+0x30c1d000 - 0x30e62fff JavaScriptCore armv7  <02a3a038820738e3b0b12d96322256e0> /System/Library/Frameworks/JavaScriptCore.framework/JavaScriptCore
+0x30f07000 - 0x30f0bfff MediaAccessibility armv7  <20ae1edf747b3388b1266d28b583b13b> /System/Library/Frameworks/MediaAccessibility.framework/MediaAccessibility
+0x30f0c000 - 0x310f0fff MediaPlayer armv7  <840db4c67d5b3dfebd78111d16b11d32> /System/Library/Frameworks/MediaPlayer.framework/MediaPlayer
+0x310f1000 - 0x313a9fff MediaToolbox armv7  <e797bc025c353a9e812c61f963f15048> /System/Library/Frameworks/MediaToolbox.framework/MediaToolbox
+0x313aa000 - 0x31445fff MessageUI armv7  <d152d7f9b23832929741aa17e498a2f9> /System/Library/Frameworks/MessageUI.framework/MessageUI
+0x31446000 - 0x314a9fff MobileCoreServices armv7  <55ad588d322734788ff9f71d6fff1c99> /System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices
+0x31e14000 - 0x31ecffff GLEngine armv7  <bc1c20bd37c8379aac474dcf7abc7d3e> /System/Library/Frameworks/OpenGLES.framework/GLEngine.bundle/GLEngine
+0x31ed0000 - 0x31ed8fff OpenGLES armv7  <7e8d38b4a38b3cdca3039b90171bbc3f> /System/Library/Frameworks/OpenGLES.framework/OpenGLES
+0x31eda000 - 0x31edafff libCVMSPluginSupport.dylib armv7  <9968bb3cf94133198ae54ae7d2af8870> /System/Library/Frameworks/OpenGLES.framework/libCVMSPluginSupport.dylib
+0x31edb000 - 0x31eddfff libCoreFSCache.dylib armv7  <7265141d529c3ecb8ccfa1b0f390f0ce> /System/Library/Frameworks/OpenGLES.framework/libCoreFSCache.dylib
+0x31ede000 - 0x31ee1fff libCoreVMClient.dylib armv7  <0070eea717313aeb84aa813a0d793c68> /System/Library/Frameworks/OpenGLES.framework/libCoreVMClient.dylib
+0x31ee2000 - 0x31ee9fff libGFXShared.dylib armv7  <e7c20c60efa637bbb32f0404e29c8c26> /System/Library/Frameworks/OpenGLES.framework/libGFXShared.dylib
+0x31eea000 - 0x31f28fff libGLImage.dylib armv7  <1c74be440ade334badafb6c81fc81478> /System/Library/Frameworks/OpenGLES.framework/libGLImage.dylib
+0x31f29000 - 0x3205efff libGLProgrammability.dylib armv7  <a6234946527f3b3899353298a05a6ea9> /System/Library/Frameworks/OpenGLES.framework/libGLProgrammability.dylib
+0x320c3000 - 0x32207fff QuartzCore armv7  <2336ddd3ee0330f283b18594837193f4> /System/Library/Frameworks/QuartzCore.framework/QuartzCore
+0x32208000 - 0x3225efff QuickLook armv7  <8521c0c2f04a30dca633d1d8c1b3a98e> /System/Library/Frameworks/QuickLook.framework/QuickLook
+0x32261000 - 0x322a2fff Security armv7  <e037e839fcd83f6289baabb7e695b37b> /System/Library/Frameworks/Security.framework/Security
+0x322a3000 - 0x32317fff Social armv7  <b53001e90d643d30890024645eb2d22f> /System/Library/Frameworks/Social.framework/Social
+0x323eb000 - 0x3243afff SystemConfiguration armv7  <f88e53ac7573393db48276a16331a312> /System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration
+0x3243b000 - 0x3243cfff Twitter armv7  <bbf86fe4fad33af4b78df020918ae068> /System/Library/Frameworks/Twitter.framework/Twitter
+0x3243d000 - 0x32b5ffff UIKit armv7  <aa9458e846e1324d847530ff29c42eef> /System/Library/Frameworks/UIKit.framework/UIKit
+0x32b60000 - 0x32badfff VideoToolbox armv7  <d032234b40b13de980da9246e14683a7> /System/Library/Frameworks/VideoToolbox.framework/VideoToolbox
+0x32dcd000 - 0x32df0fff ACTFramework armv7  <9c0537ccffc73fd690a4e4d6a1035152> /System/Library/PrivateFrameworks/ACTFramework.framework/ACTFramework
+0x32dfb000 - 0x32e04fff AOSNotification armv7  <5a97754959fd3e9eb618961ab9f2a43e> /System/Library/PrivateFrameworks/AOSNotification.framework/AOSNotification
+0x32f27000 - 0x32f2bfff AggregateDictionary armv7  <7e0539681caa307f857a2d35b611ed17> /System/Library/PrivateFrameworks/AggregateDictionary.framework/AggregateDictionary
+0x33126000 - 0x3313afff AirTraffic armv7  <f479681700e83ceb86ec4788c789d93d> /System/Library/PrivateFrameworks/AirTraffic.framework/AirTraffic
+0x334aa000 - 0x334e7fff AppSupport armv7  <fbd88a7157b0389fb5fd088915f370fd> /System/Library/PrivateFrameworks/AppSupport.framework/AppSupport
+0x334e8000 - 0x3351ffff AppleAccount armv7  <0ff7b3db0b7338fbb450d1baedf23ef4> /System/Library/PrivateFrameworks/AppleAccount.framework/AppleAccount
+0x335bf000 - 0x335cffff ApplePushService armv7  <e46a7119732d373e94e068a3cfaa6ed2> /System/Library/PrivateFrameworks/ApplePushService.framework/ApplePushService
+0x33608000 - 0x33615fff AssetsLibraryServices armv7  <8ecd3be18eb93c6f8338401114b12ef8> /System/Library/PrivateFrameworks/AssetsLibraryServices.framework/AssetsLibraryServices
+0x33652000 - 0x33655fff BTLEAudioController armv7  <1212279842dd33bb8d8f089a74bda5f3> /System/Library/PrivateFrameworks/BTLEAudioController.framework/BTLEAudioController
+0x33656000 - 0x33679fff BackBoardServices armv7  <d92dca5708a73849a68522fb30a6014e> /System/Library/PrivateFrameworks/BackBoardServices.framework/BackBoardServices
+0x3367c000 - 0x33682fff BluetoothManager armv7  <c93da6d624e839ff845b7b4d3cf7cdb9> /System/Library/PrivateFrameworks/BluetoothManager.framework/BluetoothManager
+0x33683000 - 0x336a7fff Bom armv7  <3b93ef6b1c023bbbaa28e46398d038df> /System/Library/PrivateFrameworks/Bom.framework/Bom
+0x336ba000 - 0x33702fff BulletinBoard armv7  <6178f5842e8a3386a2ae22c9e78b91f8> /System/Library/PrivateFrameworks/BulletinBoard.framework/BulletinBoard
+0x33746000 - 0x3374efff CaptiveNetwork armv7  <2bd3f3c8f24d3fb49da4d8e86b2d156f> /System/Library/PrivateFrameworks/CaptiveNetwork.framework/CaptiveNetwork
+0x3374f000 - 0x33827fff Celestial armv7  <bbad36d7ef9d34619bcd2c004c548caf> /System/Library/PrivateFrameworks/Celestial.framework/Celestial
+0x33834000 - 0x33839fff CertUI armv7  <76d4727674503a1dadbf8fd240bbd27e> /System/Library/PrivateFrameworks/CertUI.framework/CertUI
+0x33902000 - 0x33923fff ChunkingLibrary armv7  <1437642ddd9832fca56f789bee70bf80> /System/Library/PrivateFrameworks/ChunkingLibrary.framework/ChunkingLibrary
+0x33974000 - 0x3397ffff CommonUtilities armv7  <ebbad8efc40f3054a9755289d94039b4> /System/Library/PrivateFrameworks/CommonUtilities.framework/CommonUtilities
+0x33980000 - 0x33984fff CommunicationsFilter armv7  <9b8b9cb5256d336a9eb7aea07c0b060f> /System/Library/PrivateFrameworks/CommunicationsFilter.framework/CommunicationsFilter
+0x33a1b000 - 0x33a4bfff ContentIndex armv7  <2527fd93d85e3047ac46b2bb2288eebf> /System/Library/PrivateFrameworks/ContentIndex.framework/ContentIndex
+0x33a4c000 - 0x33a4efff CoreAUC armv7  <8ed60ee8748d3704899f5679c9cfe533> /System/Library/PrivateFrameworks/CoreAUC.framework/CoreAUC
+0x33a5b000 - 0x33aaffff CoreDAV armv7  <47d2ab93d0a6383082d105811d7ed5bd> /System/Library/PrivateFrameworks/CoreDAV.framework/CoreDAV
+0x33aef000 - 0x33bedfff CoreMediaStream armv7  <516c6b6c379a38b29192f1ca4f0617ea> /System/Library/PrivateFrameworks/CoreMediaStream.framework/CoreMediaStream
+0x33c87000 - 0x33c91fff CoreRecents armv7  <66128f56151c32f18ee23c530d92025b> /System/Library/PrivateFrameworks/CoreRecents.framework/CoreRecents
+0x33cdf000 - 0x33cfdfff CoreServicesInternal armv7  <7d8f51b24a0c324f902d06b3629979a4> /System/Library/PrivateFrameworks/CoreServicesInternal.framework/CoreServicesInternal
+0x33cfe000 - 0x33cfffff CoreSurface armv7  <b2dedd21bbf831909809460a6266b6f8> /System/Library/PrivateFrameworks/CoreSurface.framework/CoreSurface
+0x33da1000 - 0x33da5fff CoreTime armv7  <8aff9c59dade3777a19a778e4c6f18fa> /System/Library/PrivateFrameworks/CoreTime.framework/CoreTime
+0x33da6000 - 0x33e00fff CoreUI armv7  <2574d5808ef63d9c9face798aa8b55a0> /System/Library/PrivateFrameworks/CoreUI.framework/CoreUI
+0x33e01000 - 0x33e4dfff CoreUtils armv7  <fe28df82944335a1b90a81f2553119e0> /System/Library/PrivateFrameworks/CoreUtils.framework/CoreUtils
+0x33e4e000 - 0x33e53fff CrashReporterSupport armv7  <c1949b7c6fb93390b9f85bebb053db1c> /System/Library/PrivateFrameworks/CrashReporterSupport.framework/CrashReporterSupport
+0x33e54000 - 0x33e8afff DataAccess armv7  <64379a2a39663e999bd5f69a17ed7a5b> /System/Library/PrivateFrameworks/DataAccess.framework/DataAccess
+0x3401c000 - 0x34031fff DataAccessExpress armv7  <10ac29e41a6c3bad99266f99479f1775> /System/Library/PrivateFrameworks/DataAccessExpress.framework/DataAccessExpress
+0x3406d000 - 0x34070fff DataMigration armv7  <b4a8fb87486f304ea725f20b0947b1ee> /System/Library/PrivateFrameworks/DataMigration.framework/DataMigration
+0x34075000 - 0x34076fff DiagnosticLogCollection armv7  <95153dbff320375892d7b9b64467d5a1> /System/Library/PrivateFrameworks/DiagnosticLogCollection.framework/DiagnosticLogCollection
+0x34077000 - 0x34091fff DictionaryServices armv7  <ff36dbf9c5d032409a06e0297d0c7386> /System/Library/PrivateFrameworks/DictionaryServices.framework/DictionaryServices
+0x340ad000 - 0x340cafff EAP8021X armv7  <04312aceb6b7334caa95266b8494be0b> /System/Library/PrivateFrameworks/EAP8021X.framework/EAP8021X
+0x340d3000 - 0x340defff ExFAT armv7  <2ea255572f5033acb31243fa9755b14d> /System/Library/PrivateFrameworks/ExFAT.framework/ExFAT
+0x340f0000 - 0x340f2fff FTClientServices armv7  <5d94664865da3751a7b0dea0a0394079> /System/Library/PrivateFrameworks/FTClientServices.framework/FTClientServices
+0x340f3000 - 0x3411cfff FTServices armv7  <a25fa809757b3c3e9988b1b35e72da73> /System/Library/PrivateFrameworks/FTServices.framework/FTServices
+0x3411d000 - 0x34538fff FaceCore armv7  <681d4b06cb3230bebe94280af4249dff> /System/Library/PrivateFrameworks/FaceCore.framework/FaceCore
+0x3456b000 - 0x34571fff libGPUSupportMercury.dylib armv7  <24ac45647ce838f19a06a23e5e9d43a1> /System/Library/PrivateFrameworks/GPUSupport.framework/libGPUSupportMercury.dylib
+0x3475c000 - 0x34768fff GenerationalStorage armv7  <9e20171bee1830cf90b2b36432d13436> /System/Library/PrivateFrameworks/GenerationalStorage.framework/GenerationalStorage
+0x34769000 - 0x34901fff GeoServices armv7  <b24b47013d0236cd9e3537f1b074e591> /System/Library/PrivateFrameworks/GeoServices.framework/GeoServices
+0x34902000 - 0x34911fff GraphicsServices armv7  <8a3518db41ff3ae1a32031e90dc98b74> /System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices
+0x349a0000 - 0x34a25fff HomeSharing armv7  <b833ed95d1da330c904c94566035bd5c> /System/Library/PrivateFrameworks/HomeSharing.framework/HomeSharing
+0x34a26000 - 0x34a32fff IAP armv7  <356512b3e1723321a7e586f645615634> /System/Library/PrivateFrameworks/IAP.framework/IAP
+0x34a98000 - 0x34accfff IDS armv7  <08fadaca6e193dc79f0b1cd36a66d95c> /System/Library/PrivateFrameworks/IDS.framework/IDS
+0x34b39000 - 0x34b4afff IDSFoundation armv7  <770da46acb843ab79ef66913e73875e3> /System/Library/PrivateFrameworks/IDSFoundation.framework/IDSFoundation
+0x34bb0000 - 0x34c3cfff IMCore armv7  <f52bc264ac54340eb25e5f4475500b17> /System/Library/PrivateFrameworks/IMCore.framework/IMCore
+0x34cbc000 - 0x34d16fff IMFoundation armv7  <738888332bb43114ae74f29dfa052489> /System/Library/PrivateFrameworks/IMFoundation.framework/IMFoundation
+0x34d1d000 - 0x34d1ffff IOAccelerator armv7  <65a37ebddb083372b0366cd48bf97e16> /System/Library/PrivateFrameworks/IOAccelerator.framework/IOAccelerator
+0x34d20000 - 0x34d27fff IOMobileFramebuffer armv7  <83c8cdf5c62f32649bb374dc32f87780> /System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/IOMobileFramebuffer
+0x34d28000 - 0x34d2dfff IOSurface armv7  <26e19a815678390a9f9ae7d79c145197> /System/Library/PrivateFrameworks/IOSurface.framework/IOSurface
+0x34d2e000 - 0x34d79fff ImageCapture armv7  <f952eb646f21320bb95a27804334b4e4> /System/Library/PrivateFrameworks/ImageCapture.framework/ImageCapture
+0x34d7a000 - 0x34d7ffff IncomingCallFilter armv7  <1fd76dbd54333ba3bdc7fa8cb4ab6214> /System/Library/PrivateFrameworks/IncomingCallFilter.framework/IncomingCallFilter
+0x34d9f000 - 0x34dabfff Librarian armv7  <143ab0cb6bb73ff482149525c6c31ab4> /System/Library/PrivateFrameworks/Librarian.framework/Librarian
+0x34dac000 - 0x34de5fff MIME armv7  <cb66a3aeb3e330ab9e104bd04efce9c9> /System/Library/PrivateFrameworks/MIME.framework/MIME
+0x34de6000 - 0x34e23fff MMCS armv7  <5a65b67918f1388db9b754ad16560450> /System/Library/PrivateFrameworks/MMCS.framework/MMCS
+0x34e2c000 - 0x34e37fff MailServices armv7  <0d9e4749bbef3328bfd6770b2e8bc40d> /System/Library/PrivateFrameworks/MailServices.framework/MailServices
+0x34e6b000 - 0x34ee4fff ManagedConfiguration armv7  <3cf4000e2b1b33378da0dffd74f578e1> /System/Library/PrivateFrameworks/ManagedConfiguration.framework/ManagedConfiguration
+0x34ee5000 - 0x34ee6fff Marco armv7  <79a1611257823b4394c97fb81e6dce8f> /System/Library/PrivateFrameworks/Marco.framework/Marco
+0x34ee7000 - 0x34f5efff MediaControlSender armv7  <c44432ae7ed03333871ca0bce7a01c0d> /System/Library/PrivateFrameworks/MediaControlSender.framework/MediaControlSender
+0x34f96000 - 0x34fa0fff MediaRemote armv7  <2d0e00df14af3cad8028963de552c3b2> /System/Library/PrivateFrameworks/MediaRemote.framework/MediaRemote
+0x34fa1000 - 0x34fb9fff MediaStream armv7  <0aa96a0152793db99dfd59095ad585d1> /System/Library/PrivateFrameworks/MediaStream.framework/MediaStream
+0x3501e000 - 0x350f0fff Message armv7  <521bd5e1d7a33bce868f005c93abc580> /System/Library/PrivateFrameworks/Message.framework/Message
+0x350f5000 - 0x350f7fff MessageSupport armv7  <92d9d277d5b83bb988a7fa30d2933c60> /System/Library/PrivateFrameworks/MessageSupport.framework/MessageSupport
+0x35103000 - 0x3510efff MobileAsset armv7  <7a0819600c2732239b3c85a3579010f6> /System/Library/PrivateFrameworks/MobileAsset.framework/MobileAsset
+0x35132000 - 0x3513afff MobileBluetooth armv7  <31c61f6872eb36cbbf1326fda503ac68> /System/Library/PrivateFrameworks/MobileBluetooth.framework/MobileBluetooth
+0x35155000 - 0x35158fff MobileInstallation armv7  <d3826ee0e613392fa23f27847b35f5d4> /System/Library/PrivateFrameworks/MobileInstallation.framework/MobileInstallation
+0x35159000 - 0x35161fff MobileKeyBag armv7  <f8a7ba9562ec3f2d8e844a8af6f95f2a> /System/Library/PrivateFrameworks/MobileKeyBag.framework/MobileKeyBag
+0x35189000 - 0x3518cfff MobileSystemServices armv7  <b2b7f3b46c2632498ca4250e7573148f> /System/Library/PrivateFrameworks/MobileSystemServices.framework/MobileSystemServices
+0x351ab000 - 0x351b6fff MobileWiFi armv7  <a6c31c4cbb8839a985ba810970ca3a07> /System/Library/PrivateFrameworks/MobileWiFi.framework/MobileWiFi
+0x351ed000 - 0x3536ffff MusicLibrary armv7  <95f206ab876f3a3695e2beeb0522737a> /System/Library/PrivateFrameworks/MusicLibrary.framework/MusicLibrary
+0x35425000 - 0x3542afff Netrb armv7  <8635c42c69713fe683115901f766d4dd> /System/Library/PrivateFrameworks/Netrb.framework/Netrb
+0x3542b000 - 0x35430fff NetworkStatistics armv7  <e9bbd7a8759e3546815bf2c8dfab6fa3> /System/Library/PrivateFrameworks/NetworkStatistics.framework/NetworkStatistics
+0x35431000 - 0x3544efff Notes armv7  <f85f365db80731a4ac8784d297f83f00> /System/Library/PrivateFrameworks/Notes.framework/Notes
+0x3544f000 - 0x35451fff OAuth armv7  <1cca42050333345eaafd4050f20edccc> /System/Library/PrivateFrameworks/OAuth.framework/OAuth
+0x35baa000 - 0x35be5fff OpenCL armv7  <1d28e3d6260b33aab426e4251eafcdf4> /System/Library/PrivateFrameworks/OpenCL.framework/OpenCL
+0x3618b000 - 0x361b1fff PersistentConnection armv7  <f8991cf7c44c3b8996db0760b1695b46> /System/Library/PrivateFrameworks/PersistentConnection.framework/PersistentConnection
+0x361bb000 - 0x36314fff PhotoLibrary armv7  <7978a6a14b173482aa85217b7bad5293> /System/Library/PrivateFrameworks/PhotoLibrary.framework/PhotoLibrary
+0x36315000 - 0x3648dfff PhotoLibraryServices armv7  <9149c8aad8b33df2a2cd1a41d9518f7a> /System/Library/PrivateFrameworks/PhotoLibraryServices.framework/PhotoLibraryServices
+0x3648e000 - 0x365cbfff PhotosUI armv7  <7463fe20ad223b5ca1e1abb6ea7214cb> /System/Library/PrivateFrameworks/PhotosUI.framework/PhotosUI
+0x365cc000 - 0x365f9fff PhysicsKit armv7  <44fae72ee79e35d5b6469575dda7b16c> /System/Library/PrivateFrameworks/PhysicsKit.framework/PhysicsKit
+0x365fa000 - 0x365fdfff PowerLog armv7  <21422cc62627385cb60fd8d908c2edf0> /System/Library/PrivateFrameworks/PowerLog.framework/PowerLog
+0x366e8000 - 0x3671ffff PrintKit armv7  <486bef79139f3ba899cb86924fe0f4eb> /System/Library/PrivateFrameworks/PrintKit.framework/PrintKit
+0x36723000 - 0x367aafff ProofReader armv7  <c37d6d99b04e312290469c526a3c23d9> /System/Library/PrivateFrameworks/ProofReader.framework/ProofReader
+0x367ab000 - 0x367b5fff ProtocolBuffer armv7  <8d8e5b383674362d8f299d156b0a11eb> /System/Library/PrivateFrameworks/ProtocolBuffer.framework/ProtocolBuffer
+0x367b6000 - 0x367e6fff PrototypeTools armv7  <0c2ac44cb7a43a4ebb8c33026a1c2e7b> /System/Library/PrivateFrameworks/PrototypeTools.framework/PrototypeTools
+0x367e7000 - 0x3685bfff Quagga armv7  <e706912affcf328bbc49304af464d717> /System/Library/PrivateFrameworks/Quagga.framework/Quagga
+0x3685c000 - 0x368fbfff Radio armv7  <d3e312db3cd13dd4a9aede4f1884fc0f> /System/Library/PrivateFrameworks/Radio.framework/Radio
+0x36986000 - 0x36a06fff SAObjects armv7  <c77a5ef091333d12ac9e0e66f006f90a> /System/Library/PrivateFrameworks/SAObjects.framework/SAObjects
+0x36adc000 - 0x36b04fff SpringBoardFoundation armv7  <2a0751cb83ba39d5b7612ddeddd187dc> /System/Library/PrivateFrameworks/SpringBoardFoundation.framework/SpringBoardFoundation
+0x36b05000 - 0x36b19fff SpringBoardServices armv7  <6164f349bcb230dfb6d5b4645a37cf73> /System/Library/PrivateFrameworks/SpringBoardServices.framework/SpringBoardServices
+0x36b1a000 - 0x36b33fff SpringBoardUI armv7  <6ab9023db7ad31d5891c4b8a6e5fc967> /System/Library/PrivateFrameworks/SpringBoardUI.framework/SpringBoardUI
+0x36b34000 - 0x36b4bfff SpringBoardUIServices armv7  <cd045303852f367f93e9f13cbb68c1e8> /System/Library/PrivateFrameworks/SpringBoardUIServices.framework/SpringBoardUIServices
+0x36d30000 - 0x36e47fff StoreServices armv7  <66ebcc6172f5360892f77e8252d3e824> /System/Library/PrivateFrameworks/StoreServices.framework/StoreServices
+0x36e48000 - 0x36e57fff StreamingZip armv7  <d1d19b43ac2a3476a7f37e1e3609ecc1> /System/Library/PrivateFrameworks/StreamingZip.framework/StreamingZip
+0x36ef7000 - 0x36ef9fff TCC armv7  <d20eed0febf832d3aa6ea6e16578db88> /System/Library/PrivateFrameworks/TCC.framework/TCC
+0x36efa000 - 0x36f42fff TelephonyUI armv7  <15d5c156ddde3097887fefa8f3322c58> /System/Library/PrivateFrameworks/TelephonyUI.framework/TelephonyUI
+0x36f43000 - 0x36f64fff TelephonyUtilities armv7  <468701bb677d38f5b8f6d99c40c18aa3> /System/Library/PrivateFrameworks/TelephonyUtilities.framework/TelephonyUtilities
+0x37566000 - 0x3758afff TextInput armv7  <65c0f11125cd33b595fd4951c9a95266> /System/Library/PrivateFrameworks/TextInput.framework/TextInput
+0x37782000 - 0x37797fff ToneLibrary armv7  <5c04cc84a7f1330c91622b297ceb698c> /System/Library/PrivateFrameworks/ToneLibrary.framework/ToneLibrary
+0x377e5000 - 0x378a5fff UIFoundation armv7  <ccac20210f953d1988aceb49ab9efc51> /System/Library/PrivateFrameworks/UIFoundation.framework/UIFoundation
+0x378a6000 - 0x378bcfff Ubiquity armv7  <c15f678fb5d4357a87736b9795b7d3a5> /System/Library/PrivateFrameworks/Ubiquity.framework/Ubiquity
+0x378bd000 - 0x378c0fff UserFS armv7  <4b0250f56b933f2d88d6699498e988a8> /System/Library/PrivateFrameworks/UserFS.framework/UserFS
+0x37cff000 - 0x37d24fff WebBookmarks armv7  <4711a8f630cd30a3a9f1cd5aaf967427> /System/Library/PrivateFrameworks/WebBookmarks.framework/WebBookmarks
+0x37d3a000 - 0x387e0fff WebCore armv7  <9843d402c0f5399a997df5363bfa3f05> /System/Library/PrivateFrameworks/WebCore.framework/WebCore
+0x387e1000 - 0x388a1fff WebKit armv7  <dbce5c2e111b35a08771774e393c7b5e> /System/Library/PrivateFrameworks/WebKit.framework/WebKit
+0x389e1000 - 0x389e7fff XPCKit armv7  <be9c6101d435332c9f39810e2d259a2b> /System/Library/PrivateFrameworks/XPCKit.framework/XPCKit
+0x389e8000 - 0x389f0fff XPCObjects armv7  <d92aeb310dfa30898e59afff5e3d4170> /System/Library/PrivateFrameworks/XPCObjects.framework/XPCObjects
+0x38b93000 - 0x38bb6fff iCalendar armv7  <a810ec5363573943a47334600770e38f> /System/Library/PrivateFrameworks/iCalendar.framework/iCalendar
+0x38d92000 - 0x38dd3fff iTunesStore armv7  <ee86a75d9ecd37a99fdd17768e3aee83> /System/Library/PrivateFrameworks/iTunesStore.framework/iTunesStore
+0x39946000 - 0x3994dfff libAccessibility.dylib armv7  <e32feb55848938a49a8dbc061da71879> /usr/lib/libAccessibility.dylib
+0x39b46000 - 0x39b5cfff libCRFSuite.dylib armv7  <350876afb5af3b5785a1ccfae840a147> /usr/lib/libCRFSuite.dylib
+0x39b70000 - 0x39b71fff libMobileCheckpoint.dylib armv7  <22ab2a402ce5329b9a33f57f807b2a96> /usr/lib/libMobileCheckpoint.dylib
+0x39b72000 - 0x39b87fff libMobileGestalt.dylib armv7  <7802ef9800993ffc9b7ce1557510d2b6> /usr/lib/libMobileGestalt.dylib
+0x39b88000 - 0x39b8efff libMobileGestaltExtensions.dylib armv7  <440e62ff82b6313c9c171b514084c8d4> /usr/lib/libMobileGestaltExtensions.dylib
+0x39ba5000 - 0x39ba6fff libSystem.B.dylib armv7  <103426dc305c304f91ef997ded8038dc> /usr/lib/libSystem.B.dylib
+0x39c11000 - 0x39c3dfff libTelephonyUtilDynamic.dylib armv7  <60f63d4c953a345fb4bcc623565c2a98> /usr/lib/libTelephonyUtilDynamic.dylib
+0x39c3e000 - 0x39ce0fff libType2Streamer.dylib armv7  <4fba6bf010bf3447aba118b6ef69f42c> /usr/lib/libType2Streamer.dylib
+0x39d3a000 - 0x39d5cfff libarchive.2.dylib armv7  <a3d18126d5353591891737242a321f2b> /usr/lib/libarchive.2.dylib
+0x39d87000 - 0x39d93fff libbsm.0.dylib armv7  <4859e28b9eb33c409d1afa4ad6a3b2db> /usr/lib/libbsm.0.dylib
+0x39d94000 - 0x39d9dfff libbz2.1.0.dylib armv7  <f8cc302c9e7e389d9811feb8312831cb> /usr/lib/libbz2.1.0.dylib
+0x39d9e000 - 0x39de9fff libc++.1.dylib armv7  <f3bbaff22aea3639b1b56589a9b986e8> /usr/lib/libc++.1.dylib
+0x39dea000 - 0x39e04fff libc++abi.dylib armv7  <cc45ccea2e6735fa929bf818fd5fe368> /usr/lib/libc++abi.dylib
+0x39f74000 - 0x3a061fff libiconv.2.dylib armv7  <7694ca0f13523dab8d4f5b5dfec6eda8> /usr/lib/libiconv.2.dylib
+0x3a062000 - 0x3a1b3fff libicucore.A.dylib armv7  <88891bcb89c23978bf704b4d75df7601> /usr/lib/libicucore.A.dylib
+0x3a1bb000 - 0x3a1bbfff liblangid.dylib armv7  <d2f105737c3938c1a7afee7e7e7e4f86> /usr/lib/liblangid.dylib
+0x3a1bc000 - 0x3a1c6fff liblockdown.dylib armv7  <83a7f6b0c8463613aee7d81d3325ba21> /usr/lib/liblockdown.dylib
+0x3a1c7000 - 0x3a1dcfff liblzma.5.dylib armv7  <12b1d169327130478dea3bd0ce8aff83> /usr/lib/liblzma.5.dylib
+0x3a507000 - 0x3a51bfff libmis.dylib armv7  <8398ac3a80e2399ba1d4f218b628269b> /usr/lib/libmis.dylib
+0x3a544000 - 0x3a6e3fff libobjc.A.dylib armv7  <581c944534fc3772be4f246562cbf75d> /usr/lib/libobjc.A.dylib
+0x3a7ab000 - 0x3a7c0fff libresolv.9.dylib armv7  <f50dc125d0543dada59a21751e6857a0> /usr/lib/libresolv.9.dylib
+0x3a7e9000 - 0x3a87ffff libsqlite3.dylib armv7  <c650e5808f683ed49e7b87d582f510c8> /usr/lib/libsqlite3.dylib
+0x3a880000 - 0x3a8cdfff libstdc++.6.dylib armv7  <cc8ef865e96135f4985fcf5836e6de69> /usr/lib/libstdc++.6.dylib
+0x3a8ce000 - 0x3a8f4fff libtidy.A.dylib armv7  <b9007164b2003c00a70e3d045bdf3081> /usr/lib/libtidy.A.dylib
+0x3a8f8000 - 0x3a9abfff libxml2.2.dylib armv7  <057e404ab40f37b7be1c874a0e063b42> /usr/lib/libxml2.2.dylib
+0x3a9ac000 - 0x3a9cdfff libxslt.1.dylib armv7  <a9141d75b62b31468a1080142c27fa56> /usr/lib/libxslt.1.dylib
+0x3a9ce000 - 0x3a9dafff libz.1.dylib armv7  <65bcd248b0d137e8b6bd768dec21c9d5> /usr/lib/libz.1.dylib
+0x3a9db000 - 0x3a9dffff libcache.dylib armv7  <0954da4d78e2364395be033364dfc123> /usr/lib/system/libcache.dylib
+0x3a9e0000 - 0x3a9e8fff libcommonCrypto.dylib armv7  <50f1f8d9697c35d6b40fc0f0fe84c4df> /usr/lib/system/libcommonCrypto.dylib
+0x3a9e9000 - 0x3a9edfff libcompiler_rt.dylib armv7  <ce9f297b62fb32028e2786c2f1a19ec0> /usr/lib/system/libcompiler_rt.dylib
+0x3a9ee000 - 0x3a9f4fff libcopyfile.dylib armv7  <ff875cb1fc6c3f389a89a3511c96c612> /usr/lib/system/libcopyfile.dylib
+0x3a9f5000 - 0x3aa2dfff libcorecrypto.dylib armv7  <4184d9d49baa3abdaff0ea23e1ab88fd> /usr/lib/system/libcorecrypto.dylib
+0x3aa2e000 - 0x3aa52fff libdispatch.dylib armv7  <afedf6a5e8893666b849f8155d5e291f> /usr/lib/system/libdispatch.dylib
+0x3aa53000 - 0x3aa54fff libdyld.dylib armv7  <a1058ef743e1342d98a9f3e553363d68> /usr/lib/system/libdyld.dylib
+0x3aa55000 - 0x3aa55fff libkeymgr.dylib armv7  <8c692b7f082338dfa7bdf5c9678d9c6e> /usr/lib/system/libkeymgr.dylib
+0x3aa56000 - 0x3aa5cfff liblaunch.dylib armv7  <7a8632ac3e1937ecaff1672d2ad2a359> /usr/lib/system/liblaunch.dylib
+0x3aa5d000 - 0x3aa60fff libmacho.dylib armv7  <e5145c68ae0a327e9ae5ff0da980adfa> /usr/lib/system/libmacho.dylib
+0x3aa61000 - 0x3aa62fff libremovefile.dylib armv7  <cd855c0b6ee239a58d9e356b3d9ce0d0> /usr/lib/system/libremovefile.dylib
+0x3aa63000 - 0x3aa70fff libsystem_asl.dylib armv7  <08cdf9e1b76230de90a3d084633917be> /usr/lib/system/libsystem_asl.dylib
+0x3aa71000 - 0x3aa71fff libsystem_blocks.dylib armv7  <9b849637d37d32a0a9d74468879a119b> /usr/lib/system/libsystem_blocks.dylib
+0x3aa72000 - 0x3aad4fff libsystem_c.dylib armv7  <f3e96b2efdf63fd6a43b5b868f390033> /usr/lib/system/libsystem_c.dylib
+0x3aad5000 - 0x3aad7fff libsystem_configuration.dylib armv7  <24e968e1f7023f38a90281863f7d89e9> /usr/lib/system/libsystem_configuration.dylib
+0x3aad8000 - 0x3aadefff libsystem_dnssd.dylib armv7  <e077548d679f3df78cc6b417b5201361> /usr/lib/system/libsystem_dnssd.dylib
+0x3aadf000 - 0x3aaf7fff libsystem_info.dylib armv7  <42954830e5673e59aa96c1825153fc5a> /usr/lib/system/libsystem_info.dylib
+0x3aaf8000 - 0x3ab10fff libsystem_kernel.dylib armv7  <5255aec9d7f1352a9732cd6a20695066> /usr/lib/system/libsystem_kernel.dylib
+0x3ab11000 - 0x3ab30fff libsystem_m.dylib armv7  <c6b827386f343c20b7e8bb08318eaef2> /usr/lib/system/libsystem_m.dylib
+0x3ab31000 - 0x3ab42fff libsystem_malloc.dylib armv7  <16773e2b08913af3a280ab9cf29e0ee4> /usr/lib/system/libsystem_malloc.dylib
+0x3ab43000 - 0x3ab62fff libsystem_network.dylib armv7  <069670f7e90536449c79d188df3db434> /usr/lib/system/libsystem_network.dylib
+0x3ab63000 - 0x3ab6afff libsystem_notify.dylib armv7  <9320b2c24ecf3743a259131ce3a400a3> /usr/lib/system/libsystem_notify.dylib
+0x3ab6b000 - 0x3ab70fff libsystem_platform.dylib armv7  <e1a6fea3c16b349f9e085bb4f044a9e8> /usr/lib/system/libsystem_platform.dylib
+0x3ab71000 - 0x3ab76fff libsystem_pthread.dylib armv7  <eda773fc6d0a34af9ab7f6aacc97acea> /usr/lib/system/libsystem_pthread.dylib
+0x3ab77000 - 0x3ab78fff libsystem_sandbox.dylib armv7  <3910c5efaed7335eb0d840f3ceff0857> /usr/lib/system/libsystem_sandbox.dylib
+0x3ab79000 - 0x3ab7bfff libsystem_stats.dylib armv7  <a9e55b5dc6703bfab5306861ddee367e> /usr/lib/system/libsystem_stats.dylib
+0x3ab7c000 - 0x3ab7cfff libunwind.dylib armv7  <b4083a94d4f036d7a9f76d16a0eca556> /usr/lib/system/libunwind.dylib
+0x3ab7d000 - 0x3ab97fff libxpc.dylib armv7  <7954f94a2d973dcf9a9bab20ba2ad446> /usr/lib/system/libxpc.dylib

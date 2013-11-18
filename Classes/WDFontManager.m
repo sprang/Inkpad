@@ -19,10 +19,13 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
 @implementation WDFontManager
 
 @synthesize systemFontMap;
+@synthesize systemFamilyMap;
 @synthesize systemFonts;
 @synthesize userFontMap;
+@synthesize userFamilyMap;
 @synthesize userFonts;
 @synthesize supportedFonts;
+@synthesize supportedFamilies;
 
 + (WDFontManager *) sharedInstance
 {
@@ -71,16 +74,20 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
         dispatch_async([self fontQueue], ^{
             // load system fonts
             systemFontMap = [[NSMutableDictionary alloc] init];
+            systemFamilyMap = [[NSMutableDictionary alloc] init];
             
             NSArray *families = [UIFont familyNames];
             for (NSString *family in families) {
                 for (NSString *fontName in [UIFont fontNamesForFamilyName:family]) {
                     CTFontRef myFont = CTFontCreateWithName((CFStringRef)fontName, 12, NULL);
                     CFStringRef displayName = CTFontCopyDisplayName(myFont);
+                    CFStringRef familyName = CTFontCopyFamilyName(myFont);
 
                     systemFontMap[fontName] = (__bridge NSString *)displayName;
+                    systemFamilyMap[fontName] = (__bridge NSString *)familyName;
                     
                     CFRelease(displayName);
+                    CFRelease(familyName);
                     CFRelease(myFont);
                 }
             }
@@ -88,12 +95,13 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
             systemFonts = [[systemFontMap allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
             
             // load user fonts
-            userFontMap = [[NSMutableDictionary alloc] init];
-            
+            userFontMap = [NSMutableDictionary dictionary];
+            userFamilyMap = [NSMutableDictionary dictionary];
             for (NSString *fontPath in [self userLibraryFontPaths]) {
                 WDUserFont *userFont = [WDUserFont userFontWithFilename:fontPath];
                 if (userFont) {
                     userFontMap[userFont.fullName] = userFont;
+                    userFamilyMap[userFont.fullName] = userFont.familyName;
                 }
             }
         });
@@ -113,6 +121,20 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
 {
     [self waitForInitialLoad];
     return systemFonts;
+}
+
+- (NSArray *) supportedFamilies
+{
+    [self waitForInitialLoad];
+    
+    if (!supportedFamilies) {
+        NSMutableSet *families = [NSMutableSet setWithArray:[self.systemFamilyMap allValues]];
+        [families addObjectsFromArray:[self.userFamilyMap allValues]];
+        
+        supportedFamilies = [[families allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    }
+    
+    return supportedFamilies;
 }
 
 - (NSArray *) supportedFonts
@@ -141,10 +163,82 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     return userFontMap[fullName] ? YES : NO;
 }
 
+- (NSString *) typefaceNameForFont:(NSString *)fullName
+{
+    [self waitForInitialLoad];
+    
+    NSString *longName = systemFontMap[fullName] ?: ((WDUserFont *)userFontMap[fullName]).displayName;
+    NSString *familyName = [self familyNameForFont:fullName];
+    
+    NSString *typeface = [longName copy];
+    if ([typeface hasPrefix:familyName]) {
+        typeface = [longName substringFromIndex:[familyName length]];
+        typeface = [typeface stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    }
+    
+    if ([typeface length] == 0) {
+        typeface = @"Regular";
+    }
+    
+    return typeface;
+}
+
 - (NSString *) displayNameForFont:(NSString *)fullName
 {
     [self waitForInitialLoad];
     return systemFontMap[fullName] ?: ((WDUserFont *)userFontMap[fullName]).displayName;
+}
+
+- (NSString *) familyNameForFont:(NSString *)fullName
+{
+    [self waitForInitialLoad];
+    return systemFamilyMap[fullName] ?: ((WDUserFont *)userFamilyMap[fullName]);
+}
+
+- (NSString *) defaultFontForFamily:(NSString *)familyName
+{
+    [self waitForInitialLoad];
+    
+    NSArray *fonts = [self fontsInFamily:familyName];
+    NSArray *sorted = [fonts sortedArrayUsingComparator:^NSComparisonResult(NSString *aString, NSString *bString) {
+        NSNumber *a = @(aString.length);
+        NSNumber *b = @(bString.length);
+        return [a compare:b];
+    }];
+    
+    for (NSString *fontName in sorted) {
+        CTFontRef fontRef = [self newFontRefForFont:fontName withSize:10];
+        CTFontSymbolicTraits traits = CTFontGetSymbolicTraits(fontRef);
+        CFRelease(fontRef);
+        
+        BOOL isBold = (traits & kCTFontBoldTrait);
+        if (isBold) {
+            continue;
+        }
+        
+        BOOL isItalic = (traits & kCTFontItalicTrait);
+        if (isItalic) {
+            continue;
+        }
+        
+        return fontName;
+    }
+    
+    // Fallback, just return the first font in this family
+    return [sorted firstObject];
+}
+
+- (NSArray *) fontsInFamily:(NSString *)familyName
+{
+    [self waitForInitialLoad];
+    
+    NSArray *result = [systemFamilyMap allKeysForObject:familyName];
+    
+    if (!result || result.count == 0) {
+        result = [userFamilyMap allKeysForObject:familyName];
+    }
+    
+    return (result ?: @[]);
 }
 
 - (NSString *) pathForUserLibrary
@@ -270,6 +364,8 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     
     // the font is now copied to ~/Library/Fonts/ so update the user font map and name array
     userFontMap[userFont.fullName] = userFont;
+    userFamilyMap[userFont.fullName] = userFont.familyName;
+    
     [self userFontsChanged];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:WDFontAddedNotification
@@ -295,6 +391,7 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     
     // update caches
     [userFontMap removeObjectForKey:userFont.fullName];
+    [userFamilyMap removeObjectForKey:userFont.fullName];
     
     NSInteger index = [self.userFonts indexOfObject:userFont.fullName];
     [self userFontsChanged];

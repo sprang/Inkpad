@@ -17,9 +17,12 @@
 @interface WDFontManager : NSObject
 
 @property (weak, nonatomic, readonly) NSArray *supportedFonts;
+@property (weak, nonatomic, readonly) NSArray *supportedFamilies;
 @property (nonatomic, strong, readonly) NSMutableDictionary *userFontMap;
+@property (nonatomic, strong, readonly) NSMutableDictionary *userFamilyMap;
 @property (nonatomic, strong, readonly) NSArray *userFonts;
 @property (nonatomic, strong, readonly) NSMutableDictionary *systemFontMap;
+@property (nonatomic, strong, readonly) NSMutableDictionary *systemFamilyMap;
 @property (nonatomic, strong, readonly) NSArray *systemFonts;
 
 + (WDFontManager *) sharedInstance;
@@ -29,6 +32,11 @@
 - (BOOL) isUserFont:(NSString *)fullName;
 - (BOOL) validFont:(NSString *)fullName;
 - (NSString *) displayNameForFont:(NSString *)fullName;
+- (NSString *) typefaceNameForFont:(NSString *)fullName;
+
+- (NSString *) defaultFontForFamily:(NSString *)familyName;
+- (NSString *) familyNameForFont:(NSString *)fullName;
+- (NSArray *) fontsInFamily:(NSString *)familyName;
 
 - (WDUserFont *) userFontForPath:(NSString *)path;
 // on success returns the display name of the font, otherwise returns nil

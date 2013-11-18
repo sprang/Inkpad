@@ -76,6 +76,29 @@
 	return [blendModeNames_ count];
 }
 
+- (NSString *) localizedTitleForKey:(NSString *)key
+{
+    // we could duplicate the BlendModes.plist for every localization, but this seems less error prone
+    static NSMutableDictionary *map_ = nil;
+    if (!map_) {
+        map_ = [NSMutableDictionary dictionary];
+        map_[@"Normal"]     = NSLocalizedString(@"Normal", @"Normal");
+        map_[@"Darken"]     = NSLocalizedString(@"Darken", @"Darken");
+        map_[@"Multiply"]   = NSLocalizedString(@"Multiply", @"Multiply");
+        map_[@"Lighten"]    = NSLocalizedString(@"Lighten", @"Lighten");
+        map_[@"Screen"]     = NSLocalizedString(@"Screen", @"Screen");
+        map_[@"Overlay"]    = NSLocalizedString(@"Overlay", @"Overlay");
+        map_[@"Difference"] = NSLocalizedString(@"Difference", @"Difference");
+        map_[@"Exclusion"]  = NSLocalizedString(@"Exclusion", @"Exclusion");
+        map_[@"Hue"]        = NSLocalizedString(@"Hue", @"Hue");
+        map_[@"Saturation"] = NSLocalizedString(@"Saturation", @"Saturation");
+        map_[@"Color"]      = NSLocalizedString(@"Color", @"Color");
+        map_[@"Luminosity"] = NSLocalizedString(@"Luminosity", @"Luminosity");
+    }
+    
+    return map_[key];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	static NSString *identifier = @"blendModeCell";
@@ -85,7 +108,8 @@
 	}
     
     cell.accessoryType = (indexPath.row == selectedRow_) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-	cell.textLabel.text = blendModeNames_[indexPath.row][@"name"];
+    NSString *blendKey = blendModeNames_[indexPath.row][@"name"];
+	cell.textLabel.text = [self localizedTitleForKey:blendKey];
 	return cell;
 }
 
@@ -128,7 +152,7 @@
 {
     for (NSDictionary *dict in blendModeNames_) {
         if ([dict[@"value"] intValue] == blendMode) {
-            return dict[@"name"];
+            return [self localizedTitleForKey:dict[@"name"]];
         }
     }
     

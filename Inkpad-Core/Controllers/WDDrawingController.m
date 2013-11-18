@@ -1214,10 +1214,21 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 #pragma mark -
 #pragma mark Styles
 
+- (BOOL) canAnySelectedObjectInspectProperty:(NSString *)property
+{
+    for (WDElement *element in [self.selectedObjects objectEnumerator]) {
+        if ([element canInspectProperty:property]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (void) setValue:(id)value forProperty:(NSString *)property
 {
-    if (self.selectedObjects.count == 0) {
-        // no selection, so directly set the default value on the property manager
+    if (self.selectedObjects.count == 0 || ![self canAnySelectedObjectInspectProperty:property]) {
+        // no selection (or no selected object inspects this property), so directly set the default value on the property manager
         [propertyManager_ setDefaultValue:value forProperty:property];
         // and invalidate it so that inspectors react properly
         [propertyManager_ addToInvalidProperties:property];
