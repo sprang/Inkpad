@@ -1,0 +1,24 @@
+
+/* Class = "IBUILabel"; text = "Hue"; ObjectID = "29"; */
+"29.text" = "Ton";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "30"; */
+"30.text" = "0";
+
+/* Class = "IBUILabel"; text = "Saturation"; ObjectID = "31"; */
+"31.text" = "Canlılık";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "32"; */
+"32.text" = "0";
+
+/* Class = "IBUILabel"; text = "Brightness"; ObjectID = "34"; */
+"34.text" = "Parlaklık";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "35"; */
+"35.text" = "0";
+
+/* Class = "IBUINavigationItem"; title = "Hue and Saturation"; ObjectID = "54"; */
+"54.title" = "Ton ve Canlılık";
+
+/* Class = "IBUIBarButtonItem"; title = "Accept"; ObjectID = "55"; */
+"55.title" = "Kabul Et";
