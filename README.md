@@ -58,6 +58,8 @@ Localizations:
 
 * [Carlo Gandolfi](https://github.com/cgand) / Italian
 * [Miguel Dussán](https://github.com/migdus) / Spanish
+* [Yannick Loriot](https://github.com/YannickL) / French
+* [Ersen Tekin](https://github.com/ersentekin) / Turkish
 
 App Icon:
 
