@@ -36,7 +36,7 @@
     }
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
-    title.text = NSLocalizedString(@"Fonts", @"Fonts");
+    title.text = NSLocalizedString(@"Font", @"Font");
     title.font = [UIFont boldSystemFontOfSize:17.0f];
     title.textColor = [UIColor blackColor];
     title.backgroundColor = nil;
