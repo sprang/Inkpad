@@ -359,6 +359,11 @@ NSString *WDAlphaKey = @"WDAlphaKey";
     [self drawSwatchInRect:rect];
 }
 
+- (BOOL) wantsCenteredFillTransform
+{
+    return NO;
+}
+
 - (BOOL) transformable
 {
     return NO;

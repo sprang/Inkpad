@@ -16,6 +16,7 @@
 #import "WDFillTransform.h"
 #import "WDInspectableProperties.h"
 #import "WDPath.h"
+#import "WDPathPainter.h"
 #import "WDPenTool.h"
 #import "WDPropertyManager.h"
 #import "WDUtilities.h"
@@ -97,7 +98,8 @@
     }
 
     // we should only reset the active path's fill transform if it is the default fill transform for the shape
-    shouldResetFillTransform_ = activePath.fillTransform && [activePath.fillTransform isDefaultInRect:activePath.bounds];
+    BOOL centered = [activePath.fill wantsCenteredFillTransform];
+    shouldResetFillTransform_ = activePath.fillTransform && [activePath.fillTransform isDefaultInRect:activePath.bounds centered:centered];
 }
 
 - (void) moveWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
@@ -175,7 +177,8 @@
         }
         
         if (shouldResetFillTransform_) {
-            activePath.fillTransform = [WDFillTransform fillTransformWithRect:activePath.bounds];
+            BOOL centered = [activePath.fill wantsCenteredFillTransform];
+            activePath.fillTransform = [WDFillTransform fillTransformWithRect:activePath.bounds centered:centered];
         }
         
         [canvas.drawingController deselectAllNodes];

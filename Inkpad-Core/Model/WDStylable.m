@@ -263,11 +263,18 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
 
 - (void) setFillQuiet:(id<WDPathPainter>)fill
 {
+    BOOL wasDefaultFillTransform = NO;
+    
+    if ([fill_ isKindOfClass:[WDGradient class]]) {
+        // see if the fill transform was the default
+        wasDefaultFillTransform = [self.fillTransform isDefaultInRect:self.bounds centered:[fill_ wantsCenteredFillTransform]];
+    }
+    
     fill_ = fill;
     
     if ([fill transformable]) {
-        if (!self.fillTransform) {
-            self.fillTransform = [WDFillTransform fillTransformWithRect:self.bounds];
+        if (!self.fillTransform || wasDefaultFillTransform) {
+            self.fillTransform = [WDFillTransform fillTransformWithRect:self.bounds centered:[fill wantsCenteredFillTransform]];
         }
     } else {
         self.fillTransform = nil;

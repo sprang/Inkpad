@@ -366,6 +366,11 @@ NSString *WDGradientStopsKey = @"WDGradientStopsKey";
     CGContextRestoreGState(ctx);
 }
 
+- (BOOL) wantsCenteredFillTransform
+{
+    return (self.type == kWDRadialGradient) ? YES : NO;
+}
+
 - (BOOL) transformable
 {
     return YES;
