@@ -40,6 +40,11 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
++ (float) preferredViewWidth
+{
+    return 340;
+}
+
 - (void) setDrawing:(WDDrawing *)drawing
 {
     drawing_ = drawing;
@@ -71,7 +76,9 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 
 - (void)loadView
 {
-    table_ = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 13 * 44) style:UITableViewStyleGrouped];
+    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 13 * 44);
+    
+    table_ = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     table_.delegate = self;
     table_.dataSource = self;
     table_.sectionHeaderHeight = 0;

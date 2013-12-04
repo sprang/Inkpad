@@ -56,7 +56,9 @@
 
 - (void)loadView
 {
-    table_ = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 5 * 28 + 9 * 44) style:UITableViewStyleGrouped];
+    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 5 * 28 + 9 * 44);
+    
+    table_ = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     table_.delegate = self;
     table_.dataSource = self;
     table_.sectionHeaderHeight = 0;
