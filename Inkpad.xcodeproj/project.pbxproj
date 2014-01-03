@@ -75,6 +75,8 @@
 		6B3A2AEB1256F35300574B41 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B3A2AEA1256F35300574B41 /* lock.png */; };
 		6B3A2C0C12571C9900574B41 /* unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B3A2C0B12571C9900574B41 /* unlock.png */; };
 		6B48E9D9126BE2B4002D3B85 /* isolate.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B48E9D8126BE2B4002D3B85 /* isolate.png */; };
+		6B4EF3BF186AA08500E55D19 /* freehand_shape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4EF3BE186AA08500E55D19 /* freehand_shape@2x.png */; };
+		6B4EF3C1187672B500E55D19 /* freehand_shape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4EF3C0187672B500E55D19 /* freehand_shape.png */; };
 		6B51BC3912650D3F000F6BF3 /* WDSwatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B51BC3812650D3F000F6BF3 /* WDSwatchCell.m */; };
 		6B51BCBE12651C1C000F6BF3 /* swatches.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B51BCBD12651C1C000F6BF3 /* swatches.png */; };
 		6B51BCF0126522B6000F6BF3 /* WDButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B51BCEF126522B6000F6BF3 /* WDButton.m */; };
@@ -416,6 +418,8 @@
 		6B3A2AEA1256F35300574B41 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lock.png; path = Images/lock.png; sourceTree = "<group>"; };
 		6B3A2C0B12571C9900574B41 /* unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unlock.png; path = Images/unlock.png; sourceTree = "<group>"; };
 		6B48E9D8126BE2B4002D3B85 /* isolate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = isolate.png; path = Images/isolate.png; sourceTree = "<group>"; };
+		6B4EF3BE186AA08500E55D19 /* freehand_shape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "freehand_shape@2x.png"; sourceTree = "<group>"; };
+		6B4EF3C0187672B500E55D19 /* freehand_shape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freehand_shape.png; sourceTree = "<group>"; };
 		6B51BC3712650D3F000F6BF3 /* WDSwatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDSwatchCell.h; sourceTree = "<group>"; };
 		6B51BC3812650D3F000F6BF3 /* WDSwatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDSwatchCell.m; sourceTree = "<group>"; };
 		6B51BCBD12651C1C000F6BF3 /* swatches.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = swatches.png; path = Images/swatches.png; sourceTree = "<group>"; };
@@ -1166,6 +1170,8 @@
 				6B219C95150EF33600761F18 /* add_anchor@2x.png */,
 				6BABD8AF141ED30100F7E0A9 /* brush.png */,
 				6B219C69150ED94600761F18 /* brush@2x.png */,
+				6B4EF3BE186AA08500E55D19 /* freehand_shape@2x.png */,
+				6B4EF3C0187672B500E55D19 /* freehand_shape.png */,
 				6BABD8B1141ED30100F7E0A9 /* eraser.png */,
 				6B219C91150EF0B700761F18 /* eraser@2x.png */,
 				6BABD8B3141ED30100F7E0A9 /* eyedropper.png */,
@@ -1720,6 +1726,7 @@
 				6B094C34134EC3BC00C926EC /* table_unchecked.png in Resources */,
 				6B09739C136A174900EFD696 /* spark_knob.png in Resources */,
 				6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */,
+				6B4EF3BF186AA08500E55D19 /* freehand_shape@2x.png in Resources */,
 				6B616774137B429200BEC0BA /* Samples in Resources */,
 				6B53FF9913A7DC3E0029574B /* color_wheel.png in Resources */,
 				6B5335481803538D00D46D5B /* ShapeOptions.xib in Resources */,
@@ -1792,6 +1799,7 @@
 				6B219C5A150EA22300761F18 /* dropbox_icon_directory@2x.png in Resources */,
 				6B219C5B150EA22300761F18 /* dropbox_icon_font@2x.png in Resources */,
 				6B219C5C150EA22300761F18 /* dropbox_icon_generic@2x.png in Resources */,
+				6B4EF3C1187672B500E55D19 /* freehand_shape.png in Resources */,
 				6B219C5D150EA22300761F18 /* dropbox_icon_inkpad@2x.png in Resources */,
 				6B219C5E150EA22300761F18 /* dropbox_icon_svg@2x.png in Resources */,
 				6B219C5F150EA22300761F18 /* dropbox_icon_unsupported@2x.png in Resources */,
