@@ -20,61 +20,77 @@ typedef struct {
 
 void renderPathElement(void *info, const CGPathElement *element);
 
+////////////////////////////////////////////////////////////////////////////////
+
 inline void WDGLFillRect(CGRect rect)
 {
     rect.origin = WDRoundPoint(rect.origin);
     rect.size = WDRoundSize(rect.size);
-    
-    const GLfloat quadVertices[] = {
-        CGRectGetMinX(rect), CGRectGetMinY(rect),
-        CGRectGetMaxX(rect), CGRectGetMinY(rect),
-        CGRectGetMinX(rect), CGRectGetMaxY(rect),
-        CGRectGetMaxX(rect), CGRectGetMaxY(rect)
+
+	CGFloat minX = CGRectGetMinX(rect);
+	CGFloat maxX = CGRectGetMaxX(rect);
+	CGFloat minY = CGRectGetMinY(rect);
+	CGFloat maxY = CGRectGetMaxY(rect);
+
+    const GLfloat vertexData[] = {
+        minX, minY,
+		maxX, minY,
+		minX, maxY,
+		maxX, maxY
     };
-    
+
 #if TARGET_OS_IPHONE
-    glVertexPointer(2, GL_FLOAT, 0, quadVertices);
+    glVertexPointer(2, GL_FLOAT, 0, vertexData);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 #else
     glBegin(GL_QUADS); 
-    glVertex2d(quadVertices[0], quadVertices[1]);
-    glVertex2d(quadVertices[2], quadVertices[3]);
-    glVertex2d(quadVertices[6], quadVertices[7]);
-    glVertex2d(quadVertices[4], quadVertices[5]);
+	glVertex2D(vertexData[0], vertexData[1]);
+	glVertex2D(vertexData[2], vertexData[3]);
+	glVertex2D(vertexData[4], vertexData[5]);
+	glVertex2D(vertexData[6], vertexData[7]);
     glEnd();
 #endif
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 inline void WDGLStrokeRect(CGRect rect)
 {
     rect.origin = WDRoundPoint(rect.origin);
     rect.size = WDRoundSize(rect.size);
-    
-    const GLfloat lineVertices[] = {
-        CGRectGetMinX(rect), CGRectGetMinY(rect),
-        CGRectGetMaxX(rect), CGRectGetMinY(rect),
-        
-        CGRectGetMinX(rect), CGRectGetMaxY(rect),
-        CGRectGetMaxX(rect), CGRectGetMaxY(rect),
-        
-        CGRectGetMinX(rect), CGRectGetMinY(rect),
-        CGRectGetMinX(rect), CGRectGetMaxY(rect) + 1 / [UIScreen mainScreen].scale,
-        
-        CGRectGetMaxX(rect), CGRectGetMinY(rect),
-        CGRectGetMaxX(rect), CGRectGetMaxY(rect)
+
+	// Compute size of hairline
+	CGFloat w = 1.0 / [UIScreen mainScreen].scale;
+	// Compute inset for drawing hairline
+	CGFloat r = 0.5 * w;
+	// Center coordinates on hairline
+	CGFloat minX = CGRectGetMinX(rect) + r;
+	CGFloat maxX = CGRectGetMaxX(rect) - r;
+	CGFloat minY = CGRectGetMinY(rect) + r;
+	CGFloat maxY = CGRectGetMaxY(rect) - r;
+
+	// Prepare GL_LINE_LOOP
+    const GLfloat vertexData[] = {
+        minX, minY,
+        maxX, minY,
+        maxX, maxY,
+        minX, maxY
     };
-    
+
 #if TARGET_OS_IPHONE
-    glVertexPointer(2, GL_FLOAT, 0, lineVertices);
-    glDrawArrays(GL_LINES, 0, 8);
+    glVertexPointer(2, GL_FLOAT, 0, vertexData);
+    glDrawArrays(GL_LINE_LOOP, 0, 4);
 #else
-    glBegin(GL_LINES); 
-    for (int i = 0; i < 8; i++) {
-        glVertex2D(lineVertices[i*2], lineVertices[i*2+1]);
-    }
+    glBegin(GL_LINE_LOOP);
+	glVertex2D(vertexData[0], vertexData[1]);
+	glVertex2D(vertexData[2], vertexData[3]);
+	glVertex2D(vertexData[4], vertexData[5]);
+	glVertex2D(vertexData[6], vertexData[7]);
     glEnd();
 #endif
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 inline void WDGLFillCircle(CGPoint center, float radius, int sides)
 {
