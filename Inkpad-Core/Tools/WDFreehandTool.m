@@ -82,13 +82,13 @@ NSString *WDDefaultFreehandTool = @"WDDefaultFreehandTool";
         
         if (closeShape_ && tempPath_.nodes.count > 2) {
             // we're drawing free form closed shapes... let's relax the error
-            maxError *= 10;
+            maxError *= 5;
             
             // add the first point at the end to make sure we close
             CGPoint first = [points[0] CGPointValue];
             CGPoint last = [[points lastObject] CGPointValue];
                 
-            if (WDDistance(first, last) > (maxError*2)) {
+            if (WDDistance(first, last) >= (maxError*2)) {
                 [points addObject:points[0]];
             }
         }
