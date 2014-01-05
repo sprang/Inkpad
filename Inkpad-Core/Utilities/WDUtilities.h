@@ -212,3 +212,15 @@ static inline float WDMagnitude(CGPoint point)
     return WDDistance(point, CGPointZero);
 }
 
+static inline CGPoint WDScaleVector(CGPoint v, float toLength)
+{
+    float fromLength = WDMagnitude(v);
+    float scale = 1.0;
+    
+    if (fromLength != 0.0) {
+        scale = toLength / fromLength;
+    }
+    
+    return CGPointMake(v.x * scale, v.y * scale);
+}
+

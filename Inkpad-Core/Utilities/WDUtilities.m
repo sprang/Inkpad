@@ -248,7 +248,7 @@ CGPoint WDNormalizePoint(CGPoint vector)
         return vector;
     }
     
-    return WDMultiplyPointScalar(vector, 1.0f / WDDistance(CGPointZero, vector));
+    return WDMultiplyPointScalar(vector, 1.0f / distance);
 }
 
 CGRect WDGrowRectToPoint(CGRect rect, CGPoint pt)
