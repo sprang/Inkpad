@@ -40,11 +40,17 @@ NSString *WDPointArrayKey = @"WDPointArrayKey";
 
 + (WDBezierNode *) bezierNodeWithAnchorPoint:(CGPoint)pt
 {
+    if (isnan(pt.x) || isnan(pt.y)) {
+        return nil;
+    }
     return [[WDBezierNode alloc] initWithAnchorPoint:pt];
 }
 
 + (WDBezierNode *) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint
 {
+    if (isnan(inPoint.x) || isnan(inPoint.y) || isnan(outPoint.x) || isnan(outPoint.y)) {
+        return nil;
+    }
     return [[WDBezierNode alloc] initWithInPoint:inPoint anchorPoint:pt outPoint:outPoint];
 }
 

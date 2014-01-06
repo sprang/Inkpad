@@ -69,13 +69,17 @@
                                            anchorPoint:segments[i].a_
                                               outPoint:segments[i].out_];
         }
-        [nodes addObject:node];
+        if (node) {
+            [nodes addObject:node];
+        }
         
         if (i == (numSegments - 1) && !closePath) {
             node = [WDBezierNode bezierNodeWithInPoint:segments[i].in_
                                            anchorPoint:segments[i].b_
                                               outPoint:segments[i].b_];
-            [nodes addObject:node];
+            if (node) {
+                [nodes addObject:node];
+            }
         }
     }
     
