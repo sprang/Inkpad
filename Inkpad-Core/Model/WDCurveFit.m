@@ -21,16 +21,16 @@
 + (WDPath *) smoothPathForPoints:(NSArray *)inPoints error:(float)epsilon attemptToClose:(BOOL)shouldClose
 {
     NSMutableArray  *points = [inPoints mutableCopy];
-	CGPoint         unboxedPts[points.count];
+    CGPoint         unboxedPts[points.count];
     BOOL            closePath = NO;
     int             ix = 0;
-	
-    // transfer the wrapped CGPoints to an unboxed array
-    for (NSValue *value in points)	{
-		unboxedPts[ix++] = [value CGPointValue];
-	}
     
-	// see if this path should be closed, and if so, average the first and last points
+    // transfer the wrapped CGPoints to an unboxed array
+    for (NSValue *value in points) {
+        unboxedPts[ix++] = [value CGPointValue];
+    }
+    
+    // see if this path should be closed, and if so, average the first and last points
     if (shouldClose && points.count > 3) {
         CGPoint first = unboxedPts[0];
         CGPoint last = unboxedPts[points.count - 1];
@@ -82,6 +82,26 @@
     if (nodes.count < 2) {
         // degenerate path
         return nil;
+    }
+    
+    if (closePath) {
+        node = nodes[0];
+        
+        // fix up the control handles on the start/end node...
+        // we want them to be collinear but preserve the original magnitudes
+        
+        CGPoint outDelta = WDSubtractPoints(node.outPoint, node.anchorPoint);
+        CGPoint inDelta = WDSubtractPoints(node.inPoint, node.anchorPoint);
+        
+        CGPoint newIn = WDAveragePoints(inDelta, WDMultiplyPointScalar(outDelta, -1));
+        newIn = WDScaleVector(newIn, WDMagnitude(inDelta));
+        
+        CGPoint newOut = WDAveragePoints(outDelta, WDMultiplyPointScalar(inDelta, -1));
+        newOut = WDScaleVector(newOut, WDMagnitude(outDelta));
+        
+        nodes[0] = [WDBezierNode bezierNodeWithInPoint:WDAddPoints(node.anchorPoint, newIn)
+                                           anchorPoint:node.anchorPoint
+                                              outPoint:WDAddPoints(node.anchorPoint, newOut)];
     }
     
     WDPath *path = [[WDPath alloc] init];
