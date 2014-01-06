@@ -12,6 +12,7 @@ Next Update
 - Radial gradients now start at the center of the path instead of the left edge
 - Added new tool: Closed Freehand Shape
 - Increased maximum drawing size to 4096x4096
+- Simplified curve fitting implementation
 
 1.5.1 [currently on the App Store]
 - Fixed broken Github link in the help file
