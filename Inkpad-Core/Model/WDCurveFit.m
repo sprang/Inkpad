@@ -55,6 +55,9 @@
 //
 + (WDPath *) pathFromSegments:(WDBezierSegment *)segments numSegments:(NSUInteger)numSegments closePath:(BOOL)closePath
 {
+    if (!segments || WDBezierSegmentIsDegenerate(segments[0])) {
+        return nil;     // NaN point may be added in FitCurve, FitCubic, so return fail.
+    }
     NSMutableArray  *nodes = [NSMutableArray array];
     WDBezierNode    *node;
     
@@ -69,17 +72,13 @@
                                            anchorPoint:segments[i].a_
                                               outPoint:segments[i].out_];
         }
-        if (node) {
-            [nodes addObject:node];
-        }
+        [nodes addObject:node];
         
         if (i == (numSegments - 1) && !closePath) {
             node = [WDBezierNode bezierNodeWithInPoint:segments[i].in_
                                            anchorPoint:segments[i].b_
                                               outPoint:segments[i].b_];
-            if (node) {
-                [nodes addObject:node];
-            }
+            [nodes addObject:node];
         }
     }
     
