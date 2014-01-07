@@ -35,26 +35,40 @@ WDBezierSegment WDBezierSegmentMake(WDBezierNode *a, WDBezierNode *b)
     return segment;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+static inline CGPoint CGPointMin(CGPoint P1, CGPoint P2)
+{ return (CGPoint){ MIN(P1.x, P2.x), MIN(P1.y, P2.y) }; }
+
+static inline CGPoint CGPointMax(CGPoint P1, CGPoint P2)
+{ return (CGPoint){ MAX(P1.x, P2.x), MAX(P1.y, P2.y) }; }
+
 inline BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, float tolerance)
 {
-    float scaledTolerance = tolerance / [UIScreen mainScreen].scale;
-    
-    if (CGPointEqualToPoint(seg.a_, seg.out_) && CGPointEqualToPoint(seg.in_, seg.b_)) {
-        return YES;
-    }
-    
-    float dx = seg.b_.x - seg.a_.x;
-    float dy = seg.b_.y - seg.a_.y;
-    
-    float d2 = fabs((seg.out_.x - seg.b_.x) * dy - (seg.out_.y - seg.b_.y) * dx);
-    float d3 = fabs((seg.in_.x - seg.b_.x) * dy - (seg.in_.y - seg.b_.y) * dx);
+    if (CGPointEqualToPoint(seg.a_, seg.out_) &&
+		CGPointEqualToPoint(seg.in_, seg.b_))
+		return YES;
 
-    if ((d2 + d3) * (d2 + d3) <= scaledTolerance * (dx * dx + dy * dy)) {
-        return YES;
-    }
-    
-    return NO;
+	// Compute bounding box (WDBezierSegmentGetSimpleBounds)
+	CGPoint min = CGPointMin(seg.a_, seg.out_);
+	CGPoint max = CGPointMax(seg.a_, seg.out_);
+	min = CGPointMin(min, seg.in_);
+	max = CGPointMax(max, seg.in_);
+	min = CGPointMin(min, seg.b_);
+	max = CGPointMax(max, seg.b_);
+
+	// Get bounding box size
+	CGFloat dx = max.x - min.x;
+	CGFloat dy = max.y - min.y;
+
+    float scaledTolerance = tolerance / [UIScreen mainScreen].scale;
+
+	return
+	(dx <= scaledTolerance)&&
+	(dy <= scaledTolerance);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 BOOL WDBezierSegmentIsDegenerate(WDBezierSegment seg)
 {
