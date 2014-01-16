@@ -37,6 +37,20 @@ WDBezierSegment WDBezierSegmentMake(WDBezierNode *a, WDBezierNode *b)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+static inline CGPoint CGPointInterpolate(CGPoint P1, CGPoint P2, CGFloat r)
+{ return (CGPoint){ P1.x + r * (P2.x - P1.x), P1.y + r * (P2.y - P1.y) }; }
+
+WDBezierSegment
+WDBezierSegmentMakeWithQuadPoints(CGPoint a, CGPoint c, CGPoint b)
+{
+	// Convert to cubic http://fontforge.sourceforge.net/bezier.html
+	return (WDBezierSegment) { a,
+	CGPointInterpolate(a, c, 2.0/3.0),
+	CGPointInterpolate(b, c, 2.0/3.0), b };
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 static inline CGPoint CGPointMin(CGPoint P1, CGPoint P2)
 { return (CGPoint){ MIN(P1.x, P2.x), MIN(P1.y, P2.y) }; }
 
