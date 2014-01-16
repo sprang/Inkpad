@@ -570,49 +570,6 @@ float WDBezierSegmentLength(WDBezierSegment seg)
     return z2 * sum;
 }
 
-CGPoint WDBezierSegmentGetClosestPoint(WDBezierSegment seg, CGPoint test, float *error, float *distance)
-{
-    float       delta = 0.001f;
-    float       t2 ,t3, td2, td3, x,y;
-    float       lastX = seg.a_.x, lastY = seg.a_.y;
-    float       sum = 0;
-    float       smallestDistance = MAXFLOAT;
-    CGPoint     closest;
-    
-    for (float t = 0; t < (1.0f + delta); t += delta) {
-        t2 = t * t;
-        t3 = t2 * t;
-        
-        td2 = (1-t) * (1-t);
-        td3 = td2 * (1-t);
-        
-        x = td3 * seg.a_.x + 
-        3 * t * td2 * seg.out_.x + 
-        3 * t2 * (1-t) * seg.in_.x +
-        t3 * seg.b_.x;
-        
-        y = td3 * seg.a_.y + 
-        3 * t * td2 * seg.out_.y + 
-        3 * t2 * (1-t) * seg.in_.y +
-        t3 * seg.b_.y;
-        
-        float step = WDDistance(CGPointMake(lastX, lastY), CGPointMake(x, y));
-        sum += step;
-        
-        lastX = x;
-        lastY = y;
-        
-        float testDistance = WDDistance(CGPointMake(x,y), test);
-        if (testDistance < smallestDistance) {
-            smallestDistance = testDistance;
-            *error = testDistance;
-            *distance = sum;
-            closest = CGPointMake(x,y);
-        }
-    }
-    
-    return closest;
-}
 
 CGRect WDBezierSegmentGetSimpleBounds(WDBezierSegment seg)
 {
@@ -623,43 +580,6 @@ CGRect WDBezierSegmentGetSimpleBounds(WDBezierSegment seg)
     return rect;
 }
 
-BOOL WDBezierSegmentGetIntersection(WDBezierSegment seg, CGPoint a, CGPoint b, float *tIntersect)
-{
-    if (!CGRectIntersectsRect(WDBezierSegmentGetSimpleBounds(seg), WDRectWithPoints(a, b))) {
-        return NO;
-    }
-    
-    float           delta = 0.01f;
-    float           r, t2 ,t3, td2, td3;
-    CGPoint         current, last = seg.a_;
-
-    for (float t = 0; t < (1.0f + delta); t += delta) {
-        t2 = t * t;
-        t3 = t2 * t;
-        
-        td2 = (1-t) * (1-t);
-        td3 = td2 * (1-t);
-        
-        current.x = td3 * seg.a_.x + 
-        3 * t * td2 * seg.out_.x + 
-        3 * t2 * (1-t) * seg.in_.x +
-        t3 * seg.b_.x;
-        
-        current.y = td3 * seg.a_.y + 
-        3 * t * td2 * seg.out_.y + 
-        3 * t2 * (1-t) * seg.in_.y +
-        t3 * seg.b_.y;
-    
-        if (WDLineSegmentsIntersectWithValues(last, current, a, b, &r, NULL)) {
-            *tIntersect = WDClamp(0, 1, (t-delta) + delta * r);
-            return YES;
-        }
-
-        last = current;
-    }
-    
-    return NO;
-}
 
 BOOL WDBezierSegmentsFormCorner(WDBezierSegment a, WDBezierSegment b)
 {
@@ -697,6 +617,23 @@ float WDBezierSegmentOutAngle(WDBezierSegment seg)
     return atan2f(delta.y, delta.x);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+static inline double _ComputeValueAtT
+	(double P0, double P1, double P2, double P3, double t)
+{
+	// Compute polynomial co-efficients
+	double d = P0;
+	double c = 3*(P1-P0);
+	double b = 3*(P2-P1) - c;
+	double a = (P3-P0) - b - c;
+
+	// Compute polynomial result for t
+	return ((a * t + b) * t + c) * t + d;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
 {
 	// Get Bezier co-efficients
@@ -705,14 +642,8 @@ inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
 	double X2 = seg.in_.x;
 	double X3 = seg.b_.x;
 
-	// Calculate polynomial co-efficients
-	double dx = X0;
-	double cx = 3*(X1-X0);
-	double bx = 3*(X2-X1) - cx;
-	double ax = (X3-X0) - bx - cx;
-
-	// Calculate polynomial result for t
-	double x = ((ax * t + bx) * t + cx) * t + dx;
+	// Compute x coordinate for t
+	double x = _ComputeValueAtT(X0, X1, X2, X3, t);
 
 	// Get Bezier co-efficients
 	double Y0 = seg.a_.y;
@@ -720,17 +651,68 @@ inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
 	double Y2 = seg.in_.y;
 	double Y3 = seg.b_.y;
 
-	// Calculate polynomial co-efficients
-	double dy = Y0;
-	double cy = 3*(Y1-Y0);
-	double by = 3*(Y2-Y1) - cy;
-	double ay = (Y3-Y0) - by - cy;
+	// Compute y coordinate for t
+	double y = _ComputeValueAtT(Y0, Y1, Y2, Y3, t);
 
-	// Calculate polynomial result for t
-	double y = ((ay * t + by) * t + cy) * t + dy;
-
+	// Return result
 	return (CGPoint){ x, y };
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+BOOL WDBezierSegmentGetIntersection(WDBezierSegment seg, CGPoint a, CGPoint b, float *tIntersect)
+{
+    if (!CGRectIntersectsRect(WDBezierSegmentGetSimpleBounds(seg), WDRectWithPoints(a, b))) {
+        return NO;
+    }
+    
+    float           r, delta = 0.01f;
+    CGPoint         current, last = seg.a_;
+
+    for (float t = 0; t < (1.0f + delta); t += delta){
+
+        current = WDBezierSegmentCalculatePointAtT(seg, t);
+    
+        if (WDLineSegmentsIntersectWithValues(last, current, a, b, &r, NULL)) {
+            *tIntersect = WDClamp(0, 1, (t-delta) + delta * r);
+            return YES;
+        }
+
+        last = current;
+    }
+    
+    return NO;
+}
+
+CGPoint WDBezierSegmentGetClosestPoint(WDBezierSegment seg, CGPoint test, float *error, float *distance)
+{
+    float       delta = 0.001f;
+
+    CGPoint     current, last = seg.a_;
+    float       sum = 0;
+    float       smallestDistance = MAXFLOAT;
+    CGPoint     closest;
+    
+    for (float t = 0; t < (1.0f + delta); t += delta) {
+		current = WDBezierSegmentCalculatePointAtT(seg, t);
+
+        float step = WDDistance(last, current);
+        sum += step;
+
+        float testDistance = WDDistance(current, test);
+        if (testDistance < smallestDistance) {
+            smallestDistance = testDistance;
+            *error = testDistance;
+            *distance = sum;
+            closest = current;
+        }
+
+        last = current;
+    }
+    
+    return closest;
+}
+
 
 BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment seg, float distance, CGPoint pt, CGPoint *result, float *tResult)
 {
