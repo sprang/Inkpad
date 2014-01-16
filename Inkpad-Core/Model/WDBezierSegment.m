@@ -699,26 +699,37 @@ float WDBezierSegmentOutAngle(WDBezierSegment seg)
 
 inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
 {
-    float   t2 ,t3, td2, td3;
-    CGPoint result;
-    
-    t2 = t * t;
-    t3 = t2 * t;
-    
-    td2 = (1-t) * (1-t);
-    td3 = td2 * (1-t);
-    
-    result.x = td3 * seg.a_.x +
-    3 * t * td2 * seg.out_.x +
-    3 * t2 * (1-t) * seg.in_.x +
-    t3 * seg.b_.x;
-    
-    result.y = td3 * seg.a_.y +
-    3 * t * td2 * seg.out_.y +
-    3 * t2 * (1-t) * seg.in_.y +
-    t3 * seg.b_.y;
-    
-    return result;
+	// Get Bezier co-efficients
+	double X0 = seg.a_.x;
+	double X1 = seg.out_.x;
+	double X2 = seg.in_.x;
+	double X3 = seg.b_.x;
+
+	// Calculate polynomial co-efficients
+	double dx = X0;
+	double cx = 3*(X1-X0);
+	double bx = 3*(X2-X1) - cx;
+	double ax = (X3-X0) - bx - cx;
+
+	// Calculate polynomial result for t
+	double x = ((ax * t + bx) * t + cx) * t + dx;
+
+	// Get Bezier co-efficients
+	double Y0 = seg.a_.y;
+	double Y1 = seg.out_.y;
+	double Y2 = seg.in_.y;
+	double Y3 = seg.b_.y;
+
+	// Calculate polynomial co-efficients
+	double dy = Y0;
+	double cy = 3*(Y1-Y0);
+	double by = 3*(Y2-Y1) - cy;
+	double ay = (Y3-Y0) - by - cy;
+
+	// Calculate polynomial result for t
+	double y = ((ay * t + by) * t + cy) * t + dy;
+
+	return (CGPoint){ x, y };
 }
 
 BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment seg, float distance, CGPoint pt, CGPoint *result, float *tResult)
