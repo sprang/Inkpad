@@ -618,6 +618,9 @@ float WDBezierSegmentOutAngle(WDBezierSegment seg)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark BezierCurve 
+////////////////////////////////////////////////////////////////////////////////
 
 static inline double _ComputeValueAtT
 	(double P0, double P1, double P2, double P3, double t)
@@ -634,7 +637,7 @@ static inline double _ComputeValueAtT
 
 ////////////////////////////////////////////////////////////////////////////////
 
-inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
+static inline double WDBezierSegmentComputeX(WDBezierSegment seg, float t)
 {
 	// Get Bezier co-efficients
 	double X0 = seg.a_.x;
@@ -643,8 +646,13 @@ inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
 	double X3 = seg.b_.x;
 
 	// Compute x coordinate for t
-	double x = _ComputeValueAtT(X0, X1, X2, X3, t);
+	return _ComputeValueAtT(X0, X1, X2, X3, t);
+}
 
+////////////////////////////////////////////////////////////////////////////////
+
+static inline double WDBezierSegmentComputeY(WDBezierSegment seg, float t)
+{
 	// Get Bezier co-efficients
 	double Y0 = seg.a_.y;
 	double Y1 = seg.out_.y;
@@ -652,12 +660,20 @@ inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
 	double Y3 = seg.b_.y;
 
 	// Compute y coordinate for t
-	double y = _ComputeValueAtT(Y0, Y1, Y2, Y3, t);
-
-	// Return result
-	return (CGPoint){ x, y };
+	return _ComputeValueAtT(Y0, Y1, Y2, Y3, t);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
+{
+	return (CGPoint){
+	WDBezierSegmentComputeX(seg, t),
+	WDBezierSegmentComputeY(seg, t) };
+}
+
+////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
 ////////////////////////////////////////////////////////////////////////////////
 
 BOOL WDBezierSegmentGetIntersection(WDBezierSegment seg, CGPoint a, CGPoint b, float *tIntersect)
