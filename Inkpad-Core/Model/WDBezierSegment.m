@@ -45,7 +45,7 @@ static inline CGPoint CGPointMax(CGPoint P1, CGPoint P2)
 
 inline BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, float tolerance)
 {
-    if (CGPointEqualToPoint(seg.a_, seg.out_) &&
+	if (CGPointEqualToPoint(seg.a_, seg.out_) &&
 		CGPointEqualToPoint(seg.in_, seg.b_))
 		return YES;
 
@@ -61,11 +61,9 @@ inline BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, float tolerance)
 	CGFloat dx = max.x - min.x;
 	CGFloat dy = max.y - min.y;
 
-    float scaledTolerance = tolerance / [UIScreen mainScreen].scale;
-
 	return
-	(dx <= scaledTolerance)&&
-	(dy <= scaledTolerance);
+	(dx <= tolerance)&&
+	(dy <= tolerance);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
