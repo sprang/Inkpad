@@ -35,26 +35,38 @@ WDBezierSegment WDBezierSegmentMake(WDBezierNode *a, WDBezierNode *b)
     return segment;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+static inline CGPoint CGPointMin(CGPoint P1, CGPoint P2)
+{ return (CGPoint){ MIN(P1.x, P2.x), MIN(P1.y, P2.y) }; }
+
+static inline CGPoint CGPointMax(CGPoint P1, CGPoint P2)
+{ return (CGPoint){ MAX(P1.x, P2.x), MAX(P1.y, P2.y) }; }
+
 inline BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, float tolerance)
 {
-    float scaledTolerance = tolerance / [UIScreen mainScreen].scale;
-    
-    if (CGPointEqualToPoint(seg.a_, seg.out_) && CGPointEqualToPoint(seg.in_, seg.b_)) {
-        return YES;
-    }
-    
-    float dx = seg.b_.x - seg.a_.x;
-    float dy = seg.b_.y - seg.a_.y;
-    
-    float d2 = fabs((seg.out_.x - seg.b_.x) * dy - (seg.out_.y - seg.b_.y) * dx);
-    float d3 = fabs((seg.in_.x - seg.b_.x) * dy - (seg.in_.y - seg.b_.y) * dx);
+	if (CGPointEqualToPoint(seg.a_, seg.out_) &&
+		CGPointEqualToPoint(seg.in_, seg.b_))
+		return YES;
 
-    if ((d2 + d3) * (d2 + d3) <= scaledTolerance * (dx * dx + dy * dy)) {
-        return YES;
-    }
-    
-    return NO;
+	// Compute bounding box (WDBezierSegmentGetSimpleBounds)
+	CGPoint min = CGPointMin(seg.a_, seg.out_);
+	CGPoint max = CGPointMax(seg.a_, seg.out_);
+	min = CGPointMin(min, seg.in_);
+	max = CGPointMax(max, seg.in_);
+	min = CGPointMin(min, seg.b_);
+	max = CGPointMax(max, seg.b_);
+
+	// Get bounding box size
+	CGFloat dx = max.x - min.x;
+	CGFloat dy = max.y - min.y;
+
+	return
+	(dx <= tolerance)&&
+	(dy <= tolerance);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 BOOL WDBezierSegmentIsDegenerate(WDBezierSegment seg)
 {
@@ -663,26 +675,37 @@ float WDBezierSegmentOutAngle(WDBezierSegment seg)
 
 inline CGPoint WDBezierSegmentCalculatePointAtT(WDBezierSegment seg, float t)
 {
-    float   t2 ,t3, td2, td3;
-    CGPoint result;
-    
-    t2 = t * t;
-    t3 = t2 * t;
-    
-    td2 = (1-t) * (1-t);
-    td3 = td2 * (1-t);
-    
-    result.x = td3 * seg.a_.x +
-    3 * t * td2 * seg.out_.x +
-    3 * t2 * (1-t) * seg.in_.x +
-    t3 * seg.b_.x;
-    
-    result.y = td3 * seg.a_.y +
-    3 * t * td2 * seg.out_.y +
-    3 * t2 * (1-t) * seg.in_.y +
-    t3 * seg.b_.y;
-    
-    return result;
+	// Get Bezier co-efficients
+	double X0 = seg.a_.x;
+	double X1 = seg.out_.x;
+	double X2 = seg.in_.x;
+	double X3 = seg.b_.x;
+
+	// Calculate polynomial co-efficients
+	double dx = X0;
+	double cx = 3*(X1-X0);
+	double bx = 3*(X2-X1) - cx;
+	double ax = (X3-X0) - bx - cx;
+
+	// Calculate polynomial result for t
+	double x = ((ax * t + bx) * t + cx) * t + dx;
+
+	// Get Bezier co-efficients
+	double Y0 = seg.a_.y;
+	double Y1 = seg.out_.y;
+	double Y2 = seg.in_.y;
+	double Y3 = seg.b_.y;
+
+	// Calculate polynomial co-efficients
+	double dy = Y0;
+	double cy = 3*(Y1-Y0);
+	double by = 3*(Y2-Y1) - cy;
+	double ay = (Y3-Y0) - by - cy;
+
+	// Calculate polynomial result for t
+	double y = ((ay * t + by) * t + cy) * t + dy;
+
+	return (CGPoint){ x, y };
 }
 
 BOOL WDBezierSegmentPointDistantFromPoint(WDBezierSegment seg, float distance, CGPoint pt, CGPoint *result, float *tResult)
