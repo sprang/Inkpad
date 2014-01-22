@@ -36,6 +36,18 @@ WDBezierSegment WDBezierSegmentMakeWithNodes(WDBezierNode *a, WDBezierNode *b)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+/*
+	WDBezierSegmentMakeWithPoints
+	-----------------------------
+	This should actually be called WDBezierSegmentMake, 
+	but that used to have a previous definition.
+*/
+
+WDBezierSegment
+WDBezierSegmentMakeWithPoints(CGPoint a, CGPoint b, CGPoint c, CGPoint d)
+{ return (WDBezierSegment){ a, b, c, d }; }
+
+////////////////////////////////////////////////////////////////////////////////
 
 static inline CGPoint CGPointInterpolate(CGPoint P1, CGPoint P2, CGFloat r)
 { return (CGPoint){ P1.x + r * (P2.x - P1.x), P1.y + r * (P2.y - P1.y) }; }
@@ -82,21 +94,43 @@ inline BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, CGFloat deviceTolerance)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-BOOL WDBezierSegmentIsDegenerate(WDBezierSegment seg)
-{
-    if (isnan(seg.a_.x) || isnan(seg.out_.x) || isnan(seg.in_.x) || isnan(seg.b_.x) ||
-        isnan(seg.a_.y) || isnan(seg.out_.y) || isnan(seg.in_.y) || isnan(seg.b_.y))
-    {
-        return YES;
-    }
+CGPoint WDBezierSegmentSplit
+	(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R)
+{ return WDBezierSegmentSplitAtT(seg, L, R, 0.5f); }
 
-    return NO;
+
+CGPoint WDBezierSegmentSplitAtT
+	(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R, float t)
+{
+	/*
+		No need to check for straightness first,
+		Splitting is likely never called if straight,
+		so the conditional merely slows down processor.
+		
+		CGPointInterpolate is inlined, so doesn't need expanding out 
+		for performance. Note also, if in the same code file, 
+		the compiler will generally inline functions during optimization.
+	*/
+	const CGPoint *P = &seg.a_;
+	CGPoint A = CGPointInterpolate(P[0], P[1], t);
+	CGPoint B = CGPointInterpolate(P[1], P[2], t);
+	CGPoint C = CGPointInterpolate(P[2], P[3], t);
+
+	CGPoint D = CGPointInterpolate(A, B, t);
+	CGPoint E = CGPointInterpolate(B, C, t);
+
+	CGPoint F = CGPointInterpolate(D, E, t);
+
+	if (L)
+	{ *L = WDBezierSegmentMakeWithPoints(seg.a_, A, D, F); }
+
+	if (R)
+	{ *R = WDBezierSegmentMakeWithPoints(F, E, C, seg.b_); }
+
+	return F;
 }
 
-inline CGPoint WDBezierSegmentSplit(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R)
-{
-    return WDBezierSegmentSplitAtT(seg, L, R, 0.5f);
-}
+////////////////////////////////////////////////////////////////////////////////
 
 /*
  http://www.planetclegg.com/projects/WarpingTextToSplines.html
@@ -142,75 +176,6 @@ inline BOOL WDBezierSegmentIsStraight(WDBezierSegment segment)
 {
     // true if the control points coincide with their anchors...
     return CGPointEqualToPoint(segment.a_, segment.out_) && CGPointEqualToPoint(segment.in_, segment.b_);
-}
-
-inline CGPoint WDBezierSegmentSplitAtT(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R, float t)
-{
-    if (WDBezierSegmentIsStraight(seg)) {
-        CGPoint point = WDMultiplyPointScalar(WDSubtractPoints(seg.b_, seg.a_), t);
-        point = WDAddPoints(seg.a_, point);
-        
-        if (L) {
-            L->a_ = seg.a_;
-            L->out_ = seg.a_;
-            L->in_ = point;
-            L->b_ = point;
-        }
-        
-        if (R) {
-            R->a_ = point;
-            R->out_ = point;
-            R->in_ = seg.b_;
-            R->b_ = seg.b_;
-        }
-        
-        return point;
-    }
-    
-    CGPoint A, B, C, D, E, F;
-    
-    //A = WDAddPoints(seg.a_, WDMultiplyPointScalar(WDSubtractPoints(seg.out_, seg.a_), t));
-    //B = WDAddPoints(seg.out_, WDMultiplyPointScalar(WDSubtractPoints(seg.in_, seg.out_), t));
-    //C = WDAddPoints(seg.in_, WDMultiplyPointScalar(WDSubtractPoints(seg.b_, seg.in_), t));
-    //
-    //D = WDAddPoints(A, WDMultiplyPointScalar(WDSubtractPoints(B, A), t));
-    //E = WDAddPoints(B, WDMultiplyPointScalar(WDSubtractPoints(C, B), t));
-    //F = WDAddPoints(D, WDMultiplyPointScalar(WDSubtractPoints(E, D), t));
-    
-    // expand out the function calls above for better performance
-    A.x = seg.a_.x + (seg.out_.x - seg.a_.x) * t;
-    A.y = seg.a_.y + (seg.out_.y - seg.a_.y) * t;
-    
-    B.x = seg.out_.x + (seg.in_.x - seg.out_.x) * t;
-    B.y = seg.out_.y + (seg.in_.y - seg.out_.y) * t;
-    
-    C.x = seg.in_.x + (seg.b_.x - seg.in_.x) * t;
-    C.y = seg.in_.y + (seg.b_.y - seg.in_.y) * t;
-    
-    D.x = A.x + (B.x - A.x) * t;
-    D.y = A.y + (B.y - A.y) * t;
-    
-    E.x = B.x + (C.x - B.x) * t;
-    E.y = B.y + (C.y - B.y) * t;
-    
-    F.x = D.x + (E.x - D.x) * t;
-    F.y = D.y + (E.y - D.y) * t;
-    
-    if (L) {
-        L->a_ = seg.a_;
-        L->out_ = A;
-        L->in_ = D;
-        L->b_ = F;
-    }
-    
-    if (R) {
-        R->a_ = F;
-        R->out_ = E;
-        R->in_ = C;
-        R->b_ = seg.b_;
-    }
-    
-    return F;
 }
 
 inline float firstDerivative(float A, float B, float C, float D, float t)
