@@ -173,7 +173,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     for (int i = 0; i < numNodes-1; i++) {
         WDBezierNode    *a = nodes[i];
         WDBezierNode    *b = nodes[i+1];
-        WDBezierSegment segment = WDBezierSegmentMake(a, b);
+        WDBezierSegment segment = WDBezierSegmentMakeWithNodes(a, b);
         WDBezierSegment L, R;
         
         if (WDBezierSegmentPointDistantFromPoint(segment, [arrowhead insetLength:butt] * scale, arrowTip, &result, &t)) {
@@ -804,7 +804,7 @@ NSString *WDClosedKey = @"WDClosedKey";
             continue;
         }
         
-        seg = WDBezierSegmentMake(prev, node);
+        seg = WDBezierSegmentMakeWithNodes(prev, node);
         if (WDBezierSegmentIntersectsRect(seg, rect)) {
             return YES;
         }
@@ -813,7 +813,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     }
     
     if (self.closed) {
-        seg = WDBezierSegmentMake([nodes_ lastObject], nodes_[0]);
+        seg = WDBezierSegmentMakeWithNodes([nodes_ lastObject], nodes_[0]);
         if (WDBezierSegmentIntersectsRect(seg, rect)) {
             return YES;
         }
@@ -1208,7 +1208,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     for (int i = 1; i < numNodes; i++, segmentIndex ++) {
         curr = nodes_[(i % nodes_.count)];
         
-        segment = WDBezierSegmentMake(prev, curr);
+        segment = WDBezierSegmentMakeWithNodes(prev, curr);
         
         if (!added && WDBezierSegmentFindPointOnSegment(segment, pt, kNodeSelectionTolerance / viewScale, NULL, &t)) {
             WDBezierSegmentSplitAtT(segment,  &segments[segmentIndex], &segments[segmentIndex+1], t);
@@ -1262,7 +1262,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     for (int i = 1; i < numNodes; i++, segmentIndex += 2) {
         curr = nodes_[(i % nodes_.count)];
         
-        segment = WDBezierSegmentMake(prev, curr);
+        segment = WDBezierSegmentMakeWithNodes(prev, curr);
         WDBezierSegmentSplit(segment, &segments[segmentIndex], &segments[segmentIndex+1]);
         
         prev = curr;
@@ -1705,7 +1705,7 @@ NSString *WDClosedKey = @"WDClosedKey";
         prev = nodes[0];
         for (int i = 1; i < nodes.count; i++, prev = curr) {
             curr = nodes[i];
-            segments[i-1] = WDBezierSegmentMake(prev, curr);
+            segments[i-1] = WDBezierSegmentMakeWithNodes(prev, curr);
         }
         
         erasePath = [erasePath pathByFlatteningPath];

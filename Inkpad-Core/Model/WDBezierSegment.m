@@ -23,7 +23,7 @@ float secondDerivative(float A, float B, float C, float D, float t);
 float base3(double t, double p1, double p2, double p3, double p4);
 float cubicF(double t, WDBezierSegment seg);
 
-WDBezierSegment WDBezierSegmentMake(WDBezierNode *a, WDBezierNode *b)
+WDBezierSegment WDBezierSegmentMakeWithNodes(WDBezierNode *a, WDBezierNode *b)
 {
     WDBezierSegment segment;
     
@@ -50,34 +50,34 @@ WDBezierSegmentMakeWithQuadPoints(CGPoint a, CGPoint c, CGPoint b)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+/*
+	WDBezierSegmentIsFlat
+	---------------------
+	Check whether segment can be approximated by a line between endpoints.
+	
+	Suppose we have a horizontal line with tangential controlpoints 
+	at both ends with length r, then the curve deviates at most
+	(3.0/4.0) * r from a straight line. Thus, a 1 pixel tolerance means
+	that the vectors should be within r <= (4.0/3.0) * tolerance
 
-static inline CGPoint CGPointMin(CGPoint P1, CGPoint P2)
-{ return (CGPoint){ MIN(P1.x, P2.x), MIN(P1.y, P2.y) }; }
+	For simplicity and speed it would be nice if we could only check 
+	the euclidian vector coordinates against tolerance. This introduces 
+	an additional error for the worst case scenario (a diagonal line
+	at 45degr angle). To compensate this additional error,
+	tolerance should be divided by sqrt(2). 
+	
+	Conveniently: tolerance * (4.0/3.0) / sqrt(2) = ~tolerance
 
-static inline CGPoint CGPointMax(CGPoint P1, CGPoint P2)
-{ return (CGPoint){ MAX(P1.x, P2.x), MAX(P1.y, P2.y) }; }
+*/
 
-inline BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, float tolerance)
+inline BOOL WDBezierSegmentIsFlat(WDBezierSegment seg, CGFloat deviceTolerance)
 {
-	if (CGPointEqualToPoint(seg.a_, seg.out_) &&
-		CGPointEqualToPoint(seg.in_, seg.b_))
-		return YES;
-
-	// Compute bounding box (WDBezierSegmentGetSimpleBounds)
-	CGPoint min = CGPointMin(seg.a_, seg.out_);
-	CGPoint max = CGPointMax(seg.a_, seg.out_);
-	min = CGPointMin(min, seg.in_);
-	max = CGPointMax(max, seg.in_);
-	min = CGPointMin(min, seg.b_);
-	max = CGPointMax(max, seg.b_);
-
-	// Get bounding box size
-	CGFloat dx = max.x - min.x;
-	CGFloat dy = max.y - min.y;
-
-	return
-	(dx <= tolerance)&&
-	(dy <= tolerance);
+	const CGPoint *P = &seg.a_;
+	if (fabs(P[1].x - P[0].x) > deviceTolerance) return NO;
+	if (fabs(P[1].y - P[0].y) > deviceTolerance) return NO;
+	if (fabs(P[2].x - P[3].x) > deviceTolerance) return NO;
+	if (fabs(P[2].y - P[3].y) > deviceTolerance) return NO;
+	return YES;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

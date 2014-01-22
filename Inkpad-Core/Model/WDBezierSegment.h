@@ -27,7 +27,12 @@ typedef struct {
 } WDBezierSegment;
 
 
-WDBezierSegment WDBezierSegmentMake(WDBezierNode *a, WDBezierNode *b);
+WDBezierSegment
+WDBezierSegmentMakeWithNodes(WDBezierNode *a, WDBezierNode *b);
+WDBezierSegment
+WDBezierSegmentMakeWithQuadPoints(CGPoint a, CGPoint c, CGPoint b);
+
+
 BOOL WDBezierSegmentIsDegenerate(WDBezierSegment seg);
 
 BOOL WDBezierSegmentIntersectsRect(WDBezierSegment seg, CGRect rect);

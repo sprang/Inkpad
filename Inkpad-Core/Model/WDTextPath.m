@@ -343,7 +343,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
     for (int i = 1; i < numNodes; i++) {
         curr = [nodes[(i % nodes.count)] transform:inverse];
         
-        segment = WDBezierSegmentMake(prev, curr);
+        segment = WDBezierSegmentMakeWithNodes(prev, curr);
         length = WDBezierSegmentLength(segment);
         
         if (distance < length) {
@@ -376,7 +376,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
     for (int i = 1; i < numNodes; i++) {
         curr = [nodes[(i % nodes.count)] transform:inverse];
         
-        segments[i-1] = WDBezierSegmentMake(prev, curr);
+        segments[i-1] = WDBezierSegmentMakeWithNodes(prev, curr);
         lengths[i-1] = WDBezierSegmentLength(segments[i-1]);
         totalLength += lengths[i-1];
 
