@@ -13,7 +13,7 @@
 #import "WDBezierNode.h"
 #import "WDUtilities.h"
 
-const float kDefaultFlatness = 6;
+const float kDefaultFlatness = 1.5;
 
 static CGPoint      *vertices = NULL;
 static NSUInteger   size = 128;
