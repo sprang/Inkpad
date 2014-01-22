@@ -653,28 +653,18 @@ static inline double _ComputeValueAtT
 
 static inline double WDBezierSegmentComputeX(WDBezierSegment seg, float t)
 {
-	// Get Bezier co-efficients
-	double X0 = seg.a_.x;
-	double X1 = seg.out_.x;
-	double X2 = seg.in_.x;
-	double X3 = seg.b_.x;
-
 	// Compute x coordinate for t
-	return _ComputeValueAtT(X0, X1, X2, X3, t);
+	const CGPoint *P = &seg.a_;
+	return _ComputeValueAtT(P[0].x, P[1].x, P[2].x, P[3].x, t);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 static inline double WDBezierSegmentComputeY(WDBezierSegment seg, float t)
 {
-	// Get Bezier co-efficients
-	double Y0 = seg.a_.y;
-	double Y1 = seg.out_.y;
-	double Y2 = seg.in_.y;
-	double Y3 = seg.b_.y;
-
 	// Compute y coordinate for t
-	return _ComputeValueAtT(Y0, Y1, Y2, Y3, t);
+	const CGPoint *P = &seg.a_;
+	return _ComputeValueAtT(P[0].y, P[1].y, P[2].y, P[3].y, t);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
