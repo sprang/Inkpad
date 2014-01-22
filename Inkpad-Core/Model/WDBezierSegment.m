@@ -15,8 +15,8 @@
 
 const float kDefaultFlatness = 1.5;
 
-static CGPoint      *vertices = NULL;
-static NSUInteger   size = 128;
+static CGPoint      *gVertices = NULL;
+static NSUInteger   gSize = 128;
 
 float firstDerivative(float A, float B, float C, float D, float t);
 float secondDerivative(float A, float B, float C, float D, float t);
@@ -497,22 +497,22 @@ CGRect WDBezierSegmentBounds(WDBezierSegment seg)
 {
     NSUInteger  index = 0;
     
-    if (!vertices) {
-        vertices = calloc(sizeof(CGPoint), size);
+    if (!gVertices) {
+        gVertices = calloc(sizeof(CGPoint), gSize);
     }
     
-    WDBezierSegmentFlatten(seg, &vertices, &size, &index);
+    WDBezierSegmentFlatten(seg, &gVertices, &gSize, &index);
     
     float   minX, maxX, minY, maxY;
     
-    minX = maxX = vertices[0].x;
-    minY = maxY = vertices[0].y;
+    minX = maxX = gVertices[0].x;
+    minY = maxY = gVertices[0].y;
     
     for (int i = 1; i < index; i++) {
-        minX = MIN(minX, vertices[i].x);
-        maxX = MAX(maxX, vertices[i].x);
-        minY = MIN(minY, vertices[i].y);
-        maxY = MAX(maxY, vertices[i].y);
+        minX = MIN(minX, gVertices[i].x);
+        maxX = MAX(maxX, gVertices[i].x);
+        minY = MIN(minY, gVertices[i].y);
+        maxY = MAX(maxY, gVertices[i].y);
     }
     
     return CGRectMake(minX, minY, maxX - minX, maxY - minY);
