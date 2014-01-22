@@ -121,10 +121,10 @@ CGPoint WDBezierSegmentSplitAtT
 
 	CGPoint F = CGPointInterpolate(D, E, t);
 
-	if (L)
+	if (L != nil)
 	{ *L = WDBezierSegmentMakeWithPoints(seg.a_, A, D, F); }
 
-	if (R)
+	if (R != nil)
 	{ *R = WDBezierSegmentMakeWithPoints(F, E, C, seg.b_); }
 
 	return F;
