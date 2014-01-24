@@ -13,6 +13,8 @@ Next Update
 - Added new tool: Closed Freehand Shape
 - Increased maximum drawing size to 4096x4096
 - Simplified curve fitting implementation
+- Fixed text path layout issue (rendered incorrectly on linear segments)
+- Fixed text path start bar rendering at high magnifications
 
 1.5.1 [currently on the App Store]
 - Fixed broken Github link in the help file
