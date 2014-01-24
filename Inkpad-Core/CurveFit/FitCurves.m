@@ -170,6 +170,7 @@ static BezierCurve GenerateBezier(CGPoint *d, int first, int last, double *uPrim
         bezCurve.pts[3] = d[last];
         bezCurve.pts[1] = WDAddPoints(bezCurve.pts[0], WDScaleVector(tHat1, dist));
         bezCurve.pts[2] = WDAddPoints(bezCurve.pts[3], WDScaleVector(tHat2, dist));
+        
         return bezCurve;
     }
     
@@ -179,6 +180,7 @@ static BezierCurve GenerateBezier(CGPoint *d, int first, int last, double *uPrim
     bezCurve.pts[3] = d[last];
     bezCurve.pts[1] = WDAddPoints(bezCurve.pts[0], WDScaleVector(tHat1, alpha_l));
     bezCurve.pts[2] = WDAddPoints(bezCurve.pts[3], WDScaleVector(tHat2, alpha_r));
+    
     return bezCurve;
 }
 
@@ -207,7 +209,7 @@ static double NewtonRaphsonRootFind(BezierCurve Q, CGPoint P, double u)
     int     i;
     
     // Compute Q(u)
-    Q_u = BezierII(3, Q, u);
+    Q_u = BezierII(3, Q.pts, u);
     
     // Generate control vertices for Q'
     for (i = 0; i <= 2; i++) {
@@ -228,7 +230,8 @@ static double NewtonRaphsonRootFind(BezierCurve Q, CGPoint P, double u)
     // Compute f(u)/f'(u)
     numerator = (Q_u.x - P.x) * (Q1_u.x) + (Q_u.y - P.y) * (Q1_u.y);
     denominator = (Q1_u.x) * (Q1_u.x) + (Q1_u.y) * (Q1_u.y) +
-    (Q_u.x - P.x) * (Q2_u.x) + (Q_u.y - P.y) * (Q2_u.y);
+        (Q_u.x - P.x) * (Q2_u.x) + (Q_u.y - P.y) * (Q2_u.y);
+    
     if (denominator == 0.0f) {
         return u;
     }
@@ -240,13 +243,13 @@ static double NewtonRaphsonRootFind(BezierCurve Q, CGPoint P, double u)
 
 //  Bezier : Evaluate a Bezier curve at a particular parameter value
 //
-static CGPoint BezierII(int degree, BezierCurve V, double t)
+static CGPoint BezierII(int degree, CGPoint *V, double t)
 {
     CGPoint Vtemp[degree+1]; // Local copy of control points
     int     i, j;
     
     for (i = 0; i <= degree; i++) {
-        Vtemp[i] = V.pts[i];
+        Vtemp[i] = V[i];
     }
     
     // Triangle computation
@@ -331,7 +334,7 @@ static double ComputeMaxError(CGPoint *d, int first, int last, BezierCurve bezCu
     *splitPoint = (last - first + 1) / 2;
     
     for (int i = first + 1; i < last; i++) {
-        P = BezierII(3, bezCurve, u[i-first]);
+        P = BezierII(3, bezCurve.pts, u[i-first]);
         v = WDSubtractPoints(P, d[i]);
         dist = V2SquaredLength(v);
         if (dist >= maxDist) {
