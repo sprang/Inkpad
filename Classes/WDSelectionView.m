@@ -249,7 +249,7 @@
     
     if (singleSelection && !self.canvas.transforming && !self.canvas.transformingNode) {
         if ([[WDToolManager sharedInstance].activeTool isKindOfClass:[WDSelectionTool class]]) {
-            [singleSelection drawTextPathControlsWithViewTransform:effective];
+            [singleSelection drawTextPathControlsWithViewTransform:effective viewScale:self.canvas.viewScale];
         }
     }
     

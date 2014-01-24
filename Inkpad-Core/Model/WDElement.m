@@ -283,7 +283,7 @@ NSString *WDShadowKey = @"WDShadowKey";
 {
 }
 
-- (void) drawTextPathControlsWithViewTransform:(CGAffineTransform)viewTransform;
+- (void) drawTextPathControlsWithViewTransform:(CGAffineTransform)viewTransform viewScale:(float)viewScale
 {
 }
 
