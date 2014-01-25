@@ -114,8 +114,8 @@ inline CGPoint WDBezierSegmentTangetAtT(WDBezierSegment seg, float t)
 
 inline BOOL WDBezierSegmentIsStraight(WDBezierSegment segment)
 {
-    // true if the control points coincide with their anchors...
-    return CGPointEqualToPoint(segment.a_, segment.out_) && CGPointEqualToPoint(segment.in_, segment.b_);
+    return WDCollinear(segment.a_, segment.out_, segment.b_) &&
+           WDCollinear(segment.a_, segment.in_,  segment.b_);
 }
 
 inline CGPoint WDBezierSegmentSplitAtT(WDBezierSegment seg, WDBezierSegment *L, WDBezierSegment *R, float t)
@@ -199,6 +199,10 @@ inline  float secondDerivative(float A, float B, float C, float D, float t)
 
 inline float WDBezierSegmentCurvatureAtT(WDBezierSegment seg, float t)
 {
+    if (WDBezierSegmentIsStraight(seg)) {
+        return 0.0f;
+    }
+    
     float xPrime = firstDerivative(seg.a_.x, seg.out_.x, seg.in_.x, seg.b_.x, t);
     float yPrime = firstDerivative(seg.a_.y, seg.out_.y, seg.in_.y, seg.b_.y, t);
     
@@ -399,45 +403,47 @@ BOOL WDBezierSegmentFindPointOnSegment(WDBezierSegment seg, CGPoint testPoint, f
 
 CGPoint WDBezierSegmentPointAndTangentAtDistance(WDBezierSegment seg, float distance, CGPoint *tangent, float *curvature)
 {
+    if (WDBezierSegmentIsStraight(seg)) {
+        float t = distance / WDDistance(seg.a_, seg.b_);
+        CGPoint point = WDMultiplyPointScalar(WDSubtractPoints(seg.b_, seg.a_), t);
+        point = WDAddPoints(seg.a_, point);
+        
+        if (tangent) {
+            *tangent = WDBezierSegmentTangetAtT(seg, t);
+        }
+        
+        if (curvature) {
+            *curvature = 0.0;
+        }
+        return WDBezierSegmentSplitAtT(seg, NULL, NULL, t);
+    }
+    
+    CGPoint     current, last = seg.a_;
     float       delta = 1.0f / 200.0f;
-    float       t2 ,t3, td2, td3, x,y;
-    float       lastX = seg.a_.x, lastY = seg.a_.y;
-    float       progress = 0;
+    float       step, progress = 0;
     
     for (float t = 0; t < (1.0f + delta); t += delta) {
-        t2 = t * t;
-        t3 = t2 * t;
-        
-        td2 = (1-t) * (1-t);
-        td3 = td2 * (1-t);
-        
-        x = td3 * seg.a_.x + 
-        3 * t * td2 * seg.out_.x + 
-        3 * t2 * (1-t) * seg.in_.x +
-        t3 * seg.b_.x;
-        
-        y = td3 * seg.a_.y + 
-        3 * t * td2 * seg.out_.y + 
-        3 * t2 * (1-t) * seg.in_.y +
-        t3 * seg.b_.y;
-        
-        float step = WDDistance(CGPointMake(lastX, lastY), CGPointMake(x, y));
+        current = WDBezierSegmentCalculatePointAtT(seg, t);
+        step = WDDistance(last, current);
         
         if (progress + step >= distance) {
             // it's between the current and last set of points          
             float factor = (distance - progress) / step;
             t = (t - delta) + factor * delta;
             
-            *tangent = WDBezierSegmentTangetAtT(seg, t);
+            if (tangent) {
+                *tangent = WDBezierSegmentTangetAtT(seg, t);
+            }
+            
             if (curvature) {
                 *curvature = WDBezierSegmentCurvatureAtT(seg, t);
             }
+            
             return WDBezierSegmentSplitAtT(seg, NULL, NULL, t);
         }
         
         progress += step;
-        lastX = x;
-        lastY = y;
+        last = current;
     }
     
     return CGPointZero;
@@ -514,6 +520,10 @@ float cubicF(double t, WDBezierSegment seg)
  */
 float WDBezierSegmentLength(WDBezierSegment seg)
 {
+    if (WDBezierSegmentIsStraight(seg)) {
+        return WDDistance(seg.a_, seg.b_);
+    }
+    
     float  z = 1.0f;
     float  z2 = z / 2.0f;
     float  sum = 0.0f;
@@ -561,42 +571,23 @@ float WDBezierSegmentLength(WDBezierSegment seg)
 CGPoint WDBezierSegmentGetClosestPoint(WDBezierSegment seg, CGPoint test, float *error, float *distance)
 {
     float       delta = 0.001f;
-    float       t2 ,t3, td2, td3, x,y;
-    float       lastX = seg.a_.x, lastY = seg.a_.y;
-    float       sum = 0;
+    float       sum = 0.0f;
     float       smallestDistance = MAXFLOAT;
-    CGPoint     closest;
+    CGPoint     closest, current, last = seg.a_;
     
     for (float t = 0; t < (1.0f + delta); t += delta) {
-        t2 = t * t;
-        t3 = t2 * t;
+        current = WDBezierSegmentCalculatePointAtT(seg, t);
+        sum += WDDistance(last, current);
         
-        td2 = (1-t) * (1-t);
-        td3 = td2 * (1-t);
-        
-        x = td3 * seg.a_.x + 
-        3 * t * td2 * seg.out_.x + 
-        3 * t2 * (1-t) * seg.in_.x +
-        t3 * seg.b_.x;
-        
-        y = td3 * seg.a_.y + 
-        3 * t * td2 * seg.out_.y + 
-        3 * t2 * (1-t) * seg.in_.y +
-        t3 * seg.b_.y;
-        
-        float step = WDDistance(CGPointMake(lastX, lastY), CGPointMake(x, y));
-        sum += step;
-        
-        lastX = x;
-        lastY = y;
-        
-        float testDistance = WDDistance(CGPointMake(x,y), test);
+        float testDistance = WDDistance(current, test);
         if (testDistance < smallestDistance) {
             smallestDistance = testDistance;
             *error = testDistance;
             *distance = sum;
-            closest = CGPointMake(x,y);
+            closest = current;
         }
+        
+        last = current;
     }
     
     return closest;
@@ -617,26 +608,11 @@ BOOL WDBezierSegmentGetIntersection(WDBezierSegment seg, CGPoint a, CGPoint b, f
         return NO;
     }
     
-    float           delta = 0.01f;
-    float           r, t2 ,t3, td2, td3;
-    CGPoint         current, last = seg.a_;
+    float       r, delta = 0.01f;
+    CGPoint     current, last = seg.a_;
 
     for (float t = 0; t < (1.0f + delta); t += delta) {
-        t2 = t * t;
-        t3 = t2 * t;
-        
-        td2 = (1-t) * (1-t);
-        td3 = td2 * (1-t);
-        
-        current.x = td3 * seg.a_.x + 
-        3 * t * td2 * seg.out_.x + 
-        3 * t2 * (1-t) * seg.in_.x +
-        t3 * seg.b_.x;
-        
-        current.y = td3 * seg.a_.y + 
-        3 * t * td2 * seg.out_.y + 
-        3 * t2 * (1-t) * seg.in_.y +
-        t3 * seg.b_.y;
+        current = WDBezierSegmentCalculatePointAtT(seg, t);
     
         if (WDLineSegmentsIntersectWithValues(last, current, a, b, &r, NULL)) {
             *tIntersect = WDClamp(0, 1, (t-delta) + delta * r);

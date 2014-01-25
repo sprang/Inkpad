@@ -86,4 +86,36 @@ static NSMutableDictionary *registeredUnits_ = nil;
     return unit;
 }
 
++ (NSString *) localizedUnitName:(NSString *)name
+{
+    static NSMutableDictionary *unitMap_ = nil;
+    if (!unitMap_) {
+        unitMap_ = [NSMutableDictionary dictionary];
+        unitMap_[@"Points"]        = NSLocalizedString(@"Points", @"Points");
+        unitMap_[@"Picas"]         = NSLocalizedString(@"Picas", @"Picas");
+        unitMap_[@"Inches"]        = NSLocalizedString(@"Inches", @"Inches");
+        unitMap_[@"Millimeters"]   = NSLocalizedString(@"Millimeters", @"Millimeters");
+        unitMap_[@"Centimeters"]   = NSLocalizedString(@"Centimeters", @"Centimeters");
+        unitMap_[@"Pixels"]        = NSLocalizedString(@"Pixels", @"Pixels");
+    }
+    
+    return unitMap_[name];
+}
+
++ (NSString *) localizedUnitAbbreviation:(NSString *)abbreviation
+{
+    static NSMutableDictionary *abbrevMap_ = nil;
+    if (!abbrevMap_) {
+        abbrevMap_ = [NSMutableDictionary dictionary];
+        abbrevMap_[@"pt"]   = NSLocalizedString(@"pt", @"Abbreviation for Points unit");
+        abbrevMap_[@"pc"]   = NSLocalizedString(@"pc", @"Abbreviation for Picas unit");
+        abbrevMap_[@"in"]   = NSLocalizedString(@"in", @"Abbreviation for Inches unit");
+        abbrevMap_[@"mm"]   = NSLocalizedString(@"mm", @"Abbreviation for Millimeters unit");
+        abbrevMap_[@"cm"]   = NSLocalizedString(@"cm", @"Abbreviation for Centimeters unit");
+        abbrevMap_[@"px"]   = NSLocalizedString(@"px", @"Abbreviation for Pixels unit");
+    }
+    
+    return abbrevMap_[abbreviation];
+}
+
 @end

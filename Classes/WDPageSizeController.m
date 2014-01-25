@@ -53,7 +53,7 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    UIBarButtonItem *createItem = [[UIBarButtonItem alloc] initWithTitle:@"Create"
+    UIBarButtonItem *createItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", @"Create new drawing")
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:target_
                                                                   action:action_];
@@ -107,7 +107,9 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
 
 - (void)loadView
 {
-    table_ = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 13 * 44) style:UITableViewStyleGrouped];
+    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 13 * 44);
+    
+    table_ = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     table_.delegate = self;
     table_.dataSource = self;
     table_.sectionHeaderHeight = 0;
@@ -218,7 +220,8 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     NSString *width = [formatter stringFromNumber:@(size.width / unit.conversionFactor)];
     NSString *height = [formatter stringFromNumber:@(size.height / unit.conversionFactor)];
     
-    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, unit.abbreviation, height, unit.abbreviation];
+    NSString *abbreviation = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
+    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, abbreviation, height, abbreviation];
 }
 
 - (void) customSizeChanged:(NSNotification *)aNotification
@@ -231,8 +234,29 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     if (section == 0) { // dimensions
         return NSLocalizedString(@"Drawing Size", @"Drawing Size");
     } else {
-        return NSLocalizedString(@"Orientation", @"Orientation");
+        return NSLocalizedString(@"Orientation", @"Page orientation (landscape/portrait)");
     }
+}
+
+- (NSString *) localizedTitleForKey:(NSString *)key
+{
+    // we could duplicate the PageSizes.plist for every localization, but this seems less error prone
+    static NSMutableDictionary *map_ = nil;
+    if (!map_) {
+        map_ = [NSMutableDictionary dictionary];
+        map_[@"Letter"]         = NSLocalizedString(@"Letter", @"U.S. Letter Paper Size");
+        map_[@"Legal"]          = NSLocalizedString(@"Legal", @"U.S. Legal Paper Size");
+        map_[@"Tabloid"]        = NSLocalizedString(@"Tabloid", @"U.S. Tabloid Paper Size");
+        map_[@"A4"]             = NSLocalizedString(@"A4", @"A4");
+        map_[@"A3"]             = NSLocalizedString(@"A3", @"A3");
+        map_[@"B5"]             = NSLocalizedString(@"B5", @"B5");
+        map_[@"B4"]             = NSLocalizedString(@"B4", @"B4");
+        map_[@"Custom Size"]    = NSLocalizedString(@"Custom Size", @"Custom Size");
+        map_[@"Portrait"]       = NSLocalizedString(@"Portrait", @"Portrait");
+        map_[@"Landscape"]      = NSLocalizedString(@"Landscape", @"Landscape");
+    }
+    
+    return map_[key];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -250,7 +274,7 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     if (indexPath.section == kSizeSection) {
         NSString *name = configuration_[indexPath.row][@"Name"];
 
-        cell.textLabel.text = name;
+        cell.textLabel.text = [self localizedTitleForKey:name];
         cell.detailTextLabel.text = [self dimensionsString:configuration_[indexPath.row]];
         
         if ([name isEqualToString:[defaults objectForKey:WDPageSize]]) {
@@ -265,7 +289,9 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
         }
                                     
     } else {
-        cell.textLabel.text = orientations_[indexPath.row];
+        // find the localized orientation string
+        cell.textLabel.text = [self localizedTitleForKey:orientations_[indexPath.row]];
+        
         if ([orientations_[indexPath.row] isEqualToString:[defaults objectForKey:WDPageOrientation]]) {
             cell.imageView.image = [UIImage imageNamed:@"table_checkmark.png"];
         } else {

@@ -20,6 +20,7 @@
 @required
 - (void) paintPath:(WDAbstractPath *)path inContext:(CGContextRef)ctx;
 - (BOOL) transformable;
+- (BOOL) wantsCenteredFillTransform;
 - (BOOL) canPaintStroke;
 - (void) drawSwatchInRect:(CGRect)rect;
 - (void) drawEyedropperSwatchInRect:(CGRect)rect;

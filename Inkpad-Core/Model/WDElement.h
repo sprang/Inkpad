@@ -86,7 +86,7 @@ typedef enum {
 - (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
 - (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform;
 - (void) drawGradientControlsWithViewTransform:(CGAffineTransform)transform;
-- (void) drawTextPathControlsWithViewTransform:(CGAffineTransform)viewTransform;
+- (void) drawTextPathControlsWithViewTransform:(CGAffineTransform)viewTransform viewScale:(float)viewScale;
 
 - (NSSet *) transform:(CGAffineTransform)transform;
 - (void) adjustColor:(WDColor * (^)(WDColor *color))adjustment scope:(WDColorAdjustmentScope)scope;

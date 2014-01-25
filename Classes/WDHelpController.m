@@ -41,7 +41,8 @@
 
 - (NSURL *) helpURL
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"Help"];
+    NSString *resource = NSLocalizedString(@"index", @"Name of Help html file");
+    NSString *path = [[NSBundle mainBundle] pathForResource:resource ofType:@"html" inDirectory:@"Help"];
     return [NSURL fileURLWithPath:path isDirectory:NO];
 }
 

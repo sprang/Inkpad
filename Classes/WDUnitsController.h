@@ -24,6 +24,8 @@
 
 @property (nonatomic, weak) WDDrawing *drawing;
 
++ (float) preferredViewWidth;
+
 @end
 
 extern NSString *WDCustomDrawingSizeChanged;

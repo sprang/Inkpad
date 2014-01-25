@@ -50,11 +50,6 @@
     modeSegment_ = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"None", @"None"),
                                                               NSLocalizedString(@"Color", @"Color"),
                                                               NSLocalizedString(@"Gradient", @"Gradient")]];
-    
-    frame = modeSegment_.frame;
-    frame.size.width += 60;
-    modeSegment_.frame = frame;
-    
     [modeSegment_ addTarget:self action:@selector(modeChanged:) forControlEvents:UIControlEventValueChanged];
     
     item = [[UIBarButtonItem alloc] initWithCustomView:modeSegment_];

@@ -1,0 +1,9 @@
+
+/* Class = "IBUILabel"; text = "Shadow"; ObjectID = "39"; */
+"39.text" = "Ombra";
+
+/* Class = "IBUILabel"; text = "Opacity"; ObjectID = "62"; */
+"62.text" = "Trasparenza";
+
+/* Class = "IBUILabel"; text = "100%"; ObjectID = "vDR-y7-VS4"; */
+"vDR-y7-VS4.text" = "100%";

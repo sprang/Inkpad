@@ -47,6 +47,9 @@ NSString *WDActiveToolDidChange = @"WDActiveToolDidChange";
         WDSelectionTool *groupSelect = (WDSelectionTool *) [WDSelectionTool tool];
         groupSelect.groupSelect = YES;
         
+        WDFreehandTool *closedFreehand = (WDFreehandTool *) [WDFreehandTool tool];
+        closedFreehand.closeShape = YES;
+        
         WDShapeTool *oval = (WDShapeTool *) [WDShapeTool tool];
         oval.shapeMode = WDShapeOval;
         
@@ -66,17 +69,17 @@ NSString *WDActiveToolDidChange = @"WDActiveToolDidChange";
         spiral.shapeMode = WDShapeSpiral;
         
         tools_ = @[[WDSelectionTool tool],
-                  groupSelect,
-                  [WDPenTool tool],
-                  [WDAddAnchorTool tool],
-                  [WDScissorTool tool],
-                  [WDFreehandTool tool],
-                  [WDEraserTool tool],
-                  @[rect, oval, star, poly, spiral, line],
-                  [WDTextTool tool],
-                  [WDEyedropperTool tool], 
-                  [WDScaleTool tool],
-                  [WDRotateTool tool]];
+                   groupSelect,
+                   [WDPenTool tool],
+                   [WDAddAnchorTool tool],
+                   [WDScissorTool tool],
+                   @[[WDFreehandTool tool], closedFreehand],
+                   [WDEraserTool tool],
+                   @[rect, oval, star, poly, spiral, line],
+                   [WDTextTool tool],
+                   [WDEyedropperTool tool],
+                   [WDScaleTool tool],
+                   [WDRotateTool tool]];
     }
     
     return tools_;

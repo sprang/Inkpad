@@ -17,6 +17,7 @@
 @property (nonatomic, assign) CTFontRef fontRef;
 @property (nonatomic, strong) NSString *filepath;
 @property (nonatomic, strong) NSString *fullName;
+@property (nonatomic, strong) NSString *familyName;
 @property (nonatomic, strong) NSString *displayName;
 @property (nonatomic, strong) NSData *digest;
 

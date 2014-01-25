@@ -56,7 +56,9 @@
 
 - (void)loadView
 {
-    table_ = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 5 * 28 + 9 * 44) style:UITableViewStyleGrouped];
+    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 5 * 28 + 9 * 44);
+    
+    table_ = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     table_.delegate = self;
     table_.dataSource = self;
     table_.sectionHeaderHeight = 0;
@@ -96,7 +98,8 @@
         gridSpacing_.text = nil;
     }
     
-    gridSpacing_.placeholder = [NSString stringWithFormat:@"%@ %@", spacing, drawing_.rulerUnit.abbreviation];
+    NSString *abbreviation = [WDRulerUnit localizedUnitAbbreviation:drawing_.rulerUnit.abbreviation];
+    gridSpacing_.placeholder = [NSString stringWithFormat:@"%@ %@", spacing, abbreviation];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -141,6 +144,26 @@
     return configuration_[section][@"Title"];
 }
 
+- (NSString *) localizedTitleForKey:(NSString *)key
+{
+    // we could duplicate the Settings.plist for every localization, but this seems less error prone
+    static NSMutableDictionary *map_ = nil;
+    if (!map_) {
+        map_ = [NSMutableDictionary dictionary];
+        map_[@"Snap to Points"]         = NSLocalizedString(@"Snap to Points", @"Snap to Points");
+        map_[@"Snap to Edges"]          = NSLocalizedString(@"Snap to Edges", @"Snap to Edges");
+        map_[@"Snap to Grid"]           = NSLocalizedString(@"Snap to Grid", @"Snap to Grid");
+        map_[@"Grid"]                   = NSLocalizedString(@"Grid", @"Grid");
+        map_[@"Grid Spacing"]           = NSLocalizedString(@"Grid Spacing", @"Grid Spacing");
+        map_[@"Isolate Active Layer"]   = NSLocalizedString(@"Isolate Active Layer", @"Isolate Active Layer");
+        map_[@"Outline Mode"]           = NSLocalizedString(@"Outline Mode", @"Outline Mode");
+        map_[@"Rulers"]                 = NSLocalizedString(@"Rulers", @"Rulers");
+        map_[@"Size and Units"]         = NSLocalizedString(@"Size and Units", @"Size and Units");
+    }
+    
+    return map_[key];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellIdentifier = @"cellID";
@@ -153,7 +176,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = cellDescription[@"Title"];
+    cell.textLabel.text = [self localizedTitleForKey:cellDescription[@"Title"]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if ([cellDescription[@"Type"] isEqualToString:@"Switch"]) {
@@ -205,8 +228,8 @@
     NSString *width = [formatter stringFromNumber:@(size.width / unit.conversionFactor)];
     NSString *height = [formatter stringFromNumber:@(size.height / unit.conversionFactor)];
     
-
-    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, unit.abbreviation, height, unit.abbreviation];
+    NSString *abbreviation = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
+    return [NSString stringWithFormat:@"%@ %@ × %@ %@", width, abbreviation, height, abbreviation];
 }
 
 - (void) unitsChanged:(NSNotification *)aNotification

@@ -18,4 +18,6 @@
     BOOL            pathStarted_;
 }
 
+@property (nonatomic, assign) BOOL closeShape;
+
 @end

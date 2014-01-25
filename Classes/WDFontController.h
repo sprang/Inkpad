@@ -14,17 +14,17 @@
 @class WDDrawingController;
 @class WDText;
 
-@interface WDFontController : UIViewController <UITableViewDelegate, UITableViewDataSource> {\
-    IBOutlet UIView                 *controls_;
-    IBOutlet UITableView            *table_;
-    IBOutlet UILabel                *sizeLabel_;
-    IBOutlet UISlider               *sizeSlider_;
-    IBOutlet UISegmentedControl     *alignment_;
-    NSString                        *selectedFontName_;
+@interface WDFontController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    IBOutlet UITableView    *faceTable_;
+    IBOutlet UITableView    *familyTable_;
+    IBOutlet UILabel        *sizeLabel_;
+    IBOutlet UISlider       *sizeSlider_;
+    
+    UISegmentedControl      *alignment_;
+    NSString                *lastLoadedFamily_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;
-@property (nonatomic, strong) NSString *selectedFontName;
 
 - (IBAction) takeFontSizeFrom:(id)sender;
 - (IBAction) takeAlignmentFrom:(id)sender;

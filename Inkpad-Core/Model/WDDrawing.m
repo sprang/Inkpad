@@ -27,7 +27,7 @@
 #import "WDUtilities.h"
 
 const float kMinimumDrawingDimension = 16;
-const float kMaximumDrawingDimension = 2048;
+const float kMaximumDrawingDimension = 4096;
 const float kMaximumThumbnailDimension = 120;
 
 // encoder keys

@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <title>Inkpad Help</title>
+            <meta name="author" content="Yannick Loriot">
+            <link rel="stylesheet" type="text/css" href="styles.css">
+            <script src="jquery-1.7.1.min.js"></script>
+            <script src="retina.js"></script>
+    </head>
+    <body>
+        
+        <div class="content">
+            
+            <h1>Qu'est ce qu'Inkpad ?</h1>
+            
+            <img class="logo" src="Icon.png" width="130" height="130" alt="Logo"/>
+            <p>Inkpad est une application de dessin vectoriel conçu à partir de zéro pour l'iPad. Il prend en charge les tracés, les tracés composés, les textes, les textes sur des tracés, les images, les groupes, des masques, les dégradés, et un nombre illimité de calques.</p>
+            <p>Inkpad est un logiciel libre. Il est distribué sous la license "Mozilla Public License v2.0" qui se trouve à <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0</a>. Le code source se trouve sur <a href="https://github.com/sprang/Inkpad">http://github.com/sprang/Inkpad</a>.</p>
+            <div style="clear: both;"></div>
+            
+            <h1>Galerie</h1>
+            <p>La galerie affiche une vignette pour chacun de vos dessins. Appuyez sur une vignette pour ouvrir le dessin afin de le visualiser ou de le modifier. Appuyez sur le titre au-dessous de la vignette pour entrer dans un nouveau titre.</p>
+            <p>Appuyez sur le <b>+</b> dans le coin supérieur droit de l'écran pour créer un nouveau dessin.</p>
+            <p>Appuyez sur le boutton <b>l'appareil photo</b> pour prendre une photo et l'utiliser comme arrière-plan pour un nouveau dessin.</p>
+    
+            <h3>L'import</h3>
+            <p>Inkpad peut importer des images, des polices de caractère (TrueType et OpenType), SVG, SVGZ, et des fichiers Inkpad depuis Dropbox. Appuyez sur <b>Importer</b> pour accéder à votre Dropbox.</p>
+            <p>Les polices de caractère importés apparaissent dans la bibliothèque des <b>Polices de caractères</b> du panneau où ils peuvent être supprimés si vous ne souhaitez plus les utiliser. Lors de l'édition d'un dessin, le panneau des <b>polices de caractère</b> affiche les polices importées mélangées avec les polices intégrées.</p>
+            <p>Appuyez sur les <b>examples</b> pour réinstaller les œuvres inclus avec Inkpad.</p>
+            
+            <h3>L'export</h3>
+            <p>Appuyez sur <b>Sélectionner</b> pour passer en mode de sélection.</p>
+            <p>En mode de sélection, appuyez sur les vignettes pour les sélectionner (ou désélectionner). Quand un ou plusieurs dessins sont sélectionnés, appuyez sur <b>Adresse Électronique</b> pour les envoyer par email, ou tapez sur <b>Dropbox</b> pour les envoyer directement sur votre compte Dropbox.</p>
+            <p>Appuyez sur le boutton de la <b>Corbeille</b> pour supprimer les dessins sélectionnés.</p>
+            <p>Appuyez sur le boutton <b>OK</b> pour quitter le mode de sélection.</p>
+            
+            <h1>Dessin</h1>
+            <p>Utilisez le bouton du menu <b>Editer</b> pour couper, copier, coller, supprimer, et modifier la sélection.</p>
+            <p>Utilisez le bouton du menu <b>Arranger</b> pour déplacer les objets vers l'arrière et vers l'avant de la pile, grouper et dissocier les objets, distribuer les objets, et aligner.</p>
+            <p>Utilisez le bouton du menu <b>Tracer</b> pour ajouter/supprimer des points d'ancrages, ajouter des contours, combiné des tracés, créer des masques, et placer du texte sur un tracé.</p>
+            
+            <img class="color_inline" src="color_wheel.png" width="27" height="27" alt="Color Adjustment"/></h3>
+            <p>Utilisez le bouton du menu <b>Ajustement de la couleur</b> pour mélanger les couleurs de remplissage au travers des formes sélectionnées, régler la teinte, la saturation, la luminosité et la balance des couleurs des objets sélectionnés, et désaturer et inverser les couleurs de la sélection.</p>
+            <p>Lorsque vous utilisez le mélange des couleurs, les formes à chaque extrémité de la sélection doivent avoir des remplissages de couleur unis (pas de dégradés). Par exemple, lors de la fusion horizontale, les formes les plus à gauche et les plus à droite doivent avoir des remplissages de couleur unis. De plus, au moins trois formes doivent être sélectionnés de façon à activer les options de fusion.</p>
+            
+            <img class="undo_inline" src="undo.png" width="24" height="24" alt="Undo"/></h3>
+            <p>Appuyez sur le bouton <b>Annuler</b> pour annuler une modification.</p>
+            
+            <img class="undo_inline" src="redo.png" width="24" height="24" alt="Redo"/></h3>
+            <p>Appuyez sur le bouton <b>Rétablir</b> pour rétablir une modification.</p>
+            
+            <p>En haut à droite de l'écran, il y a plus d'options pour travailler avec votre dessin :</p>
+
+            <div class="example" style="top-margin:-1em;">
+                <img src="drawing_navbar.png" width="185" height="29" alt="Drawing Nav Bar"/>
+            </div>
+            <p>Respectivement, il y a : l'option <b>Ajuster</b>, <b>Placer une Photo</b>, <b>Paramètres</b>, et <b>Partager/Exporter</b>.</p>
+            
+            <h3>Paramètres</h3>
+            <p>Utilisez le panneau <b>Paramètres</b> pour afficher/cacher la grille, contrôler l'espacement de la grille, indiquer si vous souhaitez que les objets dessinés soient aligner sur la grille, aligner sur les points des différents tracés existants, ou encore de les alginer sur les bords des tracés existants. Vous pouvez également afficher et cacher les règles, changer les unités de mesure de votre dessin, et de modifier les dimensions de celui-ci.</p>
+            
+            <p>Lorsque <b>Isoler le Calque Actif</b> est activé, vous ne pouvez éditer que le calque actif. Les autres calques dans votre dessin seront partiellement masqués. Cela permet de simplifier rla modification du contenu d'un calque sans toucher accidentellement quelque chose dans un autre calque.</p>
+            
+            <p>Lorsque le <b>Mode Contour</b> est activé, vous ne pouvez voir que les contours des objets présent dans votre dessin. Cela permet de simplifier la sélection des objects qui sont masqués par d'autres objets. Elle réduit également de manière significative le temps de rendu pour les dessins complexes.</p>
+            
+            <h3>Zoom</h3>
+            <p>Utilisez geste standard d'iOS du pincement pour zoomer et dézoomer. Une fois que vous avez commencé un geste de pincement, vous pouvez lever un doigt pour déplacer le dessin autour sans zoom.</p>
+
+            <p>Si les unités de mesures de votre dessin sont en pixels, Inkpad affiche le dessin à la taille réelle des pixels lorsque le niveau de zoom est de 100% (comme indiqué dans la barre de navigation).</p>
+
+            <p>Si vous utilisez des unités qui ne correspondent pas à une mesure physique (pouces, centimètres, etc), Inkpad affiche le dessin au format d'impression lorsque le niveau de zoom est de 100%.</p>
+            
+            <h1>Outils</h1>
+            
+            <img class="tool_palette" src="tools.png" width="50" height="196" alt="Tool Palette"/>
+            <p>Inkpad fournit un certain nombre d'outils pour créer et modifier votre dessin.</p>
+
+            <p>La palette d'outils flotte toujours au-dessus de la toile. Faites-la glisser pour la déplacer autour de l'écran. Donner un petit coup rapide pour l'enlever de votre chemin si nécessaire.</p>
+				
+            <p>Vous pouvez modifier le comportement de nombreux outils en maintenant un deuxième doigt sur ​​le dessin <b>après</b> avoir commencer le faire glisser. Si vous appliquez le deuxième contact avant de commencer à glisser, vous zoomerez sur sur le dessin.</p>
+
+			<p>Le comportement de chacun des outils est décrit dans les sections ci-dessous.</p>
+				
+			<div style="clear:both;padding-bottom:0.25em;"></div>
+            
+            <h3>Outils de Selection et de Multi-Selection</h3>
+            
+            <img class="tool_inline" src="select.png" width="30" height="30" alt="Selection Tool"/>
+            <p>L'outil de sélection sélectionne toujours un seul objet lorsque vous appuyez sur le dessin. Tous les objets précédement séléctionnés sont déselectionnés.</p>
+            
+            <img class="tool_inline" src="groupSelect.png" width="30" height="30" alt="Multi Selection Tool"/>
+            <p>L'outil de multi-sélection ne rejette pas la sélection précédente, mais ajoute de nouveaux objets à la sélection. Le fait de toucher un objet sélectionné avec l'outil multi-sélection le désélectionne.</p>
+            
+            <p>Sélectionnez un groupe d'objets en appuyant sur une partie vide du dessin et faire glisser pour les inclure. Une boîte (appelé un chapiteau) apparaît pour indiquer la zone de sélection.</p>
+            
+            <p>Faites glisser les objets sélectionnés pour les déplacer autour de votre dessin. Vous pouvez contraindre le mouvement horizontalement, en diagonale ou verticalement en maintenant un deuxième doigt sur ​​la toile après avoir commencé le glissement.</p>
+            
+            <p>Quand un seul tracé est sélectionné, vous pouvez modifier les points d'ancrages et les points de contrôle de celui-ci. Comme avec l'outil <b>Plume</b> décrit après, en maintenant un deuxième doigt lorsque vous faites glisser un point de commande force le point de commande opposée à rester fixe.</p>
+
+            <p>Tapez deux fois sur les points d'ancrages d'un tracé pour les convertir entre les coins et les courbes. Tapez deux fois sur un point de commande pour le supprimer.</p>
+            
+            <p>Tapez deux fois et faites glisser un point d'ancrage pour modifier les points de contrôle en miroir les uns des autres.</p>
+            
+            <h3>Outil Plume <img class="tool_header" src="pen.png" width="30" height="30" alt="Pen Tool"/></h3>
+            <p>L'outil Plume est le moyen le plus puissant pour créer des tracés dans Inkpad. Vous pouvez l'utiliser pour définir toute les formes possibles. Pour commencer, sélectionnez la <b>Plume</b> de la palette d'outils.</p>
+            
+            <p>Appuyez une fois sur le dessin pour ajouter un point d'angle unique (une ancre) à votre forme. Une série d'appui simple produira un polygone à angles vifs.</p>
+            
+            <div class="example">
+                <img src="polygon_path.png" width="195" height="84" alt="Polygon"/>
+            </div>
+            
+            <p>Pour faire un bord incurvé, appuyez et faites glisser. Vous verrez une série de poignées de contrôle apparaitrent qui déterminent la forme de la courbe. Les poignées de commande les plus éloignées sont issus du point d'ancrage, la plus extrême celle de la courbe.</p>
+            
+            <div class="example">
+                <img src="curve.png" width="217" height="167" alt="Curve"/>
+            </div>
+            
+            <p>Vous pouvez également déplacer les poignées de contrôle indépendamment les unes des autres. Une fois que vous commencez à faire glisser, toucher le dessin avec un deuxième doigt pour maintenir la poignée de contrôle opposée fixe. Cela vous permet de créer deux segments courbés qui forment un coin.</p>
+
+            <div class="example">
+                <img src="corner.png" width="200" height="200" alt="Corner"/>
+            </div>
+            
+            <p>Appuyez sur le premier point d'ancrage dans le tracé pour le fermer.</p>
+            
+            <p>Appuyez deux fois sur le dernier point ancrage du tracé afin de finir la forme sans la fermer.</p>
+	
+            <p>Pour continuer la modification d'un chemin non fermé existant, vous devez le sélectionner avec l'outil de <b>Sélection</b>. Ensuite, choisissez l'outil <b>Plume</b> et appuyez sur l'un des points du tracé. Vous pouvez maintenant étendre le tracé ou appuyer sur le point d'extrémité opposée pour le fermer.</p>
+            
+            <h3>Outil Main Levée <img class="tool_header" src="brush.png" width="30" height="30" alt="Freehand Tool"/></h3>
+            <p>L'outil <b>Main Levée</b> permet de dessiner des formes libre sur le calque. C'est un excellent outils pour griffonner et peindre.</p>
+            
+            <h3>Outil Gomme <img class="tool_header" src="eraser.png" width="30" height="30" alt="Eraser Tool"/></h3>
+            <p>L'outil <b>Gomme</b> permet d'effacer des parties de formes dans votre dessin. Il fonctionne sur n'importe quel tracé dissocié ou composé.</p>
+            
+            <p>Si il y a une sélection, l'outil <b>Gomme</b> ne fonctionnera que sur les objets sélectionnés.</p>
+            
+            <p>Vous pouvez ajuster la largeur de la gomme en passant par le petit panneau de configuration qui apparaît au bas de la toile lorsque l'outil <b>Gomme</b> est sélectionné.</p>
+            
+            <h3>Outil Ajouter des Points d'Ancrage <img class="tool_header" src="add_anchor.png" width="30" height="30" alt="Add Anchor Tool"/></h3>
+            <p>L'outil <b>Ajouter des Points d'Ancrage</b> ajoute des points d'ancrage à des formes existantes de votre dessin.</p>
+            
+            <p>Appuyez sur le bord d'une forme pour ajouter un nouveau point d'ancrage.</p>
+            
+            <p>L'outil <b>Ajouter des Points d'Ancrage</b> sélectionne la forme si cela est nécessaire, mais il est plus facile d'ajouter des ancres si vous sélectionnez d'abord le tracé afin que vous puissiez voir les points d'ancrage déjà existants.</p>
+            
+            <h3>Outil Ciseaux <img class="tool_header" src="scissor.png" width="30" height="30" alt="Scissor Tool"/></h3>
+            <p>L'outil <b>Ciseaux</b> permet de couper les tracé existants.</p>
+            
+            <p>Pour couper un tracé, il suffit d'appuyer sur le bord que vous souhaitez couper. Pour couper au niveau d'un point d'ancrage, il faut appuyez dessus.</p>
+
+            <p>Si le tracé a déjà été fermé, le tracé s'ouvre automatiquement et les deux points d'extrémités seront situés à l'emplacement du point de toucher. Si le tracé n'a pas été fermé, il sera divisé en deux tracé distinct au niveau de la touche.</p>
+            
+            <h3>Outil Forme <img class="tool_header" src="rect.png" width="30" height="30" alt="Rectangle Tool"/>
+			            <img class="tool_header" src="oval.png" width="30" height="30" alt="Oval Tool"/>
+			            <img class="tool_header" src="star.png" width="30" height="30" alt="Star Tool"/>
+                        <img class="tool_header" src="polygon.png" width="30" height="30" alt="Polygon Tool"/>
+                        <img class="tool_header" src="spiral.png" width="30" height="30" alt="Spiral Tool"/>
+			            <img class="tool_header" src="line.png" width="30" height="30" alt="Line Tool"/></h3>
+            <p>L'outil <b>Forme</b> permet de créer des rectangles, des ovales, des étoiles, des polygones, des spirales et des lignes.</p>
+            
+            <p>Appuyez et maintenez l'outil <b>Forme</b> actif dans la palette d'outils pour y accéder. Une sous-palette apparaît qui vous permet de choisir une forme différente.</p>
+            
+            <p>Par défaut, les rectangles et les ovales ne sont pas limités à ratio particulier. Si vous voulez un carré ou un cercle parfait, touchez l'écran avec un deuxième doigt après que vous ayez commencé à faire glisser la forme.</p>
+
+            <p>Vous pouvez régler le rayon des coins du rectangle, le nombre de points dans les étoiles, le taux de décroissance des spirales, et le nombre de côtés dans les polygones à l'aide un petit panneau de configuration qui apparaît au bas de l'interface lorsque vous sélectionnez l'outil correspondant.</p>
+
+            <p>Si vous touchez l'écran avec un deuxième doigt tout en faisant glisser une étoile, le rayon intérieur de celle-ci est maintenue constante, ce qui vous permet de faire en sorte que l'étoile sera plus ou moins pointu.</p>
+		
+            <p>Si vous touchez l'écran avec un deuxième doigt tout en faisant glisser une ligne, la ligne sera limitée dans le sens horizontale, diagonale ou verticale.</p>
+            
+            <h3>Outil Pipette <img class="tool_header" src="eyedropper.png" width="30" height="30" alt="Eyedropper Tool"/></h3>
+            <p>L'outil <b>Pipette</b> collecte les attributs de style des objets existants dans votre dessin. Il prend et applique les propriétés qui peuvent être modifiées dans les panneaux de style décrites dans la section suivante.</p>
+
+            <p>Pour utiliser la pipette, faites glisser votre doigt sur les objets de votre dessin jusqu'à ce que vous avez ramassé le style que vous souhaitez appliquer.</p>
+
+            <p>Si rien n'est sélectionné lorsque vous faites glisser la pipette, les styles seront appliqués à l'objet suivant que vous créez. Si quelque chose est sélectionnée, les modèles sont appliqués à aux objets sélectionnés.</p>
+            
+            <h3>Outil Texte <img class="tool_header" src="text.png"  width="30" height="30" alt="Text Tool"/></h3>
+            <p>L'outil <b>Texte</b> permet de créer des objets contenant du texte.</p>
+            
+            <p>Tapez et faites glisser pour créer une zone de texte sur la toile. Lorsque vous avez terminé le déplacement, le clavier virtuel apparaît, vous permettant de modifier le texte. Pour arrêter l'édition, appuyez n'importe où sur la toile.</p>
+            <p>
+            
+            <p>Pour modifier à nouveau le texte, sélectionnez l'outil Texte, puis tapez sur le texte voulu, ou choisissez l'un des outils de sélection et appuyez deux fois sur l'objet texte.</p>
+            
+            <h3>Outil Redimensionnement et Rotation</h3>
+            <p>L'outil <b>Redimensionnement et Rotation</b> permet de transformer les objets sélectionnés.</p>
+
+            <p>Une simple pression en utilisant l'un de ces outils permet de déplacer le point de pivot (initialement il apparaît au centre de la sélection). Les objets se redimensionnent ou tournent le long du pivot lorsque vous faites les faites glisser.</p>
+            
+            <img class="tool_inline" src="scale.png"  width="30" height="30" alt="Scale Tool"/>
+            <p>L'outil <b>Redimensionnement</b> maintient le ratio d'aspect des objets sélectionnés, cependant en maintenant un deuxième doigt tout en faisant glisser l'autre doigt permet d'effectuer un redimensionnement non uniforme.</p>
+
+            <img class="tool_inline" src="rotate.png"  width="30" height="30" alt="Rotate Tool"/>
+            <p>L'outil <b>Rotation</b> permet de tourner librement, sauf si vous maintenez un deuxième doigt tout en faisant glisser, dans ce cas, l'outil limite la rotation à 45°.</p>
+            
+            <h1>Styliser les Objets</h1>
+            <p>Appuyez sur les boutons de style dans la barre d'outils pour modifier l'apparence des objets sélectionnés :</p>
+            
+            <div class="example" style="margin-bottom:-0.5em;">
+                <img src="style_bar.png" width="252" height="30" alt="Styles Toolbar"/>
+            </div>
+            <p>Ils sont, respectivement dans : <b>Police de caractère</b>, <b>Ombre et Opacité</b>, <b>Contour</b>, <b>Remplissage</b>, et <b>Nuanciers</b>.</p>
+            
+            <p>L'<b>Ombre et Opacité</b> indique la couleur actuelle de l'ombre et de sa direction, ainsi que l'opacité de l'objet. Les couleurs indiquées dans les boutons <b>Contour</b> et <b>Remplissage</b> sont les valeurs utilisées lors de la création de nouvelles formes.</p>
+            
+            <h3>Nuanciers</h3>
+            <p>Le <b>Nuancier</b> enregistre couleurs et des dégradés pour une réutilisation ultérieure.</p>
+            
+            <p>Les commandes <b>Ombre et Opacité</b> / <b>Contour</b> / <b>Remplissage</b>  au bas de l'écran détermine quel style est enregistré lorsque vous appuyez sur le bouton <b>+</b> dans le coin supérieur droit du panneau. Il détermine également quel style est utilisé lorsque vous appuyez sur l'un des échantillons dans le panneau.</p>
+
+            <p>Comme les gradients fonctionnent comme du remplissage, en tapant sur une nuance de dégradé, cela applique le style de remplissage indépendamment du réglage.</p>
+            
+            <h1>Dégradés</h1>
+            <p>Un dégradé est un remplissage qui assure la transition entre deux couleurs ou plus. Un dégradé est définie par un jeu d'étapes de couleurs. Chaque étape spécifie une couleur et une position dans le gradient.</p>
+            
+            <p>Pour appliquer un dégradé, ouvrez le panneau <b>Remplissage</b> et appuyez sur l'onglet <b>Dégradé</b> la barre de titre.</p>
+
+            <p>Appuyez sur une étape de couleur pour la sélectionner. Utilisez les curseurs de couleur en haut de l'écran pour modifier la couleur de l'étape. Faites glisser l'étape de couleur pour changer sa position dans le gradient.</p>
+
+            <p>Pour inverser la direction du gradient, balayez vers la gauche ou vers la droite dans la barre de dégradé (la zone au-dessus des étapes de couleurs).</p>
+            
+            <p>Pour répartir les étapes dans un gradient, tapez deux fois sur la barre de dégradé.</p>
+
+            <p>Pour ajouter une nouvelle étape de couleur, appuyez sur l'espace vide entre les étapes de couleur (au-dessous de la barre de dégradé).</p>
+            
+            <p>Pour supprimer une étape de couleur du gradient, faites glisser vers le haut ou vers le bas.</p>
+
+            <p>Quand une forme a un fond en dégradé (et que c'est le seul objet sélectionné), les poignées de contrôle spéciales apparaîssent pour permettre de modifier les points de début et de fin du dégradé :</p>
+            <div class="example" style="margin-bottom:-1.5em;">
+                <img src="gradient_canvas.png" width="215" height="150" alt="Gradient on Canvas"/>
+            </div>
+            
+            <h1>Calques</h1>
+            <p>Inkpad supporte un nombre illimité de couches. Les calques sont utiles pour organiser des dessins complexes. Chaque composant du dessin peut être sur son propre calque, ce qui le rend beaucoup plus facile à modifier.</p>
+
+            <p>Vous pouvez supprimer, dupliquer, réorganiser, renommer, verrouiller et masquer les calques. Vous pouvez également contrôler la transparence de chacune d'entre elle.</p>
+            
+            <p>Appuyez sur les bouton des <b>Calques</b> dans la barre d'outils pour voir les calques dans votre dessin.</p>
+            
+            <h1>Joindre les Tracés</h1>
+            <p>Pour joindre deux tracés non fermés, sélectionnez les deux tracés et choisir <b>Joindre les Tracés</b> dans le menu <b>Tracer</b>.</p>
+
+            <p>Les tracés sont rejoints en utilisant leurs plus proches points de terminaison, de sorte que vous pouvez choisir l'alignement avant de <b>Joindre les Tracés</b>.</p>
+
+            <p>Si les extrémités opposées du nouveau tracé coïncident après assemblage, le nouveau tracé est fermé.</p>
+            
+            <h1>Grouper les Tracés</h1>
+            <p>Un groupement de tracé est un tracé composé de plusieurs sous-tracés. Ils sont utiles pour créer des formes qui contiennent des trous.</p>
+            
+            <p>Pour créer un tracé composé, sélectionnez deux ou plusieurs tracés et/ou des tracés composés et choisissez <b>Grouper les Tracés</b> dans le menu <b>Tracer</b>.</p>
+            
+            <p>Pour dégroupper un tracé composé en tracé simples, choisissez <b>Séparer les Tracés</b> dans le menu <b>Tracer</b>.</p>
+            
+            <p>L'orientation relative de chaque sous-tracé dans un tracé groupé détermine les sous-tracé qui sont remplis. Si tous les tracés s'étendent dans la même direction, ils sont tous remplis.</p>
+
+            <p>Si vous avez combiné deux tracés dans l'espoir de faire un trou, mais que le trou est rempli, sélectionnez l'un des deux tracé dans le tracé groupé et choisissez <b>Inverser la Direction du Tracé</b> dans le menu <b>Tracer</b>.</p>
+            <p>
+            
+            <h1>Placer du Texte sur un Tracé</h1>
+            <p>Pour placer du texte sur un tracé, sélectionnez un tracé non-groupé (ou un tracé et un objet texte existant) et choisissez <b>Placer du Texte sur le Tracé</b> dans le menu <b>Tracer</b>.</p>
+   
+            <p>Un éditeur de texte apparaît, vous permettant de modifier le texte sur le tracé. Réactiver cet éditeur plus tard en faisant une double touche sur le tracé avec l'un des outils de sélection (ou en tapant sur le tracé avec l'outil texte).</p>
+            
+            <p>Le tracé est modifiable comme tout tracé normal, mais les paramètres de style s'appliquent uniquement au texte.</p>
+            
+            <p>Faites glisser la barre de démarrage qui apparaît au début du texte pour ajuster la position de départ du texte sur le chemin.</p>
+            
+            <p>Pour faire apparaître le texte de l'autre côté du chemin, choisissez <b>Inverser la Direction du Tracé</b> dans le menu <b>Tracer</b>.</p>
+            
+            <h1>Les Masques</h1>
+            <p>Un masque est un tracé, composé, ou un objet texte qui attache le contenu des autres éléments de dessin.</p>
+
+            <p>Pour créer un masque, sélectionnez les objets que vous souhaitez masquer et le tracé ou l'objet texte que vous souhaitez utiliser comme masque (l'objet de masquage doit être l'objet le plus haut sélectionné). Choisissez <b> Masquer</b> dans le menu <b>Tracer</b>.</p>
+            <p>
+            
+            <p>Pour démasquer des objets, sélectionnez l'objet masqué et choisissez <b>Afficher</b> dans le menu <b>Tracer</b>.</p>
+            
+            <p>Un masque de tracé peut avoir un fond et un contour, comme tout chemin normal.</p>
+        </div>
+    </body>
+    
+    <script type="text/javascript">
+        highdpi_init();
+    </script>
+</html>

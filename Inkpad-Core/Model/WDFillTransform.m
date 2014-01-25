@@ -26,9 +26,10 @@ NSString *WDFillTransformTransformKey = @"WDFillTransformTransformKey";
 @synthesize end = end_;
 @synthesize transform = transform_;
 
-+ (WDFillTransform *) fillTransformWithRect:(CGRect)rect
++ (WDFillTransform *) fillTransformWithRect:(CGRect)rect centered:(BOOL)centered
 {
-    CGPoint start = CGPointMake(CGRectGetMinX(rect), CGRectGetMidY(rect));
+    float   startX = centered ? CGRectGetMidX(rect) : CGRectGetMinX(rect);
+    CGPoint start = CGPointMake(startX, CGRectGetMidY(rect));
     CGPoint end = CGPointMake(CGRectGetMaxX(rect), CGRectGetMidY(rect));
     
     WDFillTransform *fT = [[WDFillTransform alloc] initWithTransform:CGAffineTransformIdentity start:start end:end];
@@ -69,13 +70,9 @@ NSString *WDFillTransformTransformKey = @"WDFillTransformTransformKey";
     return self; 
 }
 
-- (BOOL) isDefaultInRect:(CGRect)rect
+- (BOOL) isDefaultInRect:(CGRect)rect centered:(BOOL)centered
 {
-    CGPoint start = CGPointMake(CGRectGetMinX(rect), CGRectGetMidY(rect));
-    CGPoint end = CGPointMake(CGRectGetMaxX(rect), CGRectGetMidY(rect));
-        
-    return (CGPointEqualToPoint(start_, start) && CGPointEqualToPoint(end_, end) &&
-            CGAffineTransformIsIdentity(self.transform));
+    return [self isEqual:[WDFillTransform fillTransformWithRect:rect centered:centered]];
 }
 
 - (BOOL) isEqual:(WDFillTransform *)fillTransform

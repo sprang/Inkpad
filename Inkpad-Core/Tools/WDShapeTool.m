@@ -21,18 +21,12 @@
 #import "WDShapeTool.h"
 #import "WDUtilities.h"
 
-#if TARGET_OS_IPHONE
-#import "UIView+Additions.h"
-#endif
-
 NSString *WDShapeToolStarInnerRadiusRatio = @"WDShapeToolStarInnerRadiusRatio";
 NSString *WDShapeToolStarPointCount = @"WDShapeToolStarPointCount";
 NSString *WDShapeToolPolygonSideCount = @"WDShapeToolPolygonSideCount";
 NSString *WDShapeToolRectCornerRadius = @"WDShapeToolRectCornerRadius";
 NSString *WDDefaultShapeTool = @"WDDefaultShapeTool";
 NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
-
-#define kOptionsViewCornerRadius 9
 
 @implementation WDShapeTool
 
@@ -334,6 +328,7 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
     
     if (!optionsView_) {
         [[NSBundle mainBundle] loadNibNamed:@"ShapeOptions" owner:self options:nil];
+        [self configureOptionsView:optionsView_];
         
         if (shapeMode_ == WDShapeRectangle) {
             optionsSlider_.minimumValue = 0;
@@ -348,18 +343,7 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
             optionsSlider_.minimumValue = 10;
             optionsSlider_.maximumValue = 99;
         }
-        
-        optionsSlider_.backgroundColor = nil;
         optionsSlider_.exclusiveTouch = YES;
-        
-        optionsView_.layer.cornerRadius = kOptionsViewCornerRadius;
-        
-        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRoundedRect:optionsView_.bounds cornerRadius:kOptionsViewCornerRadius];
-        CALayer *layer = optionsView_.layer;
-        layer.shadowPath = shadowPath.CGPath;
-        layer.shadowOpacity = 0.4f;
-        layer.shadowRadius = 2;
-        layer.shadowOffset = CGSizeZero;
         
         if (shapeMode_ == WDShapeRectangle) {
             optionsTitle_.text = NSLocalizedString(@"Corner Radius", @"Corner Radius");
@@ -370,8 +354,6 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
         } else if (shapeMode_ == WDShapeSpiral) {
             optionsTitle_.text = NSLocalizedString(@"Decay", @"Decay");
         }
-        
-        [optionsView_ addParallaxEffect];
     }
     
     [self updateOptionsSettings];

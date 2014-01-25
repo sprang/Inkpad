@@ -21,8 +21,7 @@
 
 NSString *WDEraserToolSize = @"WDEraserToolSize";
 
-#define kOptionsViewCornerRadius    9
-#define kMaxError                   5.0f
+#define kMaxError   5.0f
 
 @implementation WDEraserTool
 
@@ -139,31 +138,13 @@ NSString *WDEraserToolSize = @"WDEraserToolSize";
 {
     if (!optionsView_) {
         [[NSBundle mainBundle] loadNibNamed:@"ShapeOptions" owner:self options:nil];
+        [self configureOptionsView:optionsView_];
         
         optionsSlider_.minimumValue = 1;
         optionsSlider_.maximumValue = 100;
-        optionsSlider_.backgroundColor = nil;
         optionsSlider_.exclusiveTouch = YES;
         
-        optionsView_.layer.cornerRadius = kOptionsViewCornerRadius;
-        
-        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRoundedRect:optionsView_.bounds cornerRadius:kOptionsViewCornerRadius];
-        CALayer *layer = optionsView_.layer;
-        
-        layer.shadowPath = shadowPath.CGPath;
-        layer.shadowOpacity = 0.33f;
-        layer.shadowRadius = 10;
-        layer.shadowOffset = CGSizeZero;
-        
         optionsTitle_.text = NSLocalizedString(@"Eraser Size", @"Eraser Size");
-        
-        [optionsSlider_ addTarget:self
-                           action:@selector(takeSliderValueFrom:)
-                 forControlEvents:UIControlEventValueChanged];
-        
-        [optionsSlider_ addTarget:self
-                           action:@selector(takeFinalSliderValueFrom:)
-                 forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
     }
     
     [self updateOptionsSettings];
