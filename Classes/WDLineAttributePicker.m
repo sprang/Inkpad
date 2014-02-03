@@ -20,12 +20,23 @@
 @synthesize join = join_;
 @synthesize mode = mode_;
 
+const CGFloat highlightComponents[] = {0.0f, 118.0f / 255.0f, 1.0f, 0.9f};
+const CGFloat normalComponents[] = {125.0f / 255.0f, 147.0f / 255.0f, 178.0f / 255.0f, 0.8f};
+const CGFloat highlightGray = 0.9f;
+const CGFloat normalGray = 0.2f;
+const float radius = 3.0f;
+
 + (UIImage *) joinImageWithSize:(CGSize)size join:(CGLineJoin)join highlight:(BOOL)highlight
 {
     CGMutablePathRef pathRef = CGPathCreateMutable();
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    // set this up so that we can set colors via component array
+    CGColorSpaceRef strokeColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextSetStrokeColorSpace(ctx, strokeColorSpace);
+    CGColorSpaceRelease(strokeColorSpace);
     
     float x = floor(size.width * 0.4f) + 0.5;
     float y = floor(size.width * 0.4f) + 0.5 - 1;
@@ -40,20 +51,16 @@
     
     CGContextAddPath(ctx, pathRef);
     CGContextSetLineWidth(ctx, lineWidth);
-    if (highlight) {
-        CGContextSetRGBStrokeColor(ctx, 0.0f, 118.0f / 255.0f, 1.0f, 0.9f);
-    } else {
-        CGContextSetGrayStrokeColor(ctx, 0.75f, 0.5f);
-    }
+    CGContextSetStrokeColor(ctx, highlight ? highlightComponents : normalComponents);
     CGContextStrokePath(ctx);
     
     CGContextAddPath(ctx, pathRef);
     CGContextSetLineWidth(ctx, 1);
-    CGContextSetGrayStrokeColor(ctx, 0, 1);
+    CGContextSetGrayStrokeColor(ctx, highlight ? highlightGray : normalGray, 1);
     CGContextStrokePath(ctx);
     
-    CGContextSetGrayFillColor(ctx, 0, 1);
-    CGContextAddEllipseInRect(ctx, CGRectMake(x - 2.5, y - 2.5, 5, 5));
+    CGContextSetGrayFillColor(ctx, highlight ? highlightGray : normalGray, 1);
+    CGContextAddEllipseInRect(ctx, CGRectMake(x - radius, y - radius, radius * 2, radius * 2));
     CGContextFillPath(ctx);
     
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
@@ -71,6 +78,11 @@
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
+    // set this up so that we can set colors via component array
+    CGColorSpaceRef strokeColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextSetStrokeColorSpace(ctx, strokeColorSpace);
+    CGColorSpaceRelease(strokeColorSpace);
+    
     float x = (cap == kCGLineCapButt) ? floor(size.width * 0.25f) : floor(size.width * 0.5f);
     float y = floor(size.width * 0.5f) + 0.5;
     int lineWidth = size.width * 0.9f;
@@ -83,22 +95,18 @@
     
     CGContextAddPath(ctx, pathRef);
     CGContextSetLineWidth(ctx, lineWidth);
-    if (highlight) {
-        CGContextSetRGBStrokeColor(ctx, 0.0f, 118.0f / 255.0f, 1.0f, 0.9f);
-    } else {
-        CGContextSetGrayStrokeColor(ctx, 0.75f, 0.5f);
-    }
+    CGContextSetStrokeColor(ctx, highlight ? highlightComponents : normalComponents);
     CGContextStrokePath(ctx);
     
     CGContextAddPath(ctx, pathRef);
     CGContextSetLineWidth(ctx, 1);
-    CGContextSetGrayStrokeColor(ctx, 0, 1);
+    CGContextSetGrayStrokeColor(ctx, highlight ? highlightGray : normalGray, 1);
     CGContextStrokePath(ctx);
     
-    CGContextSetGrayFillColor(ctx, 0, 1);
+    CGContextSetGrayFillColor(ctx, highlight ? highlightGray : normalGray, 1);
     x = round(x) + 0.5f;
     y = round(y) - 0.5f;
-    CGContextAddEllipseInRect(ctx, CGRectMake(x - 2.5, y - 2.5, 5, 5));
+    CGContextAddEllipseInRect(ctx, CGRectMake(x - radius, y - radius, radius * 2, radius * 2));
     CGContextFillPath(ctx);
     
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
