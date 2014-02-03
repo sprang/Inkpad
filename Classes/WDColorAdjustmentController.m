@@ -225,8 +225,8 @@
     if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint velocity = [sender velocityInView:view];
         
-        BOOL xSign = (velocity.x < 0) ? -1 : 1;
-        BOOL ySign = (velocity.y < 0) ? -1 : 1;
+        float xSign = (velocity.x < 0) ? -1 : 1;
+        float ySign = (velocity.y < 0) ? -1 : 1;
         
         velocity.x = powf(fabs(velocity.x), kVelocityDampening) * xSign;
         velocity.y = powf(fabs(velocity.y), kVelocityDampening) * ySign;
