@@ -22,6 +22,8 @@
 #import "WDPropertyManager.h"
 #import "WDUtilities.h"
 
+const float kMaxStrokeWidth = 300.0f;
+
 @implementation WDStrokeController
 
 @synthesize drawingController = drawingController_;
@@ -132,12 +134,12 @@
     v = log(v);
     v /= kXLog;
     
-    return (v * 100);
+    return (v * kMaxStrokeWidth);
 }
 
 - (float) sliderValueToStrokeWidth
 {
-    float percentage = WDClamp(0.0f, 1.0f, (widthSlider_.value) / 100.0f);
+    float percentage = WDClamp(0.0f, 1.0f, (widthSlider_.value) / kMaxStrokeWidth);
     float delta = [self widthSliderDelta];
     float v = delta * (exp(kXLog * percentage) - 1.0f) / kX + widthSlider_.minimumValue;
     
@@ -312,7 +314,7 @@
     colorController_.action = @selector(takeColorFrom:);
     
     widthSlider_.minimumValue = 0.1f;
-    widthSlider_.maximumValue = 100.0f;
+    widthSlider_.maximumValue = kMaxStrokeWidth;
     [widthSlider_ addTarget:self action:@selector(takeStrokeWidthFrom:)
           forControlEvents:(UIControlEventTouchDown | UIControlEventTouchDragInside | UIControlEventValueChanged)];
     [widthSlider_ addTarget:self action:@selector(takeFinalStrokeWidthFrom:)
