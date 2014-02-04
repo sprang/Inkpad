@@ -692,7 +692,8 @@
             // only the <svg> group and implicit top-level group are below this one
             WDLayer *layer = [[WDLayer alloc] initWithElements:elements];
             layer.name = layerName ?: xmlid;
-            layer.opacity = [[state_ style:kWDPropertyOpacity] floatValue];
+			if ([state_ style:kWDPropertyOpacity])
+            { layer.opacity = [[state_ style:kWDPropertyOpacity] floatValue]; }
             if ([[state_ style:kWDPropertyVisibility] isEqualToString:@"hidden"] || [[state_ style:kWDPropertyDisplay] isEqualToString:@"none"]) {
                 layer.hidden = YES;
             }
@@ -700,7 +701,8 @@
             [drawing_ addLayer:layer];
         } else if ([elements count] == 1) {
             state_.wdElement = [self clipAndGroup:[elements lastObject]];
-            state_.wdElement.opacity *= [[state_ style:kWDPropertyOpacity] floatValue];
+			if ([state_ style:kWDPropertyOpacity])
+            { state_.wdElement.opacity *= [[state_ style:kWDPropertyOpacity] floatValue]; }
         } else {
             WDGroup *group = [[WDGroup alloc] init];
             group.layer = drawing_.activeLayer;
