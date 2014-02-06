@@ -462,6 +462,10 @@
     NSString *stopColor = [state_ style:kWDPropertyStopColor];
     NSString *stopOpacity = [state_ style:kWDPropertyStopOpacity];
     id resolvedColor = [styleParser_ resolvePainter:stopColor alpha:[stopOpacity floatValue]];
+    if (resolvedColor == nil) {
+        // must have been set to "none", but gradient stops need a non-nil color...
+        resolvedColor = [WDColor colorWithRed:0 green:0 blue:0 alpha:0];
+    }
     WDGradientStop *stop = [WDGradientStop stopWithColor:resolvedColor andRatio:offset];
     [gradientStops_ addObject:stop];
 }

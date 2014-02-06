@@ -37,7 +37,8 @@ NSString *WDStopColorKey = @"WDStopColorKey";
         return nil;
     }
     
-    color_ = color;
+    // makes sure we won't end up with a nil color
+    color_ = color ?: [WDColor blackColor];
     ratio_ = WDClamp(0.0f, 1.0f, ratio);
     
     return self;
