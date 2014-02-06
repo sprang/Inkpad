@@ -38,8 +38,8 @@
                     <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <textInputTraits key="textInputTraits"/>
                     <scopeButtonTitles>
-                        <string>Most Downloaded</string>
-                        <string>Most Favorited</string>
+                        <string>Top Downloads</string>
+                        <string>Top Favorites</string>
                         <string>Newest</string>
                     </scopeButtonTitles>
                     <connections>

@@ -510,6 +510,7 @@
 		6B83970A18A36253001D5985 /* OCAThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCAThumbnailCell.m; path = Openclipart/OCAThumbnailCell.m; sourceTree = SOURCE_ROOT; };
 		6B83970B18A36253001D5985 /* OCAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCAViewController.h; path = Openclipart/OCAViewController.h; sourceTree = SOURCE_ROOT; };
 		6B83970C18A36253001D5985 /* OCAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCAViewController.m; path = Openclipart/OCAViewController.m; sourceTree = SOURCE_ROOT; };
+		6B83971318A36D23001D5985 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpenClipArt.strings; sourceTree = "<group>"; };
 		6B8416C017EFA8F000508CE7 /* UIBarButtonItem+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Additions.h"; sourceTree = "<group>"; };
 		6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Additions.m"; sourceTree = "<group>"; };
 		6B87C948131258660027A482 /* WDHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDHelpController.h; sourceTree = "<group>"; };
@@ -2163,6 +2164,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B8396E1189F2FB0001D5985 /* Base */,
+				6B83971318A36D23001D5985 /* en */,
 			);
 			name = OpenClipArt.xib;
 			sourceTree = "<group>";
