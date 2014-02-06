@@ -1,4 +1,10 @@
 Next Update
+- Increased maximum stroke width to 300
+- Tweaked line attribute picker appearance
+- Fixed type bug that broke palette 'tossing' on 64-bit devices
+- Added support for importing SVGs from Openclipart.com
+
+1.5.2 [currently on the App Store]
 - Added T-end arrowhead
 - Fixed incorrect shadow/parallax on eraser options view
 - Integrated UIDocumentInteractionController for exporting
@@ -16,7 +22,7 @@ Next Update
 - Fixed text path layout issue (rendered incorrectly on linear segments)
 - Fixed text path start bar rendering at high magnifications
 
-1.5.1 [currently on the App Store]
+1.5.1
 - Fixed broken Github link in the help file
 - Fixed a bug that caused gradient transforms to be reset when reactivating an existing path
 - Vertically centered the titles in the Stroke and Fill panels
