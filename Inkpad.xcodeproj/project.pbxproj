@@ -153,6 +153,8 @@
 		6B83973118A41126001D5985 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972918A41125001D5985 /* Localizable.strings */; };
 		6B83973218A41126001D5985 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972B18A41126001D5985 /* Shadow.strings */; };
 		6B83973318A41126001D5985 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972D18A41126001D5985 /* Stroke.strings */; };
+		6B83973918A4390C001D5985 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B83973718A4390C001D5985 /* trash.png */; };
+		6B83973A18A4390C001D5985 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B83973818A4390C001D5985 /* trash@2x.png */; };
 		6B8416C217EFA8F000508CE7 /* UIBarButtonItem+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */; };
 		6B87C94A131258660027A482 /* WDHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B87C949131258660027A482 /* WDHelpController.m */; };
 		6B87CA5F1312610D0027A482 /* Help in Resources */ = {isa = PBXBuildFile; fileRef = 6B87CA5C1312610D0027A482 /* Help */; };
@@ -521,6 +523,8 @@
 		6B83972A18A41125001D5985 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		6B83972C18A41126001D5985 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Shadow.strings; sourceTree = "<group>"; };
 		6B83972E18A41126001D5985 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Stroke.strings; sourceTree = "<group>"; };
+		6B83973718A4390C001D5985 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trash.png; path = Images/trash.png; sourceTree = "<group>"; };
+		6B83973818A4390C001D5985 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trash@2x.png"; path = "Images/trash@2x.png"; sourceTree = "<group>"; };
 		6B8416C017EFA8F000508CE7 /* UIBarButtonItem+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Additions.h"; sourceTree = "<group>"; };
 		6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Additions.m"; sourceTree = "<group>"; };
 		6B87C948131258660027A482 /* WDHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDHelpController.h; sourceTree = "<group>"; };
@@ -996,6 +1000,8 @@
 				6BCD5294123FFFED002FCB27 /* redo.png */,
 				6B7D2CF215089965001311B0 /* redo@2x.png */,
 				6B51BCBD12651C1C000F6BF3 /* swatches.png */,
+				6B83973718A4390C001D5985 /* trash.png */,
+				6B83973818A4390C001D5985 /* trash@2x.png */,
 				6BCD529F123FFFED002FCB27 /* undo.png */,
 				6B7D2CF315089965001311B0 /* undo@2x.png */,
 				6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */,
@@ -1752,6 +1758,7 @@
 				6B51BCBE12651C1C000F6BF3 /* swatches.png in Resources */,
 				6B48E9D9126BE2B4002D3B85 /* isolate.png in Resources */,
 				6BC96752183149E300F46191 /* Localizable.strings in Resources */,
+				6B83973918A4390C001D5985 /* trash.png in Resources */,
 				6B5335471803538D00D46D5B /* Shadow.xib in Resources */,
 				6B53353D1803538D00D46D5B /* Color.xib in Resources */,
 				6BF747931311C399000D9344 /* Entitlements.plist in Resources */,
@@ -1810,6 +1817,7 @@
 				6B7D2CF415089966001311B0 /* redo@2x.png in Resources */,
 				6B7D2CF515089966001311B0 /* undo@2x.png in Resources */,
 				6B2AC3FB17EAD420008D6391 /* duplicate@2x.png in Resources */,
+				6B83973A18A4390C001D5985 /* trash@2x.png in Resources */,
 				6B7D2D011508A0B2001311B0 /* album@2x.png in Resources */,
 				6B7D2D031508A291001311B0 /* text@2x.png in Resources */,
 				6B7D2D0B1508AC8D001311B0 /* slider_border@2x.png in Resources */,

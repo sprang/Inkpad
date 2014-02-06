@@ -59,6 +59,7 @@
     WDRulerCornerView       *cornerView_;
     
     WDPalette               *toolPalette_;
+    UIButton                *deleteButton_; // pseudo delete tool
     CGPoint                 cachedCenter_;
     
     UILabel                 *messageLabel_;

@@ -13,6 +13,20 @@
 
 @implementation WDEtchedLine
 
+- (id) initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+
+    if (!self) {
+        return nil;
+    }
+    
+    self.backgroundColor = nil;
+    self.opaque = NO;
+    
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
