@@ -11,6 +11,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "OCADownloader.h"
 #import "WDHelpController.h"
 #import "WDImportController.h"
 #import "WDSamplesController.h"
@@ -26,6 +27,7 @@
 @class WDActivityController;
 @class WDBlockingView;
 @class WDExportController;
+@class OCAViewController;
 
 @interface WDBrowserController : UICollectionViewController <UIActionSheetDelegate,
                                                              UIPopoverControllerDelegate,
@@ -34,7 +36,8 @@
                                                              WDImportControllerDelegate,
                                                              WDSamplesControllerDelegate,
                                                              UINavigationControllerDelegate,
-                                                             UIImagePickerControllerDelegate>
+                                                             UIImagePickerControllerDelegate,
+                                                             OCADownloaderDelegate>
 {
     NSMutableArray          *toolbarItems_;
     UIBarButtonItem         *emailItem_;
@@ -54,6 +57,7 @@
     WDFontLibraryController *fontLibraryController_;
     WDSamplesController     *samplesController_;
     WDActivityController    *activityController_;
+    OCAViewController       *openClipArtController_;
     
     DBRestClient            *restClient_;
     NSMutableSet            *filesBeingUploaded_;
@@ -63,6 +67,8 @@
     WDThumbnailView         *editingThumbnail_;
     
     BOOL                    everLoaded_;
+    
+    NSMutableSet            *downloaders_; // for downloading open clip art
 }
 
 - (void) startEditingDrawing:(WDDocument *)drawing;

@@ -10,6 +10,8 @@
 //
 
 #import <DropboxSDK/DropboxSDK.h>
+#import "OCAEntry.h"
+#import "OCAViewController.h"
 #import "NSData+Additions.h"
 #import "WDActivity.h"
 #import "WDActivityController.h"
@@ -118,6 +120,12 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
                                                                                     action:@selector(importFromCamera:)];
         [rightBarButtonItems addObject:cameraItem];
     }
+    
+    UIBarButtonItem *openClipArtItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"openclipart.png"]
+                                                                        style:UIBarButtonItemStylePlain
+                                                                       target:self
+                                                                       action:@selector(showOpenClipArt:)];
+    [rightBarButtonItems addObject:openClipArtItem];
 
     // Create a help button to display in the top left corner.
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", @"Help")
@@ -173,6 +181,54 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         popoverController_.delegate = self;
         [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
     }
+}
+
+#pragma mark - OpenClipArt
+
+- (void) takeDataFromDownloader:(OCADownloader *)downloader
+{
+    NSString *title = [downloader.info stringByAppendingPathExtension:@"svg"];
+    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
+    [downloader.data writeToFile:path atomically:NO];
+    
+    NSURL *pathURL = [[NSURL alloc] initFileURLWithPath:path isDirectory:NO];
+    [[WDDrawingManager sharedInstance] importDrawingAtURL:pathURL
+                                               errorBlock:^{ [self showImportErrorMessage:downloader.info]; }
+                                    withCompletionHandler:nil];
+    
+    [downloaders_ removeObject:downloader];
+}
+
+- (void) importOpenClipArt:(OCAViewController *)viewController
+{
+    OCAEntry *entry = viewController.selectedEntry;
+    
+    if (!downloaders_) {
+        downloaders_ = [NSMutableSet set];
+    }
+    
+    OCADownloader *downloader = [OCADownloader downloaderWithURL:entry.SVGURL delegate:self info:entry.title];
+    [downloaders_ addObject:downloader];
+}
+
+- (void) showOpenClipArt:(id)sender
+{
+    if (openClipArtController_) {
+        [self dismissPopover];
+        return;
+    }
+    
+    [self dismissPopover];
+    
+    openClipArtController_ = [[OCAViewController alloc] initWithNibName:@"OpenClipArt" bundle:nil];
+    [openClipArtController_ setImportTarget:self action:@selector(importOpenClipArt:)];
+    [openClipArtController_ setActionTitle:NSLocalizedString(@"Import", @"Import")];
+    
+    UINavigationController  *navController = [[UINavigationController alloc] initWithRootViewController:openClipArtController_];
+    
+    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
+    popoverController_.delegate = self;
+    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
 }
 
 #pragma mark - Camera
@@ -697,6 +753,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     fontLibraryController_ = nil;
     samplesController_ = nil;
     activityController_ = nil;
+    openClipArtController_ = nil;
     
     if (deleteSheet_) {
         [deleteSheet_ dismissWithClickedButtonIndex:deleteSheet_.cancelButtonIndex animated:NO];
@@ -721,6 +778,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     fontLibraryController_ = nil;
     samplesController_ = nil;
     activityController_ = nil;
+    openClipArtController_ = nil;
 }
 
 - (void)didDismissModalView {

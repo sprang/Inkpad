@@ -365,14 +365,23 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
                         [drawingNames_ addObject:drawingName];
                         [self saveDrawingOrder_];
                         [[NSNotificationCenter defaultCenter] postNotificationName:WDDrawingAdded object:drawingName];
-                        completionBlock(doc);
+                        
+                        if (completionBlock) {
+                           completionBlock(doc);
+                        }
+                        
                         [doc closeWithCompletionHandler:nil];
                     });
                 }];
             } else {
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    errorBlock();
-                    completionBlock(nil);
+                    if (errorBlock) {
+                        errorBlock();
+                    }
+                    
+                    if (completionBlock) {
+                        completionBlock(nil);
+                    }
                 });
             }
         });
