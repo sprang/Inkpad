@@ -86,34 +86,53 @@ void RGBtoHSV(float r, float g, float b, float *h, float *s, float *v)
     *h /= 360.0f;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark Drawing Functions
+////////////////////////////////////////////////////////////////////////////////
 
-void WDDrawCheckersInRect(CGContextRef ctx, CGRect dest, int size)
+void WDDrawCheckersInRect(CGContextRef ctx, CGRect dstR, CGFloat size)
 {
-    CGRect  square = CGRectMake(0, 0, size, size);
-    float   startx = CGRectGetMinX(dest);
-    float   starty = CGRectGetMinY(dest);
-    
-    CGContextSaveGState(ctx);
-    CGContextClipToRect(ctx, dest);
-    
-    [[UIColor colorWithWhite:0.9f alpha:1.0f] set];
-    CGContextFillRect(ctx, dest);
-    
-    [[UIColor colorWithWhite:0.78f alpha:1.0f] set];
-    for (int y = 0; y * size < CGRectGetHeight(dest); y++) {
-        for (int x = 0; x * size < CGRectGetWidth(dest); x++) {
-            if ((y + x) % 2) {
-                square.origin.x = startx + x * size;
-                square.origin.y = starty + y * size;
-                CGContextFillRect(ctx, square);
-            }
-        }
-    }
-    
-    CGContextRestoreGState(ctx);
+	CGContextSaveGState(ctx);
+	CGContextClipToRect(ctx, dstR);
+
+	static const CGFloat canvasClr[] = { 0.9, 0.9, 0.9, 1.0 };
+	CGContextSetFillColor(ctx, canvasClr);
+
+	// Fill dstR with first color
+	CGContextFillRect(ctx, dstR);
+
+	static const CGFloat patchClr[] = { 0.78, 0.78, 0.78, 1.0 };
+	CGContextSetFillColor(ctx, patchClr);
+
+	// Draw pattern with second color
+	CGRect patchR =
+	{ CGRectGetMinX(dstR), CGRectGetMinY(dstR), size, size };
+
+	// Iterate per tile of 2x2 patches
+	for (int y = ceil(CGRectGetHeight(dstR)/(2*size)); y!=0; y--)
+	{
+		for (int x = ceil(CGRectGetWidth(dstR)/(2*size)); x!=0; x--)
+		{
+			// Draw 2 patches at once in a 2x2 tile
+			CGContextFillRect(ctx, patchR);
+			patchR.origin.x += size;
+			patchR.origin.y += size;
+			CGContextFillRect(ctx, patchR);
+			patchR.origin.x += size;
+			patchR.origin.y -= size;
+		}
+
+		// Move to next row of tiles
+		patchR.origin.x = CGRectGetMinX(dstR);
+		patchR.origin.y += size;
+		patchR.origin.y += size;
+	}
+
+	CGContextRestoreGState(ctx);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void WDDrawTransparencyDiamondInRect(CGContextRef ctx, CGRect dest)
 {

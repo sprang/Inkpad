@@ -28,7 +28,7 @@ void RGBtoHSV(float r, float g, float b, float *h, float *s, float *v);
 // Drawing Functions
 //
 
-void WDDrawCheckersInRect(CGContextRef ctx, CGRect dest, int size);
+void WDDrawCheckersInRect(CGContextRef ctx, CGRect dest, CGFloat size);
 void WDDrawTransparencyDiamondInRect(CGContextRef ctx, CGRect dest);
 void WDContextDrawImageToFill(CGContextRef ctx, CGRect bounds, CGImageRef imageRef);
 
