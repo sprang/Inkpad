@@ -70,6 +70,8 @@ BOOL WDLineSegmentsIntersect(CGPoint A, CGPoint B, CGPoint C, CGPoint D);
 
 CGRect WDShrinkRect(CGRect rect, float percentage);
 
+CGSize WDClampSize(CGSize size, float maximumDimension);
+
 //
 // Paths
 //

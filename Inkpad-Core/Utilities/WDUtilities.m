@@ -356,6 +356,21 @@ CGRect WDShrinkRect(CGRect rect, float percentage)
     return CGRectInset(rect, widthInset, heightInset);
 }
 
+CGSize WDClampSize(CGSize size, float maxDimension)
+{
+    if (size.width > maxDimension || size.height > maxDimension) {
+        if (size.width > size.height) {
+            size.height = (size.height / size.width) * maxDimension;
+            size.width = maxDimension;
+        } else {
+            size.width = (size.width / size.height) * maxDimension;
+            size.height = maxDimension;
+        }
+    }
+    
+    return size;
+}
+
 #pragma mark -
 #pragma mark Paths
 

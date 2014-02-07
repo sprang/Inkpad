@@ -26,9 +26,10 @@
 #import "WDSVGHelper.h"
 #import "WDUtilities.h"
 
-const float kMinimumDrawingDimension = 16;
-const float kMaximumDrawingDimension = 4096;
-const float kMaximumThumbnailDimension = 120;
+const float kMinimumDrawingDimension     = 16;
+const float kMaximumDrawingDimension     = 16000;
+const float kMaximumBitmapImageDimension = 4096;
+const float kMaximumThumbnailDimension   = 120;
 
 // encoder keys
 NSString *WDDrawingKey = @"WDDrawingKey";
@@ -581,22 +582,12 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
     }
     
     CGSize size = WDMultiplySizeScalar(styleBounds.size, 2);
-    
-    if (size.width > kMaximumDrawingDimension || size.height > kMaximumDrawingDimension) {
-        if (size.width > size.height) {
-            size.height = (size.height / size.width) * kMaximumDrawingDimension;
-            size.width = kMaximumDrawingDimension;
-        } else {
-            size.width = (size.width / size.height) * kMaximumDrawingDimension;
-            size.height = kMaximumDrawingDimension;
-        }
-    }
-    
-    float scale = size.width / styleBounds.size.width;
+    size = WDClampSize(size, kMaximumBitmapImageDimension);
     
     UIGraphicsBeginImageContext(size);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
+    float scale = size.width / styleBounds.size.width;
     CGContextScaleCTM(ctx, scale, scale);
     CGContextTranslateCTM(ctx, -styleBounds.origin.x, -styleBounds.origin.y);
     [self renderInContext:ctx clipRect:self.bounds metaData:WDRenderingMetaDataMake(scale, WDRenderDefault)];
@@ -614,7 +605,10 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
         contentBounds = CGRectUnion(contentBounds, element.styleBounds);
     }
     
-    UIGraphicsBeginImageContext(WDMultiplySizeScalar(contentBounds.size, scaleFactor));
+    CGSize size = WDMultiplySizeScalar(contentBounds.size, scaleFactor);
+    size = WDClampSize(size, kMaximumBitmapImageDimension);
+    
+    UIGraphicsBeginImageContext(size);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     // scale and offset the elements to render in the new image

@@ -32,7 +32,6 @@
 #define kPrintSizeFactor            (72.0f / 132.0f)
 #define kHundredPercentScale        (132.0f / 72.0f)
 #define kMaxZoom                    (64 * kHundredPercentScale)
-#define kMinZoom                    (0.05 * kHundredPercentScale)
 #define kMessageFadeDelay           1
 #define kDropperRadius              80
 #define kDropperAnimationDuration   0.2f
@@ -642,10 +641,14 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) scaleBy:(double)scale
 {
+    float   maxDimension = MAX(self.drawing.width, self.drawing.height);
+    // at the minimum zoom, the drawing will be 200 effective screen pixels wide (or tall)
+    double  minZoom = (200 / maxDimension);
+    
     if (scale * viewScale_ > kMaxZoom) {
         scale = kMaxZoom / viewScale_;
-    } else if (scale * viewScale_ < kMinZoom) {
-        scale = kMinZoom / viewScale_;
+    } else if (scale * viewScale_ < minZoom) {
+        scale = minZoom / viewScale_;
     }
     
     [self setTrueViewScale_:trueViewScale_ * scale];
