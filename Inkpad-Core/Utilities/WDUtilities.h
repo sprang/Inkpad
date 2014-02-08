@@ -13,6 +13,12 @@
 #import <UIKit/UIKit.h>
 #endif
 
+#if WD_DEBUG
+#define WDLog NSLog
+#else
+#define WDLog(...)
+#endif
+
 #import "WDPickResult.h"
 
 @class WDStrokeStyle;
