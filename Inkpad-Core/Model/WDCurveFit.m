@@ -44,7 +44,7 @@
     
     // finally, do the actual curve fitting!
     WDBezierSegment segments[points.count];
-    int numSegments = FitCurve(segments, unboxedPts, (int) points.count, epsilon);
+    int numSegments = FitCurve(segments, unboxedPts, (int) points.count, epsilon * epsilon);
     
     // ... and turn those segments into an Inkpad path
     return [WDCurveFit pathFromSegments:segments numSegments:numSegments closePath:closePath];
