@@ -279,11 +279,13 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 - (void) viewWillAppear:(BOOL)animated
 {
     if (!everLoaded_) {
-        // scroll to bottom
-        NSUInteger count = [[WDDrawingManager sharedInstance] numberOfDrawings] - 1;
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:count inSection:0]
-                                    atScrollPosition:UICollectionViewScrollPositionTop
-                                            animated:NO];
+        if ([[WDDrawingManager sharedInstance] numberOfDrawings] > 0) {
+            // scroll to bottom
+            NSUInteger count = [[WDDrawingManager sharedInstance] numberOfDrawings] - 1;
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:count inSection:0]
+                                        atScrollPosition:UICollectionViewScrollPositionTop
+                                                animated:NO];
+        }
         
         everLoaded_ = YES;
     }
