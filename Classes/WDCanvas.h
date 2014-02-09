@@ -91,6 +91,7 @@
 @property (nonatomic, weak) UIView *toolOptionsView;
 @property (nonatomic, readonly) float thinWidth;
 @property (nonatomic, strong) IBOutlet UIView *activityView;
+@property (nonatomic, strong) NSArray *dynamicGuides;
 
 - (CGRect) convertRectToView:(CGRect)rect;
 - (CGPoint) convertPointToDocumentSpace:(CGPoint)pt;

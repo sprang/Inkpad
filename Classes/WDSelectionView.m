@@ -281,6 +281,10 @@
         [self.canvas.shapeUnderConstruction drawOpenGLHighlightWithTransform:CGAffineTransformIdentity viewTransform:effective];
     }
     
+    if (self.canvas.dynamicGuides && self.canvas.dynamicGuides.count) {
+        [self.canvas.dynamicGuides makeObjectsPerformSelector:@selector(render:) withObject:canvas_];
+    }
+    
     [context presentRenderbuffer:GL_RENDERBUFFER_OES];
 }
 

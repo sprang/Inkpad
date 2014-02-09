@@ -58,6 +58,8 @@
 	<false/>
 	<key>WDSnapToPoint</key>
 	<false/>
+	<key>WDDynamicGuides</key>
+	<false/>
 	<key>WDStrokeCapProperty</key>
 	<integer>0</integer>
 	<key>WDStrokeJoinProperty</key>

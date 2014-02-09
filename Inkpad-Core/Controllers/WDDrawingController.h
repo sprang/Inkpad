@@ -48,11 +48,14 @@
 - (WDElement *) singleSelection;
 - (NSMutableArray *) orderedSelectedObjects;
 - (NSArray *) sortedSelectionForLayer:(WDLayer *)layer;
+- (NSArray *) unselectedObjects;
 
 - (BOOL) isSelected:(WDElement *)element;
 - (BOOL) isSelectedOrSubelementIsSelected:(WDElement *)element;
 
 - (CGRect) selectionBounds;
+- (CGRect) selectionStyleBounds;
+
 - (NSSet *) selectedPaths;
 - (BOOL) allSelectedObjectsAreRootObjects;
 

@@ -66,6 +66,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 @synthesize verticalRuler = verticalRuler_;
 @synthesize toolOptionsView = toolOptionsView_;
 @synthesize activityView = activityView_;
+@synthesize dynamicGuides = dynamicGuides_;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -993,6 +994,12 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (void) setMarquee:(NSValue *)marquee
 {
     marquee_ = marquee;
+    [self invalidateSelectionView];
+}
+
+- (void) setDynamicGuides:(NSArray *)dynamicGuides
+{
+    dynamicGuides_ = dynamicGuides;
     [self invalidateSelectionView];
 }
 

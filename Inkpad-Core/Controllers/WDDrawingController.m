@@ -341,6 +341,31 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     return NO;
 }
 
+- (NSArray *) unselectedObjects
+{
+    NSMutableArray *result  = [NSMutableArray array];
+    
+    for (WDLayer *layer in drawing_.layers) {
+        if (layer.hidden) {
+            // don't snap to objects on hidden layers
+            continue;
+        }
+        
+        if (self.drawing.isolateActiveLayer && layer != self.drawing.activeLayer) {
+            // ignore non-isolated layers
+            continue;
+        }
+        
+        NSArray *unselected = [layer.elements filter:^BOOL(id obj) {
+            return ![selectedObjects_ containsObject:obj];
+        }];
+        
+        [result addObjectsFromArray:unselected];
+    }
+    
+    return result;
+}
+
 - (NSMutableArray *) orderedSelectedObjects
 {
     NSMutableArray *ordered = [NSMutableArray array];
@@ -384,6 +409,17 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     
     for (WDElement *element in selectedObjects_) {
         bounds = CGRectUnion(bounds, element.bounds);
+    }
+    
+    return bounds;
+}
+
+- (CGRect) selectionStyleBounds
+{
+    CGRect bounds = CGRectNull;
+    
+    for (WDElement *element in selectedObjects_) {
+        bounds = CGRectUnion(bounds, element.styleBounds);
     }
     
     return bounds;

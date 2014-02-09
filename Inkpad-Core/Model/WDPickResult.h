@@ -18,7 +18,8 @@ enum {
     kWDSnapFills            = 1 << 3,
     kWDSnapLocked           = 1 << 4,
     kWDSnapSelectedOnly     = 1 << 5,
-    kWDSnapSubelement       = 1 << 6
+    kWDSnapSubelement       = 1 << 6,
+    kWDSnapDynamicGuides    = 1 << 7
 };
 
 typedef enum {

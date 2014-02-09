@@ -47,6 +47,7 @@ NSString *WDSnapToEdges = @"WDSnapToEdges";
 NSString *WDIsolateActiveLayer = @"WDIsolateActiveLayer";
 NSString *WDOutlineMode = @"WDOutlineMode";
 NSString *WDSnapToGrid = @"WDSnapToGrid";
+NSString *WDDynamicGuides = @"WDDynamicGuides";
 NSString *WDShowGrid = @"WDShowGrid";
 NSString *WDGridSpacing = @"WDGridSpacing";
 NSString *WDRulersVisible = @"WDRulersVisible";
@@ -146,7 +147,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
     // each drawing saves its own settings, but when a user alters them they become the default settings for new documents
     // since this is a new document, look up the values in the defaults...
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *keyArray = @[WDShowGrid, WDSnapToGrid, WDSnapToPoints, WDSnapToEdges, WDRulersVisible];
+    NSArray *keyArray = @[WDShowGrid, WDSnapToGrid, WDSnapToPoints, WDSnapToEdges, WDDynamicGuides, WDRulersVisible];
     for (NSString *key in keyArray) {
         settings_[key] = @([defaults boolForKey:key]);
     }
@@ -296,6 +297,10 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
     
     if ([settings_[WDSnapToEdges] boolValue]) {
         flags |= kWDSnapEdges;
+    }
+    
+    if ([settings_[WDDynamicGuides] boolValue]) {
+        flags |= kWDSnapDynamicGuides;
     }
     
     return flags;
@@ -825,6 +830,19 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
 - (void) setSnapToGrid:(BOOL)snap
 {
     settings_[WDSnapToGrid] = @(snap);
+    
+    // this isn't an undoable action so it does not dirty the document
+    [self.document markChanged];
+}
+
+- (BOOL) dynamicGuides
+{
+    return [settings_[WDDynamicGuides] boolValue];
+}
+
+- (void) setDynamicGuides:(BOOL)dynamicGuides
+{
+    settings_[WDDynamicGuides] = @(dynamicGuides);
     
     // this isn't an undoable action so it does not dirty the document
     [self.document markChanged];

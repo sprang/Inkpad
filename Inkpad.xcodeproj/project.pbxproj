@@ -155,6 +155,7 @@
 		6B83973318A41126001D5985 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972D18A41126001D5985 /* Stroke.strings */; };
 		6B83973918A4390C001D5985 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B83973718A4390C001D5985 /* trash.png */; };
 		6B83973A18A4390C001D5985 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B83973818A4390C001D5985 /* trash@2x.png */; };
+		6B83973D18A5BA60001D5985 /* WDDynamicGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83973C18A5BA60001D5985 /* WDDynamicGuide.m */; };
 		6B8416C217EFA8F000508CE7 /* UIBarButtonItem+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */; };
 		6B87C94A131258660027A482 /* WDHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B87C949131258660027A482 /* WDHelpController.m */; };
 		6B87CA5F1312610D0027A482 /* Help in Resources */ = {isa = PBXBuildFile; fileRef = 6B87CA5C1312610D0027A482 /* Help */; };
@@ -525,6 +526,8 @@
 		6B83972E18A41126001D5985 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Stroke.strings; sourceTree = "<group>"; };
 		6B83973718A4390C001D5985 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trash.png; path = Images/trash.png; sourceTree = "<group>"; };
 		6B83973818A4390C001D5985 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trash@2x.png"; path = "Images/trash@2x.png"; sourceTree = "<group>"; };
+		6B83973B18A5BA60001D5985 /* WDDynamicGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDDynamicGuide.h; sourceTree = "<group>"; };
+		6B83973C18A5BA60001D5985 /* WDDynamicGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDDynamicGuide.m; sourceTree = "<group>"; };
 		6B8416C017EFA8F000508CE7 /* UIBarButtonItem+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Additions.h"; sourceTree = "<group>"; };
 		6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Additions.m"; sourceTree = "<group>"; };
 		6B87C948131258660027A482 /* WDHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDHelpController.h; sourceTree = "<group>"; };
@@ -1288,6 +1291,8 @@
 				6BABD8F2141ED30100F7E0A9 /* WDCurveFit.m */,
 				6BABD8F3141ED30100F7E0A9 /* WDDrawing.h */,
 				6BABD8F4141ED30100F7E0A9 /* WDDrawing.m */,
+				6B83973B18A5BA60001D5985 /* WDDynamicGuide.h */,
+				6B83973C18A5BA60001D5985 /* WDDynamicGuide.m */,
 				6BABD8F5141ED30100F7E0A9 /* WDElement.h */,
 				6BABD8F6141ED30100F7E0A9 /* WDElement.m */,
 				6BABD8F7141ED30100F7E0A9 /* WDFillTransform.h */,
@@ -1968,6 +1973,7 @@
 				6B963452140359060096A349 /* WDUserFont.m in Sources */,
 				6B00DA531405F65F00E45409 /* WDActivity.m in Sources */,
 				6B00DA5A1406022B00E45409 /* WDActivityManager.m in Sources */,
+				6B83973D18A5BA60001D5985 /* WDDynamicGuide.m in Sources */,
 				6B83971018A36253001D5985 /* OCAThumbnailCell.m in Sources */,
 				6B00DA5D140604CE00E45409 /* WDActivityController.m in Sources */,
 				6B74182B140617F100A00C76 /* WDProgressView.m in Sources */,

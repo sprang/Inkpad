@@ -41,6 +41,10 @@
     BOOL                    nodeWasSelected_;
     BOOL                    objectWasSelected_;
     WDElement               *lastTappedObject_;
+    
+    BOOL                    generatedGuides_;
+    NSMutableArray          *verticalGuides_;
+    NSMutableArray          *horizontalGuides_;
 }
 
 @property (nonatomic, assign) BOOL groupSelect;
