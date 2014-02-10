@@ -856,9 +856,9 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
         WDAbstractPath *outline = [path outlineStroke];
         
         if (outline) {
-            outline.fill = [self.propertyManager activeStrokeStyle].color;
-            outline.shadow = [self.propertyManager activeShadow];
-            outline.opacity = [[self.propertyManager defaultValueForProperty:WDOpacityProperty] floatValue];
+            outline.fill = path.strokeStyle.color;
+            outline.shadow = path.shadow;
+            outline.opacity = path.opacity;
             
             [path.layer insertObject:outline above:element];
             [path.layer removeObject:element];
