@@ -54,6 +54,9 @@ NSString *WDPaletteMovedNotification = @"WDPaletteMovedNotification";
     self.exclusiveTouch = YES;
     self.multipleTouchEnabled = NO;
     
+    self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin |
+        UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    
     return self;
 }
 
