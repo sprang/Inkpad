@@ -3,6 +3,15 @@ Next Update
 - Tweaked line attribute picker appearance
 - Fixed type bug that broke palette 'tossing' on 64-bit devices
 - Added support for importing SVGs from Openclipart.com
+- Fixed SVG import bugs
+- Added a 'delete' pseudo-tool to the tool palette
+- Increased maximum logical drawing dimension to 16000
+- Fixed crash that occurred at launch if there were no drawings
+- Implemented support for dynamic "Smart" guides
+- Increased maximum grid spacing to 1024
+- Outlined strokes now take their style from the parent path, not the active style
+- Tweaked Add Anchor Tool so that tapping an anchor selects an unselected path
+- Floating palettes now maintain relative screen position when the device is rotated
 
 1.5.2 [currently on the App Store]
 - Added T-end arrowhead
