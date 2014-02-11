@@ -56,7 +56,7 @@
 
 - (void)loadView
 {
-    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 5 * 28 + 9 * 44);
+    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 6 * 28 + 10 * 44);
     
     table_ = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     table_.delegate = self;
