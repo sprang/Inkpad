@@ -219,6 +219,18 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
             delta = WDConstrainPoint(delta);
         }
         
+        if ([canvas.drawing dynamicGuides]) {
+            if (!generatedGuides_) {
+                [self generateGuides:canvas.drawingController];
+            }
+       
+            CGPoint adjusted = [self adjustedPointForGuides:WDAddPoints(initialSnapped, delta) inCanvas:canvas];
+            delta = WDSubtractPoints(adjusted, initialSnapped);
+            
+            // find guides that are snapped to the result
+            canvas.dynamicGuides = [self snappedGuidesForPoint:adjusted];
+        }
+        
         transform_ = CGAffineTransformMakeTranslation(delta.x, delta.y);
         [canvas transformSelection:transform_];
     } else if (transformingHandles_) {
@@ -311,6 +323,11 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
     
     canvas.transforming = canvas.transformingNode = NO;
     
+    // clear guide containers
+    [horizontalGuides_ removeAllObjects];
+    [verticalGuides_ removeAllObjects];
+    canvas.dynamicGuides = nil;
+    
     if (transformingGradient_) {
         if (self.moved) {
             WDPath *path = ((WDPath *) [canvas.drawingController singleSelection]);
@@ -364,11 +381,6 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
         } else if (self.groupSelect && lastTappedObject_ && objectWasSelected_) {
             [canvas.drawingController deselectObject:lastTappedObject_];
         }
-        
-        // clear guide containers
-        [horizontalGuides_ removeAllObjects];
-        [verticalGuides_ removeAllObjects];
-        canvas.dynamicGuides = nil;
     }
 }
 
@@ -475,6 +487,31 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
     return nil;
 }
 
+- (NSArray *) snappedGuidesForPoint:(CGPoint)pt
+{
+    NSMutableArray *snapped = [NSMutableArray array];
+    
+    WDDynamicGuide *horizontal = [WDDynamicGuide horizontalGuideWithOffset:pt.x];
+    [horizontal addExtent:[WDExtent extentWithMin:pt.y max:pt.y]];
+    
+    WDDynamicGuide *vertical = [WDDynamicGuide verticalGuideWithOffset:pt.y];
+    [vertical addExtent:[WDExtent extentWithMin:pt.x max:pt.x]];
+    
+    WDDynamicGuide *found = [self findCoincidentGuide:horizontal array:horizontalGuides_];
+    if (found) {
+        [horizontal addExtentsFromSet:found.extents];
+        [snapped addObject:horizontal];
+    }
+    
+    found = [self findCoincidentGuide:vertical array:verticalGuides_];
+    if (found) {
+        [vertical addExtentsFromSet:found.extents];
+        [snapped addObject:vertical];
+    }
+    
+    return snapped;
+}
+
 - (NSArray *) snappedGuides:(CGRect)snapRect
 {
     NSMutableArray *snapped = [NSMutableArray array];
@@ -501,6 +538,23 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
     }
     
     return snapped;
+}
+
+- (CGPoint) adjustedPointForGuides:(CGPoint)pt inCanvas:(WDCanvas *)canvas
+{
+    double      hDelta, vDelta;
+    double      tolerance = (kDynamicGuideSnappingTolerance / canvas.viewScale);
+    
+    WDDynamicGuide *horizontal = [WDDynamicGuide horizontalGuideWithOffset:pt.x];
+    WDDynamicGuide *vertical = [WDDynamicGuide verticalGuideWithOffset:pt.y];
+    
+    hDelta = [self deltaForGuide:horizontal array:horizontalGuides_];
+    hDelta = fabs(hDelta) > tolerance ? 0 : hDelta;
+    
+    vDelta = [self deltaForGuide:vertical array:verticalGuides_];
+    vDelta = fabs(vDelta) > tolerance ? 0 : vDelta;
+    
+    return WDAddPoints(CGPointMake(hDelta, vDelta), pt);
 }
 
 - (CGPoint) offsetSelectionForGuides:(CGPoint)originalDelta inCanvas:(WDCanvas *)canvas

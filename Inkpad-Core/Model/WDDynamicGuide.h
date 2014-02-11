@@ -45,8 +45,11 @@ static NSComparator guideCompare = ^(id a, id b){
 
 @property (nonatomic, getter=isVertical) BOOL vertical;
 
-+ (WDDynamicGuide *) verticalGuideWithOffset:(double)offset;
+// horizontal guides align objects horizontally, but somewhat confusingly, they render as vertical lines
 + (WDDynamicGuide *) horizontalGuideWithOffset:(double)offset;
+
+// vertical guides align objects vertically (but render as horizontal lines)
++ (WDDynamicGuide *) verticalGuideWithOffset:(double)offset;
 
 + (void) generateGuidesForBoundingBox:(CGRect)bbox
                      horizontalGuides:(NSMutableArray *)horizontal

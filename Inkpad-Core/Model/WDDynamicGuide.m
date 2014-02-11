@@ -17,6 +17,9 @@
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 
+const float kWDDefaultOutset = 15.0f;
+const float kWDMinimumExtent = 120.0f;
+
 //
 // WDExtent
 //
@@ -27,8 +30,11 @@
 {
     WDExtent *extent = [[WDExtent alloc] init];
     
-    extent.min = min;
-    extent.max = max;
+    // sanity check our inputs
+    BOOL inOrder = (min <= max);
+    
+    extent.min = inOrder ? min : max;
+    extent.max = inOrder ? max : min;
     
     return extent;
 }
@@ -54,16 +60,16 @@
 
 @implementation WDDynamicGuide
 
++ (WDDynamicGuide *) horizontalGuideWithOffset:(double)offset
+{
+    return [[WDDynamicGuide alloc] initWithOffset:offset];
+}
+
 + (WDDynamicGuide *) verticalGuideWithOffset:(double)offset
 {
     WDDynamicGuide *guide = [[WDDynamicGuide alloc] initWithOffset:offset];
     guide.vertical = YES;
     return guide;
-}
-
-+ (WDDynamicGuide *) horizontalGuideWithOffset:(double)offset
-{
-    return [[WDDynamicGuide alloc] initWithOffset:offset];
 }
 
 - (id) initWithOffset:(double)offset
@@ -144,13 +150,25 @@
 - (void) render:(WDCanvas *)canvas
 {
     CGPoint     a, b;
-    float       outset = 10.0f / canvas.viewScale;
+    float       outset;
     float       frameHeight = CGRectGetHeight(canvas.frame);
     
     glLineWidth([UIScreen mainScreen].scale);
     glColor4f(0, 118.0 / 255, 1, 1);
     
     for (WDExtent *extent in self.extents) {
+        double extentLength = extent.max - extent.min;
+        double effectiveLength = (canvas.viewScale * extentLength) + (kWDDefaultOutset * 2);
+        
+        // make sure the rendered extent is at least some minimum length after accounting for view scale
+        if (effectiveLength < kWDMinimumExtent) {
+            outset = kWDMinimumExtent - (canvas.viewScale * extentLength);
+            outset /= 2.0f;
+        } else {
+            outset = kWDDefaultOutset;
+        }
+        outset /= canvas.viewScale;
+        
         if (self.isVertical) {
             a.y = b.y = self.offset;
             a.x = extent.min - outset;
