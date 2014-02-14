@@ -44,6 +44,7 @@ typedef enum {
 @property (nonatomic, strong) WDEvent *initialEvent;
 @property (nonatomic, strong) WDEvent *previousEvent;
 @property (nonatomic, readonly) WDToolFlags flags;
+@property (nonatomic, readonly) BOOL shouldSnapPointsToGuides;
 
 + (WDTool *) tool;
 - (void) activated;

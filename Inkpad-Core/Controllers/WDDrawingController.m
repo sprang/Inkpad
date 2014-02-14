@@ -22,6 +22,7 @@
 #import "WDCompoundPath.h"
 #import "WDDrawing.h"
 #import "WDDrawingController.h"
+#import "WDDynamicGuideController.h"
 #import "WDFontManager.h"
 #import "WDGroup.h"
 #import "WDImage.h"
@@ -51,6 +52,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 @synthesize lastAppliedTransform = lastAppliedTransform_;
 @synthesize undoSelectionStack = undoSelectionStack_;
 @synthesize redoSelectionStack = redoSelectionStack_;
+@synthesize dynamicGuideController = dynamicGuideController_;
 
 - (id) init
 {
@@ -341,7 +343,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     return NO;
 }
 
-- (NSArray *) unselectedObjects
+- (NSArray *) guideGeneratingObjects
 {
     NSMutableArray *result  = [NSMutableArray array];
     
@@ -356,11 +358,11 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
             continue;
         }
         
-        NSArray *unselected = [layer.elements filter:^BOOL(id obj) {
-            return ![selectedObjects_ containsObject:obj];
-        }];
+        //NSArray *unselected = [layer.elements filter:^BOOL(id obj) {
+        //    return ![selectedObjects_ containsObject:obj];
+        //}];
         
-        [result addObjectsFromArray:unselected];
+        [result addObjectsFromArray:layer.elements];
     }
     
     return result;
@@ -1796,6 +1798,15 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 #pragma mark -
 #pragma mark Hit Testing
 
+- (WDDynamicGuideController *) dynamicGuideController
+{
+    if (!dynamicGuideController_) {
+        dynamicGuideController_ = [[WDDynamicGuideController alloc] initWithDrawingController:self];
+    }
+    
+    return dynamicGuideController_;
+}
+
 - (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
 {
     WDPickResult    *pickResult;
@@ -1856,6 +1867,19 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
         
         snap.x = floor((pt.x / gridSpacing) + 0.5) * gridSpacing;
         snap.y = floor((pt.y / gridSpacing) + 0.5) * gridSpacing;
+        
+        pickResult = [WDPickResult pickResult];
+        pickResult.snappedPoint = snap;
+        
+        return pickResult;
+    }
+    
+    if (flags & kWDSnapDynamicGuides) {
+        WDDynamicGuideController *guideController = self.dynamicGuideController;
+        
+        // harmless if already called
+        [guideController beginGuideOperation];
+        CGPoint snap = [guideController adjustedPointForGuides:pt viewScale:viewScale];
         
         pickResult = [WDPickResult pickResult];
         pickResult.snappedPoint = snap;

@@ -15,6 +15,7 @@
 #import "WDCanvas.h"
 #import "WDDrawing.h"
 #import "WDDrawingController.h"
+#import "WDDynamicGuideController.h"
 #import "WDInspectableProperties.h"
 #import "WDPath.h"
 #import "WDPropertyManager.h"
@@ -211,6 +212,11 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
     return ((self.flags & WDToolShiftKey) || (self.flags & WDToolSecondaryTouch)) ? YES : NO;
 }
 
+- (BOOL) shouldSnapPointsToGuides
+{
+    return YES;
+}
+
 - (void)moveWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
     if (!self.moved) {
@@ -218,6 +224,21 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
     }
     
     WDPath  *temp = [self pathWithPoint:theEvent.snappedLocation constrain:[self constrain]];
+    
+    if (canvas.drawing.dynamicGuides) {
+        WDDynamicGuideController *guideController = canvas.drawingController.dynamicGuideController;
+        
+        if (shapeMode_ < WDShapeStar) {
+            // ovals and rectangles
+            canvas.dynamicGuides = [guideController snappedGuidesForRect:temp.bounds];
+        } else {
+            // snapping to the bounding box doesn't really make sense for the rest of the shapes...
+            NSMutableArray *snapped = [NSMutableArray array];
+            [snapped addObjectsFromArray:[guideController snappedGuidesForPoint:self.initialEvent.snappedLocation]];
+            [snapped addObjectsFromArray:[guideController snappedGuidesForPoint:theEvent.snappedLocation]];
+            canvas.dynamicGuides = snapped;
+        }
+    }
     
     canvas.shapeUnderConstruction = temp;
 }
@@ -243,6 +264,11 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
         }
         
         canvas.shapeUnderConstruction = nil;
+        canvas.dynamicGuides = nil;
+    }
+    
+    if ([canvas.drawing dynamicGuides]) {
+        [canvas.drawingController.dynamicGuideController endGuideOperation];
     }
 }
 

@@ -299,10 +299,6 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
         flags |= kWDSnapEdges;
     }
     
-    if ([settings_[WDDynamicGuides] boolValue]) {
-        flags |= kWDSnapDynamicGuides;
-    }
-    
     return flags;
 }
 
