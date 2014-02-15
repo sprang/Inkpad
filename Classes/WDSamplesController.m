@@ -12,7 +12,8 @@
 #import "WDSamplesController.h"
 #import "WDDrawing.h"
 
-const NSInteger kThumbnailDimension = 64;
+const NSInteger kThumbnailDimension = 80;
+const NSInteger kThumbnailPadding = 12;
 
 @interface WDSamplesController ()
 @property (nonatomic, copy)     NSArray             *sampleURLs;
@@ -67,14 +68,14 @@ const NSInteger kThumbnailDimension = 64;
 
 - (void)loadView
 {
-    contentsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 5 * 28 + 9 * 44) style:UITableViewStylePlain];
+    contentsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 380, 5 * 28 + 9 * 44) style:UITableViewStylePlain];
     contentsTable.delegate = self;
     contentsTable.dataSource = self;
     contentsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    contentsTable.rowHeight = 80;
+    contentsTable.rowHeight = kThumbnailDimension + kThumbnailPadding;
     self.view = contentsTable;
     
-    self.preferredContentSize = CGSizeMake(320, 80 * 6);
+    self.preferredContentSize = CGSizeMake(380, contentsTable.rowHeight * 6);
 }
 
 #pragma mark -
