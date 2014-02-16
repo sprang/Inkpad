@@ -13,14 +13,6 @@
 
 @implementation OCAEntry
 
-@synthesize title;
-@synthesize uploader;
-@synthesize ID;
-@synthesize favorites;
-@synthesize downloads;
-@synthesize SVGURL;
-@synthesize thumbURL;
-
 + (OCAEntry *) openClipArtEntryWithDictionary:(NSDictionary *)dict
 {
     OCAEntry *entry = [[OCAEntry alloc] init];
@@ -30,9 +22,9 @@
     entry.ID = dict[@"id"];
     entry.favorites = [dict[@"total_favorites"] integerValue];
     entry.downloads = [dict[@"downloaded_by"] integerValue];
-    entry.SVGURL = dict[@"svg"][@"url"];
-    entry.thumbURL = dict[@"svg"][@"png_thumb"];
-    
+    entry.SVGURL = [dict[@"svg"][@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    entry.thumbURL = [dict[@"svg"][@"png_thumb"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
     return entry;
 }
 
