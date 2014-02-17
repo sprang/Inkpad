@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WDOpenClipArtController">
             <connections>
-                <outlet property="activityIndicator" destination="3Cp-7y-jbo" id="eXv-2B-hXu"/>
                 <outlet property="collectionView" destination="sfS-P9-lwi" id="foX-cZ-wwt"/>
                 <outlet property="view" destination="1" id="G4W-pb-nPS"/>
             </connections>
@@ -23,7 +22,7 @@
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="51O-Ba-llK">
                         <size key="itemSize" width="125" height="145"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="50" height="70"/>
                         <inset key="sectionInset" minX="20" minY="10" maxX="20" maxY="20"/>
                     </collectionViewFlowLayout>
                     <cells/>
@@ -46,11 +45,6 @@
                         <outlet property="delegate" destination="-1" id="uuE-tU-NSE"/>
                     </connections>
                 </searchBar>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3Cp-7y-jbo">
-                    <rect key="frame" x="209" y="290" width="37" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

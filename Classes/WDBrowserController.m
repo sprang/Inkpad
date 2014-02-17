@@ -209,22 +209,29 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     
     OCADownloader *downloader = [OCADownloader downloaderWithURL:entry.SVGURL delegate:self info:entry.title];
     [downloaders_ addObject:downloader];
+    
+    if (openClipArtController_.isVisible) {
+        [self dismissPopover];
+    }
 }
 
 - (void) showOpenClipArt:(id)sender
 {
-    if (openClipArtController_) {
+    if (openClipArtController_.isVisible) {
         [self dismissPopover];
         return;
     }
     
     [self dismissPopover];
     
-    openClipArtController_ = [[OCAViewController alloc] initWithNibName:@"OpenClipArt" bundle:nil];
-    [openClipArtController_ setImportTarget:self action:@selector(importOpenClipArt:)];
-    [openClipArtController_ setActionTitle:NSLocalizedString(@"Import", @"Import")];
+    if (!openClipArtController_) {
+        openClipArtController_ = [[OCAViewController alloc] initWithNibName:@"OpenClipArt" bundle:nil];
+        [openClipArtController_ setImportTarget:self action:@selector(importOpenClipArt:)];
+        [openClipArtController_ setActionTitle:NSLocalizedString(@"Import", @"Import")];
+    }
     
     UINavigationController  *navController = [[UINavigationController alloc] initWithRootViewController:openClipArtController_];
+    navController.toolbarHidden = NO;
     
     popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
     popoverController_.delegate = self;
@@ -755,7 +762,6 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     fontLibraryController_ = nil;
     samplesController_ = nil;
     activityController_ = nil;
-    openClipArtController_ = nil;
     
     if (deleteSheet_) {
         [deleteSheet_ dismissWithClickedButtonIndex:deleteSheet_.cancelButtonIndex animated:NO];
@@ -780,7 +786,6 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     fontLibraryController_ = nil;
     samplesController_ = nil;
     activityController_ = nil;
-    openClipArtController_ = nil;
 }
 
 - (void)didDismissModalView {

@@ -13,32 +13,67 @@
 #import "OCAEntry.h"
 #import "OCAThumbnailCell.h"
 #import "UIBarButtonItem+Additions.h"
+#import "UIView+Additions.h"
+#import "WDUtilities.h"
 
-@interface OCAViewController () {
-    BOOL            haveSearchResults_;
-    OCADownloader   *downloader_;
+//
+// OCACollectionViewFooter
+//
+
+@interface OCACollectionViewFooter : UICollectionReusableView
+@property (nonatomic) UIActivityIndicatorView *activity;
+@end
+
+@implementation OCACollectionViewFooter
+- (id) initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    
+    if (!self) {
+        return nil;
+    }
+    
+    _activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _activity.color = [UIColor colorWithRed:0.0f green:118.0f / 255 blue:1.0f alpha:1.0f];
+    
+    CGPoint center = WDCenterOfRect(self.bounds);
+    center.y -= 10;
+    _activity.sharpCenter = center;
+    
+    [self addSubview:_activity];
+    
+    return self;
 }
+@end
 
-@property (nonatomic) UIBarButtonItem       *importButton;
-@property (nonatomic) UILabel               *itemCountLabel;
-@property (nonatomic) NSMutableArray        *entries;
-@property (nonatomic) NSUInteger            numItems;
-@property (nonatomic) NSString              *sortMode;
-@property (nonatomic) SEL                   action;
-@property (nonatomic) id                    target;
+
+//
+// OCAViewController
+//
+
+@interface OCAViewController ()
+
+@property (nonatomic) UIBarButtonItem   *importButton;
+@property (nonatomic) UILabel           *itemCountLabel;
+
+@property (nonatomic) SEL               action;
+@property (nonatomic) id                target;
+
+@property (nonatomic) NSString          *queryString;
+@property (nonatomic) NSString          *sortMode;
+
+@property (nonatomic) NSMutableArray    *entries;
+@property (nonatomic) NSUInteger        numItems;
+
+@property (nonatomic) OCADownloader     *downloader;
+@property (nonatomic) NSUInteger        pageCount;
+@property (nonatomic) NSUInteger        nextPageToLoad;
+@property (nonatomic) BOOL              moreToLoad;
+@property (nonatomic) BOOL              haveSearchResults;
 
 @end
 
 @implementation OCAViewController
-
-@synthesize importButton = importButton_;
-@synthesize itemCountLabel = itemCountLabel_;
-@synthesize entries = entries_;
-@synthesize selectedEntry = selectedEntry_;
-@synthesize numItems = numItems_;
-@synthesize sortMode = sortMode_;
-@synthesize action = action_;
-@synthesize target = target_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,15 +85,15 @@
     
     self.title = NSLocalizedString(@"Openclipart", @"Title of Openclipart import panel. Probably shouldn't be localized.");
     
-	importButton_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Import", @"Import")
+    _importButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Import", @"Import")
                                                      style:UIBarButtonItemStyleDone
                                                     target:self
                                                     action:@selector(performAction:)];
-	self.navigationItem.rightBarButtonItem = importButton_;
-    importButton_.enabled = NO;
+    self.navigationItem.rightBarButtonItem = _importButton;
+    _importButton.enabled = NO;
     
-    entries_ = [NSMutableArray array];
-    self.sortMode = @"downloads";
+    _entries = [NSMutableArray array];
+    _sortMode = @"downloads";
     
     return self;
 }
@@ -71,7 +106,7 @@
 
 - (void) setActionTitle:(NSString *)title
 {
-    importButton_.title = title;
+    self.importButton.title = title;
 }
 
 - (void)viewDidLoad
@@ -80,8 +115,15 @@
     
     [self.collectionView registerClass:[OCAThumbnailCell class] forCellWithReuseIdentifier:@"cellID"];
     
-    [self.navigationController setToolbarHidden:NO];
+    [self.collectionView registerClass:[OCACollectionViewFooter class]
+            forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                   withReuseIdentifier:@"footerID"];
+    
     self.toolbarItems = [self toolbarItemArray];
+    
+    UIToolbar *toolbar = self.navigationController.toolbar;
+    toolbar.translucent = NO;
+    toolbar.backgroundColor = [UIColor colorWithWhite:0.975f alpha:1.0f];
     
     self.preferredContentSize = self.view.frame.size;
 }
@@ -90,38 +132,50 @@
 {
     UIBarButtonItem *flexibleSpaceItem = [UIBarButtonItem flexibleItem];
     
-    itemCountLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(0,0,100,20)];
-    UIBarButtonItem *countItem = [[UIBarButtonItem alloc] initWithCustomView:itemCountLabel_];
+    self.itemCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,100,44)];
+    UIBarButtonItem *countItem = [[UIBarButtonItem alloc] initWithCustomView:self.itemCountLabel];
     
     return @[flexibleSpaceItem, countItem, flexibleSpaceItem];
 }
 
 - (void) performAction:(id)sender
 {
-    [[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
-}
-
-- (void) setNumItems:(NSUInteger)numItems
-{
-    numItems_ = numItems;
-    [self updateItemCount];
+    [[UIApplication sharedApplication] sendAction:self.action to:self.target from:self forEvent:nil];
 }
 
 - (void) updateItemCount
 {
-    if (numItems_ == 0) {
-        itemCountLabel_.text = NSLocalizedString(@"No Items Found", @"Label for no Openclipart search results");
-    } else if (numItems_ == 1) {
-        itemCountLabel_.text = NSLocalizedString(@"1 Item Found", @"Label for Openclipart search results (1)");
+    if (self.numItems == 0) {
+        self.itemCountLabel.text = NSLocalizedString(@"No items found", @"Label for no Openclipart search results");
+    } else if (self.numItems == 1) {
+        self.itemCountLabel.text = NSLocalizedString(@"1 item found", @"Label for Openclipart search results (1)");
     } else {
-        NSString *format = NSLocalizedString(@"%lu Items Found", @"Format string for Openclipart search results");
-        itemCountLabel_.text = [NSString stringWithFormat:format, numItems_];
+        NSString *format = NSLocalizedString(@"%lu items found", @"Format string for Openclipart search results");
+        self.itemCountLabel.text = [NSString stringWithFormat:format, self.numItems];
     }
     
-    itemCountLabel_.hidden = !haveSearchResults_;
-    [itemCountLabel_ sizeToFit];
-    
+    self.itemCountLabel.hidden = !_haveSearchResults;
+    [self.itemCountLabel sizeToFit];
 }
+
+- (void) setNumItems:(NSUInteger)numItems
+{
+    _numItems = numItems;
+    [self updateItemCount];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.visible = false;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.visible = true;
+}
+
 #pragma mark - Downloader
 
 - (void) takeDataFromDownloader:(OCADownloader *)downloader
@@ -129,31 +183,62 @@
     id jsonData = [NSJSONSerialization JSONObjectWithData:downloader.data options:0 error:nil];
     
     if (!jsonData) {
-        NSLog(@"Failed to load from JSON!");
+        WDLog(@"Failed to load from JSON!");
     }
     
-    haveSearchResults_ = YES;
+    _haveSearchResults = YES;
     self.numItems = [jsonData[@"info"][@"results"] integerValue];
+    self.pageCount = [jsonData[@"info"][@"pages"] integerValue];
+
+    NSUInteger currentPage = [jsonData[@"info"][@"current_page"] integerValue];
+    self.moreToLoad = currentPage != self.pageCount;
     
-    [entries_ removeAllObjects];
+    if (currentPage == 1) {
+        [self.entries removeAllObjects];
+    }
+    
+    _nextPageToLoad++;
+    
     for (NSDictionary *dict in jsonData[@"payload"]) {
         OCAEntry *entry = [OCAEntry openClipArtEntryWithDictionary:dict];
-        [entries_ addObject:entry];
+        [self.entries addObject:entry];
     }
     
-    downloader_ = nil;
-    [self.activityIndicator stopAnimating];
+    _downloader = nil;
+    
     [self.collectionView reloadData];
 }
 
 #pragma mark - Search
 
+- (void) loadNextPage
+{
+    if (_downloader) {
+        return;
+    }
+    
+    NSString *urlString = @"https://openclipart.org/search/json/?query=";
+    urlString = [urlString stringByAppendingString:self.queryString];
+    urlString = [urlString stringByAppendingString:@"&amount=30"];
+    urlString = [urlString stringByAppendingString:@"&sort="];
+    urlString = [urlString stringByAppendingString:self.sortMode];
+    urlString = [urlString stringByAppendingString:@"&page="];
+    urlString = [urlString stringByAppendingString:@(_nextPageToLoad).stringValue];
+    
+    _downloader = [OCADownloader downloaderWithURL:urlString delegate:self];
+}
+
 - (void) clearSearch
 {
-    haveSearchResults_ = NO;
+    if (_downloader) {
+        [_downloader cancel];
+        _downloader = nil;
+    }
+    
+    _haveSearchResults = NO;
     self.numItems = 0;
 
-    [entries_ removeAllObjects];
+    [self.entries removeAllObjects];
     [self.collectionView reloadData];
 }
 
@@ -162,20 +247,14 @@
     NSArray *tokens = [searchBar.text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *searchTerm = [tokens componentsJoinedByString:@"+"];
     searchTerm = [searchTerm stringByAddingPercentEscapesUsingEncoding:NSStringEncodingConversionAllowLossy];
+
+    self.queryString = searchTerm;
+    self.moreToLoad = YES;
+    _nextPageToLoad = 1;
     
-    // TODO (sprang): Handle multiple pages of result data...
-    NSString *urlString = @"https://openclipart.org/search/json/?query=";
-    urlString = [urlString stringByAppendingString:searchTerm];
-    urlString = [urlString stringByAppendingString:@"&page=1&amount=42&sort="];
-    urlString = [urlString stringByAppendingString:self.sortMode];
+    [self.collectionView reloadData];
     
-    if (downloader_) {
-        [downloader_ cancel];
-        downloader_ = nil;
-    }
-    
-    downloader_ = [OCADownloader downloaderWithURL:urlString delegate:self];
-    [self.activityIndicator startAnimating];
+    [self loadNextPage];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -205,13 +284,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedEntry = entries_[indexPath.row];
-    importButton_.enabled = YES;
+    self.selectedEntry = self.entries[indexPath.row];
+    self.importButton.enabled = YES;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return entries_.count;
+    return self.entries.count;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -219,9 +298,38 @@
 {
     OCAThumbnailCell *thumbnail = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cellID" forIndexPath:indexPath];
     
-    thumbnail.entry = [entries_ objectAtIndex:indexPath.row];
+    thumbnail.entry = [self.entries objectAtIndex:indexPath.row];
     
     return thumbnail;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath
+{
+    OCACollectionViewFooter *footerView = nil;
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                                                        withReuseIdentifier:@"footerID"
+                                                               forIndexPath:indexPath];
+        if (self.moreToLoad) {
+            [footerView.activity startAnimating];
+        } else {
+            [footerView.activity stopAnimating];
+        }
+    }
+    
+    return footerView;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height) {
+        if (_nextPageToLoad <= self.pageCount) {
+            [self loadNextPage];
+        }
+    }
 }
 
 @end

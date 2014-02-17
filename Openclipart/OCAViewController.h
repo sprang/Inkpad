@@ -18,8 +18,8 @@
                                                         UISearchBarDelegate, OCADownloaderDelegate>
 
 @property (nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) OCAEntry *selectedEntry;
+@property (nonatomic, getter=isVisible) BOOL visible;
 
 - (void) setImportTarget:(id)target action:(SEL)action;
 - (void) setActionTitle:(NSString *)title;
