@@ -4,9 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WDOpenClipArtController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OCAViewController">
             <connections>
                 <outlet property="collectionView" destination="sfS-P9-lwi" id="foX-cZ-wwt"/>
+                <outlet property="searchBar" destination="RRV-qS-tbK" id="hhu-PC-hwv"/>
                 <outlet property="view" destination="1" id="G4W-pb-nPS"/>
             </connections>
         </placeholder>

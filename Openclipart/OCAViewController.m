@@ -125,6 +125,9 @@
     toolbar.translucent = NO;
     toolbar.backgroundColor = [UIColor colorWithWhite:0.975f alpha:1.0f];
     
+    // work around localization bug with UISearchBar in an XIB?
+    self.searchBar.placeholder = NSLocalizedString(@"Search Openclipart", "Openclipart search bar placeholder text.");
+    
     self.preferredContentSize = self.view.frame.size;
 }
 

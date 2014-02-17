@@ -162,6 +162,7 @@
 		6B83975018B29D2A001D5985 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974818B29D2A001D5985 /* Localizable.strings */; };
 		6B83975118B29D2A001D5985 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974A18B29D2A001D5985 /* Shadow.strings */; };
 		6B83975218B29D2A001D5985 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974C18B29D2A001D5985 /* Stroke.strings */; };
+		6B83975518B2CE77001D5985 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83975318B2CE77001D5985 /* OpenClipArt.strings */; };
 		6B8416C217EFA8F000508CE7 /* UIBarButtonItem+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */; };
 		6B87C94A131258660027A482 /* WDHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B87C949131258660027A482 /* WDHelpController.m */; };
 		6B87CA5F1312610D0027A482 /* Help in Resources */ = {isa = PBXBuildFile; fileRef = 6B87CA5C1312610D0027A482 /* Help */; };
@@ -541,6 +542,7 @@
 		6B83974918B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Localizable.strings; sourceTree = "<group>"; };
 		6B83974B18B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Shadow.strings; sourceTree = "<group>"; };
 		6B83974D18B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Stroke.strings; sourceTree = "<group>"; };
+		6B83975418B2CE77001D5985 /* it */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/OpenClipArt.strings; sourceTree = "<group>"; };
 		6B8416C017EFA8F000508CE7 /* UIBarButtonItem+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Additions.h"; sourceTree = "<group>"; };
 		6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Additions.m"; sourceTree = "<group>"; };
 		6B87C948131258660027A482 /* WDHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDHelpController.h; sourceTree = "<group>"; };
@@ -1118,6 +1120,7 @@
 			isa = PBXGroup;
 			children = (
 				6B8C537D182AEB4A00C102F7 /* Localizable.strings */,
+				6B83975318B2CE77001D5985 /* OpenClipArt.strings */,
 			);
 			path = it.lproj;
 			sourceTree = "<group>";
@@ -1801,6 +1804,7 @@
 				6BFBC4EB1335F4A000D5877F /* zoom_to_fit.png in Resources */,
 				6B83975018B29D2A001D5985 /* Localizable.strings in Resources */,
 				6B53353F1803538D00D46D5B /* Fill.xib in Resources */,
+				6B83975518B2CE77001D5985 /* OpenClipArt.strings in Resources */,
 				6B094C32134EC24000C926EC /* table_checkmark.png in Resources */,
 				6B83973318A41126001D5985 /* Stroke.strings in Resources */,
 				6B094C34134EC3BC00C926EC /* table_unchecked.png in Resources */,
@@ -2325,6 +2329,15 @@
 				6B83974D18B29D2A001D5985 /* pt */,
 			);
 			name = Stroke.strings;
+			sourceTree = "<group>";
+		};
+		6B83975318B2CE77001D5985 /* OpenClipArt.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83975418B2CE77001D5985 /* it */,
+			);
+			name = OpenClipArt.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		6B8C537D182AEB4A00C102F7 /* Localizable.strings */ = {

@@ -18,6 +18,7 @@
                                                         UISearchBarDelegate, OCADownloaderDelegate>
 
 @property (nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) OCAEntry *selectedEntry;
 @property (nonatomic, getter=isVisible) BOOL visible;
 
