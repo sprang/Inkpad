@@ -358,11 +358,11 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
             continue;
         }
         
-        //NSArray *unselected = [layer.elements filter:^BOOL(id obj) {
-        //    return ![selectedObjects_ containsObject:obj];
-        //}];
+        NSArray *unselected = [layer.elements filter:^BOOL(id obj) {
+            return ![selectedObjects_ containsObject:obj];
+        }];
         
-        [result addObjectsFromArray:layer.elements];
+        [result addObjectsFromArray:unselected];
     }
     
     return result;

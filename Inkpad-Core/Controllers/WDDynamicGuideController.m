@@ -47,11 +47,19 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
     NSMutableArray *vertical = [NSMutableArray array];
     
     // add guides for the canvas itself
-    [WDDynamicGuide generateGuidesForBoundingBox:self.drawingController.drawing.bounds horizontalGuides:horizontal verticalGuides:vertical];
+    [WDDynamicGuide generateGuidesForBoundingBox:self.drawingController.drawing.bounds
+                                horizontalGuides:horizontal verticalGuides:vertical];
     
     // add guides for all unselected drawing elements
     for (WDElement *element in [self.drawingController guideGeneratingObjects]) {
-        [WDDynamicGuide generateGuidesForBoundingBox:element.bounds horizontalGuides:horizontal verticalGuides:vertical];
+        [WDDynamicGuide generateGuidesForBoundingBox:element.bounds
+                                    horizontalGuides:horizontal verticalGuides:vertical];
+    }
+    
+    // add guides for the current selection bounds
+    if (self.drawingController.selectedObjects.count > 0) {
+        [WDDynamicGuide generateGuidesForBoundingBox:self.drawingController.selectionBounds
+                                    horizontalGuides:horizontal verticalGuides:vertical];
     }
     
     [self.horizontalGuides removeAllObjects];
