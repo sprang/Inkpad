@@ -235,6 +235,7 @@
         _downloader = nil;
     }
     
+    self.moreToLoad = NO;
     _haveSearchResults = NO;
     self.numItems = 0;
 
