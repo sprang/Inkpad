@@ -154,7 +154,7 @@
         self.itemCountLabel.text = [NSString stringWithFormat:format, self.numItems];
     }
     
-    self.itemCountLabel.hidden = !_haveSearchResults;
+    self.itemCountLabel.hidden = !self.haveSearchResults;
     [self.itemCountLabel sizeToFit];
 }
 
@@ -186,7 +186,7 @@
         WDLog(@"Failed to load from JSON!");
     }
     
-    _haveSearchResults = YES;
+    self.haveSearchResults = YES;
     self.numItems = [jsonData[@"info"][@"results"] integerValue];
     self.pageCount = [jsonData[@"info"][@"pages"] integerValue];
 
@@ -197,14 +197,14 @@
         [self.entries removeAllObjects];
     }
     
-    _nextPageToLoad++;
+    self.nextPageToLoad++;
     
     for (NSDictionary *dict in jsonData[@"payload"]) {
         OCAEntry *entry = [OCAEntry openClipArtEntryWithDictionary:dict];
         [self.entries addObject:entry];
     }
     
-    _downloader = nil;
+    self.downloader = nil;
     
     [self.collectionView reloadData];
 }
@@ -213,7 +213,7 @@
 
 - (void) loadNextPage
 {
-    if (_downloader) {
+    if (self.downloader) {
         return;
     }
     
@@ -223,20 +223,20 @@
     urlString = [urlString stringByAppendingString:@"&sort="];
     urlString = [urlString stringByAppendingString:self.sortMode];
     urlString = [urlString stringByAppendingString:@"&page="];
-    urlString = [urlString stringByAppendingString:@(_nextPageToLoad).stringValue];
+    urlString = [urlString stringByAppendingString:@(self.nextPageToLoad).stringValue];
     
-    _downloader = [OCADownloader downloaderWithURL:urlString delegate:self];
+    self.downloader = [OCADownloader downloaderWithURL:urlString delegate:self];
 }
 
 - (void) clearSearch
 {
-    if (_downloader) {
-        [_downloader cancel];
-        _downloader = nil;
+    if (self.downloader) {
+        [self.downloader cancel];
+        self.downloader = nil;
     }
     
     self.moreToLoad = NO;
-    _haveSearchResults = NO;
+    self.haveSearchResults = NO;
     self.numItems = 0;
 
     [self.entries removeAllObjects];
@@ -251,7 +251,7 @@
 
     self.queryString = searchTerm;
     self.moreToLoad = YES;
-    _nextPageToLoad = 1;
+    self.nextPageToLoad = 1;
     
     [self.collectionView reloadData];
     
@@ -269,7 +269,7 @@
     [self clearSearch];
 }
 
-- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope NS_AVAILABLE_IOS(3_0)
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     NSString *modes[] = {@"downloads", @"favorites", @"date"};
     self.sortMode = modes[selectedScope];
@@ -327,7 +327,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height) {
-        if (_nextPageToLoad <= self.pageCount) {
+        if (self.nextPageToLoad <= self.pageCount) {
             [self loadNextPage];
         }
     }
