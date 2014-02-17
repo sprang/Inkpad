@@ -189,12 +189,19 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 {
     NSString *title = [downloader.info stringByAppendingPathExtension:@"svg"];
     NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
-    [downloader.data writeToFile:path atomically:NO];
     
-    NSURL *pathURL = [[NSURL alloc] initFileURLWithPath:path isDirectory:NO];
-    [[WDDrawingManager sharedInstance] importDrawingAtURL:pathURL
-                                               errorBlock:^{ [self showImportErrorMessage:downloader.info]; }
-                                    withCompletionHandler:nil];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [downloader.data writeToFile:path atomically:YES];
+        
+        NSURL *pathURL = [[NSURL alloc] initFileURLWithPath:path isDirectory:NO];
+        [[WDDrawingManager sharedInstance] importDrawingAtURL:pathURL
+                                                   errorBlock:^{
+                                                       [self showImportErrorMessage:downloader.info];
+                                                   }
+                                        withCompletionHandler:^(WDDocument *document) {
+                                            [[NSFileManager defaultManager] removeItemAtURL:pathURL error:nil];
+                                        }];
+    }
     
     [downloaders_ removeObject:downloader];
 }
