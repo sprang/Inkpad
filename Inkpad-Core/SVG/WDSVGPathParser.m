@@ -223,9 +223,9 @@ BOOL decomposeArcToCubic(CGMutablePathRef path, float angle, float rx, float ry,
                 to = getPoint(arguments, i + 4, path_, absolute);
                 pathLog(@"Curve(C): cp1(%f, %f) cp2(%f, %f) to(%f, %f)", cp1.x, cp1.y, cp2.x, cp2.y, to.x, to.y);
                 CGPathAddCurveToPoint(path_, NULL, cp1.x, cp1.y, cp2.x, cp2.y, to.x, to.y);
+                lastCurveControl_ = cp2;
+                lastQuadCurveControl_ = CGPathGetCurrentPoint(path_);
             }
-            lastCurveControl_ = cp2;
-            lastQuadCurveControl_ = CGPathGetCurrentPoint(path_);
             break;
         case 'S':
         case 's':
@@ -235,9 +235,9 @@ BOOL decomposeArcToCubic(CGMutablePathRef path, float angle, float rx, float ry,
                 to = getPoint(arguments, i + 2, path_, absolute);
                 pathLog(@"Curve(S): cp1(%f, %f) cp2(%f, %f) to(%f, %f)", cp1.x, cp1.y, cp2.x, cp2.y, to.x, to.y);
                 CGPathAddCurveToPoint(path_, NULL, cp1.x, cp1.y, cp2.x, cp2.y, to.x, to.y);
+                lastCurveControl_ = cp2;
+                lastQuadCurveControl_ = CGPathGetCurrentPoint(path_);
             }
-            lastCurveControl_ = cp2;
-            lastQuadCurveControl_ = CGPathGetCurrentPoint(path_);
             break;
         case 'Q':
         case 'q':
@@ -246,9 +246,9 @@ BOOL decomposeArcToCubic(CGMutablePathRef path, float angle, float rx, float ry,
                 to = getPoint(arguments, i + 2, path_, absolute);
                 pathLog(@"Curve(Q): cp(%f, %f) to(%f, %f)", cp1.x, cp1.y, to.x, to.y);
                 CGPathAddQuadCurveToPoint(path_, NULL, cp1.x, cp1.y, to.x, to.y);
+                lastCurveControl_ = CGPathGetCurrentPoint(path_);
+                lastQuadCurveControl_ = cp1;
             }
-            lastCurveControl_ = CGPathGetCurrentPoint(path_);
-            lastQuadCurveControl_ = cp1;
             break;
         case 'T':
         case 't':
@@ -257,9 +257,9 @@ BOOL decomposeArcToCubic(CGMutablePathRef path, float angle, float rx, float ry,
                 to = getPoint(arguments, i, path_, absolute);
                 pathLog(@"Curve(T): cp(%f, %f) to(%f, %f)", cp1.x, cp1.y, to.x, to.y);
                 CGPathAddQuadCurveToPoint(path_, NULL, cp1.x, cp1.y, to.x, to.y);
+                lastCurveControl_ = CGPathGetCurrentPoint(path_);
+                lastQuadCurveControl_ = cp1;
             }
-            lastCurveControl_ = CGPathGetCurrentPoint(path_);
-            lastQuadCurveControl_ = cp1;
             break;
         case 'A':
         case 'a':

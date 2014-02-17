@@ -72,6 +72,13 @@ NSString *WDGradientStopsKey = @"WDGradientStopsKey";
         return nil;
     }
     
+    if (!stops || !stops.count) {
+        WDLog(@"-[WDGradient initWithType:stops:] called with empty stop array!");
+        
+        stops = @[[WDGradientStop stopWithColor:[WDColor blackColor] andRatio:0.0],
+                  [WDGradientStop stopWithColor:[WDColor whiteColor] andRatio:1.0]];
+    }
+    
     stops_ = [stops sortedArrayUsingSelector:@selector(compare:)];
     type_ = type;
     

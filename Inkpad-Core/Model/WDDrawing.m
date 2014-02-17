@@ -26,9 +26,10 @@
 #import "WDSVGHelper.h"
 #import "WDUtilities.h"
 
-const float kMinimumDrawingDimension = 16;
-const float kMaximumDrawingDimension = 4096;
-const float kMaximumThumbnailDimension = 120;
+const float kMinimumDrawingDimension     = 16;
+const float kMaximumDrawingDimension     = 16000;
+const float kMaximumBitmapImageDimension = 4096;
+const float kMaximumThumbnailDimension   = 120;
 
 // encoder keys
 NSString *WDDrawingKey = @"WDDrawingKey";
@@ -46,6 +47,7 @@ NSString *WDSnapToEdges = @"WDSnapToEdges";
 NSString *WDIsolateActiveLayer = @"WDIsolateActiveLayer";
 NSString *WDOutlineMode = @"WDOutlineMode";
 NSString *WDSnapToGrid = @"WDSnapToGrid";
+NSString *WDDynamicGuides = @"WDDynamicGuides";
 NSString *WDShowGrid = @"WDShowGrid";
 NSString *WDGridSpacing = @"WDGridSpacing";
 NSString *WDRulersVisible = @"WDRulersVisible";
@@ -145,7 +147,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
     // each drawing saves its own settings, but when a user alters them they become the default settings for new documents
     // since this is a new document, look up the values in the defaults...
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *keyArray = @[WDShowGrid, WDSnapToGrid, WDSnapToPoints, WDSnapToEdges, WDRulersVisible];
+    NSArray *keyArray = @[WDShowGrid, WDSnapToGrid, WDSnapToPoints, WDSnapToEdges, WDDynamicGuides, WDRulersVisible];
     for (NSString *key in keyArray) {
         settings_[key] = @([defaults boolForKey:key]);
     }
@@ -581,22 +583,12 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
     }
     
     CGSize size = WDMultiplySizeScalar(styleBounds.size, 2);
-    
-    if (size.width > kMaximumDrawingDimension || size.height > kMaximumDrawingDimension) {
-        if (size.width > size.height) {
-            size.height = (size.height / size.width) * kMaximumDrawingDimension;
-            size.width = kMaximumDrawingDimension;
-        } else {
-            size.width = (size.width / size.height) * kMaximumDrawingDimension;
-            size.height = kMaximumDrawingDimension;
-        }
-    }
-    
-    float scale = size.width / styleBounds.size.width;
+    size = WDClampSize(size, kMaximumBitmapImageDimension);
     
     UIGraphicsBeginImageContext(size);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
+    float scale = size.width / styleBounds.size.width;
     CGContextScaleCTM(ctx, scale, scale);
     CGContextTranslateCTM(ctx, -styleBounds.origin.x, -styleBounds.origin.y);
     [self renderInContext:ctx clipRect:self.bounds metaData:WDRenderingMetaDataMake(scale, WDRenderDefault)];
@@ -614,7 +606,10 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
         contentBounds = CGRectUnion(contentBounds, element.styleBounds);
     }
     
-    UIGraphicsBeginImageContext(WDMultiplySizeScalar(contentBounds.size, scaleFactor));
+    CGSize size = WDMultiplySizeScalar(contentBounds.size, scaleFactor);
+    size = WDClampSize(size, kMaximumBitmapImageDimension);
+    
+    UIGraphicsBeginImageContext(size);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     // scale and offset the elements to render in the new image
@@ -836,6 +831,19 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
     [self.document markChanged];
 }
 
+- (BOOL) dynamicGuides
+{
+    return [settings_[WDDynamicGuides] boolValue];
+}
+
+- (void) setDynamicGuides:(BOOL)dynamicGuides
+{
+    settings_[WDDynamicGuides] = @(dynamicGuides);
+    
+    // this isn't an undoable action so it does not dirty the document
+    [self.document markChanged];
+}
+
 - (BOOL) isolateActiveLayer
 {
     return [settings_[WDIsolateActiveLayer] boolValue];
@@ -885,7 +893,7 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
 
 - (void) setGridSpacing:(float)spacing
 {
-    spacing = WDClamp(1, 216, spacing);
+    spacing = WDClamp(1, 1024, spacing);
     
     settings_[WDGridSpacing] = @(spacing);
     [[NSNotificationCenter defaultCenter] postNotificationName:WDGridSpacingChangedNotification object:self];

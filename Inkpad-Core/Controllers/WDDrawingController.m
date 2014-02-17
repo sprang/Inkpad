@@ -22,6 +22,7 @@
 #import "WDCompoundPath.h"
 #import "WDDrawing.h"
 #import "WDDrawingController.h"
+#import "WDDynamicGuideController.h"
 #import "WDFontManager.h"
 #import "WDGroup.h"
 #import "WDImage.h"
@@ -51,6 +52,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 @synthesize lastAppliedTransform = lastAppliedTransform_;
 @synthesize undoSelectionStack = undoSelectionStack_;
 @synthesize redoSelectionStack = redoSelectionStack_;
+@synthesize dynamicGuideController = dynamicGuideController_;
 
 - (id) init
 {
@@ -341,6 +343,31 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     return NO;
 }
 
+- (NSArray *) guideGeneratingObjects
+{
+    NSMutableArray *result  = [NSMutableArray array];
+    
+    for (WDLayer *layer in drawing_.layers) {
+        if (layer.hidden) {
+            // don't snap to objects on hidden layers
+            continue;
+        }
+        
+        if (self.drawing.isolateActiveLayer && layer != self.drawing.activeLayer) {
+            // ignore non-isolated layers
+            continue;
+        }
+        
+        NSArray *unselected = [layer.elements filter:^BOOL(id obj) {
+            return ![selectedObjects_ containsObject:obj];
+        }];
+        
+        [result addObjectsFromArray:unselected];
+    }
+    
+    return result;
+}
+
 - (NSMutableArray *) orderedSelectedObjects
 {
     NSMutableArray *ordered = [NSMutableArray array];
@@ -384,6 +411,17 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     
     for (WDElement *element in selectedObjects_) {
         bounds = CGRectUnion(bounds, element.bounds);
+    }
+    
+    return bounds;
+}
+
+- (CGRect) selectionStyleBounds
+{
+    CGRect bounds = CGRectNull;
+    
+    for (WDElement *element in selectedObjects_) {
+        bounds = CGRectUnion(bounds, element.styleBounds);
     }
     
     return bounds;
@@ -820,9 +858,9 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
         WDAbstractPath *outline = [path outlineStroke];
         
         if (outline) {
-            outline.fill = [self.propertyManager activeStrokeStyle].color;
-            outline.shadow = [self.propertyManager activeShadow];
-            outline.opacity = [[self.propertyManager defaultValueForProperty:WDOpacityProperty] floatValue];
+            outline.fill = path.strokeStyle.color;
+            outline.shadow = path.shadow;
+            outline.opacity = path.opacity;
             
             [path.layer insertObject:outline above:element];
             [path.layer removeObject:element];
@@ -1760,6 +1798,15 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 #pragma mark -
 #pragma mark Hit Testing
 
+- (WDDynamicGuideController *) dynamicGuideController
+{
+    if (!dynamicGuideController_) {
+        dynamicGuideController_ = [[WDDynamicGuideController alloc] initWithDrawingController:self];
+    }
+    
+    return dynamicGuideController_;
+}
+
 - (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
 {
     WDPickResult    *pickResult;
@@ -1820,6 +1867,19 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
         
         snap.x = floor((pt.x / gridSpacing) + 0.5) * gridSpacing;
         snap.y = floor((pt.y / gridSpacing) + 0.5) * gridSpacing;
+        
+        pickResult = [WDPickResult pickResult];
+        pickResult.snappedPoint = snap;
+        
+        return pickResult;
+    }
+    
+    if (flags & kWDSnapDynamicGuides) {
+        WDDynamicGuideController *guideController = self.dynamicGuideController;
+        
+        // harmless if already called
+        [guideController beginGuideOperation];
+        CGPoint snap = [guideController adjustedPointForGuides:pt viewScale:viewScale];
         
         pickResult = [WDPickResult pickResult];
         pickResult.snappedPoint = snap;

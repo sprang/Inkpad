@@ -98,10 +98,10 @@ void WDDrawCheckersInRect(CGContextRef ctx, CGRect dest, int size)
     CGContextSaveGState(ctx);
     CGContextClipToRect(ctx, dest);
     
-    [[UIColor colorWithWhite:0.9f alpha:1.0f] set];
+    CGContextSetGrayFillColor(ctx, 0.9f, 1.0f);
     CGContextFillRect(ctx, dest);
     
-    [[UIColor colorWithWhite:0.78f alpha:1.0f] set];
+    CGContextSetGrayFillColor(ctx, 0.78f, 1.0f);
     for (int y = 0; y * size < CGRectGetHeight(dest); y++) {
         for (int x = 0; x * size < CGRectGetWidth(dest); x++) {
             if ((y + x) % 2) {
@@ -354,6 +354,21 @@ CGRect WDShrinkRect(CGRect rect, float percentage)
     float   heightInset = CGRectGetHeight(rect) * percentage;
     
     return CGRectInset(rect, widthInset, heightInset);
+}
+
+CGSize WDClampSize(CGSize size, float maxDimension)
+{
+    if (size.width > maxDimension || size.height > maxDimension) {
+        if (size.width > size.height) {
+            size.height = (size.height / size.width) * maxDimension;
+            size.width = maxDimension;
+        } else {
+            size.width = (size.width / size.height) * maxDimension;
+            size.height = maxDimension;
+        }
+    }
+    
+    return size;
 }
 
 #pragma mark -

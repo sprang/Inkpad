@@ -14,6 +14,8 @@
 #import "WDCanvas.h"
 #import "WDCanvasController.h"
 #import "WDCompoundPath.h"
+#import "WDDynamicGuide.h"
+#import "WDDynamicGuideController.h"
 #import "WDDrawingController.h"
 #import "WDFillTransform.h"
 #import "WDPath.h"
@@ -42,6 +44,11 @@
 - (NSString *) iconName
 {
     return (self.groupSelect ? @"groupSelect.png" : @"select.png");
+}
+
+- (BOOL) shouldSnapPointsToGuides
+{
+    return transformingNodes_ || transformingHandles_;
 }
 
 - (void) flagsChangedInCanvas:(WDCanvas *)canvas
@@ -187,6 +194,7 @@
 
 - (void) moveWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
+    WDDynamicGuideController *guideController = canvas.drawingController.dynamicGuideController;
     CGPoint initialPt = self.initialEvent.location;
     CGPoint initialSnapped = self.initialEvent.snappedLocation;
     CGPoint currentPt = event.location;
@@ -213,13 +221,18 @@
             delta = WDConstrainPoint(delta);
         }
         
+        if ([canvas.drawing dynamicGuides]) {
+            // find guides that are snapped to the result
+            canvas.dynamicGuides = [guideController snappedGuidesForPoint:WDAddPoints(initialSnapped, delta)];
+        }
+        
         transform_ = CGAffineTransformMakeTranslation(delta.x, delta.y);
         [canvas transformSelection:transform_];
     } else if (transformingHandles_) {
         canvas.transforming = canvas.transformingNode = YES;
         
         WDPath *path = (WDPath *) [canvas.drawingController singleSelection];
-        WDBezierNodeReflectionMode reflect = (self.flags & WDToolOptionKey || self.flags & WDToolSecondaryTouch ? WDIndependent : originalReflectionMode_);
+        WDBezierNodeReflectionMode reflect = (self.flags & WDToolOptionKey || self.flags & WDToolSecondaryTouch) ? WDIndependent : originalReflectionMode_;
         
         replacementNode_ = [activeNode_ moveControlHandle:(int)pointToMove_ toPoint:snapped reflectionMode:reflect];
         replacementNode_.selected = YES; 
@@ -232,6 +245,11 @@
             } else {
                 [newNodes addObject:node];
             }
+        }
+        
+        if ([canvas.drawing dynamicGuides]) {
+            // find guides that are snapped to the result
+            canvas.dynamicGuides = [guideController snappedGuidesForPoint:snapped];
         }
         
         path.displayNodes = newNodes;
@@ -271,8 +289,24 @@
             delta = WDConstrainPoint(delta);
         }
         
+        BOOL snapToGuides = [canvas.drawing dynamicGuides];
+
+        if (snapToGuides) {
+            // can be harmlessly called multiple times
+            [guideController beginGuideOperation];
+        }
+        
+        // grid snapping overrides guide snapping
         if ([canvas.drawing snapFlags] & kWDSnapGrid) {
             delta = [self offsetSelection:delta inCanvas:canvas];
+        } else if (snapToGuides) {
+            delta = [guideController offsetSelectionForGuides:delta viewScale:canvas.viewScale];
+        }
+        
+        if (snapToGuides) {
+            // find guides that are snapped to the result
+            CGRect snapRect = CGRectOffset([canvas.drawingController selectionBounds], delta.x, delta.y);
+            canvas.dynamicGuides = [guideController snappedGuidesForRect:snapRect];
         }
         
         transform_ = CGAffineTransformMakeTranslation(delta.x, delta.y);
@@ -290,6 +324,10 @@
     }
     
     canvas.transforming = canvas.transformingNode = NO;
+    
+    // clean up guides
+    canvas.dynamicGuides = nil;
+    [canvas.drawingController.dynamicGuideController endGuideOperation];
     
     if (transformingGradient_) {
         if (self.moved) {
@@ -343,9 +381,15 @@
             transform_ = CGAffineTransformIdentity;
         } else if (self.groupSelect && lastTappedObject_ && objectWasSelected_) {
             [canvas.drawingController deselectObject:lastTappedObject_];
-        }  
+        }
     }
+    
+    // turn these off here to make sure we don't snap to guides when we don't want to
+    transformingNodes_ = NO;
+    transformingHandles_ = NO;
 }
+
+#pragma mark - Grid Snapping
 
 - (NSValue *) snapCorner:(CGPoint)pt inCanvas:(WDCanvas *)canvas
 {

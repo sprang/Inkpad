@@ -398,9 +398,9 @@ NSArray *tokenizeStyle(NSString *source)
     NSString *visibility = [stack_ style:kWDPropertyVisibility];
     NSString *display= [stack_ style:kWDPropertyDisplay];
     if ([display isEqualToString:@"none"] || [visibility isEqualToString:@"hidden"]) {
-        element.opacity = 0;
+        element.opacity = 0; // TODO: add visibility property to WDElement
     } else {
-        element.opacity = [opacity floatValue];
+        element.opacity = opacity ? [opacity floatValue] : 1.0;
     }
 
     NSString *blendModeSource = [stack_ attribute:@"inkpad:blendMode"];

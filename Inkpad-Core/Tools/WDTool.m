@@ -96,16 +96,22 @@
     return NO;
 }
 
+- (BOOL) shouldSnapPointsToGuides
+{
+    return NO;
+}
+
 - (CGPoint) snappedPointForPoint:(CGPoint)pt inCanvas:(WDCanvas *)canvas
 {
     NSUInteger snapFlags = [canvas.drawing snapFlags] | kWDSnapLocked | kWDSnapSubelement;
     
-    WDPickResult *result = [canvas.drawingController snappedPoint:pt viewScale:canvas.viewScale snapFlags:(int)snapFlags];
-    if (result.snapped) {
-        pt = result.snappedPoint;
+    if (self.shouldSnapPointsToGuides && canvas.drawing.dynamicGuides) {
+        snapFlags |= kWDSnapDynamicGuides;
     }
     
-    return pt;
+    WDPickResult *result = [canvas.drawingController snappedPoint:pt viewScale:canvas.viewScale snapFlags:(int)snapFlags];
+    
+    return result.snapped ? result.snappedPoint : pt;
 }
 
 #pragma mark -

@@ -43,6 +43,21 @@
 		<key>Items</key>
 		<array>
 			<dict>
+				<key>Key</key>
+				<string>WDDynamicGuides</string>
+				<key>Selector</key>
+				<string>takeDynamicGuidesFrom:</string>
+				<key>Title</key>
+				<string>Dynamic Guides</string>
+				<key>Type</key>
+				<string>Switch</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>Items</key>
+		<array>
+			<dict>
 				<key>Accessor</key>
 				<string>showGrid</string>
 				<key>Key</key>

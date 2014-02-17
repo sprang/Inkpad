@@ -1,0 +1,33 @@
+
+/* Class = "IBUILabel"; text = "Blue"; ObjectID = "15"; */
+"15.text" = "Blau";
+
+/* Class = "IBUILabel"; text = "Yellow"; ObjectID = "16"; */
+"16.text" = "Gelb";
+
+/* Class = "IBUILabel"; text = "Green"; ObjectID = "18"; */
+"18.text" = "Grün";
+
+/* Class = "IBUILabel"; text = "Magenta"; ObjectID = "19"; */
+"19.text" = "Magenta";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "21"; */
+"21.text" = "0";
+
+/* Class = "IBUILabel"; text = "Cyan"; ObjectID = "22"; */
+"22.text" = "Cyan";
+
+/* Class = "IBUILabel"; text = "Red"; ObjectID = "23"; */
+"23.text" = "Rot";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "24"; */
+"24.text" = "0";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "25"; */
+"25.text" = "0";
+
+/* Class = "IBUINavigationItem"; title = "Color Balance"; ObjectID = "34"; */
+"34.title" = "Farbbalance";
+
+/* Class = "IBUIBarButtonItem"; title = "Accept"; ObjectID = "36"; */
+"36.title" = "Bestätigen";

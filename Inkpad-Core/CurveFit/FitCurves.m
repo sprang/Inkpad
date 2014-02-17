@@ -24,18 +24,27 @@ typedef struct {
     CGPoint pts[4];
 } BezierCurve;
 
+
 // forward declarations
-static int          FitCubic();
-static double *     Reparameterize();
-static double       NewtonRaphsonRootFind();
-static CGPoint      BezierII();
-static double       B0(), B1(), B2(), B3();
-static CGPoint      ComputeLeftTangent(), ComputeRightTangent(), ComputeCenterTangent();
-static double       ComputeMaxError();
-static double *     ChordLengthParameterize();
-static BezierCurve  GenerateBezier();
-static  double      V2SquaredLength(), V2Dot();
-static  void        AddBezierSegment();
+//
+static int          FitCubic(WDBezierSegment *segments, CGPoint *d, int first, int last, CGPoint tHat1, CGPoint tHat2, double error, int segCount);
+static BezierCurve  GenerateBezier(CGPoint *d, int first, int last, double *uPrime, CGPoint tHat1, CGPoint tHat2);
+static double *     Reparameterize(CGPoint *d, int first, int last, double *u, BezierCurve bezCurve);
+static double       NewtonRaphsonRootFind(BezierCurve Q, CGPoint P, double u);
+static CGPoint      BezierII(int degree, CGPoint *V, double t);
+static double       B0(double u);
+static double       B1(double u);
+static double       B2(double u);
+static double       B3(double u);
+static CGPoint      ComputeLeftTangent(CGPoint *d, int end);
+static CGPoint      ComputeRightTangent(CGPoint *d, int end);
+static CGPoint      ComputeCenterTangent(CGPoint *d, int center);
+static double *     ChordLengthParameterize(CGPoint *d, int first, int last);
+static double       ComputeMaxError(CGPoint *d, int first, int last, BezierCurve bezCurve, double *u, int *splitPoint);
+static double       V2SquaredLength(CGPoint a);
+static double       V2Dot(CGPoint a, CGPoint b);
+static void         AddBezierSegment(WDBezierSegment *segments, BezierCurve curve, int ix);
+
 
 //  FitCurve : Fit a Bezier curve to a set of digitized points
 //

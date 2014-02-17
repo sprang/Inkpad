@@ -10,6 +10,8 @@
 //
 
 #import <DropboxSDK/DropboxSDK.h>
+#import "OCAEntry.h"
+#import "OCAViewController.h"
 #import "NSData+Additions.h"
 #import "WDActivity.h"
 #import "WDActivityController.h"
@@ -118,6 +120,12 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
                                                                                     action:@selector(importFromCamera:)];
         [rightBarButtonItems addObject:cameraItem];
     }
+    
+    UIBarButtonItem *openClipArtItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"openclipart.png"]
+                                                                        style:UIBarButtonItemStylePlain
+                                                                       target:self
+                                                                       action:@selector(showOpenClipArt:)];
+    [rightBarButtonItems addObject:openClipArtItem];
 
     // Create a help button to display in the top left corner.
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", @"Help")
@@ -175,6 +183,68 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     }
 }
 
+#pragma mark - OpenClipArt
+
+- (void) takeDataFromDownloader:(OCADownloader *)downloader
+{
+    NSString *title = [downloader.info stringByAppendingPathExtension:@"svg"];
+    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [downloader.data writeToFile:path atomically:YES];
+        
+        NSURL *pathURL = [[NSURL alloc] initFileURLWithPath:path isDirectory:NO];
+        [[WDDrawingManager sharedInstance] importDrawingAtURL:pathURL
+                                                   errorBlock:^{
+                                                       [self showImportErrorMessage:downloader.info];
+                                                   }
+                                        withCompletionHandler:^(WDDocument *document) {
+                                            [[NSFileManager defaultManager] removeItemAtURL:pathURL error:nil];
+                                        }];
+    }
+    
+    [downloaders_ removeObject:downloader];
+}
+
+- (void) importOpenClipArt:(OCAViewController *)viewController
+{
+    OCAEntry *entry = viewController.selectedEntry;
+    
+    if (!downloaders_) {
+        downloaders_ = [NSMutableSet set];
+    }
+    
+    OCADownloader *downloader = [OCADownloader downloaderWithURL:entry.SVGURL delegate:self info:entry.title];
+    [downloaders_ addObject:downloader];
+    
+    if (openClipArtController_.isVisible) {
+        [self dismissPopover];
+    }
+}
+
+- (void) showOpenClipArt:(id)sender
+{
+    if (openClipArtController_.isVisible) {
+        [self dismissPopover];
+        return;
+    }
+    
+    [self dismissPopover];
+    
+    if (!openClipArtController_) {
+        openClipArtController_ = [[OCAViewController alloc] initWithNibName:@"OpenClipArt" bundle:nil];
+        [openClipArtController_ setImportTarget:self action:@selector(importOpenClipArt:)];
+        [openClipArtController_ setActionTitle:NSLocalizedString(@"Import", @"Import")];
+    }
+    
+    UINavigationController  *navController = [[UINavigationController alloc] initWithRootViewController:openClipArtController_];
+    navController.toolbarHidden = NO;
+    
+    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
+    popoverController_.delegate = self;
+    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+}
+
 #pragma mark - Camera
 
 - (void) importFromImagePicker:(id)sender sourceType:(UIImagePickerControllerSourceType)sourceType
@@ -223,11 +293,13 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 - (void) viewWillAppear:(BOOL)animated
 {
     if (!everLoaded_) {
-        // scroll to bottom
-        NSUInteger count = [[WDDrawingManager sharedInstance] numberOfDrawings] - 1;
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:count inSection:0]
-                                    atScrollPosition:UICollectionViewScrollPositionTop
-                                            animated:NO];
+        if ([[WDDrawingManager sharedInstance] numberOfDrawings] > 0) {
+            // scroll to bottom
+            NSUInteger count = [[WDDrawingManager sharedInstance] numberOfDrawings] - 1;
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:count inSection:0]
+                                        atScrollPosition:UICollectionViewScrollPositionTop
+                                                animated:NO];
+        }
         
         everLoaded_ = YES;
     }

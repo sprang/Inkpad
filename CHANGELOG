@@ -1,4 +1,21 @@
 Next Update
+- Increased maximum stroke width to 300
+- Tweaked line attribute picker appearance
+- Fixed type bug that broke palette 'tossing' on 64-bit devices
+- Added support for importing SVGs from Openclipart.com
+- Fixed SVG import bugs
+- Added a 'delete' pseudo-tool to the tool palette
+- Increased maximum logical drawing dimension to 16000
+- Fixed crash that occurred at launch if there were no drawings
+- Implemented support for dynamic "Smart" guides
+- Increased maximum grid spacing to 1024
+- Outlined strokes now take their style from the parent path, not the active style
+- Tweaked Add Anchor Tool so that tapping an anchor selects an unselected path
+- Floating palettes now maintain relative screen position when the device is rotated
+- Added German localization
+- Added Portuguese localization
+
+1.5.2 [currently on the App Store]
 - Added T-end arrowhead
 - Fixed incorrect shadow/parallax on eraser options view
 - Integrated UIDocumentInteractionController for exporting
@@ -16,7 +33,7 @@ Next Update
 - Fixed text path layout issue (rendered incorrectly on linear segments)
 - Fixed text path start bar rendering at high magnifications
 
-1.5.1 [currently on the App Store]
+1.5.1
 - Fixed broken Github link in the help file
 - Fixed a bug that caused gradient transforms to be reset when reactivating an existing path
 - Vertically centered the titles in the Stroke and Fill panels

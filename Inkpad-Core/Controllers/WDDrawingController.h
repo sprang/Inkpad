@@ -17,6 +17,7 @@
 @class WDBezierNode;
 @class WDColor;
 @class WDDrawing;
+@class WDDynamicGuideController;
 @class WDElement;
 @class WDLayer;
 @class WDPath;
@@ -37,6 +38,7 @@
 @property (nonatomic, assign) CGAffineTransform lastAppliedTransform;
 @property (nonatomic, strong) NSMutableArray *undoSelectionStack;
 @property (nonatomic, strong) NSMutableArray *redoSelectionStack;
+@property (nonatomic, readonly) WDDynamicGuideController *dynamicGuideController;
 
 // node selection
 - (void) selectNode:(WDBezierNode *)node;
@@ -48,11 +50,14 @@
 - (WDElement *) singleSelection;
 - (NSMutableArray *) orderedSelectedObjects;
 - (NSArray *) sortedSelectionForLayer:(WDLayer *)layer;
+- (NSArray *) guideGeneratingObjects;
 
 - (BOOL) isSelected:(WDElement *)element;
 - (BOOL) isSelectedOrSubelementIsSelected:(WDElement *)element;
 
 - (CGRect) selectionBounds;
+- (CGRect) selectionStyleBounds;
+
 - (NSSet *) selectedPaths;
 - (BOOL) allSelectedObjectsAreRootObjects;
 

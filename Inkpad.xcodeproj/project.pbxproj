@@ -140,6 +140,28 @@
 		6B7D2D2115097D8B001311B0 /* increment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7D2D1D15097D8B001311B0 /* increment@2x.png */; };
 		6B7D2D23150AD7A9001311B0 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7D2D22150AD7A6001311B0 /* Default-Landscape@2x.png */; };
 		6B7D2D25150AD851001311B0 /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B7D2D24150AD84E001311B0 /* Default-Portrait@2x.png */; };
+		6B8396E2189F2FB0001D5985 /* OpenClipArt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B8396E0189F2FB0001D5985 /* OpenClipArt.xib */; };
+		6B8396E5189F3767001D5985 /* openclipart.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B8396E3189F3767001D5985 /* openclipart.png */; };
+		6B8396E6189F3767001D5985 /* openclipart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B8396E4189F3767001D5985 /* openclipart@2x.png */; };
+		6B83970D18A36253001D5985 /* OCADownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83970418A36253001D5985 /* OCADownloader.m */; };
+		6B83970E18A36253001D5985 /* OCAEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83970618A36253001D5985 /* OCAEntry.m */; };
+		6B83970F18A36253001D5985 /* OCAThumbnailCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83970818A36253001D5985 /* OCAThumbnailCache.m */; };
+		6B83971018A36253001D5985 /* OCAThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83970A18A36253001D5985 /* OCAThumbnailCell.m */; };
+		6B83971118A36253001D5985 /* OCAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83970C18A36253001D5985 /* OCAViewController.m */; };
+		6B83972F18A41126001D5985 /* ColorBalance.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972518A41125001D5985 /* ColorBalance.strings */; };
+		6B83973018A41126001D5985 /* HueSaturation.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972718A41125001D5985 /* HueSaturation.strings */; };
+		6B83973118A41126001D5985 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972918A41125001D5985 /* Localizable.strings */; };
+		6B83973218A41126001D5985 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972B18A41126001D5985 /* Shadow.strings */; };
+		6B83973318A41126001D5985 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83972D18A41126001D5985 /* Stroke.strings */; };
+		6B83973918A4390C001D5985 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B83973718A4390C001D5985 /* trash.png */; };
+		6B83973A18A4390C001D5985 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B83973818A4390C001D5985 /* trash@2x.png */; };
+		6B83973D18A5BA60001D5985 /* WDDynamicGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83973C18A5BA60001D5985 /* WDDynamicGuide.m */; };
+		6B83974218AC5777001D5985 /* WDDynamicGuideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83974118AC5777001D5985 /* WDDynamicGuideController.m */; };
+		6B83974E18B29D2A001D5985 /* ColorBalance.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974418B29D2A001D5985 /* ColorBalance.strings */; };
+		6B83974F18B29D2A001D5985 /* HueSaturation.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974618B29D2A001D5985 /* HueSaturation.strings */; };
+		6B83975018B29D2A001D5985 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974818B29D2A001D5985 /* Localizable.strings */; };
+		6B83975118B29D2A001D5985 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974A18B29D2A001D5985 /* Shadow.strings */; };
+		6B83975218B29D2A001D5985 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B83974C18B29D2A001D5985 /* Stroke.strings */; };
 		6B8416C217EFA8F000508CE7 /* UIBarButtonItem+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */; };
 		6B87C94A131258660027A482 /* WDHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B87C949131258660027A482 /* WDHelpController.m */; };
 		6B87CA5F1312610D0027A482 /* Help in Resources */ = {isa = PBXBuildFile; fileRef = 6B87CA5C1312610D0027A482 /* Help */; };
@@ -489,6 +511,36 @@
 		6B7D2D1D15097D8B001311B0 /* increment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "increment@2x.png"; path = "Images/increment@2x.png"; sourceTree = "<group>"; };
 		6B7D2D22150AD7A6001311B0 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x.png"; path = "Images/Default-Landscape@2x.png"; sourceTree = "<group>"; };
 		6B7D2D24150AD84E001311B0 /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x.png"; path = "Images/Default-Portrait@2x.png"; sourceTree = "<group>"; };
+		6B8396E1189F2FB0001D5985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenClipArt.xib; sourceTree = "<group>"; };
+		6B8396E3189F3767001D5985 /* openclipart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = openclipart.png; path = Images/openclipart.png; sourceTree = "<group>"; };
+		6B8396E4189F3767001D5985 /* openclipart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "openclipart@2x.png"; path = "Images/openclipart@2x.png"; sourceTree = "<group>"; };
+		6B83970318A36253001D5985 /* OCADownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCADownloader.h; path = Openclipart/OCADownloader.h; sourceTree = SOURCE_ROOT; };
+		6B83970418A36253001D5985 /* OCADownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCADownloader.m; path = Openclipart/OCADownloader.m; sourceTree = SOURCE_ROOT; };
+		6B83970518A36253001D5985 /* OCAEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCAEntry.h; path = Openclipart/OCAEntry.h; sourceTree = SOURCE_ROOT; };
+		6B83970618A36253001D5985 /* OCAEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCAEntry.m; path = Openclipart/OCAEntry.m; sourceTree = SOURCE_ROOT; };
+		6B83970718A36253001D5985 /* OCAThumbnailCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCAThumbnailCache.h; path = Openclipart/OCAThumbnailCache.h; sourceTree = SOURCE_ROOT; };
+		6B83970818A36253001D5985 /* OCAThumbnailCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCAThumbnailCache.m; path = Openclipart/OCAThumbnailCache.m; sourceTree = SOURCE_ROOT; };
+		6B83970918A36253001D5985 /* OCAThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCAThumbnailCell.h; path = Openclipart/OCAThumbnailCell.h; sourceTree = SOURCE_ROOT; };
+		6B83970A18A36253001D5985 /* OCAThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCAThumbnailCell.m; path = Openclipart/OCAThumbnailCell.m; sourceTree = SOURCE_ROOT; };
+		6B83970B18A36253001D5985 /* OCAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OCAViewController.h; path = Openclipart/OCAViewController.h; sourceTree = SOURCE_ROOT; };
+		6B83970C18A36253001D5985 /* OCAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OCAViewController.m; path = Openclipart/OCAViewController.m; sourceTree = SOURCE_ROOT; };
+		6B83971318A36D23001D5985 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpenClipArt.strings; sourceTree = "<group>"; };
+		6B83972618A41125001D5985 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ColorBalance.strings; sourceTree = "<group>"; };
+		6B83972818A41125001D5985 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = HueSaturation.strings; sourceTree = "<group>"; };
+		6B83972A18A41125001D5985 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
+		6B83972C18A41126001D5985 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Shadow.strings; sourceTree = "<group>"; };
+		6B83972E18A41126001D5985 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Stroke.strings; sourceTree = "<group>"; };
+		6B83973718A4390C001D5985 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trash.png; path = Images/trash.png; sourceTree = "<group>"; };
+		6B83973818A4390C001D5985 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trash@2x.png"; path = "Images/trash@2x.png"; sourceTree = "<group>"; };
+		6B83973B18A5BA60001D5985 /* WDDynamicGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDDynamicGuide.h; sourceTree = "<group>"; };
+		6B83973C18A5BA60001D5985 /* WDDynamicGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDDynamicGuide.m; sourceTree = "<group>"; };
+		6B83974018AC5777001D5985 /* WDDynamicGuideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDDynamicGuideController.h; sourceTree = "<group>"; };
+		6B83974118AC5777001D5985 /* WDDynamicGuideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDDynamicGuideController.m; sourceTree = "<group>"; };
+		6B83974518B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = ColorBalance.strings; sourceTree = "<group>"; };
+		6B83974718B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = HueSaturation.strings; sourceTree = "<group>"; };
+		6B83974918B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Localizable.strings; sourceTree = "<group>"; };
+		6B83974B18B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Shadow.strings; sourceTree = "<group>"; };
+		6B83974D18B29D2A001D5985 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Stroke.strings; sourceTree = "<group>"; };
 		6B8416C017EFA8F000508CE7 /* UIBarButtonItem+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Additions.h"; sourceTree = "<group>"; };
 		6B8416C117EFA8F000508CE7 /* UIBarButtonItem+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Additions.m"; sourceTree = "<group>"; };
 		6B87C948131258660027A482 /* WDHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDHelpController.h; sourceTree = "<group>"; };
@@ -819,6 +871,7 @@
 				6BCD53651240002D002FCB27 /* Controllers */,
 				6BCD536212400025002FCB27 /* Model */,
 				6BCD53681240003D002FCB27 /* View */,
+				6B8396ED18A072A4001D5985 /* Openclipart */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -856,11 +909,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6B83972418A41125001D5985 /* de.lproj */,
 				6B8F091517FCE1DB00BB6F7E /* en.lproj */,
 				6BC96745183149E300F46191 /* es.lproj */,
 				F43A1D69183557770032933E /* fr.lproj */,
 				6B8C5379182AEA5000C102F7 /* it.lproj */,
 				6B95751E183C52940094B7D5 /* tr.lproj */,
+				6B83974318B29D2A001D5985 /* pt.lproj */,
 				6B616773137B429200BEC0BA /* Samples */,
 				6B87CA5C1312610D0027A482 /* Help */,
 				6B984AF7131623FA007FB48F /* PLists */,
@@ -913,24 +968,69 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		6B8396ED18A072A4001D5985 /* Openclipart */ = {
+			isa = PBXGroup;
+			children = (
+				6B83970318A36253001D5985 /* OCADownloader.h */,
+				6B83970418A36253001D5985 /* OCADownloader.m */,
+				6B83970518A36253001D5985 /* OCAEntry.h */,
+				6B83970618A36253001D5985 /* OCAEntry.m */,
+				6B83970718A36253001D5985 /* OCAThumbnailCache.h */,
+				6B83970818A36253001D5985 /* OCAThumbnailCache.m */,
+				6B83970918A36253001D5985 /* OCAThumbnailCell.h */,
+				6B83970A18A36253001D5985 /* OCAThumbnailCell.m */,
+				6B83970B18A36253001D5985 /* OCAViewController.h */,
+				6B83970C18A36253001D5985 /* OCAViewController.m */,
+			);
+			name = Openclipart;
+			sourceTree = "<group>";
+		};
+		6B83972418A41125001D5985 /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6B83972518A41125001D5985 /* ColorBalance.strings */,
+				6B83972718A41125001D5985 /* HueSaturation.strings */,
+				6B83972918A41125001D5985 /* Localizable.strings */,
+				6B83972B18A41126001D5985 /* Shadow.strings */,
+				6B83972D18A41126001D5985 /* Stroke.strings */,
+			);
+			path = de.lproj;
+			sourceTree = "<group>";
+		};
+		6B83974318B29D2A001D5985 /* pt.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6B83974418B29D2A001D5985 /* ColorBalance.strings */,
+				6B83974618B29D2A001D5985 /* HueSaturation.strings */,
+				6B83974818B29D2A001D5985 /* Localizable.strings */,
+				6B83974A18B29D2A001D5985 /* Shadow.strings */,
+				6B83974C18B29D2A001D5985 /* Stroke.strings */,
+			);
+			path = pt.lproj;
+			sourceTree = "<group>";
+		};
 		6B87CDEC1313C5A00027A482 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
-				6BC967591834852400F46191 /* album_centered.png */,
-				6BC9675A1834852400F46191 /* album_centered@2x.png */,
-				6B219CCA1511893500761F18 /* duplicate.png */,
-				6B2AC3FA17EAD420008D6391 /* duplicate@2x.png */,
 				6BCD5282123FFFED002FCB27 /* album.png */,
 				6B7D2D001508A0B2001311B0 /* album@2x.png */,
+				6BC967591834852400F46191 /* album_centered.png */,
+				6BC9675A1834852400F46191 /* album_centered@2x.png */,
 				6B53FF9813A7DC3E0029574B /* color_wheel.png */,
 				6B74B7DB150E8213000A08D4 /* color_wheel@2x.png */,
+				6B219CCA1511893500761F18 /* duplicate.png */,
+				6B2AC3FA17EAD420008D6391 /* duplicate@2x.png */,
 				6B98C153124D642A008FB8E1 /* font.png */,
 				6B7D2CEF150898BE001311B0 /* font@2x.png */,
 				6BCD5288123FFFED002FCB27 /* gear.png */,
 				6B7D2D101509726D001311B0 /* gear@2x.png */,
+				6B8396E3189F3767001D5985 /* openclipart.png */,
+				6B8396E4189F3767001D5985 /* openclipart@2x.png */,
 				6BCD5294123FFFED002FCB27 /* redo.png */,
 				6B7D2CF215089965001311B0 /* redo@2x.png */,
 				6B51BCBD12651C1C000F6BF3 /* swatches.png */,
+				6B83973718A4390C001D5985 /* trash.png */,
+				6B83973818A4390C001D5985 /* trash@2x.png */,
 				6BCD529F123FFFED002FCB27 /* undo.png */,
 				6B7D2CF315089965001311B0 /* undo@2x.png */,
 				6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */,
@@ -1051,6 +1151,7 @@
 				6B53352D1803538D00D46D5B /* Import.xib */,
 				6B53352F1803538D00D46D5B /* LayerCell.xib */,
 				6B5335311803538D00D46D5B /* MainStoryboard.storyboard */,
+				6B8396E0189F2FB0001D5985 /* OpenClipArt.xib */,
 				6B5335331803538D00D46D5B /* Samples.xib */,
 				6B5335351803538D00D46D5B /* Shadow.xib */,
 				6B5335371803538D00D46D5B /* ShapeOptions.xib */,
@@ -1115,6 +1216,8 @@
 			children = (
 				6BABD894141ED30100F7E0A9 /* WDDrawingController.h */,
 				6BABD895141ED30100F7E0A9 /* WDDrawingController.m */,
+				6B83974018AC5777001D5985 /* WDDynamicGuideController.h */,
+				6B83974118AC5777001D5985 /* WDDynamicGuideController.m */,
 				6BABD896141ED30100F7E0A9 /* WDPropertyManager.h */,
 				6BABD897141ED30100F7E0A9 /* WDPropertyManager.m */,
 				6BABD898141ED30100F7E0A9 /* WDToolManager.h */,
@@ -1216,6 +1319,8 @@
 				6BABD8F2141ED30100F7E0A9 /* WDCurveFit.m */,
 				6BABD8F3141ED30100F7E0A9 /* WDDrawing.h */,
 				6BABD8F4141ED30100F7E0A9 /* WDDrawing.m */,
+				6B83973B18A5BA60001D5985 /* WDDynamicGuide.h */,
+				6B83973C18A5BA60001D5985 /* WDDynamicGuide.m */,
 				6BABD8F5141ED30100F7E0A9 /* WDElement.h */,
 				6BABD8F6141ED30100F7E0A9 /* WDElement.m */,
 				6BABD8F7141ED30100F7E0A9 /* WDFillTransform.h */,
@@ -1385,21 +1490,21 @@
 		6BCD536212400025002FCB27 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				29735E8C14215801006CF698 /* WDDocumentProtocol.h */,
 				6B00DA511405F65E00E45409 /* WDActivity.h */,
 				6B00DA521405F65E00E45409 /* WDActivity.m */,
 				6B00DA581406022B00E45409 /* WDActivityManager.h */,
 				6B00DA591406022B00E45409 /* WDActivityManager.m */,
+				6BABD9E2141ED51F00F7E0A9 /* WDDocument.h */,
+				6BABD9E3141ED51F00F7E0A9 /* WDDocument.m */,
+				29735E8C14215801006CF698 /* WDDocumentProtocol.h */,
 				6BCD52E812400017002FCB27 /* WDDrawingManager.h */,
 				6BCD52E912400017002FCB27 /* WDDrawingManager.m */,
+				29E28F8215115F68007D36DE /* WDEmail.h */,
+				29E28F8315115F68007D36DE /* WDEmail.m */,
 				6B0D8CD413E01C4300DDFDC7 /* WDFontManager.h */,
 				6B0D8CD513E01C4400DDFDC7 /* WDFontManager.m */,
 				6B963450140359060096A349 /* WDUserFont.h */,
 				6B963451140359060096A349 /* WDUserFont.m */,
-				6BABD9E2141ED51F00F7E0A9 /* WDDocument.h */,
-				6BABD9E3141ED51F00F7E0A9 /* WDDocument.m */,
-				29E28F8215115F68007D36DE /* WDEmail.h */,
-				29E28F8315115F68007D36DE /* WDEmail.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1632,6 +1737,8 @@
 				it,
 				es,
 				tr,
+				de,
+				pt,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1656,6 +1763,7 @@
 				6BCD52BC123FFFED002FCB27 /* textRight.png in Resources */,
 				6BCD52BD123FFFED002FCB27 /* undo.png in Resources */,
 				6B197DAC12434CED006C5C3A /* align_bottom.png in Resources */,
+				6B83974E18B29D2A001D5985 /* ColorBalance.strings in Resources */,
 				6B6749D817F9446300E9A627 /* Icon-Settings.png in Resources */,
 				6B197DAD12434CED006C5C3A /* align_center.png in Resources */,
 				6BC9675B1834852400F46191 /* album_centered.png in Resources */,
@@ -1668,6 +1776,7 @@
 				6B5335401803538D00D46D5B /* Font.xib in Resources */,
 				6B53351F1803530E00D46D5B /* PageSizes.plist in Resources */,
 				6B98C154124D642A008FB8E1 /* font.png in Resources */,
+				6B8396E2189F2FB0001D5985 /* OpenClipArt.xib in Resources */,
 				6BC062AE124F719000451362 /* checkmark.png in Resources */,
 				6B3A2A571256E2CE00574B41 /* hidden.png in Resources */,
 				6B3A2A581256E2CE00574B41 /* visible.png in Resources */,
@@ -1684,13 +1793,16 @@
 				6B51BCBE12651C1C000F6BF3 /* swatches.png in Resources */,
 				6B48E9D9126BE2B4002D3B85 /* isolate.png in Resources */,
 				6BC96752183149E300F46191 /* Localizable.strings in Resources */,
+				6B83973918A4390C001D5985 /* trash.png in Resources */,
 				6B5335471803538D00D46D5B /* Shadow.xib in Resources */,
 				6B53353D1803538D00D46D5B /* Color.xib in Resources */,
 				6BF747931311C399000D9344 /* Entitlements.plist in Resources */,
 				6B87CA5F1312610D0027A482 /* Help in Resources */,
 				6BFBC4EB1335F4A000D5877F /* zoom_to_fit.png in Resources */,
+				6B83975018B29D2A001D5985 /* Localizable.strings in Resources */,
 				6B53353F1803538D00D46D5B /* Fill.xib in Resources */,
 				6B094C32134EC24000C926EC /* table_checkmark.png in Resources */,
+				6B83973318A41126001D5985 /* Stroke.strings in Resources */,
 				6B094C34134EC3BC00C926EC /* table_unchecked.png in Resources */,
 				6B09739C136A174900EFD696 /* spark_knob.png in Resources */,
 				6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */,
@@ -1702,8 +1814,10 @@
 				5D3C1A77138771900040D261 /* dropbox_icon_generic.png in Resources */,
 				6BCF3AD713BA2E6400A95E0D /* dropbox_icon_inkpad.png in Resources */,
 				6BCF3AD913BA2F9F00A95E0D /* dropbox_icon_unsupported.png in Resources */,
+				6B83973218A41126001D5985 /* Shadow.strings in Resources */,
 				6BDD92E413DE744F0005F55D /* hue_shifter_overlay.png in Resources */,
 				6B6749D917F9446300E9A627 /* Icon-Settings@2x.png in Resources */,
+				6B83975118B29D2A001D5985 /* Shadow.strings in Resources */,
 				6B87EA3513FB2F7300CC07C3 /* dropbox_icon_font.png in Resources */,
 				6B87EA3613FB2F7300CC07C3 /* dropbox_icon_svg.png in Resources */,
 				6BABD97C141ED30100F7E0A9 /* add_anchor.png in Resources */,
@@ -1731,14 +1845,17 @@
 				6BABD9A1141ED30100F7E0A9 /* text.png in Resources */,
 				6B5335421803538D00D46D5B /* HueSaturation.xib in Resources */,
 				6B53351E1803530E00D46D5B /* ImportFormats.plist in Resources */,
+				6B83973118A41126001D5985 /* Localizable.strings in Resources */,
 				F43A1D76183557770032933E /* Localizable.strings in Resources */,
 				6BABD9A3141ED30100F7E0A9 /* zoom.png in Resources */,
 				6BABD9E7141F15AC00F7E0A9 /* SVGColors.plist in Resources */,
 				6B7D2CF0150898BE001311B0 /* font@2x.png in Resources */,
+				6B83975218B29D2A001D5985 /* Stroke.strings in Resources */,
 				6B53354A1803538D00D46D5B /* Text.xib in Resources */,
 				6B7D2CF415089966001311B0 /* redo@2x.png in Resources */,
 				6B7D2CF515089966001311B0 /* undo@2x.png in Resources */,
 				6B2AC3FB17EAD420008D6391 /* duplicate@2x.png in Resources */,
+				6B83973A18A4390C001D5985 /* trash@2x.png in Resources */,
 				6B7D2D011508A0B2001311B0 /* album@2x.png in Resources */,
 				6B7D2D031508A291001311B0 /* text@2x.png in Resources */,
 				6B7D2D0B1508AC8D001311B0 /* slider_border@2x.png in Resources */,
@@ -1749,6 +1866,7 @@
 				6B7D2D1E15097D8B001311B0 /* decrement.png in Resources */,
 				6B7D2D1F15097D8B001311B0 /* decrement@2x.png in Resources */,
 				6B6749DD17F9446300E9A627 /* Icon@2x.png in Resources */,
+				6B83974F18B29D2A001D5985 /* HueSaturation.strings in Resources */,
 				6B7D2D2015097D8B001311B0 /* increment.png in Resources */,
 				6B7D2D2115097D8B001311B0 /* increment@2x.png in Resources */,
 				6B7D2D23150AD7A9001311B0 /* Default-Landscape@2x.png in Resources */,
@@ -1775,6 +1893,8 @@
 				6B219C65150EC7BB00761F18 /* unlock@2x.png in Resources */,
 				6B219C6B150ED94600761F18 /* brush@2x.png in Resources */,
 				6B219C6F150ED9DE00761F18 /* eyedropper@2x.png in Resources */,
+				6B83973018A41126001D5985 /* HueSaturation.strings in Resources */,
+				6B8396E5189F3767001D5985 /* openclipart.png in Resources */,
 				6B219C73150EDB3900761F18 /* scale@2x.png in Resources */,
 				6B53351D1803530E00D46D5B /* Defaults.plist in Resources */,
 				6B6749DC17F9446300E9A627 /* Icon.png in Resources */,
@@ -1787,8 +1907,10 @@
 				6B219C8B150EEF0700761F18 /* spiral@2x.png in Resources */,
 				6B5335441803538D00D46D5B /* LayerCell.xib in Resources */,
 				6B219C8F150EEFC100761F18 /* scissor@2x.png in Resources */,
+				6B83972F18A41126001D5985 /* ColorBalance.strings in Resources */,
 				6B219C93150EF0B700761F18 /* eraser@2x.png in Resources */,
 				6B219C97150EF33700761F18 /* add_anchor@2x.png in Resources */,
+				6B8396E6189F3767001D5985 /* openclipart@2x.png in Resources */,
 				6B219C9B150EF59400761F18 /* pen@2x.png in Resources */,
 				6B5335201803530E00D46D5B /* Settings.plist in Resources */,
 				6B219CA1150EFAE700761F18 /* groupSelect@2x.png in Resources */,
@@ -1880,9 +2002,14 @@
 				6B1760F513E15D61007016D9 /* WDFontLibraryController.m in Sources */,
 				5D27FE8F13EC992D00EEEFF7 /* WDSamplesController.m in Sources */,
 				6B87EA3913FB3FD000CC07C3 /* WDCoreTextLabel.m in Sources */,
+				6B83971118A36253001D5985 /* OCAViewController.m in Sources */,
+				6B83970D18A36253001D5985 /* OCADownloader.m in Sources */,
 				6B963452140359060096A349 /* WDUserFont.m in Sources */,
 				6B00DA531405F65F00E45409 /* WDActivity.m in Sources */,
 				6B00DA5A1406022B00E45409 /* WDActivityManager.m in Sources */,
+				6B83974218AC5777001D5985 /* WDDynamicGuideController.m in Sources */,
+				6B83973D18A5BA60001D5985 /* WDDynamicGuide.m in Sources */,
+				6B83971018A36253001D5985 /* OCAThumbnailCell.m in Sources */,
 				6B00DA5D140604CE00E45409 /* WDActivityController.m in Sources */,
 				6B74182B140617F100A00C76 /* WDProgressView.m in Sources */,
 				6BABD96D141ED30100F7E0A9 /* NSArray+Additions.m in Sources */,
@@ -1902,6 +2029,7 @@
 				6BABD9A8141ED30100F7E0A9 /* PathConversion.cpp in Sources */,
 				6BABD9A9141ED30100F7E0A9 /* Shape.cpp in Sources */,
 				6B7A881A180CF73000FA241B /* WDArrowhead.m in Sources */,
+				6B83970E18A36253001D5985 /* OCAEntry.m in Sources */,
 				6BABD9AA141ED30100F7E0A9 /* ShapeMisc.cpp in Sources */,
 				6BABD9AB141ED30100F7E0A9 /* ShapeSweep.cpp in Sources */,
 				6BABD9AC141ED30100F7E0A9 /* ShapeSweepUtils.cpp in Sources */,
@@ -1919,6 +2047,7 @@
 				6BABD9B7141ED30100F7E0A9 /* WDGradientStop.m in Sources */,
 				6BABD9B8141ED30100F7E0A9 /* WDGroup.m in Sources */,
 				6BABD9B9141ED30100F7E0A9 /* WDImage.m in Sources */,
+				6B83970F18A36253001D5985 /* OCAThumbnailCache.m in Sources */,
 				6BABD9BA141ED30100F7E0A9 /* WDImageData.m in Sources */,
 				6BABD9BB141ED30100F7E0A9 /* WDInspectableProperties.m in Sources */,
 				6BABD9BC141ED30100F7E0A9 /* WDLayer.m in Sources */,
@@ -2107,6 +2236,95 @@
 				6B53355A18035B3F00D46D5B /* Base */,
 			);
 			name = Activity.xib;
+			sourceTree = "<group>";
+		};
+		6B8396E0189F2FB0001D5985 /* OpenClipArt.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B8396E1189F2FB0001D5985 /* Base */,
+				6B83971318A36D23001D5985 /* en */,
+			);
+			name = OpenClipArt.xib;
+			sourceTree = "<group>";
+		};
+		6B83972518A41125001D5985 /* ColorBalance.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83972618A41125001D5985 /* de */,
+			);
+			name = ColorBalance.strings;
+			sourceTree = "<group>";
+		};
+		6B83972718A41125001D5985 /* HueSaturation.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83972818A41125001D5985 /* de */,
+			);
+			name = HueSaturation.strings;
+			sourceTree = "<group>";
+		};
+		6B83972918A41125001D5985 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83972A18A41125001D5985 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6B83972B18A41126001D5985 /* Shadow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83972C18A41126001D5985 /* de */,
+			);
+			name = Shadow.strings;
+			sourceTree = "<group>";
+		};
+		6B83972D18A41126001D5985 /* Stroke.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83972E18A41126001D5985 /* de */,
+			);
+			name = Stroke.strings;
+			sourceTree = "<group>";
+		};
+		6B83974418B29D2A001D5985 /* ColorBalance.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83974518B29D2A001D5985 /* pt */,
+			);
+			name = ColorBalance.strings;
+			sourceTree = "<group>";
+		};
+		6B83974618B29D2A001D5985 /* HueSaturation.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83974718B29D2A001D5985 /* pt */,
+			);
+			name = HueSaturation.strings;
+			sourceTree = "<group>";
+		};
+		6B83974818B29D2A001D5985 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83974918B29D2A001D5985 /* pt */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6B83974A18B29D2A001D5985 /* Shadow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83974B18B29D2A001D5985 /* pt */,
+			);
+			name = Shadow.strings;
+			sourceTree = "<group>";
+		};
+		6B83974C18B29D2A001D5985 /* Stroke.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B83974D18B29D2A001D5985 /* pt */,
+			);
+			name = Stroke.strings;
 			sourceTree = "<group>";
 		};
 		6B8C537D182AEB4A00C102F7 /* Localizable.strings */ = {

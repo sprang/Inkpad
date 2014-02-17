@@ -15,6 +15,7 @@
 #import "WDDrawingController.h"
 #import "WDColor.h"
 #import "WDEraserPreviewView.h"
+#import "WDEtchedLine.h"
 #import "WDEyedropper.h"
 #import "WDLayer.h"
 #import "WDPalette.h"
@@ -22,6 +23,7 @@
 #import "WDPenTool.h"
 #import "WDRulerView.h"
 #import "WDSelectionView.h"
+#import "WDToolButton.h"
 #import "WDToolView.h"
 #import "WDToolManager.h"
 #import "WDUtilities.h"
@@ -30,7 +32,6 @@
 #define kPrintSizeFactor            (72.0f / 132.0f)
 #define kHundredPercentScale        (132.0f / 72.0f)
 #define kMaxZoom                    (64 * kHundredPercentScale)
-#define kMinZoom                    (0.05 * kHundredPercentScale)
 #define kMessageFadeDelay           1
 #define kDropperRadius              80
 #define kDropperAnimationDuration   0.2f
@@ -65,6 +66,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 @synthesize verticalRuler = verticalRuler_;
 @synthesize toolOptionsView = toolOptionsView_;
 @synthesize activityView = activityView_;
+@synthesize dynamicGuides = dynamicGuides_;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -640,10 +642,14 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) scaleBy:(double)scale
 {
+    float   maxDimension = MAX(self.drawing.width, self.drawing.height);
+    // at the minimum zoom, the drawing will be 200 effective screen pixels wide (or tall)
+    double  minZoom = (200 / maxDimension);
+    
     if (scale * viewScale_ > kMaxZoom) {
         scale = kMaxZoom / viewScale_;
-    } else if (scale * viewScale_ < kMinZoom) {
-        scale = kMinZoom / viewScale_;
+    } else if (scale * viewScale_ < minZoom) {
+        scale = minZoom / viewScale_;
     }
     
     [self setTrueViewScale_:trueViewScale_ * scale];
@@ -851,9 +857,31 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     }
     
     WDToolView *tools = [[WDToolView alloc] initWithTools:[WDToolManager sharedInstance].tools];
-    toolPalette_ = [WDPalette paletteWithBaseView:tools defaultsName:@"tools palette"];
     tools.canvas = self;
     
+    CGRect frame = tools.frame;
+    frame.size.height += [WDToolButton dimension] + 4;
+    float bottom = CGRectGetHeight(tools.frame);
+    
+    // create a base view for all the palette elements
+    UIView *paletteView = [[UIView alloc] initWithFrame:frame];
+    [paletteView addSubview:tools];
+    
+    // add a separator
+    WDEtchedLine *line = [[WDEtchedLine alloc] initWithFrame:CGRectMake(2, bottom + 1, CGRectGetWidth(frame) - 4, 2)];
+    [paletteView addSubview:line];
+    
+    // add a "delete" buttton
+    deleteButton_ = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *icon = [[UIImage imageNamed:@"trash.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    deleteButton_.frame = CGRectMake(0, bottom + 3, [WDToolButton dimension], [WDToolButton dimension]);
+    [deleteButton_ setImage:icon forState:UIControlStateNormal];
+    deleteButton_.tintColor = [UIColor colorWithRed:(166.0f / 255.0f) green:(51.0f / 255.0f) blue:(51.0 / 255.0f) alpha:1.0f];
+    [deleteButton_ addTarget:self.controller action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
+    deleteButton_.enabled = NO;
+    [paletteView addSubview:deleteButton_];
+    
+    toolPalette_ = [WDPalette paletteWithBaseView:paletteView defaultsName:@"tools palette"];
     [self addSubview:toolPalette_];
     
     [self ensureToolPaletteIsOnScreen];
@@ -872,6 +900,8 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) selectionChanged:(NSNotification *)aNotification
 {
+    deleteButton_.enabled = (self.drawingController.selectedObjects.count > 0) ? YES : NO;
+    
     [self setShowsPivot:[WDToolManager sharedInstance].activeTool.needsPivot];
     [self invalidateSelectionView];
 }
@@ -964,6 +994,12 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (void) setMarquee:(NSValue *)marquee
 {
     marquee_ = marquee;
+    [self invalidateSelectionView];
+}
+
+- (void) setDynamicGuides:(NSArray *)dynamicGuides
+{
+    dynamicGuides_ = dynamicGuides;
     [self invalidateSelectionView];
 }
 

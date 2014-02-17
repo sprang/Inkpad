@@ -56,7 +56,7 @@
 
 - (void)loadView
 {
-    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 5 * 28 + 9 * 44);
+    CGRect frame = CGRectMake(0, 0, [WDUnitsController preferredViewWidth], 6 * 28 + 10 * 44);
     
     table_ = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     table_.delegate = self;
@@ -153,6 +153,7 @@
         map_[@"Snap to Points"]         = NSLocalizedString(@"Snap to Points", @"Snap to Points");
         map_[@"Snap to Edges"]          = NSLocalizedString(@"Snap to Edges", @"Snap to Edges");
         map_[@"Snap to Grid"]           = NSLocalizedString(@"Snap to Grid", @"Snap to Grid");
+        map_[@"Dynamic Guides"]         = NSLocalizedString(@"Dynamic Guides", @"Dynamic 'Smart' alignment guides");
         map_[@"Grid"]                   = NSLocalizedString(@"Grid", @"Grid");
         map_[@"Grid Spacing"]           = NSLocalizedString(@"Grid Spacing", @"Grid Spacing");
         map_[@"Isolate Active Layer"]   = NSLocalizedString(@"Isolate Active Layer", @"Isolate Active Layer");
@@ -285,6 +286,15 @@
     
     drawing_.snapToGrid = mySwitch.isOn;
     [[NSUserDefaults standardUserDefaults] setBool:mySwitch.isOn forKey:WDSnapToGrid];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void) takeDynamicGuidesFrom:(id)sender
+{
+    UISwitch    *mySwitch = (UISwitch *)sender;
+    
+    drawing_.dynamicGuides = mySwitch.isOn;
+    [[NSUserDefaults standardUserDefaults] setBool:mySwitch.isOn forKey:WDDynamicGuides];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

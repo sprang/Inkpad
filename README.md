@@ -53,6 +53,7 @@ Contributors
 * [Joe Ricioppo](https://github.com/joericioppo) / Initial Dropbox Integration
 * [Sam Green](https://github.com/samgreen)
 * [Alistair McMillan](https://github.com/alistairmcmillan)
+* [Oscar Rysdyk](https://github.com/32Beat)
 
 Localizations:
 
@@ -60,6 +61,8 @@ Localizations:
 * [Miguel Dussán](https://github.com/migdus) / Spanish
 * [Yannick Loriot](https://github.com/YannickL) / French
 * [Ersen Tekin](https://github.com/ersentekin) / Turkish
+* [Henry Wagler](https://github.com/number-six) / German
+* [Delfim Rodrigues](http://asebenta.wordpress.com) / Portuguese
 
 App Icon:
 
