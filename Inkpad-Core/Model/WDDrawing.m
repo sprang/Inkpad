@@ -26,10 +26,11 @@
 #import "WDSVGHelper.h"
 #import "WDUtilities.h"
 
-const float kMinimumDrawingDimension     = 16;
-const float kMaximumDrawingDimension     = 16000;
-const float kMaximumBitmapImageDimension = 4096;
-const float kMaximumThumbnailDimension   = 120;
+const float kMinimumDrawingDimension = 16;
+const float kMaximumDrawingDimension = 16000;
+const float kMaximumBitmapImageArea = 4096 * 4096;
+const float kMaximumCopiedBitmapImageDimension = 2048;
+const float kMaximumThumbnailDimension = 120;
 
 // encoder keys
 NSString *WDDrawingKey = @"WDDrawingKey";
@@ -552,15 +553,25 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
     
     CGContextEndTransparencyLayer(ctx);
 }
+
 - (UIImage *) pixelImage
 {
-    CGRect docBounds = CGRectMake(0, 0, dimensions_.width, dimensions_.height);
+    CGSize  dimensions = self.dimensions;
+    double  scale = 1.0f;
+    double  area = dimensions.width * dimensions.height;
     
-    UIGraphicsBeginImageContext(docBounds.size);
+    // make sure we don't use all the memory generating this bitmap
+    if (area > kMaximumBitmapImageArea) {
+        scale = sqrt(kMaximumBitmapImageArea) / sqrt(area);
+        dimensions = WDMultiplySizeScalar(dimensions, scale);
+        // whole pixel size
+        dimensions = WDRoundSize(dimensions);
+    }
+
+    UIGraphicsBeginImageContext(dimensions);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
+    CGContextScaleCTM(ctx, scale, scale);
     [self renderInContext:ctx clipRect:self.bounds metaData:WDRenderingMetaDataMake(1, WDRenderDefault)];
-    
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -570,11 +581,13 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
 - (UIImage *) image
 {
     if ([self.units isEqualToString:@"Pixels"]) {
+        // for pixel units, include the entire drawing bounds
         return [self pixelImage];
     }
     
-    CGRect styleBounds = [self styleBounds];
-    CGRect docBounds = CGRectMake(0, 0, dimensions_.width, dimensions_.height);
+    // for any other unit, crop to the style bounds of the drawing content
+    CGRect styleBounds = self.styleBounds;
+    CGRect docBounds = self.bounds;
     
     if (CGRectEqualToRect(styleBounds, CGRectNull)) {
         styleBounds = docBounds;
@@ -582,13 +595,25 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
         styleBounds = CGRectIntersection(styleBounds, docBounds);
     }
     
-    CGSize size = WDMultiplySizeScalar(styleBounds.size, 2);
-    size = WDClampSize(size, kMaximumBitmapImageDimension);
+    // there's no canonical mapping from units to pixels: we'll double the resolution
+    double  scale = 2.0f;
+    CGSize  dimensions = WDMultiplySizeScalar(styleBounds.size, scale);
+    double  area = dimensions.width * dimensions.height;
     
-    UIGraphicsBeginImageContext(size);
+    // make sure we don't use all the memory generating this bitmap
+    if (area > kMaximumBitmapImageArea) {
+        double shrink = sqrt(kMaximumBitmapImageArea) / sqrt(area);
+        dimensions = WDMultiplySizeScalar(dimensions, shrink);
+        // whole pixel size
+        dimensions = WDRoundSize(dimensions);
+
+        // update the scale since it will have changed (approximately the same as scale *= shrink)
+        scale = dimensions.width / styleBounds.size.width;
+    }
+    
+    UIGraphicsBeginImageContext(dimensions);
+    
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-    float scale = size.width / styleBounds.size.width;
     CGContextScaleCTM(ctx, scale, scale);
     CGContextTranslateCTM(ctx, -styleBounds.origin.x, -styleBounds.origin.y);
     [self renderInContext:ctx clipRect:self.bounds metaData:WDRenderingMetaDataMake(scale, WDRenderDefault)];
@@ -599,6 +624,9 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
     return result;
 }
 
+//
+// Used for copying an image of the selection to the clipboard
+//
 + (UIImage *) imageForElements:(NSArray *)elements scale:(float)scaleFactor
 {
     CGRect contentBounds = CGRectNull;
@@ -606,22 +634,25 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
         contentBounds = CGRectUnion(contentBounds, element.styleBounds);
     }
     
+    // apply the requested scale factor
     CGSize size = WDMultiplySizeScalar(contentBounds.size, scaleFactor);
-    size = WDClampSize(size, kMaximumBitmapImageDimension);
+    
+    // make sure we didn't exceed the maximum dimension
+    size = WDClampSize(size, kMaximumCopiedBitmapImageDimension);
+    
+    // ... and make sure the scale factor is still accurate
+    scaleFactor = size.width / contentBounds.size.width;
     
     UIGraphicsBeginImageContext(size);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     // scale and offset the elements to render in the new image
-    CGContextSaveGState(ctx);
-    CGContextTranslateCTM(ctx, -contentBounds.origin.x * scaleFactor, -contentBounds.origin.y * scaleFactor);
+    CGPoint origin = WDMultiplyPointScalar(contentBounds.origin, -scaleFactor);
+    CGContextTranslateCTM(ctx, origin.x, origin.y);
     CGContextScaleCTM(ctx, scaleFactor, scaleFactor);
-    
     for (WDElement *element in elements) {
         [element renderInContext:ctx metaData:WDRenderingMetaDataMake(scaleFactor, WDRenderDefault)];   
     }
-    
-    CGContextRestoreGState(ctx);
     
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

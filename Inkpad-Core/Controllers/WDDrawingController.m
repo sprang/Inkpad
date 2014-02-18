@@ -697,7 +697,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     NSMutableDictionary  *pbItems = [NSMutableDictionary dictionary];
     
     if ([pb isEqual:[UIPasteboard generalPasteboard]]) {
-        UIImage *image = [WDDrawing imageForElements:selection scale:1];
+        UIImage *image = [WDDrawing imageForElements:selection scale:2];
         pbItems[(NSString *)kUTTypePNG] = UIImagePNGRepresentation(image);
     }
     
