@@ -277,6 +277,7 @@
 		6BBB7CDC18B32C240018954B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BBB7CD418B32C240018954B /* Localizable.strings */; };
 		6BBB7CDD18B32C240018954B /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BBB7CD618B32C240018954B /* Shadow.strings */; };
 		6BBB7CDE18B32C240018954B /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BBB7CD818B32C240018954B /* Stroke.strings */; };
+		6BBB7CE118B55BFA0018954B /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BBB7CDF18B55BFA0018954B /* OpenClipArt.strings */; };
 		6BBCDDED1368085100DB910B /* WDToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCDDEC1368085100DB910B /* WDToolView.m */; };
 		6BBCDDF0136808A900DB910B /* WDToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCDDEF136808A800DB910B /* WDToolButton.m */; };
 		6BC062AE124F719000451362 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC062AD124F719000451362 /* checkmark.png */; };
@@ -755,6 +756,7 @@
 		6BBB7CD518B32C240018954B /* pt_PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_PT; path = Localizable.strings; sourceTree = "<group>"; };
 		6BBB7CD718B32C240018954B /* pt_PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_PT; path = Shadow.strings; sourceTree = "<group>"; };
 		6BBB7CD918B32C240018954B /* pt_PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_PT; path = Stroke.strings; sourceTree = "<group>"; };
+		6BBB7CE018B55BFA0018954B /* pt_PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_PT; path = OpenClipArt.strings; sourceTree = "<group>"; };
 		6BBCDDEB1368085100DB910B /* WDToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDToolView.h; sourceTree = "<group>"; };
 		6BBCDDEC1368085100DB910B /* WDToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDToolView.m; sourceTree = "<group>"; };
 		6BBCDDEE136808A800DB910B /* WDToolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDToolButton.h; sourceTree = "<group>"; };
@@ -1446,6 +1448,7 @@
 				6BBB7CD018B32C240018954B /* ColorBalance.strings */,
 				6BBB7CD218B32C240018954B /* HueSaturation.strings */,
 				6BBB7CD418B32C240018954B /* Localizable.strings */,
+				6BBB7CDF18B55BFA0018954B /* OpenClipArt.strings */,
 				6BBB7CD618B32C240018954B /* Shadow.strings */,
 				6BBB7CD818B32C240018954B /* Stroke.strings */,
 			);
@@ -1866,6 +1869,7 @@
 				6B7D2D0B1508AC8D001311B0 /* slider_border@2x.png in Resources */,
 				6B7D2D0D1508AED6001311B0 /* hue_shifter_overlay@2x.png in Resources */,
 				6B7D2D0F1508AF4E001311B0 /* pivot@2x.png in Resources */,
+				6BBB7CE118B55BFA0018954B /* OpenClipArt.strings in Resources */,
 				6B7D2D111509726E001311B0 /* gear@2x.png in Resources */,
 				6B7D2D15150976EC001311B0 /* isolate@2x.png in Resources */,
 				6B7D2D1E15097D8B001311B0 /* decrement.png in Resources */,
@@ -2363,6 +2367,14 @@
 				6BBB7CD918B32C240018954B /* pt_PT */,
 			);
 			name = Stroke.strings;
+			sourceTree = "<group>";
+		};
+		6BBB7CDF18B55BFA0018954B /* OpenClipArt.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BBB7CE018B55BFA0018954B /* pt_PT */,
+			);
+			name = OpenClipArt.strings;
 			sourceTree = "<group>";
 		};
 		6BC9674A183149E300F46191 /* Localizable.strings */ = {
