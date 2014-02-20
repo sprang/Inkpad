@@ -334,6 +334,7 @@
 		6BFA802C1249CEDB00D1749C /* WDLayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFA802B1249CEDB00D1749C /* WDLayerCell.m */; };
 		6BFBC4EB1335F4A000D5877F /* zoom_to_fit.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */; };
 		F43A1D76183557770032933E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43A1D6E183557770032933E /* Localizable.strings */; };
+		F4F41F7218B2C7E300065865 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4F41F7018B2C7E300065865 /* OpenClipArt.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -840,6 +841,7 @@
 		6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoom_to_fit.png; path = Images/zoom_to_fit.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Inkpad-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Inkpad-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		F43A1D6F183557770032933E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
+		F4F41F7118B2C7E300065865 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = OpenClipArt.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1687,6 +1689,7 @@
 		F43A1D69183557770032933E /* fr.lproj */ = {
 			isa = PBXGroup;
 			children = (
+				F4F41F7018B2C7E300065865 /* OpenClipArt.strings */,
 				F43A1D6E183557770032933E /* Localizable.strings */,
 			);
 			path = fr.lproj;
@@ -2391,6 +2394,14 @@
 				F43A1D6F183557770032933E /* fr */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F4F41F7018B2C7E300065865 /* OpenClipArt.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4F41F7118B2C7E300065865 /* fr */,
+			);
+			name = OpenClipArt.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
