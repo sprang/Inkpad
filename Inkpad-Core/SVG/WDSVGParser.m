@@ -371,14 +371,21 @@
     }
 }
 
-- (NSMutableArray *) copyStops
+- (NSMutableArray *) copyStopsForId:(NSString *)gradientId
 {
     NSMutableArray *stopsCopy = [gradientStops_ mutableCopy];
     [gradientStops_ removeAllObjects];
+    
     NSString *iri = [state_ idFromIRI:@"xlink:href"];
     if (iri) {
         // this part of xlink:xref inheritance works a little differently, and isn't covered by inheritXlinks:
         id painter = [styleParser_ painterForId:iri];
+        
+        if (!painter && stopsCopy.count == 0) {
+            // forward reference?
+            [styleParser_ registerGradient:gradientId forForwardReference:iri];
+        }
+        
         if ([painter isKindOfClass:[WDGradient class]]) {
             WDGradient *refGradient = painter;
             if ([stopsCopy count] == 0) {
@@ -727,7 +734,7 @@
     CGPoint p1 = [resolved x:@"x1" y:@"y1" withBounds:state_.viewport.size];
     CGPoint p2 = [resolved x:@"x2" y:@"y2" withBounds:state_.viewport.size andDefault:CGPointMake([state_ viewWidth], 0)];
     WDFillTransform *transform = [[WDFillTransform alloc] initWithTransform:gradientTransform start:p1 end:p2];
-    NSMutableArray *stopsCopy = [self copyStops];
+    NSMutableArray *stopsCopy = [self copyStopsForId:gradientId];
     WDGradient *gradient = [WDGradient gradientWithType:kWDLinearGradient stops:stopsCopy];
     [styleParser_ setPainter:gradient withTransform:transform forId:gradientId];
 }
@@ -742,7 +749,7 @@
     float r = [resolved length:@"r" withBound:[state_ viewRadius] andDefault:([state_ viewRadius] / 2.f)];
     if (r >= 0) {
         WDFillTransform *transform = [[WDFillTransform alloc] initWithTransform:gradientTransform start:f end:CGPointMake(c.x + r, c.y)];
-        NSMutableArray *stopsCopy = [self copyStops];
+        NSMutableArray *stopsCopy = [self copyStopsForId:gradientId];
         WDGradient *gradient = [WDGradient gradientWithType:kWDRadialGradient stops:stopsCopy];
         [styleParser_ setPainter:gradient withTransform:transform forId:gradientId];
     } else {

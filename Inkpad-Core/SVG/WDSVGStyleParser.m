@@ -14,6 +14,7 @@
 #import "WDAbstractPath.h"
 #import "WDColor.h"
 #import "WDFillTransform.h"
+#import "WDGradient.h"
 #import "WDParseUtil.h"
 #import "WDShadow.h"
 #import "WDSVGElement.h"
@@ -44,7 +45,7 @@ NSString * const kWDPropertyTextAnchor       = @"text-anchor";
 NSString * const kWDPropertyVisibility       = @"visibility";
 
 @implementation WDSVGStyleParser
-
+    
 - (id) initWithStack:(WDSVGParserStateStack *)stack
 {
     self = [super init];
@@ -65,6 +66,8 @@ NSString * const kWDPropertyVisibility       = @"visibility";
     for (NSDictionary *dict in blendModeArray) {
         blendModeNames_[dict[@"name"]] = dict[@"value"];
     }
+    
+    forwardReferences_ = [NSMutableDictionary dictionary];
     
     return self;
 }
@@ -456,6 +459,16 @@ NSArray *tokenizeStyle(NSString *source)
 
 - (void) setPainter:(id<WDPathPainter>)painter withTransform:(WDFillTransform *)transform forId:(NSString *)painterId
 {
+    NSString *referrer = [forwardReferences_ objectForKey:painterId];
+    if (referrer && [painter isKindOfClass:[WDGradient class]]) {
+        WDGradient *referringGradient = (WDGradient *) [self painterForId:referrer];
+        
+        // replace the earlier gradient now that the referenced object exists
+        [self setPainter:[referringGradient gradientWithStops:[(WDGradient *)painter stops]]
+           withTransform:[self transformForId:referrer]
+                   forId:referrer];
+    }
+    
     WDStylable *prototype = [[WDStylable alloc] init];
     // TODO pick a stroke style here    
     prototype.fill = painter;
@@ -473,6 +486,11 @@ NSArray *tokenizeStyle(NSString *source)
 {
     WDStylable *painter = painters_[[@"#" stringByAppendingString:painterId]];
     return painter.fillTransform;
+}
+    
+- (void) registerGradient:(NSString *)gradient forForwardReference:(NSString *)forwardReference
+{
+    [forwardReferences_ setObject:gradient forKey:forwardReference];
 }
 
 @end

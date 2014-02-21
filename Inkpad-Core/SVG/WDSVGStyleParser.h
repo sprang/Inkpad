@@ -39,9 +39,10 @@ extern NSString * const kWDPropertyVisibility;
 
 
 @interface WDSVGStyleParser : NSObject {
-    WDSVGParserStateStack*  stack_;
-    NSMutableDictionary*    painters_;
-    NSMutableDictionary*    blendModeNames_;
+    WDSVGParserStateStack   *stack_;
+    NSMutableDictionary     *painters_;
+    NSMutableDictionary     *blendModeNames_;
+    NSMutableDictionary     *forwardReferences_;
 }
 
 - (id) initWithStack:(WDSVGParserStateStack *)stack;
@@ -54,5 +55,7 @@ extern NSString * const kWDPropertyVisibility;
 - (void) setPainter:(id<WDPathPainter>)painter withTransform:(WDFillTransform *)transform forId:(NSString *)painterId;
 - (id<WDPathPainter>) painterForId:(NSString *)painterId;
 - (WDFillTransform *) transformForId:(NSString *)painterId;
-
+    
+- (void) registerGradient:(NSString *)gradient forForwardReference:(NSString *)forwardReference;
+    
 @end
