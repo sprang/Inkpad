@@ -937,19 +937,18 @@
     [svgElements_ removeLastObject];
     [self createLayerFor:state_.group];
     
-    // autosize if necessary
-    if (drawing_.width == 0 || drawing_.height == 0) {
-        for (int i = 0; i < [drawing_.layers count]; ++i) {
-            WDLayer *layer = (drawing_.layers)[i];
-            if ([layer.elements count] > 0) {
-                CGRect bounds = [layer styleBounds];
-                if (CGRectGetMaxX(bounds) > drawing_.width) {
-                    drawing_.width = CGRectGetMaxX(bounds);
-                } 
-                if (CGRectGetMaxY(bounds) > drawing_.height) {
-                    drawing_.height = CGRectGetMaxY(bounds);
-                }
+    if (drawing_.layers.count == 0) {
+        [state_ reportError:@"No layers in drawing!"];
+    } else if (drawing_.width == 0 || drawing_.height == 0) {
+        // autosize if necessary
+        for (WDLayer *layer in drawing_.layers) {
+            if (layer.elements.count == 0) {
+                continue;
             }
+            
+            CGRect bounds = [layer styleBounds];
+            drawing_.width = MAX(drawing_.width, CGRectGetMaxX(bounds));
+            drawing_.height = MAX(drawing_.height, CGRectGetMaxY(bounds));
         }
     }
 }
