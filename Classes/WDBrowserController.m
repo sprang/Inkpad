@@ -197,6 +197,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         [[WDDrawingManager sharedInstance] importDrawingAtURL:pathURL
                                                    errorBlock:^{
                                                        [self showImportErrorMessage:downloader.info];
+                                                       [[NSFileManager defaultManager] removeItemAtURL:pathURL error:nil];
                                                    }
                                         withCompletionHandler:^(WDDocument *document) {
                                             [[NSFileManager defaultManager] removeItemAtURL:pathURL error:nil];
