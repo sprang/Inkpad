@@ -16,6 +16,7 @@
 - (void) drawToFillRect:(CGRect)bounds;
 - (UIImage *) rotatedImage:(int)rotation;
 - (UIImage *) downsampleWithMaxDimension:(float)constraint;
+- (UIImage *) downsampleWithMaxArea:(float)constraint;
 - (UIImage *) JPEGify:(float)compressionFactor;
 
 @end

@@ -1227,15 +1227,19 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 
 - (void) placeImage:(UIImage *)image
 {
-    image = [image downsampleWithMaxDimension:1024];
+    image = [image downsampleWithMaxArea:4096*4096];
     WDImage *placedImage = [WDImage imageWithUIImage:image inDrawing:drawing_];
     
-    float scale = (drawing_.dimensions.width / 2) / image.size.width;
+    CGSize imageSize = image.size;
+    CGSize drawingSize = drawing_.dimensions;
+    
+    double imageRatio = imageSize.width / imageSize.height;
+    double drawingRatio = drawingSize.width / drawingSize.height;
+    double scale = (drawingRatio > imageRatio) ? (drawingSize.height / imageSize.height) : (drawingSize.width / imageSize.width);
     scale = (scale > 1) ? 1 : scale;
     
-    float width = scale * image.size.width;
-    float height = scale * image.size.height;
-    CGPoint ul = CGPointMake((drawing_.dimensions.width - width) / 2, (drawing_.dimensions.height - height) / 2);
+    imageSize = WDMultiplySizeScalar(imageSize, scale);
+    CGPoint ul = CGPointMake((drawingSize.width - imageSize.width) / 2, (drawingSize.height - imageSize.height) / 2);
     
     CGAffineTransform transform = CGAffineTransformMakeTranslation(ul.x, ul.y);
     transform = CGAffineTransformScale(transform, scale, scale);

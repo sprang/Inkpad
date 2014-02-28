@@ -86,6 +86,24 @@
     return [self resizedImage:newSize interpolationQuality:kCGInterpolationHigh];
 }
 
+- (UIImage *) downsampleWithMaxArea:(float)maxArea
+{
+    CGSize  size = self.size;
+    double  area = size.width * size.height;
+    
+    if (area > maxArea) {
+        double scale = sqrt(maxArea) / sqrt(area);
+        size = WDMultiplySizeScalar(size, scale);
+        // whole pixel size
+        size = WDRoundSize(size);
+    } else if (self.imageOrientation == UIImageOrientationUp) {
+        // we're small enough and have the right orientation
+        return self;
+    }
+    
+    return [self resizedImage:size interpolationQuality:kCGInterpolationHigh];
+}
+
 - (UIImage *) JPEGify:(float)compressionFactor
 {
     NSData * jpegData = UIImageJPEGRepresentation(self, compressionFactor);

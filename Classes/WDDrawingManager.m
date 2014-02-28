@@ -269,7 +269,7 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
         return nil;
     }
     
-    image = [image downsampleWithMaxDimension:1024];
+    image = [image downsampleWithMaxArea:4096*4096];
     
     WDDrawing *drawing = [[WDDrawing alloc] initWithImage:image imageName:imageName];
     return [self installDrawing:drawing withName:drawingName closeAfterSaving:YES] ? YES : NO;
