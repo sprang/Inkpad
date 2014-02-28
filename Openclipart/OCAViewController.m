@@ -194,7 +194,7 @@
     self.pageCount = [jsonData[@"info"][@"pages"] integerValue];
 
     NSUInteger currentPage = [jsonData[@"info"][@"current_page"] integerValue];
-    self.moreToLoad = currentPage != self.pageCount;
+    self.moreToLoad = currentPage < self.pageCount;
     
     if (currentPage == 1) {
         [self.entries removeAllObjects];
