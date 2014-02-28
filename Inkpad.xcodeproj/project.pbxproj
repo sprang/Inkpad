@@ -176,6 +176,12 @@
 		6B98C140124D63B1008FB8E1 /* WDTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B98C13F124D63B1008FB8E1 /* WDTextController.m */; };
 		6B98C154124D642A008FB8E1 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98C153124D642A008FB8E1 /* font.png */; };
 		6B9A287B18C1058100697BE7 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A287918C1058100697BE7 /* OpenClipArt.strings */; };
+		6B9A288918C1087300697BE7 /* ColorBalance.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A287D18C1087300697BE7 /* ColorBalance.strings */; };
+		6B9A288A18C1087300697BE7 /* HueSaturation.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A287F18C1087300697BE7 /* HueSaturation.strings */; };
+		6B9A288B18C1087300697BE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288118C1087300697BE7 /* Localizable.strings */; };
+		6B9A288C18C1087300697BE7 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288318C1087300697BE7 /* OpenClipArt.strings */; };
+		6B9A288D18C1087300697BE7 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288518C1087300697BE7 /* Shadow.strings */; };
+		6B9A288E18C1087300697BE7 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288718C1087300697BE7 /* Stroke.strings */; };
 		6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */; };
 		6BA45791180F2B9200B51D7A /* WDArrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45790180F2B9200B51D7A /* WDArrowController.m */; };
 		6BA45794180F778F00B51D7A /* WDArrowheadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45793180F778F00B51D7A /* WDArrowheadCell.m */; };
@@ -579,6 +585,12 @@
 		6B98C13F124D63B1008FB8E1 /* WDTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WDTextController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6B98C153124D642A008FB8E1 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Images/font.png; sourceTree = "<group>"; };
 		6B9A287A18C1058100697BE7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = OpenClipArt.strings; sourceTree = "<group>"; };
+		6B9A287E18C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = ColorBalance.strings; sourceTree = "<group>"; };
+		6B9A288018C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = HueSaturation.strings; sourceTree = "<group>"; };
+		6B9A288218C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Localizable.strings; sourceTree = "<group>"; };
+		6B9A288418C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = OpenClipArt.strings; sourceTree = "<group>"; };
+		6B9A288618C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Shadow.strings; sourceTree = "<group>"; };
+		6B9A288818C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Stroke.strings; sourceTree = "<group>"; };
 		6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark_knob_highlighted.png; path = Images/spark_knob_highlighted.png; sourceTree = "<group>"; };
 		6BA4578F180F2B9200B51D7A /* WDArrowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowController.h; sourceTree = "<group>"; };
 		6BA45790180F2B9200B51D7A /* WDArrowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowController.m; sourceTree = "<group>"; };
@@ -921,13 +933,14 @@
 				6BC96745183149E300F46191 /* es.lproj */,
 				F43A1D69183557770032933E /* fr.lproj */,
 				6B8C5379182AEA5000C102F7 /* it.lproj */,
+				6B9A287C18C1087300697BE7 /* pt.lproj */,
 				6BBB7CCF18B32C240018954B /* pt_PT.lproj */,
 				6B95751E183C52940094B7D5 /* tr.lproj */,
-				6B616773137B429200BEC0BA /* Samples */,
 				6B87CA5C1312610D0027A482 /* Help */,
-				6B984AF7131623FA007FB48F /* PLists */,
-				6B984AF4131623F1007FB48F /* XIB */,
 				6BCD52C0123FFFF3002FCB27 /* Images */,
+				6B984AF7131623FA007FB48F /* PLists */,
+				6B616773137B429200BEC0BA /* Samples */,
+				6B984AF4131623F1007FB48F /* XIB */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1170,6 +1183,19 @@
 				6B53351B1803530E00D46D5B /* Settings.plist */,
 			);
 			name = PLists;
+			sourceTree = "<group>";
+		};
+		6B9A287C18C1087300697BE7 /* pt.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6B9A287D18C1087300697BE7 /* ColorBalance.strings */,
+				6B9A287F18C1087300697BE7 /* HueSaturation.strings */,
+				6B9A288118C1087300697BE7 /* Localizable.strings */,
+				6B9A288318C1087300697BE7 /* OpenClipArt.strings */,
+				6B9A288518C1087300697BE7 /* Shadow.strings */,
+				6B9A288718C1087300697BE7 /* Stroke.strings */,
+			);
+			path = pt.lproj;
 			sourceTree = "<group>";
 		};
 		6BABD85D141ED30100F7E0A9 /* Inkpad-Core */ = {
@@ -1835,6 +1861,7 @@
 				6BABD980141ED30100F7E0A9 /* eraser.png in Resources */,
 				6B8F091817FCE1DB00BB6F7E /* Localizable.strings in Resources */,
 				6BABD982141ED30100F7E0A9 /* eyedropper.png in Resources */,
+				6B9A288918C1087300697BE7 /* ColorBalance.strings in Resources */,
 				6BABD984141ED30100F7E0A9 /* groupSelect.png in Resources */,
 				6BABD986141ED30100F7E0A9 /* hand.png in Resources */,
 				6BABD988141ED30100F7E0A9 /* line.png in Resources */,
@@ -1852,6 +1879,7 @@
 				6B8C537F182AEB4A00C102F7 /* Localizable.strings in Resources */,
 				6BABD99B141ED30100F7E0A9 /* spiral.png in Resources */,
 				6BABD99D141ED30100F7E0A9 /* star.png in Resources */,
+				6B9A288A18C1087300697BE7 /* HueSaturation.strings in Resources */,
 				6B5335461803538D00D46D5B /* Samples.xib in Resources */,
 				6BABD9A1141ED30100F7E0A9 /* text.png in Resources */,
 				6B5335421803538D00D46D5B /* HueSaturation.xib in Resources */,
@@ -1879,6 +1907,7 @@
 				6B7D2D15150976EC001311B0 /* isolate@2x.png in Resources */,
 				6B7D2D1E15097D8B001311B0 /* decrement.png in Resources */,
 				6B7D2D1F15097D8B001311B0 /* decrement@2x.png in Resources */,
+				6B9A288C18C1087300697BE7 /* OpenClipArt.strings in Resources */,
 				6B6749DD17F9446300E9A627 /* Icon@2x.png in Resources */,
 				6B7D2D2015097D8B001311B0 /* increment.png in Resources */,
 				6B9A287B18C1058100697BE7 /* OpenClipArt.strings in Resources */,
@@ -1913,14 +1942,17 @@
 				6B219C73150EDB3900761F18 /* scale@2x.png in Resources */,
 				6B53351D1803530E00D46D5B /* Defaults.plist in Resources */,
 				6B6749DC17F9446300E9A627 /* Icon.png in Resources */,
+				6B9A288E18C1087300697BE7 /* Stroke.strings in Resources */,
 				6B219C77150EDC1700761F18 /* rotate@2x.png in Resources */,
 				6B219C7F150EEB2900761F18 /* line@2x.png in Resources */,
 				6B95752B183C52940094B7D5 /* Localizable.strings in Resources */,
 				6B219C81150EEB2900761F18 /* polygon@2x.png in Resources */,
 				6B219C83150EEB2900761F18 /* star@2x.png in Resources */,
 				6B219C87150EEC5700761F18 /* oval@2x.png in Resources */,
+				6B9A288D18C1087300697BE7 /* Shadow.strings in Resources */,
 				6B219C8B150EEF0700761F18 /* spiral@2x.png in Resources */,
 				6B5335441803538D00D46D5B /* LayerCell.xib in Resources */,
+				6B9A288B18C1087300697BE7 /* Localizable.strings in Resources */,
 				6B219C8F150EEFC100761F18 /* scissor@2x.png in Resources */,
 				6B83972F18A41126001D5985 /* ColorBalance.strings in Resources */,
 				6B219C93150EF0B700761F18 /* eraser@2x.png in Resources */,
@@ -2341,6 +2373,54 @@
 				6B9A287A18C1058100697BE7 /* de */,
 			);
 			name = OpenClipArt.strings;
+			sourceTree = "<group>";
+		};
+		6B9A287D18C1087300697BE7 /* ColorBalance.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A287E18C1087300697BE7 /* pt */,
+			);
+			name = ColorBalance.strings;
+			sourceTree = "<group>";
+		};
+		6B9A287F18C1087300697BE7 /* HueSaturation.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A288018C1087300697BE7 /* pt */,
+			);
+			name = HueSaturation.strings;
+			sourceTree = "<group>";
+		};
+		6B9A288118C1087300697BE7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A288218C1087300697BE7 /* pt */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6B9A288318C1087300697BE7 /* OpenClipArt.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A288418C1087300697BE7 /* pt */,
+			);
+			name = OpenClipArt.strings;
+			sourceTree = "<group>";
+		};
+		6B9A288518C1087300697BE7 /* Shadow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A288618C1087300697BE7 /* pt */,
+			);
+			name = Shadow.strings;
+			sourceTree = "<group>";
+		};
+		6B9A288718C1087300697BE7 /* Stroke.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A288818C1087300697BE7 /* pt */,
+			);
+			name = Stroke.strings;
 			sourceTree = "<group>";
 		};
 		6BBB7CD018B32C240018954B /* ColorBalance.strings */ = {

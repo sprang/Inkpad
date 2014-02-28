@@ -1,0 +1,12 @@
+
+/* Class = "IBUISearchBar"; placeholder = "Search Openclipart"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.placeholder" = "Importar do Openclipart";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[0] = "Top Downloads"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[0]" = "Mais baixados";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[1] = "Top Favorites"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[1]" = "Top dos Favoritos";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[2] = "Newest"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[2]" = "Recentes";
