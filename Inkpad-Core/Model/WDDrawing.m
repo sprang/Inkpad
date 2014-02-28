@@ -924,7 +924,7 @@ NSLog(@"Elements in drawing: %lu", (unsigned long)[self allElements].count);
 
 - (void) setGridSpacing:(float)spacing
 {
-    spacing = WDClamp(1, 1024, spacing);
+    spacing = WDClamp(1, kMaximumDrawingDimension / 2, spacing);
     
     settings_[WDGridSpacing] = @(spacing);
     [[NSNotificationCenter defaultCenter] postNotificationName:WDGridSpacingChangedNotification object:self];
