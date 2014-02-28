@@ -42,7 +42,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 
 + (float) preferredViewWidth
 {
-    return 340;
+    return 380;
 }
 
 - (void) setDrawing:(WDDrawing *)drawing

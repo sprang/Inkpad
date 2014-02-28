@@ -182,6 +182,7 @@
 		6B9A288C18C1087300697BE7 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288318C1087300697BE7 /* OpenClipArt.strings */; };
 		6B9A288D18C1087300697BE7 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288518C1087300697BE7 /* Shadow.strings */; };
 		6B9A288E18C1087300697BE7 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288718C1087300697BE7 /* Stroke.strings */; };
+		6B9A289118C1226800697BE7 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A288F18C1226800697BE7 /* OpenClipArt.strings */; };
 		6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */; };
 		6BA45791180F2B9200B51D7A /* WDArrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45790180F2B9200B51D7A /* WDArrowController.m */; };
 		6BA45794180F778F00B51D7A /* WDArrowheadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45793180F778F00B51D7A /* WDArrowheadCell.m */; };
@@ -591,6 +592,7 @@
 		6B9A288418C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = OpenClipArt.strings; sourceTree = "<group>"; };
 		6B9A288618C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Shadow.strings; sourceTree = "<group>"; };
 		6B9A288818C1087300697BE7 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Stroke.strings; sourceTree = "<group>"; };
+		6B9A289018C1226800697BE7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = OpenClipArt.strings; sourceTree = "<group>"; };
 		6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark_knob_highlighted.png; path = Images/spark_knob_highlighted.png; sourceTree = "<group>"; };
 		6BA4578F180F2B9200B51D7A /* WDArrowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowController.h; sourceTree = "<group>"; };
 		6BA45790180F2B9200B51D7A /* WDArrowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowController.m; sourceTree = "<group>"; };
@@ -1489,6 +1491,7 @@
 			isa = PBXGroup;
 			children = (
 				6BC9674A183149E300F46191 /* Localizable.strings */,
+				6B9A288F18C1226800697BE7 /* OpenClipArt.strings */,
 			);
 			path = es.lproj;
 			sourceTree = "<group>";
@@ -1820,6 +1823,7 @@
 				6B3A2AEB1256F35300574B41 /* lock.png in Resources */,
 				6B5335411803538D00D46D5B /* Gradient.xib in Resources */,
 				6B3A2C0C12571C9900574B41 /* unlock.png in Resources */,
+				6B9A289118C1226800697BE7 /* OpenClipArt.strings in Resources */,
 				6B6A1C95125DC01000253800 /* Default-Portrait.png in Resources */,
 				6B5335431803538D00D46D5B /* Import.xib in Resources */,
 				6B6A1C9B125DC10800253800 /* Default-Landscape.png in Resources */,
@@ -2421,6 +2425,14 @@
 				6B9A288818C1087300697BE7 /* pt */,
 			);
 			name = Stroke.strings;
+			sourceTree = "<group>";
+		};
+		6B9A288F18C1226800697BE7 /* OpenClipArt.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A289018C1226800697BE7 /* es */,
+			);
+			name = OpenClipArt.strings;
 			sourceTree = "<group>";
 		};
 		6BBB7CD018B32C240018954B /* ColorBalance.strings */ = {
