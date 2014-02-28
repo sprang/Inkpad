@@ -175,6 +175,7 @@
 		6B98C11F124D5FBE008FB8E1 /* WDFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B98C11E124D5FBE008FB8E1 /* WDFontController.m */; };
 		6B98C140124D63B1008FB8E1 /* WDTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B98C13F124D63B1008FB8E1 /* WDTextController.m */; };
 		6B98C154124D642A008FB8E1 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B98C153124D642A008FB8E1 /* font.png */; };
+		6B9A287B18C1058100697BE7 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6B9A287918C1058100697BE7 /* OpenClipArt.strings */; };
 		6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */; };
 		6BA45791180F2B9200B51D7A /* WDArrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45790180F2B9200B51D7A /* WDArrowController.m */; };
 		6BA45794180F778F00B51D7A /* WDArrowheadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BA45793180F778F00B51D7A /* WDArrowheadCell.m */; };
@@ -334,7 +335,6 @@
 		6BFA802C1249CEDB00D1749C /* WDLayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BFA802B1249CEDB00D1749C /* WDLayerCell.m */; };
 		6BFBC4EB1335F4A000D5877F /* zoom_to_fit.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BFBC4EA1335F4A000D5877F /* zoom_to_fit.png */; };
 		F43A1D76183557770032933E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43A1D6E183557770032933E /* Localizable.strings */; };
-		F4F41F7218B2C7E300065865 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4F41F7018B2C7E300065865 /* OpenClipArt.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -578,6 +578,7 @@
 		6B98C13E124D63B1008FB8E1 /* WDTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDTextController.h; sourceTree = "<group>"; };
 		6B98C13F124D63B1008FB8E1 /* WDTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WDTextController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6B98C153124D642A008FB8E1 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Images/font.png; sourceTree = "<group>"; };
+		6B9A287A18C1058100697BE7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = OpenClipArt.strings; sourceTree = "<group>"; };
 		6B9D976E136A2385006DCEA5 /* spark_knob_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark_knob_highlighted.png; path = Images/spark_knob_highlighted.png; sourceTree = "<group>"; };
 		6BA4578F180F2B9200B51D7A /* WDArrowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDArrowController.h; sourceTree = "<group>"; };
 		6BA45790180F2B9200B51D7A /* WDArrowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDArrowController.m; sourceTree = "<group>"; };
@@ -997,6 +998,7 @@
 				6B83972518A41125001D5985 /* ColorBalance.strings */,
 				6B83972718A41125001D5985 /* HueSaturation.strings */,
 				6B83972918A41125001D5985 /* Localizable.strings */,
+				6B9A287918C1058100697BE7 /* OpenClipArt.strings */,
 				6B83972B18A41126001D5985 /* Shadow.strings */,
 				6B83972D18A41126001D5985 /* Stroke.strings */,
 			);
@@ -1879,6 +1881,7 @@
 				6B7D2D1F15097D8B001311B0 /* decrement@2x.png in Resources */,
 				6B6749DD17F9446300E9A627 /* Icon@2x.png in Resources */,
 				6B7D2D2015097D8B001311B0 /* increment.png in Resources */,
+				6B9A287B18C1058100697BE7 /* OpenClipArt.strings in Resources */,
 				6B7D2D2115097D8B001311B0 /* increment@2x.png in Resources */,
 				6B7D2D23150AD7A9001311B0 /* Default-Landscape@2x.png in Resources */,
 				6B7D2D25150AD851001311B0 /* Default-Portrait@2x.png in Resources */,
@@ -2330,6 +2333,14 @@
 				6B957524183C52940094B7D5 /* tr */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6B9A287918C1058100697BE7 /* OpenClipArt.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B9A287A18C1058100697BE7 /* de */,
+			);
+			name = OpenClipArt.strings;
 			sourceTree = "<group>";
 		};
 		6BBB7CD018B32C240018954B /* ColorBalance.strings */ = {
