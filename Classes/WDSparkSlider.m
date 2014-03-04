@@ -49,6 +49,7 @@
     frame = self.bounds;
     frame.origin.y = CGRectGetMaxY(frame) - kTitleLabelHeight;
     frame.size.height = kTitleLabelHeight;
+    frame = CGRectInset(frame, -4, 0);
     
     title_ = [[UILabel alloc] initWithFrame:frame];
     
