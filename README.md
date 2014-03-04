@@ -63,6 +63,9 @@ Localizations:
 * [Ersen Tekin](https://github.com/ersentekin) / Turkish
 * [Henry Wagler](https://github.com/number-six) / German
 * [Delfim Rodrigues](http://asebenta.wordpress.com) / Portuguese
+* Pedro Lovisoto / Brazilian Portuguese
+* [Juan Casares](http://www.usablehack.com) / Spanish
+* [Ale Muñoz](https://github.com/bomberstudios) / Spanish
 
 App Icon:
 
