@@ -1,19 +1,23 @@
-Next Update
+1.6 [submitted to Apple]
 - Increased maximum stroke width to 300
 - Tweaked line attribute picker appearance
 - Fixed type bug that broke palette 'tossing' on 64-bit devices
-- Added support for importing SVGs from Openclipart.com
+- Added support for importing SVGs from Openclipart.org
 - Fixed SVG import bugs
 - Added a 'delete' pseudo-tool to the tool palette
 - Increased maximum logical drawing dimension to 16000
 - Fixed crash that occurred at launch if there were no drawings
 - Implemented support for dynamic "Smart" guides
-- Increased maximum grid spacing to 1024
+- Increased maximum grid spacing to 8000 (half max drawing size)
 - Outlined strokes now take their style from the parent path, not the active style
 - Tweaked Add Anchor Tool so that tapping an anchor selects an unselected path
 - Floating palettes now maintain relative screen position when the device is rotated
 - Added German localization
 - Added Portuguese localization
+- Generated bitmaps are now constrained by maximum area rather than dimension
+- Pasted images can now be much higher resolution (up to an area of 4096x4096)
+- Added Brazilian Portuguese localization
+- Now purge temp directory contents at launch
 
 1.5.2 [currently on the App Store]
 - Added T-end arrowhead
