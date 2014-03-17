@@ -66,6 +66,7 @@ Localizations:
 * Pedro Lovisoto / Brazilian Portuguese
 * [Juan Casares](http://www.usablehack.com) / Spanish
 * [Ale Muñoz](https://github.com/bomberstudios) / Spanish
+* [Pillow Tse](https://github.com/xiezhhw), [Zhang Yungui](https://github.com/rhcad) / Chinese Simplified
 
 App Icon:
 
