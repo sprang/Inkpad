@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <title>Inkpad Help</title>
+            <meta name="author" content="Steve Sprang">
+            <link rel="stylesheet" type="text/css" href="styles.css">
+            <script src="jquery-1.7.1.min.js"></script>
+            <script src="retina.js"></script>
+    </head>
+    <body>
+        
+        <div class="content">
+            
+            <h1>Inkpad是什么？</h1>
+            
+            <img class="logo" src="Icon.png" width="130" height="130" alt="Logo"/>
+            Inkpad 是一款为iPad量身设计的矢量素描软件。它支持路径、复合路径、文本、沿路径排列文本、置入图像、成组、蒙版、颜色渐变填充以及任意数量图层。
+            <p>
+            Inkpad是采用 Mozilla 公共许可v2.0的开源软件，许可协议见<a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0</a>。源码在<a href="https://github.com/sprang/Inkpad">http://github.com/sprang/Inkpad</a>，请勿不改功能就另发布到 App Store。
+            <p>
+            <div style="clear: both;"></div>
+            
+            <h1>画廊</h1>
+            画廊是显示你每一幅作品缩略图的地方。点击一个缩略图即可打开你的作品并编辑它。点击缩略图下方的文件名就可以修改文件名。
+            <p>
+            点击屏幕右上角的 <b>+</b> 按钮就可以新建一块空白画布任你发挥灵感。
+            <p>
+            点击 <b>相机</b> 按钮，就可以马上拍一张照片，并用这张照片作为你新作品的背景。
+            <p>
+    
+    
+            Inkpad 可以通过 Dropbox 导入图形、字体（包括TureType和Opentype字体）、SVG, SVGZ, 和 Inkpad 格式的文件。点击 <b>导入</b> 即可访问你的 Dropbox。
+            <p>
+            
+            导入的字体将出现在画廊视图底部的 <b>字体</b> 面板中。如果你不再使用某个字体，你可以在字体面板中将它删除。 在绘画视图中，<b>字体</b> 面板中会显示你导入的字体以及系统自带的字体。
+            <p>
+                点击 <b>示例</b> 按钮，你就可以重新导入预置在 Inkpad 中的示例作品。
+                <p>
+            
+            <h3>导出</h3>
+           点击 <b>选择</b> 即可进入选择模式
+            <p>
+            在选择模式中，点击缩略图就可以选中或取消选中作品。 选中作品后，你可以点击 <b>用邮件发送</b> 来发送他们，或者点击 <b>Dropbox</b> 把作品直接上传到 Dropbox 中。
+            <p>
+            点击 <b>删除</b> 按钮即可删除选中的作品。
+            <p>
+                        点击 <b>完成</b> 就可以退出选择模式。
+            
+            <h1>绘制</h1>
+            
+            你可以使用 <b>编辑</b> 菜单中的命令来剪切、复制、粘贴、删除和调整选中的对象。
+            <p>
+                        使用 <b>排列</b> 菜单中的命令，就可以把对象向上/向下移、让对象成组/取消成组、分离或对齐对象。
+            <p>
+                        使用 <b>路径</b> 菜单中的命令，就可以添加锚点、删除锚点、轮廓化描边、连接路径、新建蒙版和沿路径排列文本。
+            <p>
+            
+            <img class="color_inline" src="color_wheel.png" width="27" height="27" alt="Color Adjustment"/></h3>
+            使用 <b>调整颜色</b> 菜单中的命令，就可以混合所选对象的颜色、调整色相饱和度、亮度、色彩平衡、去饱和以及对所选对象的颜色进行反相操作。
+            <p>
+            
+            在混合颜色时，两端的对象必须有填充颜色（但不可以是渐变填充）。 比如在进行水平混合时，最左边和最右边的对象必须有填充颜色。 另外，如果要使用颜色混合，你必须至少选择 3 个对象。
+            <p>
+            
+            <img class="undo_inline" src="undo.png" width="24" height="24" alt="撤销改动"/></h3>
+            点击 <b>撤销</b> 按钮就可以撤回上一步操作
+            <p>
+            
+            <img class="undo_inline" src="redo.png" width="24" height="24" alt="重做"/></h3>
+            点击 <b>重做</b> 按钮即可重做被撤销的操作。
+            <p>
+            
+            在屏幕的右上角还有更多设置选项。
+            <p>
+            
+            <div class="example" style="top-margin:-1em;">
+                <img src="drawing_navbar.png" width="185" height="29" alt="Drawing Nav Bar"/>
+            </div>
+            <p>
+            它们分别是： <b>缩放至最适合屏幕的大小</b>、<b>置入图片</b>、<b>设置</b> 以及 <b>共享/输出</b>.
+            <p>
+            
+            <h3>设置</h3>
+            在 <b>设置</b> 面板中，你可以打开/关闭网格、调整网格的间距、启用吸附到网格/路径中的边/路径中的点让对齐更容易。 你也可以打开或关闭标尺、改变画布的尺寸和计量单位。
+            <p>
+            
+            当 <b>隔离当前激活图层</b> 启动时，你就只能编辑当前激活的图层， 其他图层将会暂时隐藏。 这可以让你更轻松地编辑某一个图层上的内容而不用担心意外修改其他图层上的内容。
+            <p>
+            
+            当 <b>轮廓模式</b> 启动时, 你将只能看见画布上对象的轮廓。 这个功能可以让你在复杂的作品中选中你要的对象 ，还可以提升软件的性能，轻松创作复杂的作品。
+            <p>
+	
+            
+            <h3>缩放</h3>
+            使用 iOS 中标准的缩放手势就可以缩小和放大视图，就像你在使用其他照片软件一样。 在使用缩放手势的过程中，你还可以在画布上滚动，查看你作品上的不同位置。
+<p>
+		如果你作品的单位设置为像素，在缩放比率为 100% 时，Inkpad 将会以像素对像素的方式显示你作品的实际大小。缩放比例显示在屏幕上方的导航栏上。
+		<p>
+		如果你作品的单位设置为物理单位（如英寸、厘米等），在缩放比例为 100% 时，Inkpad 就会以实际大小来显示你的作品。
+            
+            <h1>工具</h1>
+            
+            <img class="tool_palette" src="tools.png" width="50" height="196" alt="Tool Palette"/>
+            Inkpad 提供一系列工具让你可以绘制和修改你的作品。
+			<p>
+			工具栏是悬浮在画布上的，你可以拖动它并把它放置在屏幕的任意位置。<p>
+	
+			很多工具的具体功能可以被调整，方法是在你开始用手指在屏幕上拖动 <b>之后</b> 用第二根手指长按画布。 请注意，如果你在拖动第一根手指前就用第二根手指长按的话，你的操作会被识别为用缩放手势缩放画布。
+			<p>
+			每种工具具体的功用为：
+				
+			<h3>选择和多重选择工具</h3>
+            
+            <img class="tool_inline" src="select.png" width="30" height="30" alt="Selection Tool"/>
+			使用选择工具可以选择你点按的单个对象。 之前已经被选中的对象都会被取消选择.
+            <p>
+            
+            <img class="tool_inline" src="groupSelect.png" width="30" height="30" alt="Multi Selection Tool"/>
+			使用多重选择工具可以选择你点按过的所有对象。用多重选择工具点按已经被选中的对象会取消选择它。
+            <p>
+            
+            要选择一组对象，你可以从空白的地方开始拖出一个选择框来框选他们。
+            <p>
+            
+            拖动选中的对象就可以移动他们。如果要只想水平/垂直/沿对角线移动，你可以在开始拖动 后 用第二根手指长按画布。
+            <p>
+            
+             在只选择了一条路径的时候，你就可以编辑路径上的锚点和调整控制手柄。 与下面将要介绍的钢笔工具类似，第一根手指开始拖动后，第二根手指长按画布可以让一对手柄中的另一个保持不动。
+            <p>
+            双击路径上的锚点可以让它在平滑和尖角两种类型间选择。双击一个控制手柄就可以删除它。
+			<p>
+            双击并拖动锚点可以让控制手柄恢复对称。
+            <p>
+            
+            <h3>钢笔工具 <img class="tool_header" src="pen.png" width="30" height="30" alt="Pen Tool"/></h3>
+       
+			钢笔工具是 Inkpad 中创建路径的利器。 你可以用它来绘制几乎任何形状的图形。 要使用钢笔工具，请点击工具栏中的钢笔工具图标。
+            <p>
+            
+            在画布上轻击一下，可向当前图形添加一个锚点。 连续轻击将画出一个有尖角的多边形。
+            
+            <div class="example">
+                <img src="polygon_path.png" width="195" height="84" alt="Polygon"/>
+            </div>
+            要绘制一条曲线，只需要点击并拖动你的手指。 你会看见一组控制手柄出现，这些手柄能控制曲线的形状。 控制手柄离锚点越远，曲线的弯曲程度就越大。
+            
+            你也可以单独移动某个控制手柄。 当你开始拖动之后，用另外一只手指按住画布，就可以只调整一组手柄中的一个，而让反方向的手柄保持不动。 这样做，你就可以绘制出由同一个角发出的两段曲线。
+            <p>
+            <div class="example">
+                <img src="corner.png" width="200" height="200" alt="Corner"/>
+            </div>
+            
+            点击曲线中的第一个锚点，就可以让曲线闭合。
+            <p>
+            
+            双击曲线上最后一个锚点就可以在不闭合曲线的情况下完成绘制这条曲线。
+            <p>
+	
+            如果要编辑已经闭合的路径，首先用选择工具选中它。 然后选择钢笔工具，然后点击路径任意一末端的锚点。 接下来，你就可以延长路径或者点击另一段的点来使曲线闭合。
+            
+            <h3>徒手画工具 <img class="tool_header" src="brush.png" width="30" height="30" alt="Freehand Tool"/></h3>   使用徒手画工具可以在画布上自由地创建路径。 这个工具很适合涂鸦和上色。
+            <p>
+            
+            <h3>橡皮擦工具<img class="tool_header" src="eraser.png" width="30" height="30" alt="Eraser Tool"/></h3>    使用橡皮擦工具可以擦除图纸上的图形， 包括未成组的路径图形或组合路径图形。<p>
+            
+            如果你之前已经选中了某个对象，那么这时橡皮擦就只会在你选中的对象上进行擦除操作，而不会影响其他对象。 <p>
+            
+            选择橡皮擦工具之后，画布底部会出现一个小的设置面板，在这里你可以调整橡皮擦的宽度。
+            <p>
+            
+            <h3>添加锚点工具 <img class="tool_header" src="add_anchor.png" width="30" height="30" alt="Add Anchor Tool"/></h3>    添加锚点工具可以在已经存在的图形上添加锚点。
+            <p>
+            
+            点击图形上的任一边就可以在上面创建新的锚点。
+            <p>
+            虽然“添加锚点”工具会自动选择图形，但是如果你先选择路径则能看到已有的锚点，更容易添加锚点。
+            <p>
+            
+            <h3>剪刀工具 (路径切分工具) <img class="tool_header" src="scissor.png" width="30" height="30" alt="Scissor Tool"/></h3>    使用剪刀工具可以切断已有的路径。
+            <p>
+            
+            要切分一条路径，只需在你想断开的地方点一下。如果你想在锚点处切断路径，你只需点击锚点即可。
+            <p>
+            如果你操作的路径是闭合的，那么切开后路径就会开放，并且两端点将位于你点击的地方。如果你操作的路径不是闭合的，那么路径就只会从你点击的地方分成两条新路径。
+            <p>
+            
+            <h3>形状工具	        <img class="tool_header" src="rect.png" width="30" height="30" alt="Rectangle Tool"/>
+			            <img class="tool_header" src="oval.png" width="30" height="30" alt="Oval Tool"/>
+			            <img class="tool_header" src="star.png" width="30" height="30" alt="Star Tool"/>
+                <img class="tool_header" src="polygon.png" width="30" height="30" alt="Polygon Tool"/>
+                <img class="tool_header" src="spiral.png" width="30" height="30" alt="Spiral Tool"/>
+			            <img class="tool_header" src="line.png" width="30" height="30" alt="Line Tool"/></h3>
+            
+    
+形状工具可创建矩形、椭圆、星形、多边形、螺旋线和线段。
+            <p>
+            在工具面板上长按住图形工具会显示一个浮动面板，可选择其他图形类型。
+<p>
+	默认情况下，矩形和椭圆不限制长宽比例。如果你想要画一个正方形或圆形，就在一个手指画的过程中用另一个手指触摸屏幕。
+	<p>
+		你选择各种绘图工具时，在画布底部的小设置面板上会显示相应的设置选项，例如矩形的圆角半径、星形的顶点数、螺旋线的衰减率、多边形的边数。
+		<p>
+			在画星形的过程中用第二个手指触摸屏幕，星形的内径将保持不变，这样就可让星形更尖或更平。
+			<p>
+				在画线段的过程中用第二个手指触摸屏幕，则线段将锁定在水平、垂直或45度方向上。
+            <p>
+            
+            <h3>吸管工具<img class="tool_header" src="eyedropper.png" width="30" height="30" alt="Eyedropper Tool"/></h3>    吸管工具提取图上已有对象的样式属性。 它获取和应用任何可在样式面板（见后描述）上修改的样式属性。
+            <p>
+            要使用吸管工具，就用手指拖动划过图上的对象，在圆环上会动态显示当前位置的样式属性，当手指松开后就提取到可应用的样式属性。
+            <p>
+            如果在拖动吸管前没有选择图形，则提取到的样式属性将应用到新画的图形上。如果有选择的图形则应用到已选图形上。
+            <p>
+            
+            <h3>文本工具<img class="tool_header" src="text.png"  width="30" height="30" alt="Text Tool"/></h3>  文本工具绘制文本内容。
+            <p>
+            在图上按下并拖动划出一个文本框。拖动完成后出现屏幕键盘，可输入文本内容。在画布的其他位置轻击可结束输入。
+            <p>
+            要再次修改文本内容，就选择文本工具并轻击文本对象，或者在选择工具中双击文本对象。
+            <p>
+            
+            <h3>Scale and Rotate Tools</h3>
+            
+            The Scale and Rotate tools transform selected objects.
+            <p>
+            A single tap using either of these tools moves the pivot point for the transform (initially it appears at the center of the selection). The objects scale away from the pivot or rotate around it when you drag.
+            <p>
+            <img class="tool_inline" src="scale.png"  width="30" height="30" alt="Scale Tool"/>
+            The Scale tool maintains the aspect ratio of the selected objects, but holding down a second finger while dragging performs a non-uniform scale.
+            <p>
+            <img class="tool_inline" src="rotate.png"  width="30" height="30" alt="Rotate Tool"/>
+            The Rotate tool rotates freely, unless you hold down a second finger while dragging, in which case the tool constrains the rotation to 45&deg; angles.
+            
+            <h1>Styling Objects</h1>
+            
+            Tap the style buttons in the toolbar to modify the appearance of selected objects:
+            <p>
+            
+            <div class="example" style="margin-bottom:-0.5em;">
+                <img src="style_bar.png" width="252" height="30" alt="Styles Toolbar"/>
+            </div>
+            <p>
+            They are, respectively: <b>Font</b>, <b>Shadow and Opacity</b>, <b>Stroke</b>, <b>Fill</b>, and <b>Swatches</b>.<p>
+            
+            The <b>Shadow and Opacity</b> button indicates the current shadow color and direction, as well as the object opacity. The colors indicated in the <b>Stroke</b> and <b>Fill</b> buttons are the values used when creating new shapes.
+            <p>
+            
+            <h3>Swatches</h3>
+            
+            The <b>Swatches</b> panel saves colors and gradients for later reuse.
+            <p>
+            
+            The <b>Shadow/Stroke/Fill</b> control at the bottom of the panel determines which style is saved when you press the <b>+</b> button in the upper right corner of the panel. It also determines which style is set when you tap one of the swatches in the panel.
+            <p>
+            Since gradients only function as fills, tapping a gradient swatch applies it to the fill style regardless of the setting.
+            <p>
+            
+            <h1>Gradients</h1>
+            
+            A gradient is a fill that transitions between two or more colors. A gradient is defined by a set of color stops. Each stop specifies a color and a position within the gradient.
+            <p>
+            
+            To apply a gradient, open the <b>Fill</b> panel and tap the <b>Gradient</b> button in the title bar.
+            <p>
+            Tap a color stop to select it. Use the color sliders at the top of the panel to alter the stop’s color. Drag the color stop to change its position within the gradient.
+            <p>
+            To reverse the gradient direction, swipe left or right in the gradient bar (the area above the color stops).
+            <p>
+            To evenly distribute the stops in a gradient, double tap the gradient bar.
+            <p>
+            To remove a color stop from the gradient, drag it up or down.
+            <p>
+            To insert a new color stop, tap the blank space between color stops (below the gradient bar).
+            <p>
+            When a shape has a gradient fill (and it is the only selected object), special control handles appear that allow you to change the gradient’s start and end points:
+            <p>
+            <div class="example" style="margin-bottom:-1.5em;">
+                <img src="gradient_canvas.png" width="215" height="150" alt="Gradient on Canvas"/>
+            </div>
+            
+            <h1>图层</h1>
+            
+            Inkpad 支持无限多的图层。 使用图层来管理复杂的绘图是很方便的。 绘图中的每个组件都可以显示在自己的图层上，这让组件编辑起来变得更容易。
+            <p>
+            你可以对图层做删除、复制、重置、重命名、锁定和隐藏操作，也可以控制每个图层的透明度。
+            <p>
+            
+            点击工具栏上的<b>图层</b>按钮就可以看到你绘图中的图层了。
+            <p>
+            
+            <h1>Joining Paths</h1>
+            
+            To join two unclosed paths, select them both and choose <b>Join Paths</b> from the <b>Path</b> menu.
+            <p>
+            The paths are joined by attaching their closest endpoints, so you might want to line them up the way you intend them to connect before choosing <b>Join Paths</b>.
+            <p>
+            If the opposite ends of the new path coincide after joining, the new path is also closed.
+            
+            <h1>Compound Paths</h1>
+            
+            A compound path is a path composed of multiple subpaths. They are useful for creating shapes that contain holes.
+            <p>
+            
+            To create a compound path, select two or more paths and/or compound paths and choose <b>Combine Paths</b> from the <b>Path</b> menu.
+            <p>
+            
+            To break a compound path back into simple paths, choose <b>Separate Paths</b> from the <b>Path</b> menu.
+            <p>
+            
+            The relative direction of each subpath in a compound path determines which subpaths are filled. If all the paths run in the same direction, they are all filled.
+            <p>
+            If you’ve combined two paths hoping to make a hole, but the hole is filled, select one of the paths in the compound path and choose <b>Reverse Path Direction</b> from the <b>Path</b> menu.
+            <p>
+            
+            <h1>Placing Text on a Path</h1>
+            
+            To place text on a path, select a single non-compound path (or a path and an existing text object) and choose <b>Place Text on Path</b> from the <b>Path</b> menu.
+            <p>
+            A text editor appears, allowing you to edit the text on the path. Reactivate this editor later by double tapping the path with one of the Selection tools (or tapping the path with the Text tool).
+            <p>
+            The path is editable just like any normal path, but style settings apply only to the text.
+            <p>
+            Drag the start bar that appears at the beginning of the text to adjust the starting position of the text on the path.
+            <p>
+            To make the text appear on the other side of the path, choose <b>Reverse Path Direction</b> from the <b>Path</b> menu.
+            <p>
+            
+            <h1>Masks</h1>
+            
+            A mask is a path, compound path, or text object that clips the contents of other drawing elements.
+            <p>
+            To create a mask, select the objects that you want to mask and the path or text object that you want to use as the mask (the masking object must be the topmost selected object). Choose <b>Mask</b> from the <b>Path</b> menu.
+            <p>
+            
+            To unmask objects, select the masked object and choose <b>Unmask</b> from the <b>Path</b> menu.
+            <p>
+            
+            A masking path can have a fill and stroke just like any normal path.
+            <p>
+            
+        </div>
+        
+    </body>
+    
+    <script type="text/javascript">
+        highdpi_init();
+    </script>
+</html>
