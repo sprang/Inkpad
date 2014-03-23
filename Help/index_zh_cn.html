@@ -4,7 +4,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-            <title>Inkpad Help</title>
+            <title>Inkpad 帮助</title>
             <meta name="author" content="Steve Sprang">
             <link rel="stylesheet" type="text/css" href="styles.css">
             <script src="jquery-1.7.1.min.js"></script>
@@ -32,7 +32,7 @@
             <p>
     
     
-            Inkpad 可以通过 Dropbox 导入图形、字体（包括TureType和Opentype字体）、SVG, SVGZ, 和 Inkpad 格式的文件。点击 <b>导入</b> 即可访问你的 Dropbox。
+            Inkpad 可以通过 Dropbox 导入图形、字体（包括TureType和Opentype字体）、SVG、SVGZ 和 Inkpad 格式的文件。点击 <b>导入</b> 即可访问你的 Dropbox。
             <p>
             
             导入的字体将出现在画廊视图底部的 <b>字体</b> 面板中。如果你不再使用某个字体，你可以在字体面板中将它删除。 在绘画视图中，<b>字体</b> 面板中会显示你导入的字体以及系统自带的字体。
@@ -65,11 +65,11 @@
             在混合颜色时，两端的对象必须有填充颜色（但不可以是渐变填充）。 比如在进行水平混合时，最左边和最右边的对象必须有填充颜色。 另外，如果要使用颜色混合，你必须至少选择 3 个对象。
             <p>
             
-            <img class="undo_inline" src="undo.png" width="24" height="24" alt="撤销改动"/></h3>
+            <img class="undo_inline" src="undo.png" width="24" height="24" alt="Undo"/></h3>
             点击 <b>撤销</b> 按钮就可以撤回上一步操作
             <p>
             
-            <img class="undo_inline" src="redo.png" width="24" height="24" alt="重做"/></h3>
+            <img class="undo_inline" src="redo.png" width="24" height="24" alt="Redo"/></h3>
             点击 <b>重做</b> 按钮即可重做被撤销的操作。
             <p>
             
@@ -222,60 +222,52 @@
             要再次修改文本内容，就选择文本工具并轻击文本对象，或者在选择工具中双击文本对象。
             <p>
             
-            <h3>Scale and Rotate Tools</h3>
-            
-            The Scale and Rotate tools transform selected objects.
+            <h3>缩放和旋转工具</h3>    缩放和旋转工具可以对选定的对象进行缩放和旋转操作。
             <p>
-            A single tap using either of these tools moves the pivot point for the transform (initially it appears at the center of the selection). The objects scale away from the pivot or rotate around it when you drag.
+            选中工具后，单击画布可以移动变形的中心点（这个点默认位于选中对象的中心）。 当你拖动手指，对象就会以中心点旋转。
             <p>
             <img class="tool_inline" src="scale.png"  width="30" height="30" alt="Scale Tool"/>
-            The Scale tool maintains the aspect ratio of the selected objects, but holding down a second finger while dragging performs a non-uniform scale.
+            使用缩放工具时，缩放的长宽比固定为原对象的长宽比。如果要无视原比例进行缩放，请在开始拖动后用另外一只手指长按画布以启动特殊操作功能。
             <p>
             <img class="tool_inline" src="rotate.png"  width="30" height="30" alt="Rotate Tool"/>
-            The Rotate tool rotates freely, unless you hold down a second finger while dragging, in which case the tool constrains the rotation to 45&deg; angles.
+            旋转工具可以让你以任意角度旋转对象。如果你想以45&deg;角为单位进行旋转，请在开始拖动手指后用另一只手指长按画布来启动特殊操作功能。
             
-            <h1>Styling Objects</h1>
-            
-            Tap the style buttons in the toolbar to modify the appearance of selected objects:
+            <h1>设置对象的样式</h1>    点击屏幕底部工具栏中的样式按钮就可以修改所选对象的外观。
             <p>
             
             <div class="example" style="margin-bottom:-0.5em;">
                 <img src="style_bar.png" width="252" height="30" alt="Styles Toolbar"/>
             </div>
             <p>
-            They are, respectively: <b>Font</b>, <b>Shadow and Opacity</b>, <b>Stroke</b>, <b>Fill</b>, and <b>Swatches</b>.<p>
+            他们分别是 <b>字体</b>, <b>阴影和不透明度</b>, <b>描边</b>, <b>填充</b>, 和 <b>色板</b>.<p>
             
-            The <b>Shadow and Opacity</b> button indicates the current shadow color and direction, as well as the object opacity. The colors indicated in the <b>Stroke</b> and <b>Fill</b> buttons are the values used when creating new shapes.
-            <p>
-            
-            <h3>Swatches</h3>
-            
-            The <b>Swatches</b> panel saves colors and gradients for later reuse.
+             <b>阴影和不透明度</b> 按钮上显示着当前所选对象的阴影颜色、反响和对象的不透明度。 显示在<b>描边</b>和 <b>填充</b>按钮上的颜色将用于创建新的形状。
             <p>
             
-            The <b>Shadow/Stroke/Fill</b> control at the bottom of the panel determines which style is saved when you press the <b>+</b> button in the upper right corner of the panel. It also determines which style is set when you tap one of the swatches in the panel.
-            <p>
-            Since gradients only function as fills, tapping a gradient swatch applies it to the fill style regardless of the setting.
+            <h3>样本</h3>    <b>样本</b> 面板上保存着一些颜色和渐变色样本，以方便你重复使用。
             <p>
             
-            <h1>Gradients</h1>
-            
-            A gradient is a fill that transitions between two or more colors. A gradient is defined by a set of color stops. Each stop specifies a color and a position within the gradient.
+            面板底部的<b>阴影/描边/填充</b>选项卡决定了当你按下面板右上角<b>+</b>按钮时，对象的什么样式将被存进样本库。 它还决定了当你选用样本时，该样本将应用到对象的什么部位上。
+            <p>
+            因为渐变只能应用于填充中，因此无论此时选项卡选择的是什么，点击一个渐变样本，它都只会应用于对象的填充。
             <p>
             
-            To apply a gradient, open the <b>Fill</b> panel and tap the <b>Gradient</b> button in the title bar.
+            <h1>渐变</h1>    渐变以两种或者多种颜色逐渐过渡效果来填充对象。 渐变效果由一组位于过渡效果末端的颜色标签来定义和控制。 每个标签定义了一种颜色以及它在渐变中的具体位置。
             <p>
-            Tap a color stop to select it. Use the color sliders at the top of the panel to alter the stop’s color. Drag the color stop to change its position within the gradient.
+            
+            要应用渐变效果，请打开 <b>填充</b>面板，并点击 <b>渐变</b>面板标题上的按钮。
             <p>
-            To reverse the gradient direction, swipe left or right in the gradient bar (the area above the color stops).
+            点击一个颜色标签来选择它。使用面板上部的颜色滑块来调整该标签的颜色。拖动颜色标签可调整它在渐变中的位置。
             <p>
-            To evenly distribute the stops in a gradient, double tap the gradient bar.
+            如果要反转渐变的方向，请在渐变栏（颜色标签上方的区域）上向左或向右滑动。
             <p>
-            To remove a color stop from the gradient, drag it up or down.
+            如果要让颜色标签均匀地分布，请双击渐变栏。
             <p>
-            To insert a new color stop, tap the blank space between color stops (below the gradient bar).
+            如果想删除渐变效果中的某个颜色标签，请把这个标签向上或向下拖动。
             <p>
-            When a shape has a gradient fill (and it is the only selected object), special control handles appear that allow you to change the gradient’s start and end points:
+            如果要插入一个新的颜色标签，请点击渐变栏下方、颜色标签之间的空白区域。
+            <p>
+            如果某个形状有渐变填充（并且这是它是唯一被选中的对象），特殊的控制手柄将出现在形状中，利用该手柄你可以改变渐变开始和结束的位置。
             <p>
             <div class="example" style="margin-bottom:-1.5em;">
                 <img src="gradient_canvas.png" width="215" height="150" alt="Gradient on Canvas"/>
@@ -291,54 +283,50 @@
             点击工具栏上的<b>图层</b>按钮就可以看到你绘图中的图层了。
             <p>
             
-            <h1>Joining Paths</h1>
-            
-            To join two unclosed paths, select them both and choose <b>Join Paths</b> from the <b>Path</b> menu.
+            <h1>连接路径</h1>
+            要连接两条不闭合的路径，请选中他们，并点击<b>路径</b>菜单中的<b>连接路径</b>。
             <p>
-            The paths are joined by attaching their closest endpoints, so you might want to line them up the way you intend them to connect before choosing <b>Join Paths</b>.
+            两条路径的连接点默认为两条路径中相距最近的端点。因此，你可能需要在连接它们之间先排放好它们的位置。.
             <p>
-            If the opposite ends of the new path coincide after joining, the new path is also closed.
+            如果在连接后，新路径的另外端点也连在了一起，呢么这个路径会自动闭合。
             
-            <h1>Compound Paths</h1>
-            
-            A compound path is a path composed of multiple subpaths. They are useful for creating shapes that contain holes.
+            <h1>复合路径</h1>
+            复合路径是由多条子路径复合而成的一条路径。 在创建带有孔洞的图形时，本功能将非常有用。
             <p>
             
-            To create a compound path, select two or more paths and/or compound paths and choose <b>Combine Paths</b> from the <b>Path</b> menu.
+            要创建一条复合路径，请选择两条以上的路径或复合路径，然后选择<b>路径</b>菜单中的<b>合并路径</b>命令。
             <p>
             
-            To break a compound path back into simple paths, choose <b>Separate Paths</b> from the <b>Path</b> menu.
+            要把一条复合路径释放为简单路径，请选择<b>路径</b>菜单中的<b>释放路径</b>命令。
             <p>
             
-            The relative direction of each subpath in a compound path determines which subpaths are filled. If all the paths run in the same direction, they are all filled.
+            一条复合路径中的每条子路径的相对方向将决定复合后哪些子路径会自动被填充。如果所有的子路径都朝向同一个方向，那么他们都会自动被填充。
             <p>
-            If you’ve combined two paths hoping to make a hole, but the hole is filled, select one of the paths in the compound path and choose <b>Reverse Path Direction</b> from the <b>Path</b> menu.
-            <p>
-            
-            <h1>Placing Text on a Path</h1>
-            
-            To place text on a path, select a single non-compound path (or a path and an existing text object) and choose <b>Place Text on Path</b> from the <b>Path</b> menu.
-            <p>
-            A text editor appears, allowing you to edit the text on the path. Reactivate this editor later by double tapping the path with one of the Selection tools (or tapping the path with the Text tool).
-            <p>
-            The path is editable just like any normal path, but style settings apply only to the text.
-            <p>
-            Drag the start bar that appears at the beginning of the text to adjust the starting position of the text on the path.
-            <p>
-            To make the text appear on the other side of the path, choose <b>Reverse Path Direction</b> from the <b>Path</b> menu.
+            当你想通过合并两条路径来绘制一个带孔的图形时，孔洞处却已经有填充了，你可以选择其中任一路径，然后选择<b>路径</b>菜单中的<b>反转路径方向</b>来解决问题。
             <p>
             
-            <h1>Masks</h1>
-            
-            A mask is a path, compound path, or text object that clips the contents of other drawing elements.
+            <h1>沿路径排列文本</h1>
+            要让文本沿路径排列，请选择一个不封闭的路径（或者一段路径与已有文字），然后选择<b>路径</b>菜单中的<b>沿路径排列文本</b> 。
             <p>
-            To create a mask, select the objects that you want to mask and the path or text object that you want to use as the mask (the masking object must be the topmost selected object). Choose <b>Mask</b> from the <b>Path</b> menu.
+            一个文本编辑器将出现，你可以在编辑器中编辑路径上的文字。如果要重新打开文本编辑器，你可以用任何一种选择工具或文本工具双击该路径。
+            <p>
+            排列了文本的路径就像其他普通路径一样可以被修改，不过对该路径应用样式的话，样式将只应用到排列的文本上。
+            <p>
+            拖动位于文本开头的把手可以改变文本在路径上的位置。
+            <p>
+            如果要让文本出现在路径的另一侧，请点击<b>路径</b>菜单中<b>反转路径</b>命令。
             <p>
             
-            To unmask objects, select the masked object and choose <b>Unmask</b> from the <b>Path</b> menu.
+            <h1>蒙版</h1>
+            蒙版是截取、剪贴其他对象的一段路径、一组路径或文字对象。
+            <p>
+            要创建一个蒙板，请选择你想作为基底的对象，以及你想用于作为顶层的路径或文字对象（作为顶层的对象必须位于基底的上方）。 接着选择<b>路径</b>菜单中的<b>蒙版</b>。
             <p>
             
-            A masking path can have a fill and stroke just like any normal path.
+            要停用对象的蒙版，请选择你要操作的对象，然后点击<b>路径</b>菜单中的<b>停用蒙版</b>
+            <p>
+            
+            蒙版下的路径和普通路径一样，也可以设置填充和描边样式。
             <p>
             
         </div>
