@@ -197,6 +197,7 @@
             state_.viewBoxTransform = [self preserveAspectRatio:preserve withSize:CGSizeMake(w, h) andBounds:state_.viewport];
             state_.viewport = CGRectMake(x, y, w, h);
             state_.transform = CGAffineTransformConcat(state_.viewBoxTransform, state_.transform);
+            state_.transform = CGAffineTransformTranslate(state_.transform, -x, -y);
         }
     } 
 }
