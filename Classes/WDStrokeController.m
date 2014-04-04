@@ -98,9 +98,9 @@ const float kMaxStrokeWidth = 300.0f;
             decrement.enabled = widthSlider_.value != widthSlider_.minimumValue;
             increment.enabled = widthSlider_.value != widthSlider_.maximumValue;
         } else if ([property isEqualToString:WDStrokeCapProperty]) {
-            capPicker_.cap = [value integerValue];
+            capPicker_.cap = (CGLineCap) [value integerValue];
         } else if ([property isEqualToString:WDStrokeJoinProperty]) {
-            joinPicker_.join = [value integerValue];
+            joinPicker_.join = (CGLineJoin) [value integerValue];
         } else if ([property isEqualToString:WDStrokeColorProperty]) {
             colorController_.color = value;
         } else if ([property isEqualToString:WDStrokeVisibleProperty]) {
