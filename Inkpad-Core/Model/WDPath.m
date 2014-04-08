@@ -476,10 +476,11 @@ NSString *WDClosedKey = @"WDClosedKey";
     }
     
     if (closed) {
-        // if the first and last node have the same anchor, one is redundant
+        // if the first and last node are sufficiently close to each other, one is redundant
         WDBezierNode *first = [self firstNode];
         WDBezierNode *last = [self lastNode];
-        if (CGPointEqualToPoint(first.anchorPoint, last.anchorPoint)) {
+        
+        if (WDDistance(first.anchorPoint, last.anchorPoint) < 1.0e-4) {
             WDBezierNode *closedNode = [WDBezierNode bezierNodeWithInPoint:last.inPoint anchorPoint:first.anchorPoint outPoint:first.outPoint];
             
             NSMutableArray *newNodes = [NSMutableArray arrayWithArray:nodes_];
@@ -1826,19 +1827,13 @@ NSString *WDClosedKey = @"WDClosedKey";
             !WDCollinear(current.anchorPoint, next.anchorPoint, nextnext.inPoint) ||
             !WDCollinear(current.anchorPoint, next.anchorPoint, nextnext.anchorPoint))
         {
-            // can't remove the node, add it and move on
+            // can't remove the node since it's nonlinear, add it and move on
             [newNodes addObject:next];
             current = next;
         }
         
         next = nextnext;
-        
-        if (ix < nodeCount) {
-            nextnext = nodes_[(ix % nodes_.count)];
-        } else {
-            nextnext = nil;
-        }
-        
+        nextnext = (ix < nodeCount) ? nodes_[ix % nodes_.count] : nil;
         ix++;
     }
     
@@ -1848,9 +1843,9 @@ NSString *WDClosedKey = @"WDClosedKey";
     
     if (closed_) {
         // see if we should remove the first node
-        current = [nodes_ lastObject];
-        next = nodes_[0];
-        nextnext = nodes_[1];
+        current = [newNodes lastObject];
+        next = newNodes[0];
+        nextnext = newNodes[1];
         
         if (WDCollinear(current.anchorPoint, current.outPoint, next.inPoint) &&
             WDCollinear(current.anchorPoint, next.inPoint, next.anchorPoint) &&
