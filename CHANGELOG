@@ -1,4 +1,11 @@
-1.6 [submitted to Apple]
+Next update
+- Fixed crash in Openclipart search that occurred when using Chinese glyph input. Now requires alphabetic keyboard.
+- Added Chinese localization
+- Fixed minor compilation errors (new XCode version)
+- Fixed a path bug that could occur when outlining a stroke
+- Added Japanese localization
+
+1.6 [currently on the App Store]
 - Increased maximum stroke width to 300
 - Tweaked line attribute picker appearance
 - Fixed type bug that broke palette 'tossing' on 64-bit devices
@@ -19,7 +26,7 @@
 - Added Brazilian Portuguese localization
 - Now purge temp directory contents at launch
 
-1.5.2 [currently on the App Store]
+1.5.2
 - Added T-end arrowhead
 - Fixed incorrect shadow/parallax on eraser options view
 - Integrated UIDocumentInteractionController for exporting
