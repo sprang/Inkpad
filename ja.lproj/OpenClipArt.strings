@@ -1,0 +1,12 @@
+
+/* Class = "IBUISearchBar"; placeholder = "Search Openclipart"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.placeholder" = "Openceipartの検索";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[0] = "Top Downloads"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[0]" = "ダウンロード数上位";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[1] = "Top Favorites"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[1]" = "お気に入り数上位";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[2] = "Newest"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[2]" = "最新";

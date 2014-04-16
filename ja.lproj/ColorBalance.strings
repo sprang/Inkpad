@@ -1,0 +1,33 @@
+
+/* Class = "IBUILabel"; text = "Blue"; ObjectID = "15"; */
+"15.text" = "青";
+
+/* Class = "IBUILabel"; text = "Yellow"; ObjectID = "16"; */
+"16.text" = "イエロー";
+
+/* Class = "IBUILabel"; text = "Green"; ObjectID = "18"; */
+"18.text" = "緑";
+
+/* Class = "IBUILabel"; text = "Magenta"; ObjectID = "19"; */
+"19.text" = "マゼンタ";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "21"; */
+"21.text" = "0";
+
+/* Class = "IBUILabel"; text = "Cyan"; ObjectID = "22"; */
+"22.text" = "シアン";
+
+/* Class = "IBUILabel"; text = "Red"; ObjectID = "23"; */
+"23.text" = "赤";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "24"; */
+"24.text" = "0";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "25"; */
+"25.text" = "0";
+
+/* Class = "IBUINavigationItem"; title = "Color Balance"; ObjectID = "34"; */
+"34.title" = "カラーバランス";
+
+/* Class = "IBUIBarButtonItem"; title = "Accept"; ObjectID = "36"; */
+"36.title" = "適用";
