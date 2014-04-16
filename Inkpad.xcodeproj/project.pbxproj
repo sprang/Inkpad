@@ -335,6 +335,12 @@
 		6BDBC48B130D1A6F00BC3BCA /* WDEtchedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDBC48A130D1A6F00BC3BCA /* WDEtchedLine.m */; };
 		6BDD92E413DE744F0005F55D /* hue_shifter_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BDD92E313DE744F0005F55D /* hue_shifter_overlay.png */; };
 		6BDDFA6C13E7924600B10774 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BDDFA6B13E7924600B10774 /* MobileCoreServices.framework */; };
+		6BE1875418FEE947006FC619 /* ColorBalance.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE1874818FEE947006FC619 /* ColorBalance.strings */; };
+		6BE1875518FEE947006FC619 /* HueSaturation.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE1874A18FEE947006FC619 /* HueSaturation.strings */; };
+		6BE1875618FEE947006FC619 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE1874C18FEE947006FC619 /* Localizable.strings */; };
+		6BE1875718FEE947006FC619 /* OpenClipArt.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE1874E18FEE947006FC619 /* OpenClipArt.strings */; };
+		6BE1875818FEE947006FC619 /* Shadow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE1875018FEE947006FC619 /* Shadow.strings */; };
+		6BE1875918FEE947006FC619 /* Stroke.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BE1875218FEE947006FC619 /* Stroke.strings */; };
 		6BE2F52F136782CE006BBF5E /* WDEraserPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE2F52E136782CE006BBF5E /* WDEraserPreviewView.m */; };
 		6BF0C07A125E8345009BB05C /* WDColorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF0C079125E8345009BB05C /* WDColorController.m */; };
 		6BF0C250125F9F63009BB05C /* WDStrokeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BF0C24F125F9F63009BB05C /* WDStrokeController.m */; };
@@ -846,6 +852,12 @@
 		6BDBC48A130D1A6F00BC3BCA /* WDEtchedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDEtchedLine.m; sourceTree = "<group>"; };
 		6BDD92E313DE744F0005F55D /* hue_shifter_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hue_shifter_overlay.png; path = Images/hue_shifter_overlay.png; sourceTree = "<group>"; };
 		6BDDFA6B13E7924600B10774 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6BE1874918FEE947006FC619 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ColorBalance.strings; sourceTree = "<group>"; };
+		6BE1874B18FEE947006FC619 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = HueSaturation.strings; sourceTree = "<group>"; };
+		6BE1874D18FEE947006FC619 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Localizable.strings; sourceTree = "<group>"; };
+		6BE1874F18FEE947006FC619 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = OpenClipArt.strings; sourceTree = "<group>"; };
+		6BE1875118FEE947006FC619 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Shadow.strings; sourceTree = "<group>"; };
+		6BE1875318FEE947006FC619 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Stroke.strings; sourceTree = "<group>"; };
 		6BE2F52D136782CE006BBF5E /* WDEraserPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDEraserPreviewView.h; sourceTree = "<group>"; };
 		6BE2F52E136782CE006BBF5E /* WDEraserPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDEraserPreviewView.m; sourceTree = "<group>"; };
 		6BF0C078125E8345009BB05C /* WDColorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDColorController.h; sourceTree = "<group>"; };
@@ -960,15 +972,16 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				02B54D2118D59DFF00DE8A9F /* zh-Hans.lproj */,
 				6B83972418A41125001D5985 /* de.lproj */,
 				6B8F091517FCE1DB00BB6F7E /* en.lproj */,
 				6BC96745183149E300F46191 /* es.lproj */,
 				F43A1D69183557770032933E /* fr.lproj */,
 				6B8C5379182AEA5000C102F7 /* it.lproj */,
+				6BE1874718FEE947006FC619 /* ja.lproj */,
 				6B9A287C18C1087300697BE7 /* pt.lproj */,
 				6BBB7CCF18B32C240018954B /* pt_PT.lproj */,
 				6B95751E183C52940094B7D5 /* tr.lproj */,
+				02B54D2118D59DFF00DE8A9F /* zh-Hans.lproj */,
 				6B87CA5C1312610D0027A482 /* Help */,
 				6BCD52C0123FFFF3002FCB27 /* Images */,
 				6B984AF7131623FA007FB48F /* PLists */,
@@ -1748,6 +1761,19 @@
 			name = "Text Alignment";
 			sourceTree = "<group>";
 		};
+		6BE1874718FEE947006FC619 /* ja.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6BE1874818FEE947006FC619 /* ColorBalance.strings */,
+				6BE1874A18FEE947006FC619 /* HueSaturation.strings */,
+				6BE1874C18FEE947006FC619 /* Localizable.strings */,
+				6BE1874E18FEE947006FC619 /* OpenClipArt.strings */,
+				6BE1875018FEE947006FC619 /* Shadow.strings */,
+				6BE1875218FEE947006FC619 /* Stroke.strings */,
+			);
+			path = ja.lproj;
+			sourceTree = "<group>";
+		};
 		F43A1D69183557770032933E /* fr.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -1812,6 +1838,7 @@
 				pt,
 				pt_PT,
 				"zh-Hans",
+				ja,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1845,6 +1872,7 @@
 				6B197DAE12434CED006C5C3A /* align_left.png in Resources */,
 				6B197DAF12434CED006C5C3A /* align_middle.png in Resources */,
 				6B197DB012434CED006C5C3A /* align_right.png in Resources */,
+				6BE1875618FEE947006FC619 /* Localizable.strings in Resources */,
 				6B197DB112434CED006C5C3A /* align_top.png in Resources */,
 				6B53351C1803530E00D46D5B /* BlendModes.plist in Resources */,
 				6B5335401803538D00D46D5B /* Font.xib in Resources */,
@@ -1907,6 +1935,7 @@
 				6BABD988141ED30100F7E0A9 /* line.png in Resources */,
 				6BABD98A141ED30100F7E0A9 /* oval.png in Resources */,
 				6BABD98C141ED30100F7E0A9 /* pen.png in Resources */,
+				6BE1875418FEE947006FC619 /* ColorBalance.strings in Resources */,
 				6BABD98E141ED30100F7E0A9 /* polygon.png in Resources */,
 				6BABD990141ED30100F7E0A9 /* rect.png in Resources */,
 				6BABD992141ED30100F7E0A9 /* rotate.png in Resources */,
@@ -1935,11 +1964,13 @@
 				6B7D2CF415089966001311B0 /* redo@2x.png in Resources */,
 				6B7D2CF515089966001311B0 /* undo@2x.png in Resources */,
 				6B2AC3FB17EAD420008D6391 /* duplicate@2x.png in Resources */,
+				6BE1875918FEE947006FC619 /* Stroke.strings in Resources */,
 				6BBB7CDE18B32C240018954B /* Stroke.strings in Resources */,
 				6B83973A18A4390C001D5985 /* trash@2x.png in Resources */,
 				6B7D2D011508A0B2001311B0 /* album@2x.png in Resources */,
 				6B7D2D031508A291001311B0 /* text@2x.png in Resources */,
 				6B7D2D0B1508AC8D001311B0 /* slider_border@2x.png in Resources */,
+				6BE1875818FEE947006FC619 /* Shadow.strings in Resources */,
 				02B54D3218D59DFF00DE8A9F /* Shadow.strings in Resources */,
 				6B7D2D0D1508AED6001311B0 /* hue_shifter_overlay@2x.png in Resources */,
 				6B7D2D0F1508AF4E001311B0 /* pivot@2x.png in Resources */,
@@ -1995,6 +2026,7 @@
 				6B219C8B150EEF0700761F18 /* spiral@2x.png in Resources */,
 				6B5335441803538D00D46D5B /* LayerCell.xib in Resources */,
 				6B9A288B18C1087300697BE7 /* Localizable.strings in Resources */,
+				6BE1875518FEE947006FC619 /* HueSaturation.strings in Resources */,
 				6B219C8F150EEFC100761F18 /* scissor@2x.png in Resources */,
 				6B83972F18A41126001D5985 /* ColorBalance.strings in Resources */,
 				6B219C93150EF0B700761F18 /* eraser@2x.png in Resources */,
@@ -2004,6 +2036,7 @@
 				6B5335201803530E00D46D5B /* Settings.plist in Resources */,
 				6B219CA1150EFAE700761F18 /* groupSelect@2x.png in Resources */,
 				6B219CA3150EFAE700761F18 /* select@2x.png in Resources */,
+				6BE1875718FEE947006FC619 /* OpenClipArt.strings in Resources */,
 				6B219CCB1511893500761F18 /* duplicate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2580,6 +2613,54 @@
 				6BC9674B183149E300F46191 /* es */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6BE1874818FEE947006FC619 /* ColorBalance.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BE1874918FEE947006FC619 /* ja */,
+			);
+			name = ColorBalance.strings;
+			sourceTree = "<group>";
+		};
+		6BE1874A18FEE947006FC619 /* HueSaturation.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BE1874B18FEE947006FC619 /* ja */,
+			);
+			name = HueSaturation.strings;
+			sourceTree = "<group>";
+		};
+		6BE1874C18FEE947006FC619 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BE1874D18FEE947006FC619 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6BE1874E18FEE947006FC619 /* OpenClipArt.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BE1874F18FEE947006FC619 /* ja */,
+			);
+			name = OpenClipArt.strings;
+			sourceTree = "<group>";
+		};
+		6BE1875018FEE947006FC619 /* Shadow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BE1875118FEE947006FC619 /* ja */,
+			);
+			name = Shadow.strings;
+			sourceTree = "<group>";
+		};
+		6BE1875218FEE947006FC619 /* Stroke.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BE1875318FEE947006FC619 /* ja */,
+			);
+			name = Stroke.strings;
 			sourceTree = "<group>";
 		};
 		F43A1D6E183557770032933E /* Localizable.strings */ = {
