@@ -14,6 +14,7 @@
 #import "WDRulerView.h"
 #import "WDRulerUnit.h"
 #import "WDUnitsController.h"
+#import "WDUtilities.h"
 
 @implementation WDSettingsController
 
@@ -29,6 +30,13 @@
     
     self.navigationItem.title = NSLocalizedString(@"Settings", @"Settings");
     
+    if (WDDeviceIsPhone()) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                  target:self
+                                                  action:@selector(done:)];
+    }
+    
     NSString *settingsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Settings.plist"];
     configuration_ = [NSArray arrayWithContentsOfFile:settingsPath];
     
@@ -38,6 +46,16 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 - (void) setDrawing:(WDDrawing *)drawing

@@ -12,6 +12,7 @@
 #import "WDLayer.h"
 #import "WDLayerCell.h"
 #import "WDLayerController.h"
+#import "WDUtilities.h"
 
 #define kTextFieldTag       1
 #define kVisibleButtonTag   3
@@ -47,21 +48,41 @@
     
     self.title = NSLocalizedString(@"Layers", @"Layers");
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteLayer:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                             target:self
+                                             action:@selector(deleteLayer:)];
     
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                               target:self                                         
-                                                                               action:@selector(addLayer:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                  target:self
+                                  action:@selector(addLayer:)];
     
-    UIBarButtonItem *duplicateButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"duplicate.png"]
-                                                                        style:UIBarButtonItemStylePlain
-                                                                       target:self
-                                                                       action:@selector(duplicateLayer:)];
+    UIBarButtonItem *duplicateButton = [[UIBarButtonItem alloc]
+                                        initWithImage:[UIImage imageNamed:@"duplicate.png"]
+                                        style:UIBarButtonItemStylePlain
+                                        target:self
+                                        action:@selector(duplicateLayer:)];
     
-    self.navigationItem.rightBarButtonItems = @[addButton, duplicateButton];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                   target:self
+                                   action:@selector(done:)];
+    
+    self.navigationItem.rightBarButtonItems = WDDeviceIsPhone() ? @[doneButton, addButton, duplicateButton] : @[addButton, duplicateButton];
     
     return self;
+}
+
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (void) done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) setDrawing:(WDDrawing *)drawing
@@ -378,12 +399,43 @@
     drawing_.activeLayer.opacity = opacity;
 }
 
+- (UIImage *) iPhoneSliderThumbImage
+{
+    float dimension = 26;
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(dimension, dimension), NO, 0.0f);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    CGContextSaveGState(ctx);
+    CGContextSetShadow(ctx, CGSizeMake(0,1), 2);
+    CGRect ovalRect = CGRectInset(CGRectMake(0, 0, dimension, dimension), 2, 2);
+    CGContextSetGrayFillColor(ctx, 1.0f, 1.0f);
+    CGContextFillEllipseInRect(ctx, ovalRect);
+    CGContextRestoreGState(ctx);
+    
+    CGContextSetGrayStrokeColor(ctx, 0.6f, 1.0f);
+    CGContextSetLineWidth(ctx, 0.5f);
+    CGContextStrokeEllipseInRect(ctx, ovalRect);
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
 - (NSArray *) toolbarItems
 {
     if (!toolbarItems_) {
-        opacitySlider_ = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, 250, 44)];
+        float sliderWidth = WDDeviceIsPhone() ? 175 : 250;
+        opacitySlider_ = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, sliderWidth, 44)];
         opacitySlider_.maximumValue = 1.0f;
         opacitySlider_.minimumTrackTintColor = [UIColor grayColor];
+        
+        if (WDDeviceIsPhone()) {
+            opacitySlider_.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            [opacitySlider_ setThumbImage:[self iPhoneSliderThumbImage] forState:UIControlStateNormal];
+        }
         
         [opacitySlider_ addTarget:self action:@selector(takeOpacityFrom:) forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
         [opacitySlider_ addTarget:self action:@selector(opacitySliderMoved:) forControlEvents:UIControlEventValueChanged];

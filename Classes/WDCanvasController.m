@@ -159,7 +159,12 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settings];
     
     settings.drawing = document_.drawing;
-    [self runPopoverWithController:navController from:sender];
+    
+    if (WDDeviceIsPhone()) {
+        [self presentViewController:navController animated:YES completion:nil];
+    } else {
+        [self runPopoverWithController:navController from:sender];
+    }
 }
 
 - (void) showPhotoBrowser:(id)sender
@@ -881,7 +886,11 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:layerController_];
     navController.toolbarHidden = NO;
     
-    [self runPopoverWithController:navController from:sender];
+    if (WDDeviceIsPhone()) {
+        [self presentViewController:navController animated:YES completion:nil];
+    } else {
+        [self runPopoverWithController:navController from:sender];
+    }
 }
 
 - (void) showHueAndSaturation:(id)sender
@@ -1054,18 +1063,25 @@
     [strokeWell_ setPainter:[self.drawingController.propertyManager activeStrokeStyle].color];
     
     
-	editingItems_ = @[objectItem, smallFixedItem,
-                     arrangeItem, smallFixedItem,
-                     pathItem, fixedItem,
-                     colorItem_, fixedItem,
-                     undoItem_, fixedItem,
-                     redoItem_, flexibleItem, 
-                     fontItem, fixedItem,
-                     shadowItem, fixedItem,
-                     strokeItem, fixedItem,
-                     fillItem, fixedItem,
-                     swatchItem, fixedItem,
-                     layerItem_];
+    if (WDDeviceIsPhone()) {
+        editingItems_ = @[undoItem_, fixedItem,
+                          redoItem_, flexibleItem,
+                          layerItem_];
+        
+    } else {
+        editingItems_ = @[objectItem, smallFixedItem,
+                          arrangeItem, smallFixedItem,
+                          pathItem, fixedItem,
+                          colorItem_, fixedItem,
+                          undoItem_, fixedItem,
+                          redoItem_, flexibleItem,
+                          fontItem, fixedItem,
+                          shadowItem, fixedItem,
+                          strokeItem, fixedItem,
+                          fillItem, fixedItem,
+                          swatchItem, fixedItem,
+                          layerItem_];
+    }
     
     return editingItems_;
 }
@@ -1074,30 +1090,30 @@
 {
     
     actionItem_ = [[UIBarButtonItem alloc]
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                   target:self action:@selector(showActionMenu:)];
+                   initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                   target:self action:@selector(showActionMenu:)];
     
-    gearItem_ = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"]
-                                                 style:UIBarButtonItemStylePlain
-                                                target:self
-                                                action:@selector(showSettingsMenu:)];
+    gearItem_ = [[UIBarButtonItem alloc]
+                 initWithImage:[UIImage imageNamed:@"gear.png"]
+                 style:UIBarButtonItemStylePlain
+                 target:self
+                 action:@selector(showSettingsMenu:)];
     
-    albumItem_ = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"album.png"]
-                                                  style:UIBarButtonItemStylePlain
-                                                 target:self
-                                                 action:@selector(showPhotoBrowser:)];
-    
-    zoomToFitItem_ = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"zoom_to_fit.png"]
-                                                      style:UIBarButtonItemStylePlain
-                                                     target:self
-                                                     action:@selector(scaleDocumentToFit:)];
-    
-	NSArray *items = @[actionItem_, gearItem_, albumItem_, zoomToFitItem_];
-    
+    albumItem_ = [[UIBarButtonItem alloc]
+                  initWithImage:[UIImage imageNamed:@"album.png"]
+                  style:UIBarButtonItemStylePlain
+                  target:self
+                  action:@selector(showPhotoBrowser:)];
     // make sure the album item has the proper enabled state
     albumItem_.enabled = self.drawing.activeLayer.editable;
     
-    return items;    
+    zoomToFitItem_ = [[UIBarButtonItem alloc]
+                      initWithImage:[UIImage imageNamed:@"zoom_to_fit.png"]
+                      style:UIBarButtonItemStylePlain
+                      target:self
+                      action:@selector(scaleDocumentToFit:)];
+    
+    return WDDeviceIsPhone() ? @[actionItem_, gearItem_] : @[actionItem_, gearItem_, albumItem_, zoomToFitItem_];
 }
 
 - (void) enableDocumentItems
