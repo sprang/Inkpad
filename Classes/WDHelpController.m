@@ -10,6 +10,7 @@
 //
 
 #import "WDHelpController.h"
+#import "WDUtilities.h"
 
 @implementation WDHelpController
 
@@ -37,6 +38,11 @@
                                                target:self
                                                action:@selector(dismissView:)];
     return self;
+}
+
+- (BOOL) prefersStatusBarHidden
+{
+    return WDDeviceIsPhone();
 }
 
 - (NSURL *) helpURL

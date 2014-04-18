@@ -114,6 +114,11 @@
     [hueController_ bringOnScreenAnimated:YES];
 }
 
+- (BOOL) prefersStatusBarHidden
+{
+    return WDDeviceIsPhone();
+}
+
 #pragma mark -
 #pragma mark Show Controllers
 

@@ -115,9 +115,13 @@
 			<string>{768, 1024}</string>
 		</dict>
 	</array>
+	<key>UIMainStoryboardFile</key>
+	<string>MainStoryboard~iphone</string>
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>MainStoryboard</string>
 	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

@@ -70,6 +70,9 @@
 		6B27E7ED12564B8F0066E24F /* WDPageSizeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B27E7EC12564B8F0066E24F /* WDPageSizeController.m */; };
 		6B2AC3FB17EAD420008D6391 /* duplicate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2AC3FA17EAD420008D6391 /* duplicate@2x.png */; };
 		6B2AC3FD17EB11A8008D6391 /* zoom_to_fit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2AC3FC17EB11A8008D6391 /* zoom_to_fit@2x.png */; };
+		6B2E0DBA19009258004C57CC /* MainStoryboard~iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DB819009258004C57CC /* MainStoryboard~iphone.storyboard */; };
+		6B2E0DBD1900D014004C57CC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DBB1900D014004C57CC /* Default-568h@2x.png */; };
+		6B2E0DBE1900D014004C57CC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DBC1900D014004C57CC /* Default.png */; };
 		6B308FB713B56A8A000665C3 /* WDColorAdjustmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B308FB613B56A8A000665C3 /* WDColorAdjustmentController.m */; };
 		6B308FBA13B56B59000665C3 /* WDColorBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B308FB913B56B58000665C3 /* WDColorBalanceController.m */; };
 		6B356059136026AA007D8DBB /* WDAnglePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B356058136026AA007D8DBB /* WDAnglePicker.m */; };
@@ -447,6 +450,9 @@
 		6B27E7EC12564B8F0066E24F /* WDPageSizeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDPageSizeController.m; sourceTree = "<group>"; };
 		6B2AC3FA17EAD420008D6391 /* duplicate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "duplicate@2x.png"; path = "Images/duplicate@2x.png"; sourceTree = "<group>"; };
 		6B2AC3FC17EB11A8008D6391 /* zoom_to_fit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zoom_to_fit@2x.png"; path = "Images/zoom_to_fit@2x.png"; sourceTree = "<group>"; };
+		6B2E0DB919009258004C57CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/MainStoryboard~iphone.storyboard"; sourceTree = "<group>"; };
+		6B2E0DBB1900D014004C57CC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Images/Default-568h@2x.png"; sourceTree = "<group>"; };
+		6B2E0DBC1900D014004C57CC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
 		6B308FB513B56A8A000665C3 /* WDColorAdjustmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDColorAdjustmentController.h; sourceTree = "<group>"; };
 		6B308FB613B56A8A000665C3 /* WDColorAdjustmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDColorAdjustmentController.m; sourceTree = "<group>"; };
 		6B308FB813B56B58000665C3 /* WDColorBalanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDColorBalanceController.h; sourceTree = "<group>"; };
@@ -1207,6 +1213,7 @@
 				6B53352D1803538D00D46D5B /* Import.xib */,
 				6B53352F1803538D00D46D5B /* LayerCell.xib */,
 				6B5335311803538D00D46D5B /* MainStoryboard.storyboard */,
+				6B2E0DB819009258004C57CC /* MainStoryboard~iphone.storyboard */,
 				6B8396E0189F2FB0001D5985 /* OpenClipArt.xib */,
 				6B5335331803538D00D46D5B /* Samples.xib */,
 				6B5335351803538D00D46D5B /* Shadow.xib */,
@@ -1740,13 +1747,15 @@
 		6BDBC636130E1FD000BC3BCA /* App */ = {
 			isa = PBXGroup;
 			children = (
+				6B2E0DBB1900D014004C57CC /* Default-568h@2x.png */,
+				6B6A1C9A125DC10800253800 /* Default-Landscape.png */,
+				6B7D2D22150AD7A6001311B0 /* Default-Landscape@2x.png */,
 				6B6A1C94125DC01000253800 /* Default-Portrait.png */,
 				6B7D2D24150AD84E001311B0 /* Default-Portrait@2x.png */,
+				6B2E0DBC1900D014004C57CC /* Default.png */,
 				6B094C31134EC24000C926EC /* table_checkmark.png */,
 				6B219C4E150E8BD000761F18 /* table_checkmark@2x.png */,
 				6B094C33134EC3BC00C926EC /* table_unchecked.png */,
-				6B6A1C9A125DC10800253800 /* Default-Landscape.png */,
-				6B7D2D22150AD7A6001311B0 /* Default-Landscape@2x.png */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -1871,10 +1880,12 @@
 				6BC9675C1834852400F46191 /* album_centered@2x.png in Resources */,
 				6B197DAE12434CED006C5C3A /* align_left.png in Resources */,
 				6B197DAF12434CED006C5C3A /* align_middle.png in Resources */,
+				6B2E0DBD1900D014004C57CC /* Default-568h@2x.png in Resources */,
 				6B197DB012434CED006C5C3A /* align_right.png in Resources */,
 				6BE1875618FEE947006FC619 /* Localizable.strings in Resources */,
 				6B197DB112434CED006C5C3A /* align_top.png in Resources */,
 				6B53351C1803530E00D46D5B /* BlendModes.plist in Resources */,
+				6B2E0DBA19009258004C57CC /* MainStoryboard~iphone.storyboard in Resources */,
 				6B5335401803538D00D46D5B /* Font.xib in Resources */,
 				6B53351F1803530E00D46D5B /* PageSizes.plist in Resources */,
 				6B98C154124D642A008FB8E1 /* font.png in Resources */,
@@ -1961,6 +1972,7 @@
 				6BBB7CDC18B32C240018954B /* Localizable.strings in Resources */,
 				6B7D2CF0150898BE001311B0 /* font@2x.png in Resources */,
 				6B53354A1803538D00D46D5B /* Text.xib in Resources */,
+				6B2E0DBE1900D014004C57CC /* Default.png in Resources */,
 				6B7D2CF415089966001311B0 /* redo@2x.png in Resources */,
 				6B7D2CF515089966001311B0 /* undo@2x.png in Resources */,
 				6B2AC3FB17EAD420008D6391 /* duplicate@2x.png in Resources */,
@@ -2266,6 +2278,14 @@
 				02B54D2D18D59DFF00DE8A9F /* zh-Hans */,
 			);
 			name = Stroke.strings;
+			sourceTree = "<group>";
+		};
+		6B2E0DB819009258004C57CC /* MainStoryboard~iphone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B2E0DB919009258004C57CC /* Base */,
+			);
+			name = "MainStoryboard~iphone.storyboard";
 			sourceTree = "<group>";
 		};
 		6B5335211803538D00D46D5B /* Color.xib */ = {
@@ -2707,7 +2727,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2734,7 +2754,7 @@
 				PRODUCT_NAME = Inkpad;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2785,7 +2805,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41E59B0A-7A30-4DDD-B126-053C5E83F922";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
@@ -2836,7 +2856,7 @@
 				PRODUCT_NAME = Inkpad;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";

@@ -706,3 +706,15 @@ CGPathRef WDCreateQuadPathRef(WDQuad q)
     
     return pathRef;
 }
+
+BOOL WDDeviceIsPhone()
+{
+    static BOOL isPhone;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        isPhone = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? YES : NO;
+    });
+    
+    return isPhone;
+}

@@ -29,6 +29,7 @@
 #import "WDFontManager.h"
 #import "WDPageSizeController.h"
 #import "WDThumbnailView.h"
+#import "WDUtilities.h"
 #import "UIBarButtonItem+Additions.h"
 
 #define kEditingHighlightRadius     125
@@ -142,6 +143,11 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (BOOL) prefersStatusBarHidden
+{
+    return WDDeviceIsPhone();
 }
 
 #pragma mark -

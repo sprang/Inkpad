@@ -114,6 +114,10 @@ BOOL WDQuadIntersectsQuad(WDQuad a, WDQuad b);
 CGPathRef WDCreateQuadPathRef(WDQuad q);
 NSString * NSStringFromWDQuad(WDQuad quad);
 
+// Device type
+
+BOOL WDDeviceIsPhone();
+
 //
 // Static Inline Functions (Geometry)
 //
