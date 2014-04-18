@@ -53,6 +53,7 @@
 @synthesize document = document_;
 @synthesize canvas = canvas_;
 @synthesize drawingController = drawingController_;
+@synthesize shareSheet;
 
 - (WDDrawing *) drawing 
 {
@@ -206,6 +207,39 @@
 {
     [popoverController_ dismissPopoverAnimated:YES];
     popoverController_ = nil;
+}
+
+#pragma mark - Sheets
+
+- (void) actionSheetDismissed:(WDActionSheet *)actionSheet
+{
+    if (actionSheet == shareSheet) {
+        shareSheet = nil;
+    }
+}
+
+- (void) showActionSheet:(id)sender
+{
+    shareSheet = [WDActionSheet sheet];
+    
+    __unsafe_unretained WDCanvasController *canvasController = self;
+    
+    [shareSheet addButtonWithTitle:NSLocalizedString(@"Add to Photo Album", @"Add to Photo Album")
+                            action:^(id sender) { [canvasController addToPhotoAlbum:sender]; }];
+    
+    [shareSheet addButtonWithTitle:NSLocalizedString(@"Copy Drawing", @"Copy Drawing")
+                            action:^(id sender) { [canvasController copyDrawing:sender]; }];
+    
+    [shareSheet addButtonWithTitle:NSLocalizedString(@"Duplicate Drawing", @"Duplicate Drawing")
+                            action:^(id sender) { [canvasController duplicateDrawing:sender]; }];
+    
+    [shareSheet addButtonWithTitle:NSLocalizedString(@"Print Drawing", @"Print Drawing")
+                            action:^(id sender) { [canvasController printDrawing:sender]; }];
+    
+    [shareSheet addCancelButton];
+    
+    shareSheet.delegate = self;
+    [shareSheet.sheet showFromToolbar:self.navigationController.toolbar];
 }
 
 #pragma mark -
@@ -1088,10 +1122,10 @@
 
 - (NSArray *) upperRightToolbarItems
 {
-    
     actionItem_ = [[UIBarButtonItem alloc]
                    initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                   target:self action:@selector(showActionMenu:)];
+                   target:self
+                   action:WDDeviceIsPhone() ? @selector(showActionSheet:) : @selector(showActionMenu:)];
     
     gearItem_ = [[UIBarButtonItem alloc]
                  initWithImage:[UIImage imageNamed:@"gear.png"]

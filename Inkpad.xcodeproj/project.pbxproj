@@ -73,6 +73,7 @@
 		6B2E0DBA19009258004C57CC /* MainStoryboard~iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DB819009258004C57CC /* MainStoryboard~iphone.storyboard */; };
 		6B2E0DBD1900D014004C57CC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DBB1900D014004C57CC /* Default-568h@2x.png */; };
 		6B2E0DBE1900D014004C57CC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DBC1900D014004C57CC /* Default.png */; };
+		6B2E0DC11901E6D3004C57CC /* WDActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2E0DC01901E6D3004C57CC /* WDActionSheet.m */; };
 		6B308FB713B56A8A000665C3 /* WDColorAdjustmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B308FB613B56A8A000665C3 /* WDColorAdjustmentController.m */; };
 		6B308FBA13B56B59000665C3 /* WDColorBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B308FB913B56B58000665C3 /* WDColorBalanceController.m */; };
 		6B356059136026AA007D8DBB /* WDAnglePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B356058136026AA007D8DBB /* WDAnglePicker.m */; };
@@ -453,6 +454,8 @@
 		6B2E0DB919009258004C57CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/MainStoryboard~iphone.storyboard"; sourceTree = "<group>"; };
 		6B2E0DBB1900D014004C57CC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Images/Default-568h@2x.png"; sourceTree = "<group>"; };
 		6B2E0DBC1900D014004C57CC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
+		6B2E0DBF1901E6D3004C57CC /* WDActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDActionSheet.h; sourceTree = "<group>"; };
+		6B2E0DC01901E6D3004C57CC /* WDActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDActionSheet.m; sourceTree = "<group>"; };
 		6B308FB513B56A8A000665C3 /* WDColorAdjustmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDColorAdjustmentController.h; sourceTree = "<group>"; };
 		6B308FB613B56A8A000665C3 /* WDColorAdjustmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDColorAdjustmentController.m; sourceTree = "<group>"; };
 		6B308FB813B56B58000665C3 /* WDColorBalanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDColorBalanceController.h; sourceTree = "<group>"; };
@@ -1659,6 +1662,8 @@
 		6BCD53681240003D002FCB27 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6B2E0DBF1901E6D3004C57CC /* WDActionSheet.h */,
+				6B2E0DC01901E6D3004C57CC /* WDActionSheet.m */,
 				6B356057136026AA007D8DBB /* WDAnglePicker.h */,
 				6B356058136026AA007D8DBB /* WDAnglePicker.m */,
 				6BA45792180F778F00B51D7A /* WDArrowheadCell.h */,
@@ -2178,6 +2183,7 @@
 				6BABD9B4141ED30100F7E0A9 /* WDElement.m in Sources */,
 				6BABD9B5141ED30100F7E0A9 /* WDFillTransform.m in Sources */,
 				6BABD9B6141ED30100F7E0A9 /* WDGradient.m in Sources */,
+				6B2E0DC11901E6D3004C57CC /* WDActionSheet.m in Sources */,
 				6BABD9B7141ED30100F7E0A9 /* WDGradientStop.m in Sources */,
 				6BABD9B8141ED30100F7E0A9 /* WDGroup.m in Sources */,
 				6BABD9B9141ED30100F7E0A9 /* WDImage.m in Sources */,
