@@ -28,7 +28,7 @@
 #import "WDToolManager.h"
 #import "WDUtilities.h"
 
-#define kFitBuffer                  30
+#define kFitBuffer                  20
 #define kPrintSizeFactor            (72.0f / 132.0f)
 #define kHundredPercentScale        (132.0f / 72.0f)
 #define kMaxZoom                    (64 * kHundredPercentScale)
