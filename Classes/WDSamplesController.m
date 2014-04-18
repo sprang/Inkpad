@@ -11,6 +11,7 @@
 
 #import "WDSamplesController.h"
 #import "WDDrawing.h"
+#import "WDUtilities.h"
 
 const NSInteger kThumbnailDimension = 80;
 const NSInteger kThumbnailPadding = 12;
@@ -39,21 +40,34 @@ const NSInteger kThumbnailPadding = 12;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (!self) {
         return nil;
     }
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Import All", @"Import All")
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(importAllButtonTapped:)];
+    self.navigationItem.title = NSLocalizedString(@"Samples", @"Samples");
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Import", @"Import")
-                                                                              style:UIBarButtonItemStyleDone
-                                                                             target:self
-                                                                             action:@selector(importButtonTapped:)];
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
+                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                 target:self
+                                 action:@selector(cancel:)];
     
-    self.importButton = self.navigationItem.rightBarButtonItem;
+    UIBarButtonItem *importAllItem = [[UIBarButtonItem alloc]
+                                      initWithTitle:NSLocalizedString(@"Import All", @"Import All")
+                                      style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(importAllButtonTapped:)];
+   
+    UIBarButtonItem *importItem = [[UIBarButtonItem alloc]
+                                   initWithTitle:NSLocalizedString(@"Import", @"Import")
+                                   style:UIBarButtonItemStyleDone
+                                   target:self
+                                   action:@selector(importButtonTapped:)];
+    
+    self.navigationItem.leftBarButtonItem = WDDeviceIsPhone() ? importItem : importAllItem;
+    self.navigationItem.rightBarButtonItem = WDDeviceIsPhone() ? doneItem : importItem;
+
+    self.importButton = importItem;
     self.importButton.enabled = NO;
     
     self.selectedURLs = [NSMutableSet set];
@@ -63,6 +77,10 @@ const NSInteger kThumbnailPadding = 12;
     return self;
 }
 
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
 
 #pragma mark -
 
@@ -171,6 +189,11 @@ const NSInteger kThumbnailPadding = 12;
 }
 
 #pragma mark -
+
+- (void) cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void) importButtonTapped:(id)sender
 {

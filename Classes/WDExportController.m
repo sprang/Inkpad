@@ -12,6 +12,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "WDAppDelegate.h"
 #import "WDExportController.h"
+#import "WDUtilities.h"
 
 @implementation WDExportController
 
@@ -37,6 +38,11 @@ NSString *WDDropboxFormatDefault = @"WDDropboxFormatDefault";
     [[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
 }
 
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void)loadView
 {
     float numFormats = [self formats].count;
@@ -48,6 +54,11 @@ NSString *WDDropboxFormatDefault = @"WDDropboxFormatDefault";
     self.view = formatTable_;
     
     self.preferredContentSize = formatTable_.frame.size;
+}
+
+- (void) cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) doExport:(id)sender
@@ -73,23 +84,43 @@ NSString *WDDropboxFormatDefault = @"WDDropboxFormatDefault";
 {
     mode_ = mode;
     
+    UIBarButtonItem *rightItem = nil;
+    UIBarButtonItem *leftItem = nil;
+    
     if (mode == kWDExportViaEmailMode) {
         self.title = NSLocalizedString(@"Email", @"Email");
         
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Send", @"Send") style:UIBarButtonItemStyleDone target:self action:@selector(doExport:)];
-        self.navigationItem.rightBarButtonItem = rightItem;
-        
-        self.navigationItem.leftBarButtonItem = nil;
+        rightItem = [[UIBarButtonItem alloc]
+                     initWithTitle:NSLocalizedString(@"Send", @"Send")
+                     style:UIBarButtonItemStyleDone
+                     target:self
+                     action:@selector(doExport:)];
     } else {
-        
         self.title = NSLocalizedString(@"Dropbox", @"Dropbox");
         
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Upload", @"Upload") style:UIBarButtonItemStyleDone target:self action:@selector(doExport:)];
-        self.navigationItem.rightBarButtonItem = rightItem;
+        rightItem = [[UIBarButtonItem alloc]
+                     initWithTitle:NSLocalizedString(@"Upload", @"Upload")
+                     style:UIBarButtonItemStyleDone
+                     target:self
+                     action:@selector(doExport:)];
         
-        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Unlink", @"Unlink") style:UIBarButtonItemStylePlain target:self action:@selector(unlinkDropbox:)];
-        self.navigationItem.leftBarButtonItem = leftItem;
+        leftItem = [[UIBarButtonItem alloc]
+                    initWithTitle:NSLocalizedString(@"Unlink", @"Unlink")
+                    style:UIBarButtonItemStylePlain
+                    target:self
+                    action:@selector(unlinkDropbox:)];
     }
+    
+    if (WDDeviceIsPhone()) {
+        leftItem = [[UIBarButtonItem alloc]
+                    initWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                    style:UIBarButtonItemStylePlain
+                    target:self
+                    action:@selector(cancel:)];
+    }
+    
+    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.leftBarButtonItem = leftItem;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

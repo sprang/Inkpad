@@ -32,11 +32,12 @@
 #import "WDUtilities.h"
 #import "UIBarButtonItem+Additions.h"
 
-#define kEditingHighlightRadius     125
 
 NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 @implementation WDBrowserController
+
+@synthesize currentPopoverViewController;
 
 #pragma mark -
 
@@ -115,18 +116,20 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     [rightBarButtonItems addObject:albumItem];
     
     // add a camera import item if we have a camera (I think this will always be true from now on)
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if (!WDDeviceIsPhone() && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
                                                                                     target:self
                                                                                     action:@selector(importFromCamera:)];
         [rightBarButtonItems addObject:cameraItem];
     }
     
-    UIBarButtonItem *openClipArtItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"openclipart.png"]
-                                                                        style:UIBarButtonItemStylePlain
-                                                                       target:self
-                                                                       action:@selector(showOpenClipArt:)];
-    [rightBarButtonItems addObject:openClipArtItem];
+    if (!WDDeviceIsPhone()) {
+        UIBarButtonItem *openClipArtItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"openclipart.png"]
+                                                                            style:UIBarButtonItemStylePlain
+                                                                           target:self
+                                                                           action:@selector(showOpenClipArt:)];
+        [rightBarButtonItems addObject:openClipArtItem];
+    }
 
     // Create a help button to display in the top left corner.
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", @"Help")
@@ -164,8 +167,10 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) createNewDrawing:(id)sender
 {
-    WDDocument *document = [[WDDrawingManager sharedInstance] createNewDrawingWithSize:pageSizeController_.size
-                                                                              andUnits:pageSizeController_.units];
+    WDPageSizeController *pageSizeController = (WDPageSizeController *)sender;
+    
+    WDDocument *document = [[WDDrawingManager sharedInstance] createNewDrawingWithSize:pageSizeController.size
+                                                                              andUnits:pageSizeController.units];
 
     [self startEditingDrawing:document];
     
@@ -174,19 +179,15 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) addDrawing:(id)sender
 {
-    if (popoverController_) {
-        [self dismissPopover];
-    } else {
-        pageSizeController_ = [[WDPageSizeController alloc] initWithNibName:nil bundle:nil];
-        UINavigationController  *navController = [[UINavigationController alloc] initWithRootViewController:pageSizeController_];
-        
-        pageSizeController_.target = self;
-        pageSizeController_.action = @selector(createNewDrawing:);
-        
-        popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
-        popoverController_.delegate = self;
-        [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    WDPageSizeController *controller = nil;
+    
+    if (![self.currentPopoverViewController isKindOfClass:[WDPageSizeController class]]) {
+        controller = [[WDPageSizeController alloc] initWithNibName:nil bundle:nil];
+        controller.target = self;
+        controller.action = @selector(createNewDrawing:);
     }
+    
+    [self showController:controller from:sender];
 }
 
 #pragma mark - OpenClipArt
@@ -256,21 +257,16 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) importFromImagePicker:(id)sender sourceType:(UIImagePickerControllerSourceType)sourceType
 {
-    if (pickerController_ && (pickerController_.sourceType == sourceType)) {
-        [self dismissPopover];
-        return;
+    UIImagePickerController *controller = nil;
+    UIImagePickerController *current = (UIImagePickerController *) self.currentPopoverViewController;
+    
+    if (![current isKindOfClass:[UIImagePickerController class]] || current.sourceType != sourceType) {
+        controller = [[UIImagePickerController alloc] init];
+        controller.sourceType = sourceType;
+        controller.delegate = self;
     }
     
-    [self dismissPopover];
-    
-    pickerController_ = [[UIImagePickerController alloc] init];
-    pickerController_.sourceType = sourceType;
-    pickerController_.delegate = self;
-    
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:pickerController_];
-    
-    popoverController_.delegate = self;
-    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    [self showController:controller from:sender];
 }
 
 - (void) importFromAlbum:(id)sender
@@ -291,6 +287,10 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    if (self.presentedViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
     [popoverController_ dismissPopoverAnimated:YES];
     popoverController_ = nil;
 }
@@ -352,7 +352,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     blockingView_.action = @selector(blockingViewTapped:);
     
     CGPoint shadowCenter = [self.collectionView convertPoint:editingThumbnail_.center toView:delegate.window];
-    [blockingView_ setShadowCenter:shadowCenter radius:kEditingHighlightRadius];
+    [blockingView_ setShadowCenter:shadowCenter radius:CGRectGetHeight(thumbFrame) * 0.7f];
     blockingView_.alpha = 0;
     
     [UIView animateWithDuration:[duration doubleValue] animations:^{ blockingView_.alpha = 1; }];
@@ -363,7 +363,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     if (blockingView_ && editingThumbnail_) {
         WDAppDelegate *delegate = (WDAppDelegate *) [UIApplication sharedApplication].delegate;
         CGPoint shadowCenter = [self.collectionView convertPoint:editingThumbnail_.center toView:delegate.window];
-        [blockingView_ setShadowCenter:shadowCenter radius:kEditingHighlightRadius];
+        [blockingView_ setShadowCenter:shadowCenter radius:CGRectGetHeight(editingThumbnail_.frame) * 0.7f];
     }
 }
 
@@ -495,7 +495,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         NSLocalizedString(@"Delete Drawing", @"Delete Drawing") :
         [NSString stringWithFormat:format, selectedDrawings_.count];
     
-	deleteSheet_ = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@""
+	deleteSheet_ = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
                                  destructiveButtonTitle:title otherButtonTitles:nil];
 
     [deleteSheet_ showFromBarButtonItem:sender animated:YES];
@@ -609,8 +609,6 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 - (NSArray *) defaultToolbarItems
 {
     if (!toolbarItems_) {
-        toolbarItems_ = [[NSMutableArray alloc] init];
-        
         UIBarButtonItem *importItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Import", @"Import")
                                                                        style:UIBarButtonItemStyleBordered target:self
                                                                       action:@selector(showDropboxImportPanel:)];
@@ -638,17 +636,15 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         UIBarButtonItem *flexibleItem = [UIBarButtonItem flexibleItem];
         UIBarButtonItem *fixedItem = [UIBarButtonItem fixedItemWithWidth:10];
         
-        [toolbarItems_ addObject:importItem];
-        [toolbarItems_ addObject:fixedItem];
-        [toolbarItems_ addObject:samplesItem];
-        [toolbarItems_ addObject:fixedItem];
-        [toolbarItems_ addObject:fontItem];
-        [toolbarItems_ addObject:flexibleItem];
+        NSArray *items = nil;
+        if (!WDDeviceIsPhone()) {
+            // ipad items
+            items = @[importItem, fixedItem, samplesItem, fixedItem, fontItem, flexibleItem, spinnerItem, fixedItem, fixedItem, editItem];
+        } else {
+            items = @[importItem, fixedItem, fontItem, flexibleItem, editItem];
+        }
         
-        [toolbarItems_ addObject:spinnerItem];
-        [toolbarItems_ addObject:fixedItem];
-        [toolbarItems_ addObject:fixedItem];
-        [toolbarItems_ addObject:editItem];
+        toolbarItems_ = [items mutableCopy];
     }
     
     return toolbarItems_;
@@ -658,20 +654,13 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) showFontLibraryPanel:(id)sender
 {
-    if (fontLibraryController_) {
-        [self dismissPopover];
-        return;
+    WDFontLibraryController *controller = nil;
+    
+    if (![self.currentPopoverViewController isKindOfClass:[WDFontLibraryController class]]) {
+        controller = [[WDFontLibraryController alloc] initWithNibName:nil bundle:nil];
     }
     
-    [self dismissPopover];
-    
-    fontLibraryController_ = [[WDFontLibraryController alloc] initWithNibName:nil bundle:nil];
-
-    UINavigationController  *navController = [[UINavigationController alloc] initWithRootViewController:fontLibraryController_];
-    
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
-    popoverController_.delegate = self;
-    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    [self showController:controller from:sender];
 }
 
 - (void) samplesController:(WDSamplesController *)controller didSelectURLs:(NSArray *)sampleURLs
@@ -683,45 +672,35 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) showSamplesPanel:(id)sender
 {
-    if (samplesController_) {
-        [self dismissPopover];
-        return;
+    WDSamplesController *controller = nil;
+    
+    if (![self.currentPopoverViewController isKindOfClass:[WDSamplesController class]]) {
+        controller = [[WDSamplesController alloc] initWithNibName:nil bundle:nil];
+        controller.delegate = self;
     }
     
-    [self dismissPopover];
-    
-    samplesController_ = [[WDSamplesController alloc] initWithNibName:nil bundle:nil];
-    samplesController_.title = NSLocalizedString(@"Samples", @"Samples");
-    samplesController_.delegate = self;
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:samplesController_];
-    
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
-    popoverController_.delegate = self;
-    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    [self showController:controller from:sender];
 }
 
 - (void) showActivityPanel:(id)sender
 {
-    if (activityController_) {
-        [self dismissPopover];
-        return;
+    WDActivityController *controller = nil;
+    
+    if (![self.currentPopoverViewController isKindOfClass:[WDActivityController class]]) {
+        controller = [[WDActivityController alloc] initWithNibName:nil bundle:nil];
+        controller.activityManager = activities_;
     }
     
-    [self dismissPopover];
-    
-    activityController_ = [[WDActivityController alloc] initWithNibName:nil bundle:nil];
-    activityController_.activityManager = activities_;
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:activityController_];
-    
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
-    popoverController_.delegate = self;
-    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    [self showController:controller from:sender];
 }
 
 - (void) activityCountChanged:(NSNotification *)aNotification
 {
+    if (WDDeviceIsPhone()) {
+        // we don't show this on the phone
+        return;
+    }
+    
     NSUInteger numActivities = activities_.count;
     
     if (numActivities) {
@@ -731,7 +710,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     }
     
     if (numActivities == 0) {
-        if (activityController_) {
+        if ([self.currentPopoverViewController isKindOfClass:[WDActivityController class]]) {
             [self dismissPopoverAnimated:YES];
         }
         
@@ -763,6 +742,46 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 #pragma mark - Popovers
 
+- (void) showController:(UIViewController *)controller from:(id)sender
+{
+    if (!controller) {
+        // we're trying to show the currently visible popover, so dismiss it and quit
+        [self dismissPopoverAnimated:NO];
+        return;
+    }
+    
+    // hide any other popovers
+    [self dismissPopoverAnimated:NO];
+    
+    // embed in a nav controller
+    UIViewController *presentedController;
+    
+    if ([controller isKindOfClass:[UIImagePickerController class]]) {
+        presentedController = controller;
+    } else {
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+        
+        if (controller.toolbarItems) {
+            navController.toolbarHidden = NO;
+        }
+        
+        presentedController = navController;
+    }
+    
+    if (WDDeviceIsPhone()) {
+        [self presentViewController:presentedController animated:YES completion:nil];
+    } else {
+        popoverController_ = [[UIPopoverController alloc] initWithContentViewController:presentedController];
+        popoverController_.delegate = self;
+        
+        [popoverController_ presentPopoverFromBarButtonItem:(UIBarButtonItem *)sender
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                   animated:NO];
+        
+        self.currentPopoverViewController = controller;
+    }
+}
+
 - (void) dismissPopoverAnimated:(BOOL)animated
 {
     if (popoverController_) {
@@ -770,12 +789,9 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         popoverController_ = nil;
     }
     
-    exportController_ = nil;
-    importController_ = nil;
-    pickerController_ = nil;
-    fontLibraryController_ = nil;
-    samplesController_ = nil;
-    activityController_ = nil;
+    if (self.presentedViewController) {
+        [self dismissViewControllerAnimated:animated completion:nil];
+    }
     
     if (deleteSheet_) {
         [deleteSheet_ dismissWithClickedButtonIndex:deleteSheet_.cancelButtonIndex animated:NO];
@@ -793,13 +809,6 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     if (popoverController == popoverController_) {
         popoverController_ = nil;
     }
-    
-    exportController_ = nil;
-    importController_ = nil;
-    pickerController_ = nil;
-    fontLibraryController_ = nil;
-    samplesController_ = nil;
-    activityController_ = nil;
 }
 
 - (void)didDismissModalView {
@@ -883,24 +892,17 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) showEmailPanel:(id)sender
 {
-    if (exportController_ && exportController_.mode == kWDExportViaEmailMode) {
-        [self dismissPopover];
-        return;
+    WDExportController *controller = nil;
+    WDExportController *current = (WDExportController *) self.currentPopoverViewController;
+    
+    if (![current isKindOfClass:[WDExportController class]] || current.mode != kWDExportViaEmailMode) {
+        controller = [[WDExportController  alloc] initWithNibName:nil bundle:nil];
+        controller.mode = kWDExportViaEmailMode;
+        controller.action = @selector(emailDrawings:);
+        controller.target = self;
     }
     
-    [self dismissPopover];
-    
-    exportController_ = [[WDExportController alloc] initWithNibName:nil bundle:nil];
-    exportController_.mode = kWDExportViaEmailMode;
-    
-    exportController_.action = @selector(emailDrawings:);
-    exportController_.target = self;
-    
-    UINavigationController  *navController = [[UINavigationController alloc] initWithRootViewController:exportController_];
-    
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
-    popoverController_.delegate = self;
-    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    [self showController:controller from:sender];
 }
 
 #pragma mark - Dropbox
@@ -958,24 +960,17 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) reallyShowDropboxExportPanel:(id)sender
 {
-    if (exportController_ && exportController_.mode == kWDExportViaDropboxMode) {
-        [self dismissPopover];
-        return;
+    WDExportController *controller = nil;
+    WDExportController *current = (WDExportController *) self.currentPopoverViewController;
+    
+    if (![current isKindOfClass:[WDExportController class]] || current.mode != kWDExportViaDropboxMode) {
+        controller = [[WDExportController  alloc] initWithNibName:nil bundle:nil];
+        controller.mode = kWDExportViaDropboxMode;
+        controller.action = @selector(uploadDrawings:);
+        controller.target = self;
     }
     
-    [self dismissPopover];
-    
-    exportController_ = [[WDExportController alloc] initWithNibName:nil bundle:nil];
-    exportController_.mode = kWDExportViaDropboxMode;
-    
-    exportController_.action = @selector(uploadDrawings:);
-    exportController_.target = self;
-    
-    UINavigationController  *navController = [[UINavigationController alloc] initWithRootViewController:exportController_];
-    
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
-    popoverController_.delegate = self;
-    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    [self showController:controller from:sender];
 }
 
 - (void) showDropboxExportPanel:(id)sender
@@ -992,22 +987,14 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) reallyShowDropboxImportPanel:(id)sender
 {
-	if (importController_) {
-		[self dismissPopover];
-		return;
-	}
-	
-	[self dismissPopover];
-	
-	importController_ = [[WDImportController alloc] initWithNibName:@"Import" bundle:nil];
-	importController_.title = @"Dropbox";
-	importController_.delegate = self;
-	
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:importController_];
-	
-	popoverController_ = [[UIPopoverController alloc] initWithContentViewController:navController];
-	popoverController_.delegate = self;
-	[popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+    WDImportController *controller = nil;
+    
+    if (![self.currentPopoverViewController isKindOfClass:[WDImportController class]]) {
+        controller = [[WDImportController  alloc] initWithNibName:@"Import" bundle:nil];
+        controller.delegate = self;
+    }
+    
+    [self showController:controller from:sender];
 }
 
 - (void) showDropboxImportPanel:(id)sender

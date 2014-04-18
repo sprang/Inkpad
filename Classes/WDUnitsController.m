@@ -35,6 +35,11 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
     return self;
 }
 
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

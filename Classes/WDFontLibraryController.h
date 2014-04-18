@@ -16,5 +16,6 @@
 
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableSet *selectedFonts;
+@property (nonatomic, strong) UIBarButtonItem *trashItem;
 
 @end

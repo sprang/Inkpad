@@ -50,13 +50,6 @@
     NSMutableSet            *selectedDrawings_;
     
     UIPopoverController     *popoverController_;
-    WDPageSizeController    *pageSizeController_;
-    WDExportController      *exportController_;
-	WDImportController		*importController_;
-    UIImagePickerController *pickerController_;
-    WDFontLibraryController *fontLibraryController_;
-    WDSamplesController     *samplesController_;
-    WDActivityController    *activityController_;
     OCAViewController       *openClipArtController_;
     
     DBRestClient            *restClient_;
@@ -70,6 +63,8 @@
     
     NSMutableSet            *downloaders_; // for downloading open clip art
 }
+
+@property (nonatomic, weak) UIViewController *currentPopoverViewController;
 
 - (void) startEditingDrawing:(WDDocument *)drawing;
 

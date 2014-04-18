@@ -12,6 +12,7 @@
 #import "WDCoreTextLabel.h"
 #import "WDFontLibraryController.h"
 #import "WDFontManager.h"
+#import "WDUtilities.h"
 
 #define kCoreTextLabelWidth      300
 #define kCoreTextLabelHeight     43
@@ -21,6 +22,7 @@
 
 @synthesize table;
 @synthesize selectedFonts;
+@synthesize trashItem;
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,20 +32,31 @@
         return nil;
     }
     
-    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                               target:self action:@selector(deleteSelectedFonts:)];
-    self.navigationItem.rightBarButtonItem = trashItem;
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
+                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                 target:self
+                                 action:@selector(cancel:)];
+    
+    trashItem = [[UIBarButtonItem alloc]
+                 initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                 target:self
+                 action:@selector(deleteSelectedFonts:)];
     trashItem.enabled = NO;
     
+    
+    self.navigationItem.rightBarButtonItem = WDDeviceIsPhone() ? doneItem : trashItem;
+    self.navigationItem.leftBarButtonItem = WDDeviceIsPhone() ? trashItem : nil;
+    
+    
+    self.title = NSLocalizedString(@"Font Library", @"Font Library");
     self.navigationItem.prompt = NSLocalizedString(@"Import your own fonts via Dropbox",
                                                    @"Import your own fonts via Dropbox");
-    
-    self.selectedFonts = [NSMutableSet set];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontAdded:) name:WDFontAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontDeleted:) name:WDFontDeletedNotification object:nil];
     
-    self.title = NSLocalizedString(@"Font Library", @"Font Library");
+    self.selectedFonts = [NSMutableSet set];
+    
     return self;
 }
 
@@ -52,9 +65,19 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (void) cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void) properlyEnableTrashButton
 {
-    self.navigationItem.rightBarButtonItem.enabled = (selectedFonts.count > 0 ? YES : NO);
+    trashItem.enabled = (selectedFonts.count > 0 ? YES : NO);
 }
 
 - (void) loadView

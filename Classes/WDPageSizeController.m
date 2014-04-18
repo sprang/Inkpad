@@ -14,6 +14,7 @@
 #import "WDRulerView.h"
 #import "WDRulerUnit.h"
 #import "WDUnitsController.h"
+#import "WDUtilities.h"
 
 #define kSizeSection 0
 #define kOrientationSection 1
@@ -51,13 +52,35 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
     return self;
 }
 
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (void) cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) sendAction:(id)sender
+{
+    [[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
-    UIBarButtonItem *createItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", @"Create new drawing")
-                                                                   style:UIBarButtonItemStyleDone
-                                                                  target:target_
-                                                                  action:action_];
-    self.navigationItem.rightBarButtonItem = createItem;
+    if (WDDeviceIsPhone()) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                 target:self
+                                                 action:@selector(cancel:)];
+    }
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithTitle:NSLocalizedString(@"Create", @"Create new drawing")
+                                              style:UIBarButtonItemStyleDone
+                                              target:self
+                                              action:@selector(sendAction:)];
 }
 
 - (void)dealloc

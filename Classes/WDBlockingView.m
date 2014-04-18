@@ -49,7 +49,7 @@
     CALayer *layer = self.layer;
     
     layer.shadowOpacity = 0.5;
-    layer.shadowRadius = 25;
+    layer.shadowRadius = WDDeviceIsPhone() ? 15 : 25;
     layer.shadowOffset = CGSizeMake(0, 0);
     
     CGPoint rectCenter = WDCenterOfRect(self.bounds);

@@ -15,6 +15,7 @@
 #import "UIImage+Additions.h"
 #import "WDAppDelegate.h"
 #import "WDImportController.h"
+#import "WDUtilities.h"
 #import "UIBarButtonItem+Additions.h"
 
 @interface WDImportController ()
@@ -74,8 +75,9 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (!self) {
 		return nil;
-		
 	}
+    
+    self.title = NSLocalizedString(@"Dropbox", @"Dropbox");
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failedLoadingMissingSubdirectory:) name:WDDropboxSubdirectoryMissingNotification object:nil];
 	
@@ -101,20 +103,18 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
                                                     action:@selector(importSelectedItems:)];
 	self.navigationItem.rightBarButtonItem = importButton_;
     importButton_.enabled = NO;
-    
-    self.toolbarItems = [self toolbarItems];
 	
     self.preferredContentSize = CGSizeMake(320, 480);
     
     return self;
 }
 
-#pragma mark -
-
-- (void) viewDidLoad
+- (BOOL) prefersStatusBarHidden
 {
-    [self.navigationController setToolbarHidden:NO];
+    return YES;
 }
+
+#pragma mark -
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -348,6 +348,11 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 
 #pragma mark -
 
+- (void) cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void) importSelectedItems:(id)sender
 {
 	if (delegate_ && [(id) delegate_ respondsToSelector:@selector(importController:didSelectDropboxItems:)]) {
@@ -380,13 +385,21 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 
 - (NSArray *)toolbarItems
 {
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
+                                   initWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(cancel:)];
+    
     UIBarButtonItem *flexibleSpaceItem = [UIBarButtonItem flexibleItem];
-    UIBarButtonItem *unlinkButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Unlink Dropbox", @"Unlink Dropbox") style:UIBarButtonItemStyleBordered target:self action:@selector(unlinkDropbox:)];
+    
+    UIBarButtonItem *unlinkButtonItem = [[UIBarButtonItem alloc]
+                                         initWithTitle:NSLocalizedString(@"Unlink Dropbox", @"Unlink Dropbox")
+                                         style:UIBarButtonItemStyleBordered
+                                         target:self
+                                         action:@selector(unlinkDropbox:)];
 
-    NSArray *toolbarItems = @[flexibleSpaceItem, unlinkButtonItem];
-
-
-    return toolbarItems;
+    return WDDeviceIsPhone() ? @[cancelItem, flexibleSpaceItem, unlinkButtonItem] : @[flexibleSpaceItem, unlinkButtonItem];
 }
 
 - (NSString *) importButtonTitle

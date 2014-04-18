@@ -20,8 +20,9 @@
 - (void) updateShadow_;
 @end
 
-#define kTitleFieldHeight       30
-#define kMaxThumbnailDimension  120
+#define kTitleFieldHeight               30
+#define kMaxPhoneThumbnailDimension     85
+#define kMaxThumbnailDimension          120
 
 @implementation WDThumbnailView
 
@@ -168,6 +169,7 @@
     }
     
     filename_ = filename;
+    float fontSize = WDDeviceIsPhone() ? 13 : 15;
     
     if (!titleLabel_) {
         titleLabel_ = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -177,7 +179,7 @@
         titleLabel_.exclusiveTouch = YES;
         
         titleLabel_.titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel_.titleLabel.font = [UIFont systemFontOfSize:15];
+        titleLabel_.titleLabel.font = [UIFont systemFontOfSize:fontSize];
         titleLabel_.titleLabel.shadowOffset = CGSizeMake(0, 1);
         titleLabel_.titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         
@@ -193,7 +195,7 @@
         titleField_.textAlignment = NSTextAlignmentCenter;
         titleField_.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         titleField_.delegate = self;
-        titleField_.font = [UIFont systemFontOfSize:15];
+        titleField_.font = [UIFont systemFontOfSize:fontSize];
         titleField_.textColor = [UIColor blackColor];
         titleField_.clearButtonMode = UITextFieldViewModeWhileEditing;
         titleField_.returnKeyType = UIReturnKeyDone;
@@ -264,16 +266,19 @@
     UIImage *thumbImage = [[WDDrawingManager sharedInstance] getThumbnail:filename_];
     
     if (!imageView_) {
-        imageView_ = [[WDImageView alloc] initWithImage:thumbImage maxDimension:kMaxThumbnailDimension];
-        [self addSubview:imageView_];
+        float dimension = WDDeviceIsPhone() ? kMaxPhoneThumbnailDimension : kMaxThumbnailDimension;
+        imageView_ = [[WDImageView alloc] initWithImage:thumbImage maxDimension:dimension];
+        [self insertSubview:imageView_ atIndex:0];
     } else {
         imageView_.image = thumbImage;
     }
     
-    imageView_.sharpCenter = CGPointMake(WDCenterOfRect(self.bounds).x, WDCenterOfRect(self.bounds).y - (kTitleFieldHeight / 2));
+    float centerX = CGRectGetWidth(self.bounds) / 2;
+    
+    imageView_.sharpCenter = CGPointMake(centerX, (CGRectGetHeight(self.bounds) - (kTitleFieldHeight + 3)) / 2);
     [self updateShadow_];
     
-    titleField_.sharpCenter = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetMaxY(imageView_.frame) + (kTitleFieldHeight / 2) + 3);
+    titleField_.sharpCenter = CGPointMake(centerX, CGRectGetMaxY(imageView_.frame) + (kTitleFieldHeight / 2) + 3);
     titleLabel_.sharpCenter = titleField_.sharpCenter;
     
     [self reloadFilenameFields_];
