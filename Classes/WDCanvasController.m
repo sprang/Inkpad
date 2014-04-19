@@ -1129,6 +1129,7 @@
     
     gearItem_ = [[UIBarButtonItem alloc]
                  initWithImage:[UIImage imageNamed:@"gear.png"]
+                 landscapeImagePhone:[UIImage imageNamed:@"gear-landscape.png"]
                  style:UIBarButtonItemStylePlain
                  target:self
                  action:@selector(showSettingsMenu:)];

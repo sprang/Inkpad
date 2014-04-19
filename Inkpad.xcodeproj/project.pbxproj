@@ -74,6 +74,8 @@
 		6B2E0DBD1900D014004C57CC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DBB1900D014004C57CC /* Default-568h@2x.png */; };
 		6B2E0DBE1900D014004C57CC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DBC1900D014004C57CC /* Default.png */; };
 		6B2E0DC11901E6D3004C57CC /* WDActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2E0DC01901E6D3004C57CC /* WDActionSheet.m */; };
+		6B2E0DC51901EF24004C57CC /* gear@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DC41901EF24004C57CC /* gear@2x~iphone.png */; };
+		6B2E0DC71901F0D2004C57CC /* gear-landscape@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2E0DC61901F0D2004C57CC /* gear-landscape@2x~iphone.png */; };
 		6B308FB713B56A8A000665C3 /* WDColorAdjustmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B308FB613B56A8A000665C3 /* WDColorAdjustmentController.m */; };
 		6B308FBA13B56B59000665C3 /* WDColorBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B308FB913B56B58000665C3 /* WDColorBalanceController.m */; };
 		6B356059136026AA007D8DBB /* WDAnglePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B356058136026AA007D8DBB /* WDAnglePicker.m */; };
@@ -456,6 +458,8 @@
 		6B2E0DBC1900D014004C57CC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
 		6B2E0DBF1901E6D3004C57CC /* WDActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDActionSheet.h; sourceTree = "<group>"; };
 		6B2E0DC01901E6D3004C57CC /* WDActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDActionSheet.m; sourceTree = "<group>"; };
+		6B2E0DC41901EF24004C57CC /* gear@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gear@2x~iphone.png"; path = "Images/gear@2x~iphone.png"; sourceTree = "<group>"; };
+		6B2E0DC61901F0D2004C57CC /* gear-landscape@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gear-landscape@2x~iphone.png"; path = "Images/gear-landscape@2x~iphone.png"; sourceTree = "<group>"; };
 		6B308FB513B56A8A000665C3 /* WDColorAdjustmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDColorAdjustmentController.h; sourceTree = "<group>"; };
 		6B308FB613B56A8A000665C3 /* WDColorAdjustmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDColorAdjustmentController.m; sourceTree = "<group>"; };
 		6B308FB813B56B58000665C3 /* WDColorBalanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDColorBalanceController.h; sourceTree = "<group>"; };
@@ -1088,6 +1092,8 @@
 				6B7D2CEF150898BE001311B0 /* font@2x.png */,
 				6BCD5288123FFFED002FCB27 /* gear.png */,
 				6B7D2D101509726D001311B0 /* gear@2x.png */,
+				6B2E0DC41901EF24004C57CC /* gear@2x~iphone.png */,
+				6B2E0DC61901F0D2004C57CC /* gear-landscape@2x~iphone.png */,
 				6B8396E3189F3767001D5985 /* openclipart.png */,
 				6B8396E4189F3767001D5985 /* openclipart@2x.png */,
 				6BCD5294123FFFED002FCB27 /* redo.png */,
@@ -1927,6 +1933,7 @@
 				6B09739C136A174900EFD696 /* spark_knob.png in Resources */,
 				6B9D976F136A2385006DCEA5 /* spark_knob_highlighted.png in Resources */,
 				6B4EF3BF186AA08500E55D19 /* freehand_shape@2x.png in Resources */,
+				6B2E0DC51901EF24004C57CC /* gear@2x~iphone.png in Resources */,
 				6B616774137B429200BEC0BA /* Samples in Resources */,
 				6B53FF9913A7DC3E0029574B /* color_wheel.png in Resources */,
 				6B5335481803538D00D46D5B /* ShapeOptions.xib in Resources */,
@@ -2039,6 +2046,7 @@
 				6B219C81150EEB2900761F18 /* polygon@2x.png in Resources */,
 				6B219C83150EEB2900761F18 /* star@2x.png in Resources */,
 				6B219C87150EEC5700761F18 /* oval@2x.png in Resources */,
+				6B2E0DC71901F0D2004C57CC /* gear-landscape@2x~iphone.png in Resources */,
 				6B9A288D18C1087300697BE7 /* Shadow.strings in Resources */,
 				6B219C8B150EEF0700761F18 /* spiral@2x.png in Resources */,
 				6B5335441803538D00D46D5B /* LayerCell.xib in Resources */,
