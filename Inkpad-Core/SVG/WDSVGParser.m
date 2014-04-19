@@ -136,6 +136,7 @@
 {
     NSArray *preserveAspectRatio = [[source lowercaseString] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     BOOL slice = [preserveAspectRatio containsObject:@"slice"];
+    BOOL notUniformScale = [preserveAspectRatio containsObject:@"none"];
     enum {MIN, MID, MAX} xalign = MID, yalign = MID;
     for (NSString *token in preserveAspectRatio) {
         if ([token hasPrefix:@"xmin"]) {
@@ -153,6 +154,7 @@
     }
     CGPoint translate = CGPointZero;
     CGSize scale = CGSizeMake(bounds.size.width / size.width, bounds.size.height / size.height);
+    if (notUniformScale) {} else
     if (((scale.width > scale.height) && slice) || ((scale.width < scale.height) && !slice)) {
         switch (xalign) {
             case MIN:
