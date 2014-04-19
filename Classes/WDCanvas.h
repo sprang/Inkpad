@@ -62,7 +62,7 @@
     UIButton                *deleteButton_; // pseudo delete tool
     CGPoint                 cachedCenter_;
     
-    UILabel                 *messageLabel_;
+    UITextView              *messageLabel_;
     NSTimer                 *messageTimer_;
 }
 

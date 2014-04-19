@@ -1110,24 +1110,31 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (void) showMessage:(NSString *)message
 {
     if (!messageLabel_) {
-        messageLabel_ = [[UILabel alloc] init];
-        messageLabel_.textColor = [UIColor blackColor];
-        messageLabel_.font = [UIFont systemFontOfSize:32];
-        messageLabel_.textAlignment = NSTextAlignmentCenter;
+        messageLabel_ = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
         messageLabel_.backgroundColor = [UIColor colorWithHue:0.0f saturation:0.4f brightness:1.0f alpha:0.8f];
-        messageLabel_.shadowColor = [UIColor whiteColor];
-        messageLabel_.shadowOffset = CGSizeMake(0, 1);
-        messageLabel_.layer.cornerRadius = 16;
+        messageLabel_.layer.cornerRadius = 7;
+        messageLabel_.editable = NO;
     }
     
-    messageLabel_.text = message;
-    [messageLabel_ sizeToFit];
-    
-    CGRect frame = messageLabel_.frame;
-    frame = CGRectInset(frame, -20, -15);
-    messageLabel_.frame = frame;
-    
-    messageLabel_.sharpCenter = WDCenterOfRect(self.bounds);
+    if (![messageLabel_.text isEqualToString:message]) {
+        NSShadow *shadow = [[NSShadow alloc] init];
+        [shadow setShadowBlurRadius:0];
+        [shadow setShadowColor:[UIColor whiteColor]];
+        [shadow setShadowOffset:CGSizeMake(0, 1)];
+        
+        NSMutableParagraphStyle *paragraghStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        paragraghStyle.alignment = NSTextAlignmentCenter;
+        
+        NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:shadow, NSShadowAttributeName,
+                               [UIFont systemFontOfSize:24], NSFontAttributeName,
+                               paragraghStyle, NSParagraphStyleAttributeName,
+                               nil];
+        
+        messageLabel_.attributedText = [[NSAttributedString alloc] initWithString:message attributes:attrs];
+        [messageLabel_ sizeToFit];
+        
+        messageLabel_.sharpCenter = WDCenterOfRect(self.bounds);
+    }
     
     if (messageLabel_.superview != self) {
         [self insertSubview:messageLabel_ belowSubview:toolPalette_];
