@@ -11,7 +11,6 @@
 
 #import <Foundation/Foundation.h>
 #import "WDStylable.h"
-#import "WDStrokeStyle.h"
 
 @protocol WDPathPainter;
 

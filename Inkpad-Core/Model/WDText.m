@@ -17,9 +17,7 @@
 #import <CoreText/CoreText.h>
 #import "NSString+Additions.h"
 #import "UIColor+Additions.h"
-#import "WDBezierSegment.h"
 #import "WDColor.h"
-#import "WDDrawing.h"
 #import "WDFillTransform.h"
 #import "WDFontManager.h"
 #import "WDGLUtilities.h"

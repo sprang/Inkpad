@@ -12,7 +12,6 @@
 #import "WDDrawingController.h"
 #import "WDColor.h"
 #import "WDColorSlider.h"
-#import "WDElement.h"
 #import "WDHueSaturationController.h"
 #import "WDHueShifter.h"
 

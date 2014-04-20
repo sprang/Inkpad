@@ -12,7 +12,6 @@
 #import "WDEyedropperTool.h"
 #import "WDCanvas.h"
 #import "WDDrawingController.h"
-#import "WDElement.h"
 #import "WDImage.h"
 #import "WDInspectableProperties.h"
 #import "WDPickResult.h"

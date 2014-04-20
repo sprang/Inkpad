@@ -12,9 +12,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WDDrawing.h"
-#import "WDSVGElement.h"
-#import "WDSVGParserStateStack.h"
 #import "WDSVGStyleParser.h"
 #import "WDSVGTransformParser.h"
 

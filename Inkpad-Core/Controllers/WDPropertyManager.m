@@ -9,7 +9,6 @@
 //  Copyright (c) 2011-2013 Steve Sprang
 //
 
-#import "WDAbstractPath.h"
 #import "WDColor.h"
 #import "WDDrawingController.h"
 #import "WDFontManager.h"

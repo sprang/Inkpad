@@ -10,8 +10,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WDElement.h"
-#import "WDStrokeStyle.h"
 
 @class WDCanvas;
 @class WDColorBalanceController;
