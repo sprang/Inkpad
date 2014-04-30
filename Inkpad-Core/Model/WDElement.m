@@ -11,13 +11,10 @@
 
 #import "UIColor+Additions.h"
 #import "WDColor.h"
-#import "WDDrawing.h"
-#import "WDElement.h"
 #import "WDGLUtilities.h"
 #import "WDGroup.h"
 #import "WDInspectableProperties.h"
 #import "WDLayer.h"
-#import "WDPickResult.h"
 #import "WDPropertyManager.h"
 #import "WDShadow.h"
 #import "WDSVGHelper.h"

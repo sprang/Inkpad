@@ -10,10 +10,8 @@
 //
 
 
-#import "WDAbstractPath.h"
 #import "WDBezierNode.h"
 #import "WDCanvas.h"
-#import "WDDrawing.h"
 #import "WDDrawingController.h"
 #import "WDDynamicGuideController.h"
 #import "WDInspectableProperties.h"

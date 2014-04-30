@@ -13,7 +13,6 @@
 #import "WDCanvas.h"
 #import "WDColor.h"
 #import "WDCurveFit.h"
-#import "WDDrawing.h"
 #import "WDDrawingController.h"
 #import "WDEraserTool.h"
 #import "WDPath.h"

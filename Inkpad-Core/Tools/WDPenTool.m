@@ -12,7 +12,6 @@
 #import "WDBezierNode.h"
 #import "WDCanvas.h"
 #import "WDDrawingController.h"
-#import "WDDrawing.h"
 #import "WDFillTransform.h"
 #import "WDInspectableProperties.h"
 #import "WDPath.h"

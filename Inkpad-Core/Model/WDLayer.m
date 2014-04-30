@@ -10,7 +10,6 @@
 //
 
 #import "UIColor+Additions.h"
-#import "WDDrawing.h"
 #import "WDElement.h"
 #import "WDLayer.h"
 #import "WDSVGHelper.h"

@@ -10,7 +10,6 @@
 //
 
 #import "WDCanvas.h"
-#import "WDDrawing.h"
 #import "WDDrawingController.h"
 #import "WDPickResult.h"
 #import "WDTool.h"

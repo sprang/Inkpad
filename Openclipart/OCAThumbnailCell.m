@@ -11,7 +11,6 @@
 
 #import "OCAThumbnailCell.h"
 #import "OCAEntry.h"
-#import "OCAThumbnailCache.h"
 #import "UIView+Additions.h"
 
 @interface OCAThumbnailCell ()

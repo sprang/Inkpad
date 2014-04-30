@@ -20,8 +20,6 @@
 #import "WDGroup.h"
 #import "WDImage.h"
 #import "WDLayer.h"
-#import "WDPath.h"
-#import "WDSVGElement.h"
 #import "WDSVGParser.h"
 #import "WDSVGPathParser.h"
 #import "WDText.h"
