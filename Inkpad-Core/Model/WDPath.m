@@ -12,7 +12,6 @@
 #import "UIColor+Additions.h"
 #import "WDArrowhead.h"
 #import "WDBezierNode.h"
-#import "WDBezierSegment.h"
 #import "WDColor.h"
 #import "WDCompoundPath.h"
 #import "WDFillTransform.h"

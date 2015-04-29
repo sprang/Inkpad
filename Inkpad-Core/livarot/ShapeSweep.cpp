@@ -7,7 +7,6 @@
  */
 
 #include "Shape.h"
-#include "LivarotDefs.h"
 #include "MyMath.h"
 
 

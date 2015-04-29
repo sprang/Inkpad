@@ -11,7 +11,6 @@
 
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
-#import "WDAbstractPath.h"
 #import "WDButton.h"
 #import "WDCanvas.h"
 #import "WDCanvasController.h"
@@ -30,7 +29,6 @@
 #import "WDLayerController.h"
 #import "WDMenu.h"
 #import "WDMenuItem.h"
-#import "WDPath.h"
 #import "WDPropertyManager.h"
 #import "WDRotateTool.h"
 #import "WDSelectionTool.h"

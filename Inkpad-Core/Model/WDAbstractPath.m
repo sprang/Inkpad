@@ -13,7 +13,6 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "WDAbstractPath.h"
 #import "WDArrowhead.h"
 #import "WDColor.h"
 #import "WDCompoundPath.h"

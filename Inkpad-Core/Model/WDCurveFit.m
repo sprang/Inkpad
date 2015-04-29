@@ -11,7 +11,6 @@
 
 #import "FitCurves.h"
 #import "WDBezierNode.h"
-#import "WDBezierSegment.h"
 #import "WDCurveFit.h"
 #import "WDPath.h"
 #import "WDUtilities.h"

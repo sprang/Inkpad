@@ -8,7 +8,6 @@
 
 #include "Path.h"
 #include "Shape.h"
-#include "MyMath.h"
 
 void            Path::ConvertWithBackData(float treshhold)
 {

@@ -12,8 +12,6 @@
 #import "WDBezierNode.h"
 #import "WDCanvas.h"
 #import "WDDrawingController.h"
-#import "WDDrawing.h"
-#import "WDElement.h"
 #import "WDGLUtilities.h"
 #import "WDLayer.h"
 #import "WDPath.h"

@@ -11,8 +11,6 @@
 
 #import <UIKit/UIKit.h>
 #import "WDActionSheet.h"
-#import "WDElement.h"
-#import "WDStrokeStyle.h"
 
 @class WDCanvas;
 @class WDColorBalanceController;

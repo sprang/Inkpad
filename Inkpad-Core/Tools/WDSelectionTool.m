@@ -9,7 +9,6 @@
 //  Copyright (c) 2011-2013 Steve Sprang
 //
 
-#import "WDAbstractPath.h"
 #import "WDBezierNode.h"
 #import "WDCanvas.h"
 #import "WDCanvasController.h"
@@ -18,7 +17,6 @@
 #import "WDDynamicGuideController.h"
 #import "WDDrawingController.h"
 #import "WDFillTransform.h"
-#import "WDPath.h"
 #import "WDPropertyManager.h"
 #import "WDSelectionTool.h"
 #import "WDTextPath.h"

@@ -10,7 +10,6 @@
 //
 
 #import "UIColor+Additions.h"
-#import "WDDrawing.h"
 #import "WDElement.h"
 #import "WDLayer.h"
 #import "WDSVGHelper.h"
@@ -180,7 +179,9 @@ NSString *WDOpacityKey = @"WDOpacityKey";
     }
     
     WDXMLElement *layer = [WDXMLElement elementWithName:@"g"];
-    [layer setAttribute:@"id" value:[[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:@"Layer"]];
+    NSString *uniqueName = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:
+                            [@"Layer$" stringByAppendingString:name_]];
+    [layer setAttribute:@"id" value:[uniqueName substringFromIndex:6]];
     [layer setAttribute:@"inkpad:layerName" value:name_];
     
     if (self.hidden) {

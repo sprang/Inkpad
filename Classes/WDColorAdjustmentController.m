@@ -14,7 +14,6 @@
 #import "WDCanvas.h"
 #import "WDDrawingController.h"
 #import "WDColorAdjustmentController.h"
-#import "WDDrawing.h"
 #import "WDModalTitleBar.h"
 #import "WDPaletteBackgroundView.h"
 #import "UIView+Additions.h"
