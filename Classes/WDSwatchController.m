@@ -183,6 +183,9 @@ NSString *WDSwatchPanelModeKey = @"WDSwatchPanelModeKey";
     [collectionView_ registerClass:[WDSwatchCell class] forCellWithReuseIdentifier:@"cellID"];
     
     self.view = collectionView_;
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
 }
 
 - (NSArray *) toolbarItems

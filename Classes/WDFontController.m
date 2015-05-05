@@ -116,6 +116,8 @@
 {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     sizeSlider_.minimumValue = kMinFontSize;
     sizeSlider_.maximumValue = kMaxFontSize;
     
