@@ -121,7 +121,7 @@ BOOL decomposeArcToCubic(CGMutablePathRef path, float angle, float rx, float ry,
 
     // Some results of atan2 on some platform implementations are not exact enough. So that we get more
     // cubic curves than expected here. Adding 0.001f reduces the count of segments to the correct count.
-    int segments = ceilf(fabsf(thetaArc / (M_PI_2 + 0.001f)));
+    int segments = ceilf(fabs(thetaArc / (M_PI_2 + 0.001f)));
     for (int i = 0; i < segments; ++i) {
         float startTheta = theta1 + i * thetaArc / segments;
         float endTheta = theta1 + (i + 1) * thetaArc / segments;
