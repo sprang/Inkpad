@@ -1,0 +1,3 @@
+language: objective-c
+xcode_project: Inkpad.xcodeproj
+xcode_scheme: InkPad
