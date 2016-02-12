@@ -1,0 +1,3 @@
+language: objective-c
+
+script: xctool -project Inkpad.xcodeproj -scheme Inkpad build  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
