@@ -1,4 +1,4 @@
-Inkpad Inkpad [![Build Status](https://travis-ci.org/alistairmcmillan/Inkpad.svg?branch=develop)](https://travis-ci.org/alistairmcmillan/Inkpad)
+Inkpad [![Build Status](https://travis-ci.org/alistairmcmillan/Inkpad.svg?branch=develop)](https://travis-ci.org/alistairmcmillan/Inkpad)
 ======
 
 Inkpad is a vector illustration app designed from scratch for the iPad. It supports paths, compound paths, text, images, groups, masks, gradient fills, and an unlimited number of layers.
