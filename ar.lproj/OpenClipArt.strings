@@ -1,0 +1,12 @@
+
+/* Class = "IBUISearchBar"; placeholder = "Search Openclipart"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.placeholder" = "البحث عن قصاصة فنية مفتوحة";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[0] = "Top Downloads"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[0]" = "الأكثر تحميل";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[1] = "Top Favorites"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[1]" = "الأكثر تفضيلاً";
+
+/* Class = "IBUISearchBar"; RRV-qS-tbK.scopeButtonTitles[2] = "Newest"; ObjectID = "RRV-qS-tbK"; */
+"RRV-qS-tbK.scopeButtonTitles[2]" = "الأحدث";

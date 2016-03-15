@@ -68,6 +68,7 @@ Localizations:
 * [Ale Muñoz](https://github.com/bomberstudios) / Spanish
 * [Pillow Tse](https://github.com/xiezhhw), [Zhang Yungui](https://github.com/rhcad) / Chinese Simplified
 * [Akiji Tanaka](https://github.com/akiji) / Japanese
+* [Abduolkader Idriss](https://github.com/zaxf) / Arabic
 
 App Icon:
 

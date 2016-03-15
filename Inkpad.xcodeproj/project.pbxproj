@@ -884,6 +884,12 @@
 		AE661E2318D6843D0096EAF3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenClipArt.strings"; sourceTree = "<group>"; };
 		AE661E2418D6844B0096EAF3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Shadow.strings"; sourceTree = "<group>"; };
 		AE661E2518D684560096EAF3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Stroke.strings"; sourceTree = "<group>"; };
+		C7A41BBF198003D800304C51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ColorBalance.strings; sourceTree = "<group>"; };
+		C7A41BC0198003D800304C51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HueSaturation.strings; sourceTree = "<group>"; };
+		C7A41BC1198003D800304C51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OpenClipArt.strings; sourceTree = "<group>"; };
+		C7A41BC2198003D800304C51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Shadow.strings; sourceTree = "<group>"; };
+		C7A41BC3198003D800304C51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Stroke.strings; sourceTree = "<group>"; };
+		C7A41BC4198003D800304C51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F43A1D6F183557770032933E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		F4F41F7118B2C7E300065865 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = OpenClipArt.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1839,6 +1845,7 @@
 				pt_PT,
 				"zh-Hans",
 				ja,
+				ar,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -2286,6 +2293,7 @@
 				6B95752F183C536E0094B7D5 /* fr */,
 				6B957530183C53710094B7D5 /* tr */,
 				AE661E2118D684040096EAF3 /* zh-Hans */,
+				C7A41BBF198003D800304C51 /* ar */,
 			);
 			name = ColorBalance.xib;
 			sourceTree = "<group>";
@@ -2324,6 +2332,7 @@
 				6B957532183C53A00094B7D5 /* fr */,
 				6B957533183C53A30094B7D5 /* tr */,
 				AE661E2218D684240096EAF3 /* zh-Hans */,
+				C7A41BC0198003D800304C51 /* ar */,
 			);
 			name = HueSaturation.xib;
 			sourceTree = "<group>";
@@ -2370,6 +2379,7 @@
 				6B957535183C53AF0094B7D5 /* fr */,
 				6B957536183C53B10094B7D5 /* tr */,
 				AE661E2418D6844B0096EAF3 /* zh-Hans */,
+				C7A41BC2198003D800304C51 /* ar */,
 			);
 			name = Shadow.xib;
 			sourceTree = "<group>";
@@ -2392,6 +2402,7 @@
 				6B957538183C53BD0094B7D5 /* fr */,
 				6B957539183C53BF0094B7D5 /* tr */,
 				AE661E2518D684560096EAF3 /* zh-Hans */,
+				C7A41BC3198003D800304C51 /* ar */,
 			);
 			name = Stroke.xib;
 			sourceTree = "<group>";
@@ -2418,6 +2429,7 @@
 				6B8396E1189F2FB0001D5985 /* Base */,
 				6B83971318A36D23001D5985 /* en */,
 				AE661E2318D6843D0096EAF3 /* zh-Hans */,
+				C7A41BC1198003D800304C51 /* ar */,
 			);
 			name = OpenClipArt.xib;
 			sourceTree = "<group>";
@@ -2483,6 +2495,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6B8F091717FCE1DB00BB6F7E /* en */,
+				C7A41BC4198003D800304C51 /* ar */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
