@@ -1415,7 +1415,9 @@
     [facebookSheet addImage:self.drawing.image];
     [facebookSheet setInitialText:NSLocalizedString(@"Check out my Inkpad drawing!", @"Check out my Inkpad drawing!")];
     
-    [self presentViewController:facebookSheet animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self presentViewController:facebookSheet animated:YES completion:nil];
+    });
 }
 
 - (void) tweetDrawing:(id)sender
