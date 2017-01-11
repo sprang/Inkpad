@@ -456,6 +456,9 @@ void WDBezierSegmentFlatten(WDBezierSegment seg, CGPoint **vertices, NSUInteger 
         *vertices = realloc(*vertices, sizeof(CGPoint) * *size);
     }
     
+    if (WDBezierSegmentIsDegenerate(seg)) {
+        return;
+    }
     if (WDBezierSegmentIsFlat(seg, kDefaultFlatness)) {
         if (*index == 0) {
             (*vertices)[*index] = seg.a_;

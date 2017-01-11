@@ -152,6 +152,9 @@ void WDGLFlattenBezierSegment(WDBezierSegment seg, GLfloat **vertices, NSUIntege
         *vertices = realloc(*vertices, sizeof(GLfloat) * *size);
     }
         
+    if (WDBezierSegmentIsDegenerate(seg)) {
+        return;
+    }
     if (WDBezierSegmentIsFlat(seg, kDefaultFlatness)) {
         if (*index == 0) {
             (*vertices)[*index] = seg.a_.x;

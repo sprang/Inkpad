@@ -54,6 +54,9 @@
 //
 + (WDPath *) pathFromSegments:(WDBezierSegment *)segments numSegments:(NSUInteger)numSegments closePath:(BOOL)closePath
 {
+    if (!segments || WDBezierSegmentIsDegenerate(segments[0])) {
+        return nil;     // NaN point may be added in FitCurve, FitCubic, so return fail.
+    }
     NSMutableArray  *nodes = [NSMutableArray array];
     WDBezierNode    *node;
     
