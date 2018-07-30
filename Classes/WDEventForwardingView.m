@@ -18,6 +18,8 @@
 
 - (void) awakeFromNib
 {
+    [super awakeFromNib];
+    
     self.opaque = NO;
     self.backgroundColor = nil;
 }

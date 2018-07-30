@@ -21,6 +21,8 @@ const float kArrowDimension = 6;
 
 - (void) awakeFromNib
 {
+    [super awakeFromNib];
+    
     self.exclusiveTouch = YES;
     
     self.layer.shadowOpacity = 0.15f;

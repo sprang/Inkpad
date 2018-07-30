@@ -99,6 +99,8 @@ static void release(void *info) {
 
 - (void) awakeFromNib
 {
+    [super awakeFromNib];
+    
     indicator_ = [WDColorIndicator colorIndicator];
     indicator_.sharpCenter = WDCenterOfRect([self bounds]);
     [self addSubview:indicator_];
